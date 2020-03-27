@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A11-VA-gB5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,126 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auI-QE-vPf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="696"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IbK-Ug-ntS">
+                                <rect key="frame" x="42.5" y="414" width="329" height="122.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Add Picture To Use Poleclimber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sI7-JR-10L">
+                                        <rect key="frame" x="10" y="10" width="309" height="21.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYr-sR-lBM">
+                                        <rect key="frame" x="10" y="51.5" width="309" height="51"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="51" id="laB-Ba-ucV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8c0-zf-3xH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="sI7-JR-10L" firstAttribute="leading" secondItem="IbK-Ug-ntS" secondAttribute="leading" constant="10" id="IUg-bd-p18"/>
+                                    <constraint firstItem="sI7-JR-10L" firstAttribute="top" secondItem="IbK-Ug-ntS" secondAttribute="top" constant="10" id="LyT-YH-FX2"/>
+                                    <constraint firstAttribute="trailing" secondItem="EYr-sR-lBM" secondAttribute="trailing" constant="10" id="YkV-Ql-Q7W"/>
+                                    <constraint firstItem="EYr-sR-lBM" firstAttribute="top" secondItem="sI7-JR-10L" secondAttribute="bottom" constant="20" id="ZP1-gV-Bud"/>
+                                    <constraint firstAttribute="trailing" secondItem="sI7-JR-10L" secondAttribute="trailing" constant="10" id="buo-qa-RCd"/>
+                                    <constraint firstAttribute="bottom" secondItem="EYr-sR-lBM" secondAttribute="bottom" constant="20" id="mOx-wd-dcj"/>
+                                    <constraint firstItem="EYr-sR-lBM" firstAttribute="leading" secondItem="IbK-Ug-ntS" secondAttribute="leading" constant="10" id="p26-hD-kjr"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfW-7D-w3O">
+                                <rect key="frame" x="0.0" y="792" width="414" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPO-ld-9Qd">
+                                        <rect key="frame" x="15" y="8" width="384" height="44"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="FoS-Aw-6lF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Create Clime">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="uploadAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DsD-2w-BJg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uPO-ld-9Qd" firstAttribute="top" secondItem="gfW-7D-w3O" secondAttribute="top" constant="8" id="ePv-YJ-6YO"/>
+                                    <constraint firstAttribute="height" constant="60" id="f5j-c9-0pz"/>
+                                    <constraint firstItem="uPO-ld-9Qd" firstAttribute="leading" secondItem="gfW-7D-w3O" secondAttribute="leading" constant="15" id="pc3-Vb-Qi4"/>
+                                    <constraint firstAttribute="trailing" secondItem="uPO-ld-9Qd" secondAttribute="trailing" constant="15" id="zo2-7v-mxQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.41039704623287671" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gfW-7D-w3O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="04A-4G-l1S"/>
+                            <constraint firstItem="gfW-7D-w3O" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2zn-o0-SJz"/>
+                            <constraint firstItem="IbK-Ug-ntS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="93L-ib-MaV"/>
+                            <constraint firstItem="auI-QE-vPf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="9A9-qg-gVf"/>
+                            <constraint firstItem="gfW-7D-w3O" firstAttribute="top" secondItem="auI-QE-vPf" secondAttribute="bottom" constant="8" id="Bgx-ht-LHd"/>
+                            <constraint firstItem="auI-QE-vPf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Big-AE-dKx"/>
+                            <constraint firstItem="auI-QE-vPf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FUB-aa-WRL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gfW-7D-w3O" secondAttribute="bottom" constant="10" id="f7k-ZC-WPy"/>
+                            <constraint firstItem="IbK-Ug-ntS" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ln6-Tx-ssI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="qCI-R7-UNj"/>
+                    <connections>
+                        <outlet property="containerView" destination="auI-QE-vPf" id="INB-UP-D1F"/>
+                        <outlet property="createClime" destination="uPO-ld-9Qd" id="drw-f3-0nG"/>
+                        <outlet property="noImgView" destination="IbK-Ug-ntS" id="nLI-SW-CW2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="107.8125"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Eb-hD-xpI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A11-VA-gB5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="73a-Zy-OEF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.4103970462" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aaQ-CH-o0p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="knN-cW-V0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="107.8125"/>
         </scene>
     </scenes>
 </document>
