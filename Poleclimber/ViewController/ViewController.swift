@@ -44,7 +44,7 @@ class ViewController: UIViewController {
        
     @IBAction func inspectionBtnAction(_ sender: UIButton) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-               let viewController = sb.instantiateViewController(withIdentifier: "InspectionViewController2") as! InspectionViewController2
+               let viewController = sb.instantiateViewController(withIdentifier: "ObjectDetectionViewController") as! ObjectDetectionViewController
         self.navigationController?.pushViewController(viewController, animated: true)
     }
         

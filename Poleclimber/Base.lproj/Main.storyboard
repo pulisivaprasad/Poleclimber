@@ -255,16 +255,72 @@
             </objects>
             <point key="canvasLocation" x="1743" y="107"/>
         </scene>
-        <!--Inspection View Controller2-->
+        <!--Object Detection View Controller-->
         <scene sceneID="0U3-Zg-gBQ">
             <objects>
-                <viewController storyboardIdentifier="InspectionViewController2" id="c6Y-Jp-ahG" customClass="InspectionViewController2" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObjectDetectionViewController" id="c6Y-Jp-ahG" customClass="ObjectDetectionViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rsq-i1-IkU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="24" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DBO-hh-Yks">
+                                <rect key="frame" x="0.0" y="612" width="414" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="hLt-3Q-fZP"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InfoCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" textLabel="5ZL-VU-n1k" detailTextLabel="bd9-uG-Gn7" rowHeight="24" style="IBUITableViewCellStyleValue1" id="XoJ-8t-ERm">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="24"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XoJ-8t-ERm" id="ME0-vR-hd6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5ZL-VU-n1k">
+                                                    <rect key="frame" x="20.000000000000004" y="6" width="36.333333333333336" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bd9-uG-Gn7">
+                                                    <rect key="frame" x="336.33333333333331" y="6" width="57.666666666666664" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="c6Y-Jp-ahG" id="eu6-Qk-fYP"/>
+                                    <outlet property="delegate" destination="c6Y-Jp-ahG" id="wqY-na-q4g"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWc-nQ-CzW">
+                                <rect key="frame" x="0.0" y="52" width="414" height="552"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DBO-hh-Yks" firstAttribute="top" secondItem="nWc-nQ-CzW" secondAttribute="bottom" constant="8" id="CyG-4A-h2N"/>
+                            <constraint firstItem="DBO-hh-Yks" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="IsN-ad-TRL"/>
+                            <constraint firstItem="nWc-nQ-CzW" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" constant="8" id="VYU-on-Oe9"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="DBO-hh-Yks" secondAttribute="trailing" id="dn1-PQ-OrT"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="bottom" secondItem="DBO-hh-Yks" secondAttribute="bottom" id="gUc-fJ-ged"/>
+                            <constraint firstItem="nWc-nQ-CzW" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="lwm-e5-nZ8"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="nWc-nQ-CzW" secondAttribute="trailing" id="xUU-bb-4Tc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3aj-mJ-Dia"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="DBO-hh-Yks" id="trw-z7-84l"/>
+                        <outlet property="videoPreview" destination="nWc-nQ-CzW" id="lxZ-w0-2bw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKv-Pf-kFm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

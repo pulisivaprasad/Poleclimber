@@ -11,7 +11,13 @@
 		443F02C5242CF81500DBB05F /* PConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C4242CF81500DBB05F /* PConstants.swift */; };
 		4449CA912433967F0006BA55 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */; };
 		4449CA93243420E00006BA55 /* InspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4449CA92243420E00006BA55 /* InspectionViewController.swift */; };
-		44B4DD9D243312F800343A7F /* InspectionViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4DD9C243312F800343A7F /* InspectionViewController2.swift */; };
+		445B380C24370D2F00BBD569 /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380924370D2C00BBD569 /* YOLOv3TinyInt8LUT.mlmodel */; };
+		445B380D24370D2F00BBD569 /* YOLOv3Tiny.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380A24370D2E00BBD569 /* YOLOv3Tiny.mlmodel */; };
+		445B380E24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380B24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel */; };
+		445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */; };
+		445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381024370D4100BBD569 /* ObjectDetector.mlmodel */; };
+		445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */; };
+		44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
 		44BB541D24226D0F00C1302B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541C24226D0F00C1302B /* ViewController.swift */; };
@@ -28,8 +34,14 @@
 		443F02C4242CF81500DBB05F /* PConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PConstants.swift; sourceTree = "<group>"; };
 		4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		4449CA92243420E00006BA55 /* InspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionViewController.swift; sourceTree = "<group>"; };
+		445B380924370D2C00BBD569 /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
+		445B380A24370D2E00BBD569 /* YOLOv3Tiny.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Tiny.mlmodel; sourceTree = "<group>"; };
+		445B380B24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyFP16.mlmodel; sourceTree = "<group>"; };
+		445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite.mlmodel; sourceTree = "<group>"; };
+		445B381024370D4100BBD569 /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
+		445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Int8LUT.mlmodel; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
-		44B4DD9C243312F800343A7F /* InspectionViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionViewController2.swift; sourceTree = "<group>"; };
+		44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BB541824226D0F00C1302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44BB541A24226D0F00C1302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,11 +76,40 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		445B380724370CFE00BBD569 /* mlmodel */ = {
+			isa = PBXGroup;
+			children = (
+				445B381324370D4D00BBD569 /* YOLOv3 */,
+				445B380824370D2000BBD569 /* YOLOv3Tiny */,
+				445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */,
+				445B381024370D4100BBD569 /* ObjectDetector.mlmodel */,
+			);
+			path = mlmodel;
+			sourceTree = "<group>";
+		};
+		445B380824370D2000BBD569 /* YOLOv3Tiny */ = {
+			isa = PBXGroup;
+			children = (
+				445B380A24370D2E00BBD569 /* YOLOv3Tiny.mlmodel */,
+				445B380B24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel */,
+				445B380924370D2C00BBD569 /* YOLOv3TinyInt8LUT.mlmodel */,
+			);
+			path = YOLOv3Tiny;
+			sourceTree = "<group>";
+		};
+		445B381324370D4D00BBD569 /* YOLOv3 */ = {
+			isa = PBXGroup;
+			children = (
+				445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */,
+			);
+			path = YOLOv3;
+			sourceTree = "<group>";
+		};
 		44B4DD9B243312C900343A7F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				44BB541C24226D0F00C1302B /* ViewController.swift */,
-				44B4DD9C243312F800343A7F /* InspectionViewController2.swift */,
+				44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */,
 				4449CA92243420E00006BA55 /* InspectionViewController.swift */,
 			);
 			path = ViewController;
@@ -98,6 +139,7 @@
 				44B4DD9B243312C900343A7F /* ViewController */,
 				443F02C1242CF59E00DBB05F /* Network */,
 				44BB542C2422FE2800C1302B /* Common */,
+				445B380724370CFE00BBD569 /* mlmodel */,
 				44BB541824226D0F00C1302B /* AppDelegate.swift */,
 				44BB541A24226D0F00C1302B /* SceneDelegate.swift */,
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
@@ -253,14 +295,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4449CA93243420E00006BA55 /* InspectionViewController.swift in Sources */,
+				445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */,
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
 				4449CA912433967F0006BA55 /* Inceptionv3.mlmodel in Sources */,
+				445B380E24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel in Sources */,
 				44BB541D24226D0F00C1302B /* ViewController.swift in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
-				44B4DD9D243312F800343A7F /* InspectionViewController2.swift in Sources */,
+				44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */,
+				445B380C24370D2F00BBD569 /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
+				445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */,
 				44BB54352423015300C1302B /* Reachability.swift in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
+				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
+				445B380D24370D2F00BBD569 /* YOLOv3Tiny.mlmodel in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
