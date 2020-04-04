@@ -17,6 +17,7 @@
 		445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */; };
 		445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381024370D4100BBD569 /* ObjectDetector.mlmodel */; };
 		445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */; };
+		445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */; };
 		44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite.mlmodel; sourceTree = "<group>"; };
 		445B381024370D4100BBD569 /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
 		445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Int8LUT.mlmodel; sourceTree = "<group>"; };
+		445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBoundingBoxView.swift; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
 		44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 				44BB54342423015300C1302B /* Reachability.swift */,
 				44BB542D2422FE4100C1302B /* Helper.swift */,
 				443F02C4242CF81500DBB05F /* PConstants.swift */,
+				445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */,
 				445B380C24370D2F00BBD569 /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */,
+				445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */,
 				44BB54352423015300C1302B /* Reachability.swift in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,

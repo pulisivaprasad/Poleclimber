@@ -12,6 +12,8 @@ import Vision
 
 class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     @IBOutlet weak var videoPreview: UIView!
+    @IBOutlet weak var boxesView: DrawingBoundingBoxView!
+
     @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
     let objectDectectionModel = YOLOv3Tiny()
@@ -65,6 +67,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                 
               self.predictions = result
               DispatchQueue.main.async {
+                self.boxesView.predictedObjects = self.predictions
               self.tableView.reloadData()
             }
             //print(firstObservation.identifier, firstObservation.confidence)
@@ -95,19 +98,4 @@ extension ObjectDetectionViewController: UITableViewDataSource {
     }
 }
 
-extension VNRecognizedObjectObservation {
-    var label: String? {
-        return self.labels.first?.identifier
-    }
-}
-
-extension CGRect {
-    func toString(digit: Int) -> String {
-        let xStr = String(format: "%.\(digit)f", origin.x)
-        let yStr = String(format: "%.\(digit)f", origin.y)
-        let wStr = String(format: "%.\(digit)f", width)
-        let hStr = String(format: "%.\(digit)f", height)
-        return "(\(xStr), \(yStr), \(wStr), \(hStr))"
-    }
-}
 

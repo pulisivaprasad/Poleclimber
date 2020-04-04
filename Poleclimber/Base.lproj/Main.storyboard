@@ -304,13 +304,21 @@
                                 <rect key="frame" x="0.0" y="52" width="414" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYH-yD-jed" customClass="DrawingBoundingBoxView" customModule="ObjectDetection_CoreML" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="DBO-hh-Yks" firstAttribute="top" secondItem="KYH-yD-jed" secondAttribute="bottom" id="6IM-vY-769"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="top" secondItem="nWc-nQ-CzW" secondAttribute="bottom" constant="8" id="CyG-4A-h2N"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="IsN-ad-TRL"/>
+                            <constraint firstItem="KYH-yD-jed" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="MyR-a6-KZW"/>
+                            <constraint firstItem="KYH-yD-jed" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" id="NX7-jw-bsP"/>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" constant="8" id="VYU-on-Oe9"/>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="DBO-hh-Yks" secondAttribute="trailing" id="dn1-PQ-OrT"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="KYH-yD-jed" secondAttribute="trailing" id="fM3-HM-5nQ"/>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="bottom" secondItem="DBO-hh-Yks" secondAttribute="bottom" id="gUc-fJ-ged"/>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="lwm-e5-nZ8"/>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="nWc-nQ-CzW" secondAttribute="trailing" id="xUU-bb-4Tc"/>
@@ -318,6 +326,7 @@
                         <viewLayoutGuide key="safeArea" id="3aj-mJ-Dia"/>
                     </view>
                     <connections>
+                        <outlet property="boxesView" destination="KYH-yD-jed" id="uYx-CB-WvF"/>
                         <outlet property="tableView" destination="DBO-hh-Yks" id="trw-z7-84l"/>
                         <outlet property="videoPreview" destination="nWc-nQ-CzW" id="lxZ-w0-2bw"/>
                     </connections>
