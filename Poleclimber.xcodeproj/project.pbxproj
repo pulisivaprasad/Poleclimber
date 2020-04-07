@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C2242CF74F00DBB05F /* PWebService.swift */; };
 		443F02C5242CF81500DBB05F /* PConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C4242CF81500DBB05F /* PConstants.swift */; };
+		443F3448243C34B2000719C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3445243C34B2000719C9 /* ViewController.swift */; };
+		443F3449243C34B2000719C9 /* InspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3446243C34B2000719C9 /* InspectionViewController.swift */; };
+		443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */; };
+		443F344C243C34FB000719C9 /* ObjectDetectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F344B243C34FB000719C9 /* ObjectDetectionDetailViewController.swift */; };
 		4449CA912433967F0006BA55 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */; };
-		4449CA93243420E00006BA55 /* InspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4449CA92243420E00006BA55 /* InspectionViewController.swift */; };
 		445B380C24370D2F00BBD569 /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380924370D2C00BBD569 /* YOLOv3TinyInt8LUT.mlmodel */; };
 		445B380D24370D2F00BBD569 /* YOLOv3Tiny.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380A24370D2E00BBD569 /* YOLOv3Tiny.mlmodel */; };
 		445B380E24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380B24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel */; };
@@ -18,10 +21,8 @@
 		445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381024370D4100BBD569 /* ObjectDetector.mlmodel */; };
 		445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */; };
 		445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */; };
-		44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
-		44BB541D24226D0F00C1302B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541C24226D0F00C1302B /* ViewController.swift */; };
 		44BB542024226D0F00C1302B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB541E24226D0F00C1302B /* Main.storyboard */; };
 		44BB542224226D1600C1302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BB542124226D1600C1302B /* Assets.xcassets */; };
 		44BB542524226D1600C1302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB542324226D1600C1302B /* LaunchScreen.storyboard */; };
@@ -33,8 +34,11 @@
 /* Begin PBXFileReference section */
 		443F02C2242CF74F00DBB05F /* PWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWebService.swift; sourceTree = "<group>"; };
 		443F02C4242CF81500DBB05F /* PConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PConstants.swift; sourceTree = "<group>"; };
+		443F3445243C34B2000719C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		443F3446243C34B2000719C9 /* InspectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectionViewController.swift; sourceTree = "<group>"; };
+		443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
+		443F344B243C34FB000719C9 /* ObjectDetectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionDetailViewController.swift; sourceTree = "<group>"; };
 		4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
-		4449CA92243420E00006BA55 /* InspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionViewController.swift; sourceTree = "<group>"; };
 		445B380924370D2C00BBD569 /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
 		445B380A24370D2E00BBD569 /* YOLOv3Tiny.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Tiny.mlmodel; sourceTree = "<group>"; };
 		445B380B24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyFP16.mlmodel; sourceTree = "<group>"; };
@@ -43,11 +47,9 @@
 		445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Int8LUT.mlmodel; sourceTree = "<group>"; };
 		445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBoundingBoxView.swift; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
-		44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BB541824226D0F00C1302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44BB541A24226D0F00C1302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		44BB541C24226D0F00C1302B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		44BB541F24226D0F00C1302B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44BB542124226D1600C1302B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44BB542424226D1600C1302B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				445B380824370D2000BBD569 /* YOLOv3Tiny */,
 				445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */,
 				445B381024370D4100BBD569 /* ObjectDetector.mlmodel */,
+				4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */,
 			);
 			path = mlmodel;
 			sourceTree = "<group>";
@@ -110,9 +113,10 @@
 		44B4DD9B243312C900343A7F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				44BB541C24226D0F00C1302B /* ViewController.swift */,
-				44B4DD9C243312F800343A7F /* ObjectDetectionViewController.swift */,
-				4449CA92243420E00006BA55 /* InspectionViewController.swift */,
+				443F3446243C34B2000719C9 /* InspectionViewController.swift */,
+				443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */,
+				443F3445243C34B2000719C9 /* ViewController.swift */,
+				443F344B243C34FB000719C9 /* ObjectDetectionDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -148,7 +152,6 @@
 				44BB542124226D1600C1302B /* Assets.xcassets */,
 				44BB542324226D1600C1302B /* LaunchScreen.storyboard */,
 				44BB542624226D1600C1302B /* Info.plist */,
-				4449CA902433967E0006BA55 /* Inceptionv3.mlmodel */,
 			);
 			path = Poleclimber;
 			sourceTree = "<group>";
@@ -297,19 +300,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4449CA93243420E00006BA55 /* InspectionViewController.swift in Sources */,
+				443F3448243C34B2000719C9 /* ViewController.swift in Sources */,
 				445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */,
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
 				4449CA912433967F0006BA55 /* Inceptionv3.mlmodel in Sources */,
+				443F3449243C34B2000719C9 /* InspectionViewController.swift in Sources */,
 				445B380E24370D2F00BBD569 /* YOLOv3TinyFP16.mlmodel in Sources */,
-				44BB541D24226D0F00C1302B /* ViewController.swift in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
-				44B4DD9D243312F800343A7F /* ObjectDetectionViewController.swift in Sources */,
 				445B380C24370D2F00BBD569 /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */,
 				445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */,
 				44BB54352423015300C1302B /* Reachability.swift in Sources */,
+				443F344C243C34FB000719C9 /* ObjectDetectionDetailViewController.swift in Sources */,
+				443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
 				445B380D24370D2F00BBD569 /* YOLOv3Tiny.mlmodel in Sources */,

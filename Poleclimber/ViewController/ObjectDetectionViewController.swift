@@ -10,75 +10,151 @@ import UIKit
 import AVKit
 import Vision
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
 
     @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
     let objectDectectionModel = YOLOv3Tiny()
+    @IBOutlet weak var noImgView: UIView!
+    var imagePicker:UIImagePickerController!
+    @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
   
         self.navigationController?.isNavigationBarHidden = false
-        
+        self.title = "Object Detection"
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        tableView.isHidden = true
+    }
+    
+    @IBAction func addPicture(_ sender: Any) {
+        let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                self.imageView.isHidden = true
+                self.openCamera()
+        }))
+        alert.addAction(UIAlertAction(title: "Gallary", style: .default, handler: { (action) in
+                self.imageView.isHidden = false
+                self.openGallary()
+        }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                  self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openCamera() {
         let captureSession = AVCaptureSession()
-        //captureSession.sessionPreset = .photo
-        guard let captureDevice = AVCaptureDevice.default(for: .video) else {
+               //captureSession.sessionPreset = .photo
+         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
             return
         }
-        
+               
         guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {
             return
         }
-        
+               
         captureSession.addInput(input)
         captureSession.startRunning()
-        
+               
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoPreview.layer.addSublayer(previewLayer)
         previewLayer.frame = videoPreview.frame
-        
+               
         let dataOutput = AVCaptureVideoDataOutput()
         dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
-        captureSession.addOutput(dataOutput)
+               captureSession.addOutput(dataOutput)
+    }
+    
+    func openGallary() {
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate Method
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: 299, height: 299), true, 2.0)
+            image.draw(in: CGRect(x: 0, y: 0, width: 299, height: 299))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+                   
+            let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+            var pixelBuffer : CVPixelBuffer?
+            let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(newImage.size.width), Int(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
+            guard (status == kCVReturnSuccess) else {
+                return
+            }
+                   
+            CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+            let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+                   
+            let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+            let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue) //3
+                   
+            context?.translateBy(x: 0, y: newImage.size.height)
+            context?.scaleBy(x: 1.0, y: -1.0)
+                   
+            UIGraphicsPushContext(context!)
+            newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
+            UIGraphicsPopContext()
+            CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+            imageView.image = newImage
+            captureImageDetails(pixelBuffer: pixelBuffer!)
+
+            showAddImgView()
+
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+     func showAddImgView() {
+        noImgView.isHidden = true
     }
     
     // MARK: - Capture Session
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
+          showAddImgView()
+
         // Get the pixel buffer from the capture session
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        
-        // load the Core ML model
-        guard let visionModel:VNCoreMLModel = try? VNCoreMLModel(for: objectDectectionModel.model) else { return }
-        //  set up the classification request
-        let request = VNCoreMLRequest(model: visionModel){(finishedReq, error) in
-            
-            guard let result = finishedReq.results as? [VNRecognizedObjectObservation] else {
-                return
-            }
-            
-//            guard let firstObservation = result.first else {
-//                return
-//            }
-                                
-              self.predictions = result
-              DispatchQueue.main.async {
-                self.boxesView.predictedObjects = self.predictions
-              self.tableView.reloadData()
-            }
-            //print(firstObservation.identifier, firstObservation.confidence)
-        }
-        
-        request.imageCropAndScaleOption = .scaleFill
-        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+        captureImageDetails(pixelBuffer: pixelBuffer)
     }
+    
+    func captureImageDetails(pixelBuffer: CVPixelBuffer)  {
+          // load the Core ML model
+                guard let visionModel:VNCoreMLModel = try? VNCoreMLModel(for: objectDectectionModel.model) else { return }
+                //  set up the classification request
+                let request = VNCoreMLRequest(model: visionModel){(finishedReq, error) in
+                    
+                    guard let result = finishedReq.results as? [VNRecognizedObjectObservation] else {
+                        return
+                    }
+                    
+        //            guard let firstObservation = result.first else {
+        //                return
+        //            }
+                                        
+                      self.predictions = result
+                      DispatchQueue.main.async {
+                        self.tableView.isHidden = false
+                        self.boxesView.predictedObjects = self.predictions
+                        self.tableView.reloadData()
+                    }
+                    //print(firstObservation.identifier, firstObservation.confidence)
+                }
+                
+                request.imageCropAndScaleOption = .scaleFill
+                try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+    } 
+    
 }
 
-extension ObjectDetectionViewController: UITableViewDataSource {
+extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return predictions.count
     }
@@ -96,6 +172,15 @@ extension ObjectDetectionViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = "\(rectString), \(confidenceString)"
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = sb.instantiateViewController(withIdentifier: "ObjectDetectionDetailViewController") as! ObjectDetectionDetailViewController
+        viewController.title = predictions[indexPath.row].label ?? "N/A"
+        viewController.subImgFrame = self.predictions[indexPath.row].boundingBox
+        viewController.originlImg = imageView.image!
+        self.navigationController?.pushViewController(viewController, animated: true)
+
+    }
 }
-
-

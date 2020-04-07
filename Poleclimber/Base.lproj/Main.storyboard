@@ -301,26 +301,70 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYH-yD-jed" customClass="DrawingBoundingBoxView" customModule="ObjectDetection_CoreML" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ami-hf-S9v">
+                                <rect key="frame" x="0.0" y="44" width="414" height="552"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYH-yD-jed" customClass="DrawingBoundingBoxView" customModule="Poleclimber" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="552"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-HC-32o">
+                                <rect key="frame" x="21.333333333333343" y="391.66666666666669" width="371.66666666666663" height="122.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Add Picture From Gallary or Camera." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-bT-XOE">
+                                        <rect key="frame" x="10" y="10.000000000000002" width="351.66666666666669" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-W5-X0P">
+                                        <rect key="frame" x="10" y="51.666666666666629" width="351.66666666666669" height="51"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="51" id="baU-TS-3tZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="c6Y-Jp-ahG" eventType="touchUpInside" id="AwO-xn-Edk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="9IY-bT-XOE" firstAttribute="top" secondItem="rL3-HC-32o" secondAttribute="top" constant="10" id="0VF-NG-W6p"/>
+                                    <constraint firstItem="9IY-bT-XOE" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="10" id="5ld-ML-Kbf"/>
+                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="TCD-Kp-lCI"/>
+                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="10" id="Y1h-C1-4lx"/>
+                                    <constraint firstAttribute="trailing" secondItem="UIi-W5-X0P" secondAttribute="trailing" constant="10" id="aBO-Qb-hJr"/>
+                                    <constraint firstAttribute="bottom" secondItem="UIi-W5-X0P" secondAttribute="bottom" constant="20" id="blR-yk-qiL"/>
+                                    <constraint firstAttribute="trailing" secondItem="9IY-bT-XOE" secondAttribute="trailing" constant="10" id="qsa-vh-X1X"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="4hg-Fu-Xwb"/>
+                            <constraint firstItem="rL3-HC-32o" firstAttribute="centerX" secondItem="3aj-mJ-Dia" secondAttribute="centerX" id="Ase-sO-F7U"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="top" secondItem="nWc-nQ-CzW" secondAttribute="bottom" constant="8" id="IeL-gt-b9w"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="MyR-a6-KZW"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" id="NX7-jw-bsP"/>
+                            <constraint firstItem="Ami-hf-S9v" firstAttribute="height" secondItem="rsq-i1-IkU" secondAttribute="height" multiplier="350:568" id="OuO-W9-quh"/>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="height" secondItem="rsq-i1-IkU" secondAttribute="height" multiplier="350:568" id="TTa-Z3-RTb"/>
+                            <constraint firstItem="Ami-hf-S9v" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="ULJ-Ov-Ybu"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="VaA-fl-nIb"/>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="KYH-yD-jed" secondAttribute="trailing" id="fM3-HM-5nQ"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="trailing" secondItem="3aj-mJ-Dia" secondAttribute="trailing" id="fv7-YZ-GA6"/>
+                            <constraint firstItem="Ami-hf-S9v" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" id="hRq-Sq-ZC0"/>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="trailing" secondItem="3aj-mJ-Dia" secondAttribute="trailing" id="iZg-Jq-478"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="height" secondItem="rsq-i1-IkU" secondAttribute="height" multiplier="350:568" id="ib7-7m-0tF"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="bottom" secondItem="3aj-mJ-Dia" secondAttribute="bottom" id="kXC-ZN-BMO"/>
                             <constraint firstItem="nWc-nQ-CzW" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" id="m30-yi-bGG"/>
+                            <constraint firstItem="rL3-HC-32o" firstAttribute="centerY" secondItem="3aj-mJ-Dia" secondAttribute="centerY" id="mLC-5y-4o1"/>
                             <constraint firstItem="DBO-hh-Yks" firstAttribute="trailing" secondItem="3aj-mJ-Dia" secondAttribute="trailing" id="oHE-kb-0nc"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="Ami-hf-S9v" secondAttribute="trailing" id="pES-E2-zJM"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="wAv-z4-XE6"/>
                             <constraint firstItem="KYH-yD-jed" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" id="zjR-rY-Led"/>
                         </constraints>
@@ -328,6 +372,8 @@
                     </view>
                     <connections>
                         <outlet property="boxesView" destination="KYH-yD-jed" id="uYx-CB-WvF"/>
+                        <outlet property="imageView" destination="Ami-hf-S9v" id="6mB-GF-TSo"/>
+                        <outlet property="noImgView" destination="rL3-HC-32o" id="3ZB-zx-YYs"/>
                         <outlet property="tableView" destination="DBO-hh-Yks" id="trw-z7-84l"/>
                         <outlet property="videoPreview" destination="nWc-nQ-CzW" id="lxZ-w0-2bw"/>
                     </connections>
@@ -335,6 +381,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKv-Pf-kFm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2378" y="108"/>
+        </scene>
+        <!--Object Detection Detail View Controller-->
+        <scene sceneID="nHv-fN-IkG">
+            <objects>
+                <viewController storyboardIdentifier="ObjectDetectionDetailViewController" id="hjL-Fp-kVO" customClass="ObjectDetectionDetailViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EfS-ec-KGn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-7S-OCF">
+                                <rect key="frame" x="8" y="52" width="398" height="802"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="OMj-Km-cQk" firstAttribute="bottom" secondItem="O8r-7S-OCF" secondAttribute="bottom" constant="8" id="UIu-2A-tpq"/>
+                            <constraint firstItem="OMj-Km-cQk" firstAttribute="trailing" secondItem="O8r-7S-OCF" secondAttribute="trailing" constant="8" id="dey-E9-QKr"/>
+                            <constraint firstItem="O8r-7S-OCF" firstAttribute="leading" secondItem="OMj-Km-cQk" secondAttribute="leading" constant="8" id="m2k-oh-MWo"/>
+                            <constraint firstItem="O8r-7S-OCF" firstAttribute="top" secondItem="OMj-Km-cQk" secondAttribute="top" constant="8" id="vFr-ye-jiH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OMj-Km-cQk"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="O8r-7S-OCF" id="Wc9-CV-aPs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfo-Ca-2V7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3057" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Eb-hD-xpI">

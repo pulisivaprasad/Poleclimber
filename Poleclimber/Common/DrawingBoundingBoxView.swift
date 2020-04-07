@@ -42,7 +42,7 @@ class DrawingBoundingBoxView: UIView {
         let labelString: String? = prediction.label
         let color: UIColor = labelColor(with: labelString ?? "N/A")
         
-        let scale = CGAffineTransform.identity.scaledBy(x: bounds.width, y: bounds.height)
+        let scale = CGAffineTransform.identity.scaledBy(x: bounds.width, y: 552)
         let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -1)
         let bgRect = prediction.boundingBox.applying(transform).applying(scale)
         
