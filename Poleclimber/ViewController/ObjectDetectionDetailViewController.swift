@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Vision
 
 class ObjectDetectionDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
@@ -21,6 +22,7 @@ class ObjectDetectionDetailViewController: UIViewController {
     }
     
     func cropImage(image: UIImage, normalisedRect: CGRect) -> UIImage? {
+        let objectBounds = VNImageRectForNormalizedRect(normalisedRect, Int(image.size.width), Int(image.size.height))
          let x = normalisedRect.origin.x * image.size.width
          let y = normalisedRect.origin.y * image.size.height
          let width = normalisedRect.width * image.size.width
@@ -28,7 +30,7 @@ class ObjectDetectionDetailViewController: UIViewController {
 
            let rect = CGRect(x: x, y: y, width: width, height: height)
 
-         guard let cropped = image.cgImage?.cropping(to: rect) else {
+         guard let cropped = image.cgImage?.cropping(to: objectBounds) else {
            return nil
          }
 

@@ -9,8 +9,9 @@
 import UIKit
 import AVKit
 import Vision
+import NVActivityIndicatorView
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NVActivityIndicatorViewable {
     @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
 
@@ -20,7 +21,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
-
+    var detectBtn = UIBarButtonItem()
+    var cvpixelBuffer: CVPixelBuffer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -29,6 +32,20 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         tableView.isHidden = true
+        
+        detectBtn = UIBarButtonItem(title: "Detect", style: .plain, target: self, action: #selector(detectObjects))
+        navigationItem.rightBarButtonItem = detectBtn
+        detectBtn.isEnabled = false
+    }
+    
+    @objc func detectObjects() {
+        if Helper.sharedHelper.isNetworkAvailable() {
+            
+        }
+        else{
+            Helper.sharedHelper.ShowAlert(str: "You don't have internet connection.", viewcontroller: self)
+            captureImageDetails(pixelBuffer: cvpixelBuffer!)
+        }
     }
     
     @IBAction func addPicture(_ sender: Any) {
@@ -103,7 +120,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             UIGraphicsPopContext()
             CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
             imageView.image = newImage
-            captureImageDetails(pixelBuffer: pixelBuffer!)
+            cvpixelBuffer = pixelBuffer
 
             showAddImgView()
 
@@ -113,6 +130,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
      func showAddImgView() {
         noImgView.isHidden = true
+        detectBtn.isEnabled = true
     }
     
     // MARK: - Capture Session
@@ -122,35 +140,39 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
         // Get the pixel buffer from the capture session
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        captureImageDetails(pixelBuffer: pixelBuffer)
+        cvpixelBuffer = pixelBuffer
     }
     
     func captureImageDetails(pixelBuffer: CVPixelBuffer)  {
           // load the Core ML model
-                guard let visionModel:VNCoreMLModel = try? VNCoreMLModel(for: objectDectectionModel.model) else { return }
-                //  set up the classification request
-                let request = VNCoreMLRequest(model: visionModel){(finishedReq, error) in
+        showLoader()
+        guard let visionModel:VNCoreMLModel = try? VNCoreMLModel(for: objectDectectionModel.model) else { return }
+        //  set up the classification request
+        let request = VNCoreMLRequest(model: visionModel){(finishedReq, error) in
                     
-                    guard let result = finishedReq.results as? [VNRecognizedObjectObservation] else {
-                        return
-                    }
-                    
-        //            guard let firstObservation = result.first else {
-        //                return
-        //            }
-                                        
-                      self.predictions = result
-                      DispatchQueue.main.async {
-                        self.tableView.isHidden = false
-                        self.boxesView.predictedObjects = self.predictions
-                        self.tableView.reloadData()
-                    }
-                    //print(firstObservation.identifier, firstObservation.confidence)
-                }
+        guard let result = finishedReq.results as? [VNRecognizedObjectObservation] else {
+            return
+        }
+            
+        self.stopLoader()
+//      guard let firstObservation = result.first else {
+//        return
+//      }
+
+        self.predictions = result
+        DispatchQueue.main.async {
+          self.tableView.isHidden = false
+        //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
+
+          self.boxesView.predictedObjects = self.predictions
+          self.tableView.reloadData()
+          }
+             //print(firstObservation.identifier, firstObservation.confidence)
+        }
                 
-                request.imageCropAndScaleOption = .scaleFill
-                try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
-    } 
+        request.imageCropAndScaleOption = .scaleFill
+        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+    }
     
 }
 
@@ -181,6 +203,17 @@ extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDeleg
         viewController.subImgFrame = self.predictions[indexPath.row].boundingBox
         viewController.originlImg = imageView.image!
         self.navigationController?.pushViewController(viewController, animated: true)
-
     }
+}
+
+extension ObjectDetectionViewController {
+    func showLoader() {
+           startAnimating(message: "Loading...", type: .circleStrokeSpin, color: kAppColor, backgroundColor: UIColor.clear)
+       }
+       
+       func stopLoader() {
+           DispatchQueue.main.async {
+               self.stopAnimating()
+           }
+       }
 }
