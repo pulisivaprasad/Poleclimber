@@ -47,7 +47,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         else{
             Helper.sharedHelper.ShowAlert(str: "You don't have internet connection.", viewcontroller: self)
             showLoader()
-            perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 3)
+            perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
 
         }
     }
