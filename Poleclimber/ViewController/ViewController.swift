@@ -24,6 +24,9 @@ class ViewController: UIViewController {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = pAppStatusBarColor
         }
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
     }
     
      override func viewWillAppear(_ animated: Bool) {

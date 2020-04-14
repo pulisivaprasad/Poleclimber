@@ -36,6 +36,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         detectBtn = UIBarButtonItem(title: "Detect", style: .plain, target: self, action: #selector(detectObjects))
         navigationItem.rightBarButtonItem = detectBtn
         detectBtn.isEnabled = false
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func detectObjects() {
@@ -44,8 +46,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
         else{
             Helper.sharedHelper.ShowAlert(str: "You don't have internet connection.", viewcontroller: self)
-            captureImageDetails(pixelBuffer: cvpixelBuffer!)
+            showLoader()
+            perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 3)
+
         }
+    }
+    
+    @objc func detectSubImagesInImg() {
+        captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
     @IBAction func addPicture(_ sender: Any) {
@@ -145,7 +153,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     func captureImageDetails(pixelBuffer: CVPixelBuffer)  {
           // load the Core ML model
-        showLoader()
         guard let visionModel:VNCoreMLModel = try? VNCoreMLModel(for: objectDectectionModel.model) else { return }
         //  set up the classification request
         let request = VNCoreMLRequest(model: visionModel){(finishedReq, error) in
@@ -208,7 +215,7 @@ extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDeleg
 
 extension ObjectDetectionViewController {
     func showLoader() {
-           startAnimating(message: "Loading...", type: .circleStrokeSpin, color: kAppColor, backgroundColor: UIColor.clear)
+           startAnimating(message: "Loading..", type: .circleStrokeSpin, color: pAppStatusBarColor, backgroundColor: UIColor.clear)
        }
        
        func stopLoader() {
