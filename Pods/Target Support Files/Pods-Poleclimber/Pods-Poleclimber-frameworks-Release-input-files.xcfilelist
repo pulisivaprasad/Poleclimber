@@ -1,6 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Poleclimber/Pods-Poleclimber-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AXPhotoViewer/AXPhotoViewer.framework
-${BUILT_PRODUCTS_DIR}/AXStateButton/AXStateButton.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
-${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework
-${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework
+${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework
+${BUILT_PRODUCTS_DIR}/RMessage/RMessage.framework

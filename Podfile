@@ -6,8 +6,6 @@ target 'Poleclimber' do
   use_frameworks!
 
   # Pods for Poleclimber
-  pod 'AXPhotoViewer'
+  pod 'RMessage'
   pod 'Alamofire'
-  pod 'NVActivityIndicatorView'
-
 end

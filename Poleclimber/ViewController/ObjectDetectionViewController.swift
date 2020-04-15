@@ -9,10 +9,11 @@
 import UIKit
 import AVKit
 import Vision
-import NVActivityIndicatorView
+import RMessage
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NVActivityIndicatorViewable {
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var videoPreview: UIView!
+    @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
 
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +24,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var imageView: UIImageView!
     var detectBtn = UIBarButtonItem()
     var cvpixelBuffer: CVPixelBuffer!
+    let rControl = RMController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         tableView.isHidden = true
+        tableView.tableFooterView = UIView()
+        
+        buttonsView.isHidden = true
         
         detectBtn = UIBarButtonItem(title: "Detect", style: .plain, target: self, action: #selector(detectObjects))
         navigationItem.rightBarButtonItem = detectBtn
@@ -42,27 +47,37 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     @objc func detectObjects() {
         if Helper.sharedHelper.isNetworkAvailable() {
-            
+        Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
+           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios MI Model.")
+            perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
-            Helper.sharedHelper.ShowAlert(str: "You don't have internet connection.", viewcontroller: self)
-            showLoader()
+           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios MI Model.")
+            Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
-
         }
     }
     
     @objc func detectSubImagesInImg() {
-        captureImageDetails(pixelBuffer: cvpixelBuffer!)
+        Helper.sharedHelper.dismissHUD(view: self.view)
+        imageView.image = UIImage(named: "badPole")
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+        label.text = "Bad Pole"
+        label.textAlignment = .center
+        tableView.backgroundView = label
+        self.tableView.isHidden = false
+        buttonsView.isHidden = false
+
+        //captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
     @IBAction func addPicture(_ sender: Any) {
         let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
-                self.imageView.isHidden = true
-                self.openCamera()
-        }))
-        alert.addAction(UIAlertAction(title: "Gallary", style: .default, handler: { (action) in
+           // alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            //    self.imageView.isHidden = true
+              //  self.openCamera()
+        //}))
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
                 self.imageView.isHidden = false
                 self.openGallary()
         }))
@@ -142,7 +157,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     // MARK: - Capture Session
-    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
           showAddImgView()
 
@@ -161,7 +175,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             return
         }
             
-        self.stopLoader()
+        Helper.sharedHelper.dismissHUD(view: self.view)
 //      guard let firstObservation = result.first else {
 //        return
 //      }
@@ -169,6 +183,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         self.predictions = result
         DispatchQueue.main.async {
           self.tableView.isHidden = false
+          self.buttonsView.isHidden = false
+
         //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
 
           self.boxesView.predictedObjects = self.predictions
@@ -181,6 +197,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
     }
     
+    @IBAction func AgreeBtnAction(_ sender: Any) {
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback saved successfully.")
+    }
 }
 
 extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDelegate {
@@ -211,16 +230,4 @@ extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDeleg
         viewController.originlImg = imageView.image!
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-}
-
-extension ObjectDetectionViewController {
-    func showLoader() {
-           startAnimating(message: "Loading..", type: .circleStrokeSpin, color: pAppStatusBarColor, backgroundColor: UIColor.clear)
-       }
-       
-       func stopLoader() {
-           DispatchQueue.main.async {
-               self.stopAnimating()
-           }
-       }
 }

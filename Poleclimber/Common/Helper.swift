@@ -89,7 +89,15 @@ class Helper: NSObject  {
         
         return ""
     }
+    
+    func showGlobalHUD(title: NSString, view: UIView) {
+        let HUD = MBProgressHUD.showAdded(to: view, animated: true)
+        HUD.label.text = title as String
+    }
 
+    func dismissHUD(view: UIView) {
+        MBProgressHUD.hide(for: view, animated: true)
+    }
     
     func isNetworkAvailable() -> Bool
     {
