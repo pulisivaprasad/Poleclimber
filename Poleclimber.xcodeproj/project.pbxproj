@@ -21,6 +21,7 @@
 		445B381524370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B381424370D5B00BBD569 /* YOLOv3Int8LUT.mlmodel */; };
 		445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */; };
 		446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 446F07232446CFC3005183B4 /* MBProgressHUD.m */; };
+		446F07282447050F005183B4 /* PoleStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F07272447050F005183B4 /* PoleStatusView.swift */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
 		44BB542024226D0F00C1302B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB541E24226D0F00C1302B /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		446F07222446CFC3005183B4 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		446F07232446CFC3005183B4 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		446F07252446D0BD005183B4 /* Poleclimber-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Poleclimber-Bridging-Header.h"; sourceTree = "<group>"; };
+		446F07272447050F005183B4 /* PoleStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoleStatusView.swift; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BB541824226D0F00C1302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 			path = YOLOv3;
 			sourceTree = "<group>";
 		};
+		446F0726244704A3005183B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				446F07272447050F005183B4 /* PoleStatusView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		44B4DD9B243312C900343A7F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				44B4DD9B243312C900343A7F /* ViewController */,
+				446F0726244704A3005183B4 /* View */,
 				443F02C1242CF59E00DBB05F /* Network */,
 				44BB542C2422FE2800C1302B /* Common */,
 				445B380724370CFE00BBD569 /* mlmodel */,
@@ -317,6 +328,7 @@
 				445B381224370D4100BBD569 /* ObjectDetector.mlmodel in Sources */,
 				445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */,
 				44BB54352423015300C1302B /* Reachability.swift in Sources */,
+				446F07282447050F005183B4 /* PoleStatusView.swift in Sources */,
 				443F344C243C34FB000719C9 /* ObjectDetectionDetailViewController.swift in Sources */,
 				443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */,
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,

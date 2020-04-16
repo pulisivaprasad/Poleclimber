@@ -16,6 +16,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
 
+    @IBOutlet var poleStatusSubView: PoleStatusView!
     @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
     let objectDectectionModel = YOLOv3Tiny()
@@ -30,7 +31,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         super.viewDidLoad()
   
         self.navigationController?.isNavigationBarHidden = false
-        self.title = "Object Detection"
+        self.title = "Visual inspection"
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         tableView.isHidden = true
@@ -48,36 +49,36 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @objc func detectObjects() {
         if Helper.sharedHelper.isNetworkAvailable() {
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
-           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios MI Model.")
+           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
-           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios MI Model.")
+           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios ML model.")
             Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
     }
     
     @objc func detectSubImagesInImg() {
-        Helper.sharedHelper.dismissHUD(view: self.view)
-        imageView.image = UIImage(named: "badPole")
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-        label.text = "Bad Pole"
-        label.textAlignment = .center
-        tableView.backgroundView = label
-        self.tableView.isHidden = false
-        buttonsView.isHidden = false
+//        Helper.sharedHelper.dismissHUD(view: self.view)
+//        imageView.image = UIImage(named: "badPole")
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+//        label.text = "\("Defective tip") is identified"
+//        label.textAlignment = .center
+//        tableView.backgroundView = label
+//        self.tableView.isHidden = false
+//        buttonsView.isHidden = false
 
-        //captureImageDetails(pixelBuffer: cvpixelBuffer!)
+        captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
     @IBAction func addPicture(_ sender: Any) {
         let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
-           // alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
-            //    self.imageView.isHidden = true
-              //  self.openCamera()
-        //}))
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                self.imageView.isHidden = true
+                self.openCamera()
+        }))
+        alert.addAction(UIAlertAction(title: "Gallary", style: .default, handler: { (action) in
                 self.imageView.isHidden = false
                 self.openGallary()
         }))
@@ -199,6 +200,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback saved successfully.")
+        buttonsView.isHidden = true
+    }
+    
+    @IBAction func disAgreeBtnAction(_ sender: Any) {
+        poleStatusSubView.frame = view.bounds
+        view.addSubview(poleStatusSubView)
+        
+        buttonsView.isHidden = true
     }
 }
 
