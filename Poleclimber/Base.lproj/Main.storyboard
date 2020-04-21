@@ -91,9 +91,187 @@
             <point key="canvasLocation" x="1047.2" y="107.49625187406298"/>
         </scene>
         <!--Object Detection View Controller-->
+        <scene sceneID="E5M-ry-Pkc">
+            <objects>
+                <viewController storyboardIdentifier="ObjectDetectionViewController" id="UVk-pt-u58" customClass="ObjectDetectionViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0r8-ow-vMk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZn-c6-eqG">
+                                <rect key="frame" x="0.0" y="64" width="203" height="220"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8e-ZR-hwI">
+                                        <rect key="frame" x="8" y="185" width="191" height="35"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="z9O-Zd-0aW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="UVk-pt-u58" eventType="touchUpInside" id="Eeg-HN-yaJ"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="5oZ-Ow-ZDR">
+                                        <rect key="frame" x="8" y="20" width="191" height="157"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="5oZ-Ow-ZDR" firstAttribute="top" secondItem="oZn-c6-eqG" secondAttribute="top" constant="20" symbolic="YES" id="Pix-lZ-bPA"/>
+                                    <constraint firstItem="5oZ-Ow-ZDR" firstAttribute="leading" secondItem="oZn-c6-eqG" secondAttribute="leading" constant="8" id="UEN-8u-FAR"/>
+                                    <constraint firstAttribute="trailing" secondItem="W8e-ZR-hwI" secondAttribute="trailing" constant="4" id="URe-79-UVf"/>
+                                    <constraint firstAttribute="height" constant="220" id="Uqe-mN-HrX"/>
+                                    <constraint firstItem="W8e-ZR-hwI" firstAttribute="leading" secondItem="oZn-c6-eqG" secondAttribute="leading" constant="8" id="V0N-kV-YQZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="W8e-ZR-hwI" secondAttribute="bottom" id="Z4y-4n-IKu"/>
+                                    <constraint firstAttribute="trailing" secondItem="5oZ-Ow-ZDR" secondAttribute="trailing" constant="4" id="xnz-P8-IaJ"/>
+                                    <constraint firstItem="W8e-ZR-hwI" firstAttribute="top" secondItem="5oZ-Ow-ZDR" secondAttribute="bottom" constant="8" id="xts-ZS-31Q"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZC-6O-Wqg">
+                                <rect key="frame" x="211" y="64" width="203" height="220"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="u9w-Gi-Woh">
+                                        <rect key="frame" x="4" y="20" width="191" height="157"/>
+                                    </imageView>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jP-Y5-oj5">
+                                        <rect key="frame" x="4" y="185" width="191" height="35"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="SNb-1V-4oq"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="UZN-Eo-ksl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="UVk-pt-u58" eventType="touchUpInside" id="gXf-1W-zgF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="u9w-Gi-Woh" firstAttribute="leading" secondItem="hZC-6O-Wqg" secondAttribute="leading" constant="4" id="81q-Gb-keg"/>
+                                    <constraint firstItem="u9w-Gi-Woh" firstAttribute="top" secondItem="hZC-6O-Wqg" secondAttribute="top" constant="20" symbolic="YES" id="B4A-Cm-oNf"/>
+                                    <constraint firstAttribute="bottom" secondItem="4jP-Y5-oj5" secondAttribute="bottom" id="OfB-Pw-SqM"/>
+                                    <constraint firstItem="4jP-Y5-oj5" firstAttribute="top" secondItem="u9w-Gi-Woh" secondAttribute="bottom" constant="8" id="Pef-Ng-3u5"/>
+                                    <constraint firstItem="4jP-Y5-oj5" firstAttribute="leading" secondItem="hZC-6O-Wqg" secondAttribute="leading" constant="4" id="dMJ-cM-Pgz"/>
+                                    <constraint firstAttribute="trailing" secondItem="4jP-Y5-oj5" secondAttribute="trailing" constant="8" id="jFU-si-eYS"/>
+                                    <constraint firstAttribute="trailing" secondItem="u9w-Gi-Woh" secondAttribute="trailing" constant="8" id="zRd-P0-shn"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HT4-DE-eg8">
+                                <rect key="frame" x="0.0" y="304" width="203" height="220"/>
+                                <subviews>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-Gx-QmZ">
+                                        <rect key="frame" x="8" y="185" width="191" height="35"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="54m-QJ-ikP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="UVk-pt-u58" eventType="touchUpInside" id="L7R-fc-aHK"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Ea9-NM-5Ud">
+                                        <rect key="frame" x="8" y="20" width="191" height="157"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="1aH-Gx-QmZ" firstAttribute="top" secondItem="Ea9-NM-5Ud" secondAttribute="bottom" constant="8" id="2vk-5G-u8g"/>
+                                    <constraint firstItem="1aH-Gx-QmZ" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="leading" constant="8" id="5iq-LW-A7O"/>
+                                    <constraint firstItem="Ea9-NM-5Ud" firstAttribute="top" secondItem="HT4-DE-eg8" secondAttribute="top" constant="20" symbolic="YES" id="7FD-DC-uhR"/>
+                                    <constraint firstItem="Ea9-NM-5Ud" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="leading" constant="8" id="LiK-Ap-J7Q"/>
+                                    <constraint firstAttribute="height" constant="220" id="Vq2-XR-fVy"/>
+                                    <constraint firstAttribute="bottom" secondItem="1aH-Gx-QmZ" secondAttribute="bottom" id="b0M-U9-obd"/>
+                                    <constraint firstAttribute="trailing" secondItem="1aH-Gx-QmZ" secondAttribute="trailing" constant="4" id="kA6-kp-50R"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ea9-NM-5Ud" secondAttribute="trailing" constant="4" id="xCc-uV-gsb"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5G-6O-PXo">
+                                <rect key="frame" x="211" y="304" width="203" height="220"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="FZ6-4e-6P0">
+                                        <rect key="frame" x="4" y="20" width="191" height="157"/>
+                                    </imageView>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIa-5d-OJ5">
+                                        <rect key="frame" x="4" y="185" width="191" height="35"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="nUf-YN-tbh"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="rtj-3e-UMl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Add Picture">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="UVk-pt-u58" eventType="touchUpInside" id="6rO-yM-hv0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="FZ6-4e-6P0" firstAttribute="leading" secondItem="c5G-6O-PXo" secondAttribute="leading" constant="4" id="33h-Wj-T8K"/>
+                                    <constraint firstAttribute="trailing" secondItem="UIa-5d-OJ5" secondAttribute="trailing" constant="8" id="5GA-Ny-pK5"/>
+                                    <constraint firstItem="UIa-5d-OJ5" firstAttribute="leading" secondItem="c5G-6O-PXo" secondAttribute="leading" constant="4" id="6SB-p7-slK"/>
+                                    <constraint firstAttribute="trailing" secondItem="FZ6-4e-6P0" secondAttribute="trailing" constant="8" id="CDl-mz-bya"/>
+                                    <constraint firstItem="FZ6-4e-6P0" firstAttribute="top" secondItem="c5G-6O-PXo" secondAttribute="top" constant="20" symbolic="YES" id="iRE-GR-55H"/>
+                                    <constraint firstAttribute="bottom" secondItem="UIa-5d-OJ5" secondAttribute="bottom" id="iWO-b6-XxC"/>
+                                    <constraint firstItem="UIa-5d-OJ5" firstAttribute="top" secondItem="FZ6-4e-6P0" secondAttribute="bottom" constant="8" id="zvf-bj-gyL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="c5G-6O-PXo" secondAttribute="trailing" id="2EK-UF-PQm"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="height" secondItem="HT4-DE-eg8" secondAttribute="height" id="3N3-jM-cQ9"/>
+                            <constraint firstItem="oZn-c6-eqG" firstAttribute="leading" secondItem="r1X-c2-cqi" secondAttribute="leading" id="50w-iJ-egd"/>
+                            <constraint firstItem="hZC-6O-Wqg" firstAttribute="height" secondItem="oZn-c6-eqG" secondAttribute="height" id="Ali-bc-6lp"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="trailing" constant="8" id="CbG-qd-pDE"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="height" secondItem="HT4-DE-eg8" secondAttribute="height" id="Dzm-Sn-SPH"/>
+                            <constraint firstItem="HT4-DE-eg8" firstAttribute="leading" secondItem="r1X-c2-cqi" secondAttribute="leading" id="FJO-ZP-14N"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="centerY" secondItem="HT4-DE-eg8" secondAttribute="centerY" id="PTm-GO-guk"/>
+                            <constraint firstItem="HT4-DE-eg8" firstAttribute="top" secondItem="oZn-c6-eqG" secondAttribute="bottom" constant="20" id="SwC-XZ-1lp"/>
+                            <constraint firstItem="oZn-c6-eqG" firstAttribute="top" secondItem="r1X-c2-cqi" secondAttribute="top" constant="20" id="VVG-MY-h3M"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="width" secondItem="HT4-DE-eg8" secondAttribute="width" id="VXR-Rp-ZYM"/>
+                            <constraint firstItem="hZC-6O-Wqg" firstAttribute="width" secondItem="oZn-c6-eqG" secondAttribute="width" id="Z2V-QG-hcp"/>
+                            <constraint firstItem="r1X-c2-cqi" firstAttribute="trailing" secondItem="hZC-6O-Wqg" secondAttribute="trailing" id="m6s-99-qni"/>
+                            <constraint firstItem="hZC-6O-Wqg" firstAttribute="top" secondItem="r1X-c2-cqi" secondAttribute="top" constant="20" id="ms1-3v-MAJ"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="width" secondItem="HT4-DE-eg8" secondAttribute="width" id="o4c-Ga-giB"/>
+                            <constraint firstItem="c5G-6O-PXo" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="trailing" constant="8" id="od0-BD-tku"/>
+                            <constraint firstItem="hZC-6O-Wqg" firstAttribute="leading" secondItem="oZn-c6-eqG" secondAttribute="trailing" constant="8" id="poW-2H-e4q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="r1X-c2-cqi"/>
+                    </view>
+                    <connections>
+                        <outlet property="addPictureBtn1" destination="W8e-ZR-hwI" id="UD5-MU-pAp"/>
+                        <outlet property="addPictureBtn2" destination="4jP-Y5-oj5" id="oXI-gd-SrY"/>
+                        <outlet property="addPictureBtn3" destination="1aH-Gx-QmZ" id="YjU-Ff-LmS"/>
+                        <outlet property="addPictureBtn4" destination="UIa-5d-OJ5" id="opI-S6-iOn"/>
+                        <outlet property="imageView1" destination="5oZ-Ow-ZDR" id="PR3-5C-oST"/>
+                        <outlet property="imageView2" destination="u9w-Gi-Woh" id="Nkw-MU-oBn"/>
+                        <outlet property="imageView3" destination="Ea9-NM-5Ud" id="nB8-eH-pJz"/>
+                        <outlet property="imageView4" destination="FZ6-4e-6P0" id="zZJ-t1-INE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MpV-fP-k7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1695.6521739130435" y="105.80357142857143"/>
+        </scene>
+        <!--Object Detection View Controller-->
         <scene sceneID="0U3-Zg-gBQ">
             <objects>
-                <viewController storyboardIdentifier="ObjectDetectionViewController" id="c6Y-Jp-ahG" customClass="ObjectDetectionViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="c6Y-Jp-ahG" customClass="ObjectDetectionViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rsq-i1-IkU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +535,7 @@
                     <viewLayoutGuide key="safeArea" id="Qbh-mG-xDU"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1703" y="108"/>
+            <point key="canvasLocation" x="2333" y="107"/>
         </scene>
         <!--Object Detection Detail View Controller-->
         <scene sceneID="nHv-fN-IkG">
@@ -416,6 +594,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="picture_placeholder" width="320" height="200"/>
         <image name="selected" width="24" height="24"/>
         <image name="unSelected" width="30" height="30"/>
     </resources>
