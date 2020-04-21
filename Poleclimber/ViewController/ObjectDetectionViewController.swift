@@ -27,6 +27,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var imageView3: UIImageView!
     @IBOutlet weak var imageView4: UIImageView!
 
+    @IBOutlet weak var progressBarView: UIProgressView!
+
     @IBOutlet var poleStatusSubView: PoleStatusView!
     @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
@@ -55,6 +57,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         addPictureBtn2.isHidden = true
         addPictureBtn3.isHidden = true
         addPictureBtn4.isHidden = true
+        
+        progressBarView.progress = 0.01
     }
     
     @objc func detectObjects() {
@@ -132,16 +136,21 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
             if btnTag == 0 {
                 imageView1.image = image
+                self.progressBarView.progress = 0.25
+
             }
             else if btnTag == 1 {
                 imageView2.image = image
+                self.progressBarView.progress = 0.50
             }
             else if btnTag == 2 {
                 imageView3.image = image
+                self.progressBarView.progress = 0.75
             }
             else {
                 imageView4.image = image
                 convertCVPixelBufferImg(image: image)
+                self.progressBarView.progress = 0.50
             }
 
             self.dismiss(animated: true, completion:{

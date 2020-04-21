@@ -230,6 +230,25 @@
                                     <constraint firstItem="UIa-5d-OJ5" firstAttribute="top" secondItem="FZ6-4e-6P0" secondAttribute="bottom" constant="8" id="zvf-bj-gyL"/>
                                 </constraints>
                             </view>
+                            <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z4N-qC-eVM">
+                                <rect key="frame" x="20" y="624" width="374" height="11"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="3Un-aQ-oH0"/>
+                                </constraints>
+                                <color key="progressTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVr-GB-nGJ">
+                                <rect key="frame" x="173" y="664" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -237,19 +256,24 @@
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="height" secondItem="HT4-DE-eg8" secondAttribute="height" id="3N3-jM-cQ9"/>
                             <constraint firstItem="oZn-c6-eqG" firstAttribute="leading" secondItem="r1X-c2-cqi" secondAttribute="leading" id="50w-iJ-egd"/>
                             <constraint firstItem="hZC-6O-Wqg" firstAttribute="height" secondItem="oZn-c6-eqG" secondAttribute="height" id="Ali-bc-6lp"/>
+                            <constraint firstItem="sVr-GB-nGJ" firstAttribute="centerX" secondItem="Z4N-qC-eVM" secondAttribute="centerX" id="Bf8-qy-PKb"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="trailing" constant="8" id="CbG-qd-pDE"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="height" secondItem="HT4-DE-eg8" secondAttribute="height" id="Dzm-Sn-SPH"/>
                             <constraint firstItem="HT4-DE-eg8" firstAttribute="leading" secondItem="r1X-c2-cqi" secondAttribute="leading" id="FJO-ZP-14N"/>
+                            <constraint firstItem="Z4N-qC-eVM" firstAttribute="leading" secondItem="0r8-ow-vMk" secondAttribute="leading" constant="20" id="JRs-NH-P0W"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="centerY" secondItem="HT4-DE-eg8" secondAttribute="centerY" id="PTm-GO-guk"/>
                             <constraint firstItem="HT4-DE-eg8" firstAttribute="top" secondItem="oZn-c6-eqG" secondAttribute="bottom" constant="20" id="SwC-XZ-1lp"/>
                             <constraint firstItem="oZn-c6-eqG" firstAttribute="top" secondItem="r1X-c2-cqi" secondAttribute="top" constant="20" id="VVG-MY-h3M"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="width" secondItem="HT4-DE-eg8" secondAttribute="width" id="VXR-Rp-ZYM"/>
+                            <constraint firstItem="sVr-GB-nGJ" firstAttribute="top" secondItem="Z4N-qC-eVM" secondAttribute="bottom" constant="30" id="XPW-Hi-wMQ"/>
                             <constraint firstItem="hZC-6O-Wqg" firstAttribute="width" secondItem="oZn-c6-eqG" secondAttribute="width" id="Z2V-QG-hcp"/>
+                            <constraint firstAttribute="trailing" secondItem="Z4N-qC-eVM" secondAttribute="trailing" constant="20" id="iIe-u3-sxV"/>
                             <constraint firstItem="r1X-c2-cqi" firstAttribute="trailing" secondItem="hZC-6O-Wqg" secondAttribute="trailing" id="m6s-99-qni"/>
                             <constraint firstItem="hZC-6O-Wqg" firstAttribute="top" secondItem="r1X-c2-cqi" secondAttribute="top" constant="20" id="ms1-3v-MAJ"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="width" secondItem="HT4-DE-eg8" secondAttribute="width" id="o4c-Ga-giB"/>
                             <constraint firstItem="c5G-6O-PXo" firstAttribute="leading" secondItem="HT4-DE-eg8" secondAttribute="trailing" constant="8" id="od0-BD-tku"/>
                             <constraint firstItem="hZC-6O-Wqg" firstAttribute="leading" secondItem="oZn-c6-eqG" secondAttribute="trailing" constant="8" id="poW-2H-e4q"/>
+                            <constraint firstItem="Z4N-qC-eVM" firstAttribute="top" secondItem="HT4-DE-eg8" secondAttribute="bottom" constant="100" id="qc7-5l-TZl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r1X-c2-cqi"/>
                     </view>
@@ -262,6 +286,7 @@
                         <outlet property="imageView2" destination="u9w-Gi-Woh" id="Nkw-MU-oBn"/>
                         <outlet property="imageView3" destination="Ea9-NM-5Ud" id="nB8-eH-pJz"/>
                         <outlet property="imageView4" destination="FZ6-4e-6P0" id="zZJ-t1-INE"/>
+                        <outlet property="progressBarView" destination="Z4N-qC-eVM" id="vEY-Pt-aZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MpV-fP-k7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
