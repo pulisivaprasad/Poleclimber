@@ -19,7 +19,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet var poleStatusSubView: PoleStatusView!
     @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
-    let objectDectectionModel = YOLOv3Tiny()
+    let objectDectectionModel =  MobileNetV2_SSDLite() //YOLOv3Tiny()
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
@@ -47,14 +47,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @objc func detectObjects() {
-        if Helper.sharedHelper.isNetworkAvailable() {
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
-           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
+
+        if Helper.sharedHelper.isNetworkAvailable() {
+//           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
            rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios ML model.")
-            Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
     }
@@ -75,11 +75,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBAction func addPicture(_ sender: Any) {
         let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
-                self.imageView.isHidden = true
                 self.openCamera()
         }))
         alert.addAction(UIAlertAction(title: "Gallary", style: .default, handler: { (action) in
-                self.imageView.isHidden = false
                 self.openGallary()
         }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -87,26 +85,34 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func openCamera() {
-        let captureSession = AVCaptureSession()
-               //captureSession.sessionPreset = .photo
-         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
-            return
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            self.present(imagePicker, animated: true, completion: nil)
         }
-               
-        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {
-            return
+        else{
+            Helper.sharedHelper.showGlobalAlertwithMessage("You don't have camera.")
         }
-               
-        captureSession.addInput(input)
-        captureSession.startRunning()
-               
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        videoPreview.layer.addSublayer(previewLayer)
-        previewLayer.frame = videoPreview.frame
-               
-        let dataOutput = AVCaptureVideoDataOutput()
-        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
-               captureSession.addOutput(dataOutput)
+        
+//        let captureSession = AVCaptureSession()
+//               //captureSession.sessionPreset = .photo
+//         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
+//            return
+//        }
+//
+//        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {
+//            return
+//        }
+//
+//        captureSession.addInput(input)
+//        captureSession.startRunning()
+//
+//        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+//        videoPreview.layer.addSublayer(previewLayer)
+//        previewLayer.frame = videoPreview.frame
+//
+//        let dataOutput = AVCaptureVideoDataOutput()
+//        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+//               captureSession.addOutput(dataOutput)
     }
     
     func openGallary() {
@@ -177,9 +183,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
             
         Helper.sharedHelper.dismissHUD(view: self.view)
-//      guard let firstObservation = result.first else {
-//        return
-//      }
+      guard result.first != nil else {
+        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any Objects, please selecet proper image for ML Model.")
+
+        return
+      }
 
         self.predictions = result
         DispatchQueue.main.async {
