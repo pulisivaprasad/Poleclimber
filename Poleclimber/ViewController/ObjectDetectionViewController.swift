@@ -12,14 +12,13 @@ import Vision
 import RMessage
 
 class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
+    @IBOutlet weak var namelabel: UILabel!
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
-    @IBOutlet weak var tableView: UITableView!
     var predictions: [VNRecognizedObjectObservation] = []
-    let objectDectectionModel =  MobileNetV2_SSDLite() //YOLOv3Tiny()
+    let objectDectectionModel =  MobileNetV3_SSDLite() //YOLOv3Tiny()
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
@@ -34,10 +33,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         self.title = "Visual inspection"
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        tableView.isHidden = true
-        tableView.tableFooterView = UIView()
         
         buttonsView.isHidden = true
+        namelabel.isHidden = true
         
         detectBtn = UIBarButtonItem(title: "Detect", style: .plain, target: self, action: #selector(detectObjects))
         navigationItem.rightBarButtonItem = detectBtn
@@ -50,7 +48,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
 
         if Helper.sharedHelper.isNetworkAvailable() {
-//           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
@@ -191,13 +188,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
         self.predictions = result
         DispatchQueue.main.async {
-          self.tableView.isHidden = false
           self.buttonsView.isHidden = false
+          self.namelabel.isHidden = false
+            self.namelabel.text = self.predictions.first?.label
 
-        //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
+          //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
 
           self.boxesView.predictedObjects = self.predictions
-          self.tableView.reloadData()
           }
              //print(firstObservation.identifier, firstObservation.confidence)
         }
