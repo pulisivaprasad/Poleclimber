@@ -79,7 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */,
-				657FE82D2453EFF90098D0E6 /* TiproadDetectionModel */,
+				657FE82D2453EFF90098D0E6 /* TiprotDetectionModel */,
 			);
 			path = mlmodel;
 			sourceTree = "<group>";
@@ -152,12 +152,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		657FE82D2453EFF90098D0E6 /* TiproadDetectionModel */ = {
+		657FE82D2453EFF90098D0E6 /* TiprotDetectionModel */ = {
 			isa = PBXGroup;
 			children = (
 				657FE82B24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel */,
 			);
-			path = TiproadDetectionModel;
+			path = TiprotDetectionModel;
 			sourceTree = "<group>";
 		};
 		8FBA887087DF9240D11CB325 /* Pods */ = {

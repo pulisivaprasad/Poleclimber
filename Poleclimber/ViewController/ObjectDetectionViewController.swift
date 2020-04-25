@@ -181,7 +181,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
         Helper.sharedHelper.dismissHUD(view: self.view)
       guard result.first != nil else {
-        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any Objects, please selecet proper image for ML Model.")
+        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please selecet proper pole tip image for ML Model.")
 
         return
       }
