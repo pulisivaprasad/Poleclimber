@@ -69,7 +69,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
-    @IBAction func addPicture(_ sender: Any) {
+    @IBAction func addPicture(sender: UIButton) {
         let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
                 self.openCamera()
@@ -78,7 +78,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.openGallary()
         }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                  self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func openCamera() {
@@ -182,7 +182,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         Helper.sharedHelper.dismissHUD(view: self.view)
       guard result.first != nil else {
         self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please selecet proper pole tip image for ML Model.")
-
+        self.imageView.image = UIImage(named: "")
+        self.noImgView.isHidden = false
+        self.detectBtn.isEnabled = false
         return
       }
 
