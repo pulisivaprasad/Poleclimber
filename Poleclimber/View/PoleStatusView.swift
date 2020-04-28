@@ -8,13 +8,26 @@
 
 import UIKit
 
-class PoleStatusView: UIView {
+protocol NavigationDelegate: class {
+func submitBtnAction()
+}
 
-    @IBAction func closeBtnAction(_ sender: Any) {
-        self.removeFromSuperview()
+class PoleStatusView: UIView {
+    @IBOutlet weak var closeBtn: UIButton!
+   weak var delegate : NavigationDelegate?
+    
+
+    @IBAction func closeBtnAction(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Submit" {
+            delegate?.submitBtnAction()
+        }
+        else{
+            self.removeFromSuperview()
+        }
     }
     
     @IBAction func stepBtnAction(_ sender: UIButton) {
+        closeBtn.setTitle("Submit", for: .normal)
         if sender.isSelected {
             sender.isSelected = false
         }

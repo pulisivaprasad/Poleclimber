@@ -11,7 +11,7 @@ import AVKit
 import Vision
 import RMessage
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NavigationDelegate {
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
     @IBOutlet weak var namelabel: UILabel!
@@ -57,15 +57,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @objc func detectSubImagesInImg() {
-//        Helper.sharedHelper.dismissHUD(view: self.view)
-//        imageView.image = UIImage(named: "badPole")
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-//        label.text = "\("Defective tip") is identified"
-//        label.textAlignment = .center
-//        tableView.backgroundView = label
-//        self.tableView.isHidden = false
-//        buttonsView.isHidden = false
-
         captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
@@ -74,7 +65,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
                 self.openCamera()
         }))
-        alert.addAction(UIAlertAction(title: "Gallary", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (action) in
                 self.openGallary()
         }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -89,27 +80,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         else{
             Helper.sharedHelper.showGlobalAlertwithMessage("You don't have camera.")
         }
-        
-//        let captureSession = AVCaptureSession()
-//               //captureSession.sessionPreset = .photo
-//         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
-//            return
-//        }
-//
-//        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {
-//            return
-//        }
-//
-//        captureSession.addInput(input)
-//        captureSession.startRunning()
-//
-//        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        videoPreview.layer.addSublayer(previewLayer)
-//        previewLayer.frame = videoPreview.frame
-//
-//        let dataOutput = AVCaptureVideoDataOutput()
-//        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
-//               captureSession.addOutput(dataOutput)
     }
     
     func openGallary() {
@@ -181,7 +151,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
         Helper.sharedHelper.dismissHUD(view: self.view)
       guard result.first != nil else {
-        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please selecet proper pole tip image for ML Model.")
+        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please select proper pole tip image for ML Model.")
         self.imageView.image = UIImage(named: "")
         self.noImgView.isHidden = false
         self.detectBtn.isEnabled = false
@@ -192,7 +162,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         DispatchQueue.main.async {
           self.buttonsView.isHidden = false
           self.namelabel.isHidden = false
-            self.namelabel.text = self.predictions.first?.label
+            if self.predictions.first?.label == "good_tip" {
+                self.namelabel.text = "We found Good tip"
+            }
+            else{
+                self.namelabel.text = "We found Bad tip"
+            }
 
           //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
 
@@ -207,43 +182,21 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback saved successfully.")
-        buttonsView.isHidden = true
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
+    }
+    
+    @objc func navigateToHomeScreen() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func disAgreeBtnAction(_ sender: Any) {
         poleStatusSubView.frame = view.bounds
+        poleStatusSubView.delegate = self
         view.addSubview(poleStatusSubView)
-        
-        buttonsView.isHidden = true
-    }
-}
-
-extension ObjectDetectionViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return predictions.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell") else {
-            return UITableViewCell()
-        }
-
-        let rectString = predictions[indexPath.row].boundingBox.toString(digit: 2)
-        let confidence = predictions[indexPath.row].labels.first?.confidence ?? -1
-        let confidenceString = String(format: "%.3f", confidence/*Math.sigmoid(confidence)*/)
-        
-        cell.textLabel?.text = predictions[indexPath.row].label ?? "N/A"
-        cell.detailTextLabel?.text = "\(rectString), \(confidenceString)"
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = sb.instantiateViewController(withIdentifier: "ObjectDetectionDetailViewController") as! ObjectDetectionDetailViewController
-        viewController.title = predictions[indexPath.row].label ?? "N/A"
-        viewController.subImgFrame = self.predictions[indexPath.row].boundingBox
-        viewController.originlImg = imageView.image!
-        self.navigationController?.pushViewController(viewController, animated: true)
+    func submitBtnAction() {
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your reason, we will get back to you.")
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
     }
 }
