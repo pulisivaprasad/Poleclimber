@@ -15,6 +15,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
     @IBOutlet weak var namelabel: UILabel!
+    @IBOutlet weak var detectBtn: UIButton!
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
@@ -22,7 +23,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
-    var detectBtn = UIBarButtonItem()
     var cvpixelBuffer: CVPixelBuffer!
     let rControl = RMController()
     
@@ -37,14 +37,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         buttonsView.isHidden = true
         namelabel.isHidden = true
         
-        detectBtn = UIBarButtonItem(title: "Detect", style: .plain, target: self, action: #selector(detectObjects))
-        navigationItem.rightBarButtonItem = detectBtn
-        detectBtn.isEnabled = false
+        detectBtn.isHidden = true
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    @objc func detectObjects() {
+   @IBAction func detectBtnAction(sender: UIButton) {
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
 
         if Helper.sharedHelper.isNetworkAvailable() {
@@ -60,19 +58,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         captureImageDetails(pixelBuffer: cvpixelBuffer!)
     }
     
-    @IBAction func addPicture(sender: UIButton) {
-        let alert = UIAlertController(title: "Take Photo", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
-                self.openCamera()
-        }))
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (action) in
-                self.openGallary()
-        }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func addPictureFromGallery(sender: UIButton) {
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
-    func openCamera() {
+    @IBAction func addPictureFromCamera(sender: UIButton) {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             self.present(imagePicker, animated: true, completion: nil)
@@ -80,11 +71,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         else{
             Helper.sharedHelper.showGlobalAlertwithMessage("You don't have camera.")
         }
-    }
-    
-    func openGallary() {
-        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        self.present(imagePicker, animated: true, completion: nil)
     }
     
     // MARK: - UIImagePickerControllerDelegate Method
@@ -127,7 +113,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
      func showAddImgView() {
         noImgView.isHidden = true
-        detectBtn.isEnabled = true
+        detectBtn.isHidden = false
     }
     
     // MARK: - Capture Session
@@ -154,19 +140,20 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please select proper pole tip image for ML Model.")
         self.imageView.image = UIImage(named: "")
         self.noImgView.isHidden = false
-        self.detectBtn.isEnabled = false
+        self.detectBtn.isHidden = true
         return
       }
 
         self.predictions = result
         DispatchQueue.main.async {
           self.buttonsView.isHidden = false
+            self.detectBtn.isHidden = true
           self.namelabel.isHidden = false
             if self.predictions.first?.label == "good_tip" {
-                self.namelabel.text = "We found Good tip"
+                self.namelabel.text = "Good tip detected"
             }
             else{
-                self.namelabel.text = "We found Bad tip"
+                self.namelabel.text = "Bad tip detected"
             }
 
           //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
@@ -181,6 +168,24 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
+        var detailsSaving = UserDefaults.standard.object(forKey: "USERDETAILS") as? [[String: AnyObject]]
+
+        if detailsSaving == nil {
+            detailsSaving = [[String: AnyObject]]()
+        }
+
+        var disc = [String: AnyObject]()
+        disc["title"] = self.namelabel.text as AnyObject
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
+        let dateObj = dateFormatter.string(from: Date())
+        
+        disc["time"] = dateObj as AnyObject
+        detailsSaving?.append(disc)
+        UserDefaults.standard.set(detailsSaving, forKey: "USERDETAILS")
+        UserDefaults.standard.synchronize()
+        
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback saved successfully.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
     }
@@ -191,12 +196,22 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     @IBAction func disAgreeBtnAction(_ sender: Any) {
         poleStatusSubView.frame = view.bounds
+        if self.namelabel.text == "Good tip detected"{
+            poleStatusSubView.reason1.setTitle("Reason1", for: .normal)
+            poleStatusSubView.reason2.setTitle("Reason2", for: .normal)
+            poleStatusSubView.reason3.setTitle("Reason3", for: .normal)
+        }
+        else{
+            poleStatusSubView.reason1.setTitle("Reason4", for: .normal)
+            poleStatusSubView.reason2.setTitle("Reason5", for: .normal)
+            poleStatusSubView.reason3.setTitle("Reason6", for: .normal)
+        }
         poleStatusSubView.delegate = self
         view.addSubview(poleStatusSubView)
     }
     
     func submitBtnAction() {
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your reason, we will get back to you.")
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your feedback, we will get back to you.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
     }
 }

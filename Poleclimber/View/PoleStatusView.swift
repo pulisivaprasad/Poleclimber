@@ -13,26 +13,40 @@ func submitBtnAction()
 }
 
 class PoleStatusView: UIView {
-    @IBOutlet weak var closeBtn: UIButton!
-   weak var delegate : NavigationDelegate?
-    
+    @IBOutlet weak var submitBtn: UIButton!
+    weak var delegate : NavigationDelegate?
+    @IBOutlet weak var reason1: UIButton!
+    @IBOutlet weak var reason2: UIButton!
+    @IBOutlet weak var reason3: UIButton!
 
     @IBAction func closeBtnAction(_ sender: UIButton) {
-        if sender.titleLabel?.text == "Submit" {
-            delegate?.submitBtnAction()
-        }
-        else{
-            self.removeFromSuperview()
-        }
+        reason1.isSelected = false
+        reason2.isSelected = false
+        reason3.isSelected = false
+        self.removeFromSuperview()
+        
+    }
+    @IBAction func submitBtnAction(_ sender: UIButton) {
+        delegate?.submitBtnAction()
     }
     
     @IBAction func stepBtnAction(_ sender: UIButton) {
-        closeBtn.setTitle("Submit", for: .normal)
-        if sender.isSelected {
-            sender.isSelected = false
+        submitBtn.backgroundColor = UIColor.red
+        submitBtn.isUserInteractionEnabled = true
+        if sender.tag == 1 {
+            reason1.isSelected = true
+            reason2.isSelected = false
+            reason3.isSelected = false
+        }
+        else if sender.tag == 2 {
+            reason1.isSelected = false
+            reason2.isSelected = true
+            reason3.isSelected = false
         }
         else{
-            sender.isSelected = true
+            reason1.isSelected = false
+            reason2.isSelected = false
+            reason3.isSelected = true
         }
     }
 }
