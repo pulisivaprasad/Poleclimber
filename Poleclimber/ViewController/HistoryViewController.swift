@@ -10,8 +10,9 @@ import UIKit
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var historyObj = NSMutableArray()
-    
+    var historyObj = [[String: AnyObject]]()
+    @IBOutlet weak var tableview: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,9 +20,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
-        historyObj = UserDefaults.standard.object(forKey: "USERDETAILS") as? NSMutableArray ?? NSMutableArray()
+        if let object = UserDefaults.standard.object(forKey: "USERDETAILS") {
+            historyObj = object as! [[String : AnyObject]]
+        }
+        tableview.reloadData()
         self.parent?.title = "History"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
     }
     
@@ -37,10 +40,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
 
         // set the text from the data model
-        let historyDisc = historyObj[indexPath.row] as? [String: AnyObject]
+        let historyDisc = historyObj[indexPath.row]
         
-        cell.textLabel?.text = historyDisc?["title"] as? String
-        if let objectdetectDate = historyDisc?["time"] {
+        cell.textLabel?.text = historyDisc["title"] as? String
+        if let objectdetectDate = historyDisc["time"] {
             cell.detailTextLabel?.text = "\(objectdetectDate)"
         }
 

@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5p-lt-s3S">
                                 <rect key="frame" x="0.0" y="322.66666666666669" width="414" height="256.00000000000006"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief engineer app pole testing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Engineer App Pole Testing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
                                         <rect key="frame" x="10" y="20" width="394" height="31"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,7 +40,7 @@
                                             <constraint firstAttribute="height" constant="45" id="yGx-2W-LrM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                        <state key="normal" title="Start inspection">
+                                        <state key="normal" title="Start Inspection">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -144,6 +144,9 @@
                         <viewLayoutGuide key="safeArea" id="7Qs-3q-6A1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" image="history" id="0bH-Hv-Ix4"/>
+                    <connections>
+                        <outlet property="tableview" destination="vfb-2v-EXO" id="GW3-VX-XCP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5D-oL-jGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,42 +197,36 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-HC-32o">
-                                <rect key="frame" x="30" y="348.66666666666669" width="354" height="209.00000000000006"/>
+                                <rect key="frame" x="10" y="392" width="394" height="122"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's add picture from gallery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-bT-XOE">
-                                        <rect key="frame" x="10" y="10" width="334" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's add picture from gallery. or camera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-bT-XOE">
+                                        <rect key="frame" x="10" y="10" width="374" height="22"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-W5-X0P">
-                                        <rect key="frame" x="10" y="52" width="334" height="50"/>
+                                        <rect key="frame" x="20" y="52" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="baU-TS-3tZ"/>
+                                            <constraint firstAttribute="height" constant="50" id="yWC-sO-6sm"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="Add picture">
+                                        <state key="normal" title="Gallery">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="addPictureFromGalleryWithSender:" destination="c6Y-Jp-ahG" eventType="touchUpInside" id="sHU-JU-TmA"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's add picture from camera." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f44-00-ZWp">
-                                        <rect key="frame" x="49.333333333333329" y="117" width="255.66666666666669" height="22"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-Ni-akT">
-                                        <rect key="frame" x="10" y="149" width="334" height="50"/>
+                                        <rect key="frame" x="207" y="52" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.92549019610000005" green="0.27450980390000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="isN-fx-2uh"/>
+                                            <constraint firstAttribute="height" constant="50" id="IlF-cB-vXg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="Add picture">
+                                        <state key="normal" title="Camera">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -240,17 +237,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="9IY-bT-XOE" firstAttribute="top" secondItem="rL3-HC-32o" secondAttribute="top" constant="10" id="0VF-NG-W6p"/>
-                                    <constraint firstAttribute="trailing" secondItem="I2E-Ni-akT" secondAttribute="trailing" constant="10" id="1vG-Dw-Lp4"/>
-                                    <constraint firstItem="f44-00-ZWp" firstAttribute="top" secondItem="UIi-W5-X0P" secondAttribute="bottom" constant="15" id="3S9-IZ-ZPw"/>
+                                    <constraint firstItem="I2E-Ni-akT" firstAttribute="width" secondItem="UIi-W5-X0P" secondAttribute="width" id="1EQ-pW-MZd"/>
+                                    <constraint firstItem="I2E-Ni-akT" firstAttribute="leading" secondItem="UIi-W5-X0P" secondAttribute="trailing" constant="20" id="5hY-Pc-tmI"/>
                                     <constraint firstItem="9IY-bT-XOE" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="10" id="5ld-ML-Kbf"/>
-                                    <constraint firstItem="f44-00-ZWp" firstAttribute="centerX" secondItem="rL3-HC-32o" secondAttribute="centerX" id="Ksz-Pa-bEj"/>
-                                    <constraint firstItem="I2E-Ni-akT" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="10" id="MOZ-t0-Xi3"/>
-                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="TCD-Kp-lCI"/>
-                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="10" id="Y1h-C1-4lx"/>
-                                    <constraint firstAttribute="trailing" secondItem="UIi-W5-X0P" secondAttribute="trailing" constant="10" id="aBO-Qb-hJr"/>
+                                    <constraint firstItem="I2E-Ni-akT" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="Asa-H6-MZ4"/>
+                                    <constraint firstAttribute="trailing" secondItem="I2E-Ni-akT" secondAttribute="trailing" constant="20" id="NEI-aL-ZmX"/>
+                                    <constraint firstAttribute="bottom" secondItem="UIi-W5-X0P" secondAttribute="bottom" constant="20" id="QaN-3C-Jwv"/>
+                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="ari-Bx-uvz"/>
+                                    <constraint firstAttribute="bottom" secondItem="I2E-Ni-akT" secondAttribute="bottom" constant="20" id="oac-8P-i2O"/>
                                     <constraint firstAttribute="trailing" secondItem="9IY-bT-XOE" secondAttribute="trailing" constant="10" id="qsa-vh-X1X"/>
-                                    <constraint firstItem="I2E-Ni-akT" firstAttribute="top" secondItem="f44-00-ZWp" secondAttribute="bottom" constant="10" id="sHF-LZ-1c8"/>
-                                    <constraint firstAttribute="bottom" secondItem="I2E-Ni-akT" secondAttribute="bottom" constant="10" id="u5i-fA-bIa"/>
+                                    <constraint firstItem="UIi-W5-X0P" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="20" id="uzd-WO-5ME"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whl-xI-MG5">
@@ -279,7 +275,7 @@
                                             <constraint firstAttribute="height" constant="40" id="mjc-GC-H2E"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="Continue">
+                                        <state key="normal" title="Ok">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -336,12 +332,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="f6x-9O-mcZ" secondAttribute="trailing" constant="10" id="6HG-Ua-8FC"/>
-                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="rL3-HC-32o" secondAttribute="trailing" constant="30" id="6nv-5W-KVc"/>
+                            <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="rL3-HC-32o" secondAttribute="trailing" constant="10" id="6nv-5W-KVc"/>
                             <constraint firstItem="5Iz-GX-fUX" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" constant="40" id="84B-Yc-GgH"/>
                             <constraint firstItem="rL3-HC-32o" firstAttribute="centerX" secondItem="3aj-mJ-Dia" secondAttribute="centerX" id="Ase-sO-F7U"/>
                             <constraint firstItem="TZq-bD-fig" firstAttribute="top" secondItem="Ami-hf-S9v" secondAttribute="bottom" constant="10" id="BfC-Xr-cEU"/>
                             <constraint firstAttribute="bottom" secondItem="whl-xI-MG5" secondAttribute="bottom" constant="44" id="Fj8-KM-NKG"/>
-                            <constraint firstItem="rL3-HC-32o" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" constant="30" id="Fuu-w8-7Ik"/>
+                            <constraint firstItem="rL3-HC-32o" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" constant="10" id="Fuu-w8-7Ik"/>
                             <constraint firstItem="f6x-9O-mcZ" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" constant="10" id="J5N-wY-y9c"/>
                             <constraint firstItem="TZq-bD-fig" firstAttribute="top" secondItem="f6x-9O-mcZ" secondAttribute="bottom" constant="10" id="JfI-Pn-eUh"/>
                             <constraint firstItem="whl-xI-MG5" firstAttribute="trailing" secondItem="3aj-mJ-Dia" secondAttribute="trailing" id="NkN-mj-SdJ"/>
@@ -380,7 +376,7 @@
                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifU-GZ-mnT">
                                     <rect key="frame" x="30" y="388" width="279" height="34"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" title="Submit">
+                                    <state key="normal" title="Save feedback">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -533,10 +529,10 @@
             </objects>
             <point key="canvasLocation" x="299" y="108"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="9p5-KX-Uxo">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PSL-D8-oIF" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PSL-D8-oIF" customClass="TabBarViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="chu-yN-iNg"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DnW-Kv-cy4">

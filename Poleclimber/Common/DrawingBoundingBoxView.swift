@@ -15,7 +15,12 @@ class DrawingBoundingBoxView: UIView {
     
     public func labelColor(with label: String) -> UIColor {
         if let color = DrawingBoundingBoxView.colors[label] {
-            return color
+            if label == "bad_tip" {
+                return UIColor.red
+            }
+            else{
+                return UIColor.green
+            }
         } else {
             let color = UIColor(hue: .random(in: 0...1), saturation: 1, brightness: 1, alpha: 0.8)
             DrawingBoundingBoxView.colors[label] = color

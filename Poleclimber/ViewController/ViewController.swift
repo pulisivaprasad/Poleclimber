@@ -15,19 +15,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-//        if #available(iOS 13.0, *) {
-//            let statusBar = UIView(frame: UIApplication.shared.windows.first { $0.isKeyWindow }?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-//              statusBar.backgroundColor = pAppStatusBarColor
-//            UIApplication.shared.windows.first { $0.isKeyWindow }?.addSubview(statusBar)
-//          
-//        } else {
-//            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-//            statusBar?.backgroundColor = pAppStatusBarColor
-//        }
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
     }
     
      override func viewWillAppear(_ animated: Bool) {

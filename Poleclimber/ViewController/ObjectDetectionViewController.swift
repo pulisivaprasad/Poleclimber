@@ -39,7 +39,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         
         detectBtn.isHidden = true
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
    @IBAction func detectBtnAction(sender: UIButton) {
@@ -149,6 +148,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
           self.buttonsView.isHidden = false
             self.detectBtn.isHidden = true
           self.namelabel.isHidden = false
+
             if self.predictions.first?.label == "good_tip" {
                 self.namelabel.text = "Good tip detected"
             }
@@ -156,9 +156,10 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.namelabel.text = "Bad tip detected"
             }
 
+            self.boxesView.predictedObjects = self.predictions
+
           //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
 
-          self.boxesView.predictedObjects = self.predictions
           }
              //print(firstObservation.identifier, firstObservation.confidence)
         }
@@ -186,7 +187,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         UserDefaults.standard.set(detailsSaving, forKey: "USERDETAILS")
         UserDefaults.standard.synchronize()
         
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback saved successfully.")
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback is saved successfully.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
     }
     
@@ -211,7 +212,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func submitBtnAction() {
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your feedback, we will get back to you.")
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your feedback.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
     }
 }
