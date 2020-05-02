@@ -371,11 +371,14 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7k-tY-9TK">
-                            <rect key="frame" x="30" y="74" width="339" height="472"/>
+                            <rect key="frame" x="30" y="128" width="339" height="364"/>
                             <subviews>
                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifU-GZ-mnT">
-                                    <rect key="frame" x="30" y="388" width="279" height="34"/>
+                                    <rect key="frame" x="30" y="270" width="279" height="44"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="I6T-P2-X9X"/>
+                                    </constraints>
                                     <state key="normal" title="Save feedback">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
@@ -446,6 +449,7 @@
                                 <constraint firstAttribute="trailing" secondItem="ifU-GZ-mnT" secondAttribute="trailing" constant="30" id="2aS-J8-Hq3"/>
                                 <constraint firstItem="jzn-Ia-A19" firstAttribute="top" secondItem="hs6-VE-KrF" secondAttribute="bottom" constant="20" id="5zu-G1-XUF"/>
                                 <constraint firstItem="yyU-cr-Ha4" firstAttribute="top" secondItem="R7k-tY-9TK" secondAttribute="top" constant="8" id="60z-wy-QyM"/>
+                                <constraint firstItem="ifU-GZ-mnT" firstAttribute="top" secondItem="jzn-Ia-A19" secondAttribute="bottom" constant="60" id="QBE-Vn-nD4"/>
                                 <constraint firstItem="QqH-Gb-eVb" firstAttribute="top" secondItem="R7k-tY-9TK" secondAttribute="top" constant="50" id="Sbg-ZC-VOZ"/>
                                 <constraint firstItem="jzn-Ia-A19" firstAttribute="centerX" secondItem="R7k-tY-9TK" secondAttribute="centerX" id="TKh-6Y-4qB"/>
                                 <constraint firstItem="hs6-VE-KrF" firstAttribute="top" secondItem="QqH-Gb-eVb" secondAttribute="bottom" constant="20" id="TT8-BO-2Dr"/>
@@ -458,9 +462,9 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.71762628419999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="R7k-tY-9TK" firstAttribute="centerY" secondItem="Qbh-mG-xDU" secondAttribute="centerY" id="P42-VZ-5AG"/>
                         <constraint firstItem="Qbh-mG-xDU" firstAttribute="trailing" secondItem="R7k-tY-9TK" secondAttribute="trailing" constant="30" id="R5Y-JK-asA"/>
-                        <constraint firstItem="R7k-tY-9TK" firstAttribute="top" secondItem="Qbh-mG-xDU" secondAttribute="top" constant="30" id="hl1-wJ-Aql"/>
-                        <constraint firstItem="Qbh-mG-xDU" firstAttribute="bottom" secondItem="R7k-tY-9TK" secondAttribute="bottom" constant="30" id="mBi-eA-9Ir"/>
+                        <constraint firstItem="R7k-tY-9TK" firstAttribute="centerX" secondItem="Qbh-mG-xDU" secondAttribute="centerX" id="Vjn-eQ-SxX"/>
                         <constraint firstItem="R7k-tY-9TK" firstAttribute="leading" secondItem="Qbh-mG-xDU" secondAttribute="leading" constant="30" id="nbe-0U-cdz"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="Qbh-mG-xDU"/>
@@ -556,7 +560,7 @@
         <image name="background" width="275" height="183"/>
         <image name="history" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
-        <image name="openreach_logo" width="318" height="159"/>
+        <image name="openreach_logo" width="208" height="40"/>
         <image name="profile" width="30" height="30"/>
         <image name="selected" width="24" height="24"/>
         <image name="unSelected" width="30" height="30"/>
