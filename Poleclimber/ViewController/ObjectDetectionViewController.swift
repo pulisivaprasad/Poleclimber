@@ -30,7 +30,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         super.viewDidLoad()
   
         self.navigationController?.isNavigationBarHidden = false
-        self.title = "Visual inspection"
+        self.title = "Visual Inspection"
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
@@ -38,7 +38,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         namelabel.isHidden = true
         
         detectBtn.isHidden = true
-        
     }
     
    @IBAction func detectBtnAction(sender: UIButton) {
@@ -48,7 +47,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
-           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using ios ML model.")
+           rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
     }
@@ -136,7 +135,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
         Helper.sharedHelper.dismissHUD(view: self.view)
       guard result.first != nil else {
-        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please select proper pole tip image for ML Model.")
+        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please select pole tip image for ML Model.")
         self.imageView.image = UIImage(named: "")
         self.noImgView.isHidden = false
         self.detectBtn.isHidden = true
@@ -149,11 +148,15 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             self.detectBtn.isHidden = true
           self.namelabel.isHidden = false
 
+            if self.predictions.first?.label == "pole_tip" {
+                self.predictions.remove(at: 0)
+            }
+            
             if self.predictions.first?.label == "good_tip" {
-                self.namelabel.text = "Good tip detected"
+                self.namelabel.text = "Good Tip Detected"
             }
             else{
-                self.namelabel.text = "Bad tip detected"
+                self.namelabel.text = "Bad Tip Detected"
             }
 
             self.boxesView.predictedObjects = self.predictions
@@ -188,7 +191,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         UserDefaults.standard.synchronize()
         
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback is saved successfully.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
     
     @objc func navigateToHomeScreen() {
@@ -197,7 +200,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     @IBAction func disAgreeBtnAction(_ sender: Any) {
         poleStatusSubView.frame = view.bounds
-        if self.namelabel.text == "Good tip detected"{
+        if self.namelabel.text == "Good Tip Detected"{
             poleStatusSubView.reason1.setTitle("Reason1", for: .normal)
             poleStatusSubView.reason2.setTitle("Reason2", for: .normal)
             poleStatusSubView.reason3.setTitle("Reason3", for: .normal)
@@ -212,7 +215,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func submitBtnAction() {
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you for your feedback.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 2)
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank's for your feedback.")
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
 }
