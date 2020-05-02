@@ -24,7 +24,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             historyObj = object as! [[String : AnyObject]]
         }
         tableview.reloadData()
-        self.parent?.title = "History"
+        self.title = "History"
 
     }
     
