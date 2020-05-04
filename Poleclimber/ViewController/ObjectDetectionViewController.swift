@@ -12,17 +12,20 @@ import Vision
 import RMessage
 
 class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NavigationDelegate {
-    @IBOutlet weak var buttonsView: UIView!
-    @IBOutlet weak var boxesView: DrawingBoundingBoxView!
-    @IBOutlet weak var namelabel: UILabel!
-    @IBOutlet weak var detectBtn: UIButton!
-
-    @IBOutlet var poleStatusSubView: PoleStatusView!
+    @IBOutlet weak var  buttonsView: UIView!
+    @IBOutlet weak var  boxesView: DrawingBoundingBoxView!
+    @IBOutlet weak var  namelabel: UILabel!
+    @IBOutlet weak var  detectBtn: UIButton!
+    @IBOutlet var       poleStatusSubView: PoleStatusView!
+    @IBOutlet weak var  noImgView: UIView!
+    @IBOutlet weak var  imageView: UIImageView!
+    @IBOutlet weak var containerView: UIView!
+    
     var predictions: [VNRecognizedObjectObservation] = []
     let objectDectectionModel =  MobileNetV3_SSDLite() //YOLOv3Tiny()
-    @IBOutlet weak var noImgView: UIView!
+    
     var imagePicker:UIImagePickerController!
-    @IBOutlet weak var imageView: UIImageView!
+    
     var cvpixelBuffer: CVPixelBuffer!
     let rControl = RMController()
     
@@ -183,6 +186,15 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         let dateObj = dateFormatter.string(from: Date())
         
         disc["time"] = dateObj as AnyObject
+        
+        if let image = containerView.pb_takeSnapshot() {
+            let filename = "image_" + Date().description
+            image.save(filename)
+            disc["image"] = filename as AnyObject
+        }
+        
+        disc["isGood"] = (self.predictions.first?.label == "good_tip") as AnyObject
+        
         detailsSaving?.append(disc)
         UserDefaults.standard.set(detailsSaving, forKey: "USERDETAILS")
         UserDefaults.standard.synchronize()
