@@ -141,16 +141,21 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         self.detectBtn.isHidden = true
         return
       }
-
-        self.predictions = result
+            //Removing the pole tip object
+            for object in result {
+                if (object.label != nil) && object.label != "pole_tip" {
+                    self.predictions.append(object)
+                }
+            }
+        //self.predictions = result
         DispatchQueue.main.async {
           self.buttonsView.isHidden = false
             self.detectBtn.isHidden = true
           self.namelabel.isHidden = false
 
-            if self.predictions.first?.label == "pole_tip" {
-                self.predictions.remove(at: 0)
-            }
+//            if self.predictions.first?.label == "pole_tip" {
+//                self.predictions.remove(at: 0)
+//            }
             
             if self.predictions.first?.label == "good_tip" {
                 self.namelabel.text = "Good Tip Detected"
