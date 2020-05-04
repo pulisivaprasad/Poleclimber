@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NavigationDelegate: class {
-func submitBtnAction()
+    func submitBtnAction(selectedReason: String)
 }
 
 class PoleStatusView: UIView {
@@ -18,6 +18,8 @@ class PoleStatusView: UIView {
     @IBOutlet weak var reason1: UIButton!
     @IBOutlet weak var reason2: UIButton!
     @IBOutlet weak var reason3: UIButton!
+    var selectedBtnText = ""
+    
 
     @IBAction func closeBtnAction(_ sender: UIButton) {
         reason1.isSelected = false
@@ -27,12 +29,14 @@ class PoleStatusView: UIView {
         
     }
     @IBAction func submitBtnAction(_ sender: UIButton) {
-        delegate?.submitBtnAction()
+        delegate?.submitBtnAction(selectedReason: selectedBtnText)
     }
     
     @IBAction func stepBtnAction(_ sender: UIButton) {
         submitBtn.backgroundColor = UIColor.red
         submitBtn.isUserInteractionEnabled = true
+        selectedBtnText = sender.titleLabel!.text ?? ""
+
         if sender.tag == 1 {
             reason1.isSelected = true
             reason2.isSelected = false

@@ -12,6 +12,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +22,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
-        if let object = UserDefaults.standard.object(forKey: "USERDETAILS") {
+        if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
             historyObj = object as! [[String : AnyObject]]
         }
         tableview.reloadData()
         self.title = "History"
-
+        
+        segmentControl.selectedSegmentIndex = 0
     }
     
     // number of rows in table view
@@ -48,5 +51,21 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
 
         return cell
+    }
+    
+    @IBAction func segmentConAction(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+             if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
+                historyObj = object as! [[String : AnyObject]]
+            }
+        }
+        else{
+             if let object = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
+                historyObj = object as! [[String : AnyObject]]
+            }
+        }
+        tableview.reloadData()
+
+        
     }
 }

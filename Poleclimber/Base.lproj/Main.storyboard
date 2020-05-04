@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-2v-EXO">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="ggH-PL-FWb" detailTextLabel="j21-ru-0UY" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="TQk-Ol-FcP">
@@ -138,18 +138,35 @@
                                     <outlet property="delegate" destination="E1G-h1-gSz" id="g4U-OR-m0Q"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kzB-WW-KjF">
+                                <rect key="frame" x="8" y="96" width="398" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="b8b-BR-2tG"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Ok Feedback"/>
+                                    <segment title="Disagree Feedback"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentConAction:" destination="E1G-h1-gSz" eventType="valueChanged" id="M24-wy-xQk"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vfb-2v-EXO" firstAttribute="leading" secondItem="7Qs-3q-6A1" secondAttribute="leading" id="8Qf-Lf-7WY"/>
-                            <constraint firstItem="vfb-2v-EXO" firstAttribute="top" secondItem="7Qs-3q-6A1" secondAttribute="top" id="Cyl-MN-Ehh"/>
                             <constraint firstItem="7Qs-3q-6A1" firstAttribute="bottom" secondItem="vfb-2v-EXO" secondAttribute="bottom" id="KFL-dh-QUq"/>
+                            <constraint firstItem="7Qs-3q-6A1" firstAttribute="trailing" secondItem="kzB-WW-KjF" secondAttribute="trailing" constant="8" id="OxA-wu-U3r"/>
+                            <constraint firstItem="vfb-2v-EXO" firstAttribute="top" secondItem="kzB-WW-KjF" secondAttribute="bottom" constant="8" id="Rsa-os-mWM"/>
                             <constraint firstItem="7Qs-3q-6A1" firstAttribute="trailing" secondItem="vfb-2v-EXO" secondAttribute="trailing" id="WbM-nG-pOd"/>
+                            <constraint firstItem="kzB-WW-KjF" firstAttribute="top" secondItem="7Qs-3q-6A1" secondAttribute="top" constant="8" id="k5u-Li-YRi"/>
+                            <constraint firstItem="kzB-WW-KjF" firstAttribute="leading" secondItem="7Qs-3q-6A1" secondAttribute="leading" constant="8" id="oB0-9b-vT7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Qs-3q-6A1"/>
                     </view>
                     <navigationItem key="navigationItem" id="evC-7D-A3L"/>
                     <connections>
+                        <outlet property="segmentControl" destination="kzB-WW-KjF" id="umK-v0-PXF"/>
                         <outlet property="tableview" destination="vfb-2v-EXO" id="GW3-VX-XCP"/>
                     </connections>
                 </viewController>

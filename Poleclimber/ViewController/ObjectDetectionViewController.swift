@@ -177,23 +177,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
-        var detailsSaving = UserDefaults.standard.object(forKey: "USERDETAILS") as? [[String: AnyObject]]
-
-        if detailsSaving == nil {
-            detailsSaving = [[String: AnyObject]]()
-        }
-
-        var disc = [String: AnyObject]()
-        disc["title"] = self.namelabel.text as AnyObject
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
-        let dateObj = dateFormatter.string(from: Date())
-        
-        disc["time"] = dateObj as AnyObject
-        detailsSaving?.append(disc)
-        UserDefaults.standard.set(detailsSaving, forKey: "USERDETAILS")
-        UserDefaults.standard.synchronize()
+        userfeedbackSaving(userKey: "AGREEUSERDETAILS", titleStr: namelabel.text ?? "")
         
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback is saved successfully.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
@@ -219,8 +203,30 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         view.addSubview(poleStatusSubView)
     }
     
-    func submitBtnAction() {
+    func submitBtnAction(selectedReason: String) {
+        userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", titleStr: selectedReason)
+
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank's for your feedback.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
+    }
+    
+    func userfeedbackSaving(userKey: String, titleStr: String)  {
+        var detailsSaving = UserDefaults.standard.object(forKey: userKey) as? [[String: AnyObject]]
+
+        if detailsSaving == nil {
+            detailsSaving = [[String: AnyObject]]()
+        }
+
+        var disc = [String: AnyObject]()
+        disc["title"] = titleStr as AnyObject
+               
+        let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
+        let dateObj = dateFormatter.string(from: Date())
+               
+        disc["time"] = dateObj as AnyObject
+        detailsSaving?.append(disc)
+        UserDefaults.standard.set(detailsSaving, forKey: userKey)
+        UserDefaults.standard.synchronize()
     }
 }
