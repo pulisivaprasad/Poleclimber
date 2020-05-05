@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C2242CF74F00DBB05F /* PWebService.swift */; };
 		443F02C5242CF81500DBB05F /* PConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C4242CF81500DBB05F /* PConstants.swift */; };
-		443F3448243C34B2000719C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3445243C34B2000719C9 /* ViewController.swift */; };
+		443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3445243C34B2000719C9 /* HomeViewController.swift */; };
 		443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */; };
 		445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */; };
 		445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */; };
@@ -44,7 +44,7 @@
 /* Begin PBXFileReference section */
 		443F02C2242CF74F00DBB05F /* PWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWebService.swift; sourceTree = "<group>"; };
 		443F02C4242CF81500DBB05F /* PConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PConstants.swift; sourceTree = "<group>"; };
-		443F3445243C34B2000719C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		443F3445243C34B2000719C9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite.mlmodel; sourceTree = "<group>"; };
 		445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBoundingBoxView.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		44B4DD9B243312C900343A7F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				443F3445243C34B2000719C9 /* ViewController.swift */,
+				443F3445243C34B2000719C9 /* HomeViewController.swift */,
 				443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */,
 				6540F052245A983000FF3CFA /* HistoryViewController.swift */,
 				6540F054245A984500FF3CFA /* ProfileViewController.swift */,
@@ -366,7 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */,
-				443F3448243C34B2000719C9 /* ViewController.swift in Sources */,
+				443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */,
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
 				657FE82C24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
@@ -544,15 +544,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.6;
-				DEVELOPMENT_TEAM = D23VUK52AN;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Poleclimber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wipro.Poleclimber;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wipro.OpenreachPoleclimber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Poleclimber/Common/Poleclimber-Bridging-Header.h";
@@ -569,15 +570,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.6;
-				DEVELOPMENT_TEAM = D23VUK52AN;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Poleclimber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wipro.Poleclimber;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wipro.OpenreachPoleclimber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Poleclimber/Common/Poleclimber-Bridging-Header.h";

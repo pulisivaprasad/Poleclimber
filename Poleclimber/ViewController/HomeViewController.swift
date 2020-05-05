@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Poleclimber
 //
 //  Created by Siva Preasad Reddy on 18/03/20.
@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
    
     @IBOutlet weak var startBtn: UIButton!
     
