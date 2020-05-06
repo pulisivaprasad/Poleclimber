@@ -134,19 +134,29 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
             
         Helper.sharedHelper.dismissHUD(view: self.view)
-      guard result.first != nil else {
-        self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "We didn't found any tip rot, please select pole tip image for ML Model.")
-        self.imageView.image = UIImage(named: "")
-        self.noImgView.isHidden = false
-        self.detectBtn.isHidden = true
-        return
-      }
             //Removing the pole tip object
+            let confThresh = 0.8
+            let objAspectRatio: CGFloat = 0.6
+
             for object in result {
-                if (object.label != nil) && object.label != "pole_tip" {
-                    self.predictions.append(object)
+                if (object.label != nil) && object.label != "pole_tip" && object.confidence > VNConfidence(confThresh)  {
+                    let objHeight = object.boundingBox.height
+                    let objWidth = object.boundingBox.width
+                    let objRatio = objHeight / objWidth
+                    if  objRatio > objAspectRatio {
+                      self.predictions.append(object)
+                    }
                 }
             }
+            
+            guard self.predictions.first != nil else {
+              self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "Possible reason for rejections - image is not fit for detection | or image doesnot have pole tip.")
+              self.imageView.image = UIImage(named: "")
+              self.noImgView.isHidden = false
+              self.detectBtn.isHidden = true
+              return
+            }
+
         //self.predictions = result
         DispatchQueue.main.async {
           self.buttonsView.isHidden = false
