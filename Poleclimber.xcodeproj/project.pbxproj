@@ -17,6 +17,7 @@
 		446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 446F07232446CFC3005183B4 /* MBProgressHUD.m */; };
 		446F07282447050F005183B4 /* PoleStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F07272447050F005183B4 /* PoleStatusView.swift */; };
 		44898A9024631031003C6217 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44898A8F24631031003C6217 /* LoginViewController.swift */; };
+		44898A9224631A60003C6217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44898A9124631A60003C6217 /* GoogleService-Info.plist */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
 		44BB542024226D0F00C1302B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB541E24226D0F00C1302B /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		446F07272447050F005183B4 /* PoleStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoleStatusView.swift; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
 		44898A8F24631031003C6217 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		44898A9124631A60003C6217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BB541824226D0F00C1302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44BB541A24226D0F00C1302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				44BB542124226D1600C1302B /* Assets.xcassets */,
 				44BB542324226D1600C1302B /* LaunchScreen.storyboard */,
 				44BB542624226D1600C1302B /* Info.plist */,
+				44898A9124631A60003C6217 /* GoogleService-Info.plist */,
 			);
 			path = Poleclimber;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				4453033324630BB8008F086A /* Login.storyboard in Resources */,
 				44BB542524226D1600C1302B /* LaunchScreen.storyboard in Resources */,
+				44898A9224631A60003C6217 /* GoogleService-Info.plist in Resources */,
 				44BB542224226D1600C1302B /* Assets.xcassets in Resources */,
 				44BB542024226D0F00C1302B /* Main.storyboard in Resources */,
 			);

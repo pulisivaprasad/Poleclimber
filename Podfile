@@ -8,4 +8,6 @@ target 'Poleclimber' do
   # Pods for Poleclimber
   pod 'RMessage'
   pod 'Alamofire'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 end
