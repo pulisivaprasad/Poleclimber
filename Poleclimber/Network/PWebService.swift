@@ -8,11 +8,25 @@
 
 import UIKit
 import Alamofire
+import Firebase
+import FirebaseDatabase
+import FirebaseStorage
+
+
+enum APIType : String {
+case signUpAccount              = "SIGN_UP"
+case signInAccount              = "SIGN_IN"
+}
+
+let kUSERS_T                        = "USERS"
 
 class PWebService: NSObject {
     
 static let sharedWebService = PWebService()
-typealias CompletionHandler = (_ status:String, _ response : [String:AnyObject]?, _ message:String?) -> ()
+    
+typealias CompletionHandler = (_ status:Int, _ response : [String:AnyObject]?, _ message:String?) -> ()
+    
+    fileprivate let ref = Database.database().reference()
 
     func callWebAPIWith(httpMethod: String,
                           apiName: String,
@@ -39,4 +53,86 @@ typealias CompletionHandler = (_ status:String, _ response : [String:AnyObject]?
           }
           
       }
+    
+      func webService(apiName:APIType, parameters:[String:AnyObject], completion: @escaping CompletionHandler) {
+
+             
+         if apiName.rawValue == APIType.signInAccount.rawValue {
+               
+               signInAccount(parameters: parameters, completion: completion)
+           }
+           else if apiName.rawValue == APIType.signUpAccount.rawValue {
+                   
+                   createAnAccount(parameters: parameters, completion: completion)
+               }
+             
+         }
+    
+     func signInAccount(parameters:[String:AnyObject], completion: @escaping CompletionHandler) {
+       
+        let email = parameters[kEmailKey]! as! String
+        Auth.auth().signIn(withEmail: email.lowercased(), password: parameters[kPasswordKey]! as! String) { (user, error) in
+
+            if error == nil {
+
+                let userKey = email.stringKey()
+                let childName = kUSERS_T
+               // self.userKey = userKey
+                self.ref.child(childName).child(userKey).observeSingleEvent(of: .value, with: { snapshot in
+                    
+//                    if let userDic = snapshot.value as? [String:AnyObject] {
+//                        self.currentUser = LCUser(dictionary: userDic as NSDictionary)
+//                    }
+
+                    
+                    completion(100, snapshot.value as? [String:AnyObject], "Logged in Successfully")
+                })
+            } else {
+                
+                completion(101, nil, error?.localizedDescription)
+            }
+        }
+
+    }
+    
+    func createAnAccount(parameters:[String:AnyObject], completion: @escaping CompletionHandler) {
+        let childName = kUSERS_T
+               let userEmail = parameters[kEmailKey] as! String
+               let userKey = userEmail.stringKey()
+               
+        Auth.auth().createUser(withEmail: parameters[kEmailKey] as! String,
+                                     password: parameters[kPasswordKey] as! String) { (user, error) in
+                  
+                  if error == nil {
+                      
+                      var parametersTemp = parameters
+                      parametersTemp.removeValue(forKey: kPasswordKey)
+                    
+                      let dataDic = self.postRecord(childName: childName, newEntryKey: userKey, parameters: parametersTemp)
+                    
+                    _ = self.postRecord(childName: kUSERS_T, newEntryKey: userKey, parameters: parameters)
+
+//                      self.currentUser = LCUser(dictionary: parametersTemp as NSDictionary)
+//
+//                      let dataDic = self.postRecord(childName: childName, newEntryKey: userKey, parameters: parametersTemp)
+                      
+
+                      completion(100, dataDic, "Account created successfully.")
+                  }
+                  else {
+                      completion(101, nil, error?.localizedDescription)
+                  }
+              }
+    }
+    
+    func postRecord(childName:String, newEntryKey:String, parameters:[String:AnyObject]) -> [String:AnyObject] {
+           
+           var p = parameters
+           p["updated_at"] = [".sv": "timestamp"] as AnyObject
+           p["created_at"] = [".sv": "timestamp"] as AnyObject
+           
+           self.ref.child(childName).child(newEntryKey).setValue(p)
+           
+           return p
+       }
 }

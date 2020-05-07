@@ -14,3 +14,7 @@ let pAppStatusBarColor = UIColor(red: 48/255, green: 62/255, blue: 159/255, alph
 let pButtonColor = UIColor(red: 48/255, green: 66/255, blue: 102/255, alpha: 1.0)
 
 let kBaseUrl = "https://www.servicekarma.com/mobile/new/"
+
+
+let kEmailKey               = "email"
+let kPasswordKey            = "password"

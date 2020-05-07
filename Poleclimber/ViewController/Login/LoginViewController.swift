@@ -33,8 +33,38 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            goToHomeAction()
+        var parameters = [String: AnyObject]()
+        parameters["email"] = emailTextField.text as AnyObject?
+        parameters["password"] = passwordTextField.text as AnyObject?
+        callApi(loginDict: parameters)
+        
+    }
+    
+    func callApi(loginDict: [String: AnyObject])
+    {
+        Helper.sharedHelper.showGlobalHUD(title: "Logging in...", view: view)
+        
+        PWebService.sharedWebService.webService(apiName: APIType.signInAccount, parameters: loginDict ) { (status, response, message) in
+            
+            Helper.sharedHelper.dismissHUD(view: self.view)
+            
+            if status == 100
+            {
+//                if (APP_DELEGATE.fbUser == nil) {
+//                    userDefault.set(response!["email"], forKey: "email")
+//                    userDefault.set(loginDict, forKey: "loginDict")
+//                }
+                self.goToHomeAction()
+                
+            }
+            else
+            {
+                Helper.sharedHelper.ShowAlert(str: message! as NSString , viewcontroller: self)
+                
+            }
+            
         }
+    }
     
     func goToHomeAction() {
         let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "TabBarViewController") as! UITabBarController
