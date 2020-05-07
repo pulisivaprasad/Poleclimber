@@ -19,17 +19,13 @@ class LoginViewController: UIViewController {
     }
     
       @IBAction func loginAction(_ sender: UIButton?) {
-    //        let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "EEPaymentOptionViewController") as! EEPaymentOptionViewController
-    //        self.navigationController?.isNavigationBarHidden = false
-    //        self.navigationController?.pushViewController(vc, animated: true)
-    //        return
             if emailTextField.text == "" {
-    //            emailInformationButton.isHidden = false
+              Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the email.")
                 return
             }
             
             if passwordTextField.text == "" {
-                //passwordInformationButton.isHidden = false
+                Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the password.")
                 return
             }
             
@@ -37,7 +33,6 @@ class LoginViewController: UIViewController {
         parameters["email"] = emailTextField.text as AnyObject?
         parameters["password"] = passwordTextField.text as AnyObject?
         callApi(loginDict: parameters)
-        
     }
     
     func callApi(loginDict: [String: AnyObject])
@@ -50,19 +45,16 @@ class LoginViewController: UIViewController {
             
             if status == 100
             {
-//                if (APP_DELEGATE.fbUser == nil) {
-//                    userDefault.set(response!["email"], forKey: "email")
-//                    userDefault.set(loginDict, forKey: "loginDict")
-//                }
+                if (APP_DELEGATE.fbUser == nil) {
+                    userDefault.set(response!["email"], forKey: "email")
+                    userDefault.set(loginDict, forKey: "loginDict")
+                }
                 self.goToHomeAction()
-                
             }
             else
             {
                 Helper.sharedHelper.ShowAlert(str: message! as NSString , viewcontroller: self)
-                
             }
-            
         }
     }
     
@@ -70,7 +62,6 @@ class LoginViewController: UIViewController {
         let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "TabBarViewController") as! UITabBarController
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
 }
 
     extension UIStoryboard {

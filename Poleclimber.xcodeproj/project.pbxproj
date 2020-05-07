@@ -12,6 +12,7 @@
 		443F02C5242CF81500DBB05F /* PConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C4242CF81500DBB05F /* PConstants.swift */; };
 		443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3445243C34B2000719C9 /* HomeViewController.swift */; };
 		443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */; };
+		444B6D482463E1CB0060A163 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B6D472463E1CB0060A163 /* UserModel.swift */; };
 		4453033324630BB8008F086A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4453033224630BB8008F086A /* Login.storyboard */; };
 		445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */; };
 		445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */; };
@@ -51,6 +52,7 @@
 		443F02C4242CF81500DBB05F /* PConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PConstants.swift; sourceTree = "<group>"; };
 		443F3445243C34B2000719C9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		443F3447243C34B2000719C9 /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
+		444B6D472463E1CB0060A163 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4453033224630BB8008F086A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		445B380F24370D3D00BBD569 /* MobileNetV2_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite.mlmodel; sourceTree = "<group>"; };
 		445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBoundingBoxView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		444B6D462463E19D0060A163 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				444B6D472463E1CB0060A163 /* UserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		445B380724370CFE00BBD569 /* mlmodel */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 				443F02C1242CF59E00DBB05F /* Network */,
 				44BB542C2422FE2800C1302B /* Common */,
 				445B380724370CFE00BBD569 /* mlmodel */,
+				444B6D462463E19D0060A163 /* Models */,
 				44BB541824226D0F00C1302B /* AppDelegate.swift */,
 				44BB541A24226D0F00C1302B /* SceneDelegate.swift */,
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
@@ -402,6 +413,7 @@
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
 				44898A9024631031003C6217 /* LoginViewController.swift in Sources */,
+				444B6D482463E1CB0060A163 /* UserModel.swift in Sources */,
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,

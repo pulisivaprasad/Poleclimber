@@ -27,6 +27,7 @@ static let sharedWebService = PWebService()
 typealias CompletionHandler = (_ status:Int, _ response : [String:AnyObject]?, _ message:String?) -> ()
     
     fileprivate let ref = Database.database().reference()
+    var currentUser = UserModel(dictionary: [String: Any]())
 
     func callWebAPIWith(httpMethod: String,
                           apiName: String,
@@ -80,11 +81,10 @@ typealias CompletionHandler = (_ status:Int, _ response : [String:AnyObject]?, _
                // self.userKey = userKey
                 self.ref.child(childName).child(userKey).observeSingleEvent(of: .value, with: { snapshot in
                     
-//                    if let userDic = snapshot.value as? [String:AnyObject] {
-//                        self.currentUser = LCUser(dictionary: userDic as NSDictionary)
-//                    }
+                    if let userDic = snapshot.value as? [String:AnyObject] {
+                        self.currentUser = UserModel(dictionary: userDic as [String: AnyObject])
+                    }
 
-                    
                     completion(100, snapshot.value as? [String:AnyObject], "Logged in Successfully")
                 })
             } else {
