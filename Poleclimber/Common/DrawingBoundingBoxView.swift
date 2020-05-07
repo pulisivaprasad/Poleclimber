@@ -22,16 +22,9 @@ class DrawingBoundingBoxView: UIView {
                 return UIColor.green
             }
         } else {
-            if label == "bad_tip" {
-                return UIColor.red
-            }
-            else{
-                return UIColor.green
-            }
-
-//            let color = UIColor(hue: .random(in: 0...1), saturation: 1, brightness: 1, alpha: 0.8)
-//            DrawingBoundingBoxView.colors[label] = color
-//            return color
+            let color = UIColor(hue: .random(in: 0...1), saturation: 1, brightness: 1, alpha: 0.8)
+            DrawingBoundingBoxView.colors[label] = color
+            return color
         }
     }
     

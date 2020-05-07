@@ -20,8 +20,6 @@ class ViewController: UIViewController {
      override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
            self.navigationController?.isNavigationBarHidden = true
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
     }
        
     @IBAction func inspectionBtnAction(_ sender: UIButton) {

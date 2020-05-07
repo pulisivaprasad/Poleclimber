@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
-       self.title = "Profile"
+       self.parent?.title = "Profile"
     }
 
 }
