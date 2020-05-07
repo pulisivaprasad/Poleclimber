@@ -27,6 +27,7 @@
 		44BB542524226D1600C1302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB542324226D1600C1302B /* LaunchScreen.storyboard */; };
 		44BB542E2422FE4100C1302B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB542D2422FE4100C1302B /* Helper.swift */; };
 		44BB54352423015300C1302B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB54342423015300C1302B /* Reachability.swift */; };
+		44EDE96624643B53002CFEEE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE96524643B53002CFEEE /* Extension.swift */; };
 		6540F04E245804E100FF3CFA /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04C245804E100FF3CFA /* ViewControllerTests.swift */; };
 		6540F05024582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04F24582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift */; };
 		6540F053245A983000FF3CFA /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F052245A983000FF3CFA /* HistoryViewController.swift */; };
@@ -73,6 +74,7 @@
 		44BB542624226D1600C1302B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44BB542D2422FE4100C1302B /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		44BB54342423015300C1302B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		44EDE96524643B53002CFEEE /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Poleclimber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0422458034600FF3CFA /* PoleclimberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoleclimberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0462458034600FF3CFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				443F02C4242CF81500DBB05F /* PConstants.swift */,
 				445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */,
 				6540F056245B094F00FF3CFA /* TabBarViewController.swift */,
+				44EDE96524643B53002CFEEE /* Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
 				44898A9024631031003C6217 /* LoginViewController.swift in Sources */,
+				44EDE96624643B53002CFEEE /* Extension.swift in Sources */,
 				444B6D482463E1CB0060A163 /* UserModel.swift in Sources */,
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,

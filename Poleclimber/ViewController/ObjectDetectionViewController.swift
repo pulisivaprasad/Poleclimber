@@ -16,6 +16,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
     @IBOutlet weak var namelabel: UILabel!
     @IBOutlet weak var detectBtn: UIButton!
+    @IBOutlet weak var containerView: UIView!
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
@@ -229,7 +230,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                   Helper.sharedHelper.dismissHUD(view: self.view)
                   if status == 100 {
                       let str = NSString(format: "%@", response as! CVarArg)
-                      self.uploadPost(imageString: str as String, tumbString: nil)
+                      //self.uploadPost(imageString: str as String, tumbString: nil)
                   } else {
                       Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
                   }
@@ -239,33 +240,33 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
           }
       }
     
-     func uploadPost(imageString: String?, tumbString: String?) {
-            let feedDict = NSMutableDictionary()
-            if let imageString = imageString {
-                feedDict.setValue(imageString, forKey: "source_path")
-            }
-
-
-            // Post creater user detail
-            feedDict.setValue(PWebService.sharedWebService.currentUser?.email ?? "", forKey: kEmailKey)
-
-           
-            feedDict.setValue(postObj?.row_Key, forKey: "row_key")
-            PWebService.sharedWebService.updatePost(parameters: feedDict as! [String: AnyObject],
-                                                        rowKey: postObj!.row_Key!,
-                                                        childName: "kFEEDS",
-                                                        completion: { status, _, message in
-
-                                                            if status == 100 {
-                                                                Helper.sharedHelper.showGlobalAlertwithMessage(message!, vc: self, completion: {
-                                                                    self.navigationController?.popViewController(animated: true)
-                                                                })
-                                                            } else {
-                                                                Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
-                                                            }
-                })
-            
-    }
+//     func uploadPost(imageString: String?, tumbString: String?) {
+//            let feedDict = NSMutableDictionary()
+//            if let imageString = imageString {
+//                feedDict.setValue(imageString, forKey: "source_path")
+//            }
+//
+//
+//            // Post creater user detail
+//            feedDict.setValue(PWebService.sharedWebService.currentUser?.email ?? "", forKey: kEmailKey)
+//
+//
+//            feedDict.setValue(postObj?.row_Key, forKey: "row_key")
+//            PWebService.sharedWebService.updatePost(parameters: feedDict as! [String: AnyObject],
+//                                                        rowKey: postObj!.row_Key!,
+//                                                        childName: "kFEEDS",
+//                                                        completion: { status, _, message in
+//
+//                                                            if status == 100 {
+//                                                                Helper.sharedHelper.showGlobalAlertwithMessage(message!, vc: self, completion: {
+//                                                                    self.navigationController?.popViewController(animated: true)
+//                                                                })
+//                                                            } else {
+//                                                                Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
+//                                                            }
+//                })
+//
+//    }
     
     func userfeedbackSaving(userKey: String, titleStr: String)  {
         var detailsSaving = UserDefaults.standard.object(forKey: userKey) as? [[String: AnyObject]]
@@ -282,6 +283,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         let dateObj = dateFormatter.string(from: Date())
                
         disc["time"] = dateObj as AnyObject
+        
+        if let image = containerView.pb_takeSnapshot() {
+            let filename = "image_" + Date().description
+            image.save(filename)
+            disc["image"] = filename as AnyObject
+        }
+
         detailsSaving?.append(disc)
         UserDefaults.standard.set(detailsSaving, forKey: userKey)
         UserDefaults.standard.synchronize()

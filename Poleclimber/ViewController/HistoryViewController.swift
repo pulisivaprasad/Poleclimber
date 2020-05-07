@@ -31,6 +31,30 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         segmentControl.selectedSegmentIndex = 0
     }
     
+    private func loadeImage(name: String) -> UIImage? {
+           guard let documentsDirectory = try? FileManager.default.url(for: .documentDirectory,
+                                                                           in: .userDomainMask,
+                                                                           appropriateFor:nil,
+                                                                           create:false)
+                           else {
+                               // May never happen
+                               print ("No Document directory Error")
+                               return nil
+                           }
+
+           // Construct your Path from device Documents Directory
+           var imagesDirectory = documentsDirectory
+
+           // Add your file name to path
+           imagesDirectory.appendPathComponent(name)
+
+           // Create your UIImage?
+           let result = UIImage(contentsOfFile: imagesDirectory.path)
+           
+           return result
+       }
+
+    
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return historyObj.count
@@ -40,15 +64,21 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
 
         // set the text from the data model
         let historyDisc = historyObj[indexPath.row]
         
-        cell.textLabel?.text = historyDisc["title"] as? String
+        cell.tiprotstatus?.text = historyDisc["title"] as? String
         if let objectdetectDate = historyDisc["time"] {
-            cell.detailTextLabel?.text = "\(objectdetectDate)"
+            cell.timeLabel?.text = "\(objectdetectDate)"
         }
+        
+        if let imagename = historyDisc["image"] as? String {
+            let image = self.loadeImage(name: imagename)
+            cell.imgView.image = image
+        }
+
 
         return cell
     }
@@ -69,3 +99,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
 }
+
+class TableViewCell: UITableViewCell {
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var tiprotstatus: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+
+}
+
+
