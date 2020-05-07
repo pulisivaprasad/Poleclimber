@@ -334,14 +334,13 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-W5-X0P">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-W5-X0P">
                                         <rect key="frame" x="20" y="51.666666666666686" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="yWC-sO-6sm"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="Gallery">
+                                        <state key="normal" title="  Gallery" image="gallery">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -353,14 +352,13 @@
                                             <action selector="addPictureFromGalleryWithSender:" destination="c6Y-Jp-ahG" eventType="touchUpInside" id="sHU-JU-TmA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-Ni-akT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-Ni-akT">
                                         <rect key="frame" x="207" y="51.666666666666686" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="IlF-cB-vXg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="Camera">
+                                        <state key="normal" title="  Camera" image="camera">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -741,6 +739,8 @@
     </scenes>
     <resources>
         <image name="backgroundImg" width="341.33334350585938" height="227.66667175292969"/>
+        <image name="camera" width="24" height="24"/>
+        <image name="gallery" width="30" height="30"/>
         <image name="history" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="openreach_logo" width="208" height="40"/>

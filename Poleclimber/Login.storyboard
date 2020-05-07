@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="gRz-KR-ppi">
             <objects>
-                <viewController id="JgM-Dg-bVD" customClass="LoginViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="JgM-Dg-bVD" customClass="LoginViewController" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uMF-X6-nXY"/>
                         <viewControllerLayoutGuide type="bottom" id="62r-p8-z1Z"/>
