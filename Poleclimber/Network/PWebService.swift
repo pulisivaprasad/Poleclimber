@@ -25,7 +25,8 @@ class PWebService: NSObject {
 static let sharedWebService = PWebService()
     
 typealias CompletionHandler = (_ status:Int, _ response : [String:AnyObject]?, _ message:String?) -> ()
-    
+typealias CompletionHandlerWithAnyObject = (_ status: Int, _ response: AnyObject?, _ message: String?) -> Void
+
     fileprivate let ref = Database.database().reference()
     var currentUser = UserModel(dictionary: [String: Any]())
 
@@ -135,4 +136,31 @@ typealias CompletionHandler = (_ status:Int, _ response : [String:AnyObject]?, _
            
            return p
        }
+    
+    func uploadImage(image: UIImage, imageName: String, folderNamePath: String, completion: @escaping CompletionHandlerWithAnyObject) {
+           let storage = Storage.storage()
+           let storageRef = storage.reference()
+
+           let data1 = image.jpegData(compressionQuality: 0.8)
+
+           let riversRef = storageRef.child("\(folderNamePath)/\(imageName).png")
+
+           _ = riversRef.putData(data1!, metadata: nil) { metadata, error in
+               guard metadata != nil else {
+                   completion(101, error as AnyObject, error?.localizedDescription)
+                   return
+               }
+               riversRef.downloadURL { url, _ in
+                   completion(100, url as AnyObject, "Groups")
+               }
+           }
+       }
+    func updatePost(parameters: [String: AnyObject], rowKey: String, childName: String, completion: @escaping CompletionHandler) {
+        var p = parameters
+        p.removeValue(forKey: "created_at")
+        p["updated_at"] = [".sv": "timestamp"] as AnyObject
+        ref.child(childName).child(rowKey).updateChildValues(p)
+
+        completion(100, nil, "Your Post Updated Successfully.")
+    }
 }

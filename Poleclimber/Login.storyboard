@@ -55,7 +55,7 @@
                                                     <constraint firstAttribute="height" constant="14" id="RHx-aM-14a"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" red="0.10980392160000001" green="0.41568627450000001" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qk2-2W-73g">
@@ -94,7 +94,7 @@
                                                     <constraint firstAttribute="height" constant="14" id="cMx-FR-2Rl"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" red="0.10980392160000001" green="0.41568627450000001" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iYg-8h-E3A">
@@ -126,7 +126,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNA-gk-zTd">
                                         <rect key="frame" x="30" y="246" width="260" height="44"/>
-                                        <color key="backgroundColor" red="0.10980392160000001" green="0.41568627450000001" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="h0A-Ts-Xhl"/>
                                         </constraints>
@@ -159,7 +159,7 @@
                                     <constraint firstItem="nNA-gk-zTd" firstAttribute="leading" secondItem="XhP-P1-bhj" secondAttribute="leading" constant="30" id="wyQ-QJ-cmN"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jib-wZ-O65" customClass="PrimaryButton" customModule="Poleclimber" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jib-wZ-O65" customClass="PrimaryButton" customModule="Poleclimber" customModuleProvider="target">
                                 <rect key="frame" x="30" y="464" width="260" height="44"/>
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.41568627450000001" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>

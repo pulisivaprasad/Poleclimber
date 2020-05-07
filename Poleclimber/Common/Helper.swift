@@ -105,6 +105,14 @@ class Helper: NSObject  {
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         viewcontroller.navigationController?.present(alertView, animated: true, completion: nil)
     }
+    
+    func generateName() -> String {
+           let date = Date()
+           let formater = DateFormatter()
+           formater.dateFormat = "dd:MM:yyyy:mm:ss:SSS"
+           let DateStr = formater.string(from: date) as String
+           return DateStr.replacingOccurrences(of: ":", with: "")
+       }
 }
 
 
