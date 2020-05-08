@@ -21,10 +21,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
        self.title = "Profile"
+       navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,9 +44,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             cell?.detailTextLabel?.text = appVersion
         }
+        else if indexPath.row == 3 {
+            cell?.textLabel?.text = "Database flow"
+            cell?.detailTextLabel?.text = ""
+        }
         
         return cell!
 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 3  {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+                   let viewController = sb.instantiateViewController(withIdentifier: "DatabaseFlowViewController") as! DatabaseFlowViewController
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func logoutBtnAction(sender: UIButton) {

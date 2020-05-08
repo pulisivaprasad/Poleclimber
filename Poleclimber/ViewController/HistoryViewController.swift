@@ -51,35 +51,6 @@ class HistoryViewController: UIViewController {
            
            return result
        }
-
-    
-//    // number of rows in table view
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return historyObj.count
-//    }
-//
-//    // create a cell for each table view row
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        // create a new cell if needed or reuse an old one
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
-//
-//        // set the text from the data model
-//        let historyDisc = historyObj[indexPath.row]
-//
-//        cell.tiprotstatus?.text = historyDisc["title"] as? String
-//        if let objectdetectDate = historyDisc["time"] {
-//            cell.timeLabel?.text = "\(objectdetectDate)"
-//        }
-//
-//        if let imagename = historyDisc["image"] as? String {
-//            let image = self.loadeImage(name: imagename)
-//            cell.imgView.image = image
-//        }
-//
-//
-//        return cell
-//    }
     
     @IBAction func segmentConAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
