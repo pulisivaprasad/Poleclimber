@@ -11,30 +11,53 @@ import UIKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = "openreach@gmail.com"
-        passwordTextField.text = "test123"
+//        emailTextField.text = "openreach@gmail.com"
+//        passwordTextField.text = "test123"
 
         // Do any additional setup after loading the view.
     }
     
       @IBAction func loginAction(_ sender: UIButton?) {
-            if emailTextField.text == "" {
-              Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the email.")
-                return
-            }
+        guard emailTextField.text != "" else {
+          Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the user id.")
+            return
+        }
             
-            if passwordTextField.text == "" {
-                Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the password.")
-                return
-            }
+        guard passwordTextField.text != "" else {
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the password.")
+            return
+        }
+        
+        if !userIDArr.contains(emailTextField.text!) {
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct user id.")
+            return
+        }
+        
+        if passwordTextField.text != "openreach@123" {
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct password.")
+            return
+        }
             
         var parameters = [String: AnyObject]()
         parameters["email"] = emailTextField.text as AnyObject?
         parameters["password"] = passwordTextField.text as AnyObject?
-        callApi(loginDict: parameters)
+        
+        Helper.sharedHelper.showGlobalHUD(title: "Logging in...", view: view)
+
+        perform(#selector(login), with: nil, afterDelay: 2)
+
+        
+        //callApi(loginDict: parameters)
+    }
+    
+    @objc func login() {
+        Helper.sharedHelper.dismissHUD(view: self.view)
+
+        self.goToHomeAction()
     }
     
     func callApi(loginDict: [String: AnyObject])

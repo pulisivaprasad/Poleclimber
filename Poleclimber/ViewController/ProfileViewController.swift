@@ -59,8 +59,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                         self.dismiss(animated: true, completion: nil)
 
-                        self.navigationController?.popToRootViewController(animated: true)
-
+                         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                       
+                        let centerViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                                       //            centerViewController.identifier = "yes"
+                        let centerNav = UINavigationController(rootViewController: centerViewController)
+                        centerNav.isNavigationBarHidden = true
+                                       
+                        self.view.window?.rootViewController = centerNav
                     })
                     
                     let noAction = UIAlertAction.init(title: "No", style: .default, handler: { (alert) in

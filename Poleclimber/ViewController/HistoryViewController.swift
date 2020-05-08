@@ -8,12 +8,11 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HistoryViewController: UIViewController {
 
     var historyObj = [[String: AnyObject]]()
-    @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
-
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
             historyObj = object as! [[String : AnyObject]]
         }
-        tableview.reloadData()
         self.title = "History"
         
         segmentControl.selectedSegmentIndex = 0
@@ -55,33 +53,33 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
        }
 
     
-    // number of rows in table view
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyObj.count
-    }
-
-    // create a cell for each table view row
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        // create a new cell if needed or reuse an old one
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
-
-        // set the text from the data model
-        let historyDisc = historyObj[indexPath.row]
-        
-        cell.tiprotstatus?.text = historyDisc["title"] as? String
-        if let objectdetectDate = historyDisc["time"] {
-            cell.timeLabel?.text = "\(objectdetectDate)"
-        }
-        
-        if let imagename = historyDisc["image"] as? String {
-            let image = self.loadeImage(name: imagename)
-            cell.imgView.image = image
-        }
-
-
-        return cell
-    }
+//    // number of rows in table view
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return historyObj.count
+//    }
+//
+//    // create a cell for each table view row
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        // create a new cell if needed or reuse an old one
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
+//
+//        // set the text from the data model
+//        let historyDisc = historyObj[indexPath.row]
+//
+//        cell.tiprotstatus?.text = historyDisc["title"] as? String
+//        if let objectdetectDate = historyDisc["time"] {
+//            cell.timeLabel?.text = "\(objectdetectDate)"
+//        }
+//
+//        if let imagename = historyDisc["image"] as? String {
+//            let image = self.loadeImage(name: imagename)
+//            cell.imgView.image = image
+//        }
+//
+//
+//        return cell
+//    }
     
     @IBAction func segmentConAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -94,13 +92,59 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 historyObj = object as! [[String : AnyObject]]
             }
         }
-        tableview.reloadData()
-
-        
+        collectionView.reloadData()
     }
 }
 
-class TableViewCell: UITableViewCell {
+extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       
+        return self.historyObj.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer", for: indexPath) as! HistoryCell
+
+        let historyDisc =  self.historyObj[indexPath.row]
+        
+       cell.tiprotstatus?.text = historyDisc["title"] as? String
+        if let objectdetectDate = historyDisc["time"] {
+            cell.timeLabel?.text = "\(objectdetectDate)"
+        }
+        
+        if let imagename = historyDisc["image"] as? String {
+            let image = self.loadeImage(name: imagename)
+            let cellWidth = self.view.frame.width/2 - 15
+            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: cellWidth))
+        }
+        
+        return cell
+    }
+
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        collectionView.deselectItem(at: indexPath, animated: true)
+//        cellDidSelect(col: indexPath.row)
+//    }
+    
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+       let noOfCellsInRow = 2
+
+       let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+
+       let totalSpace = flowLayout.sectionInset.left
+           + flowLayout.sectionInset.right
+           + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+
+       let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+
+       return CGSize(width: size, height: size)
+   }
+    
+}
+
+class HistoryCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var tiprotstatus: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
