@@ -5,6 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="gRz-KR-ppi">
@@ -49,7 +54,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZnW-Wq-jCK">
                                         <rect key="frame" x="30" y="92" width="260" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBZ-6W-iag">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBZ-6W-iag">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="RHx-aM-14a"/>
@@ -58,7 +63,7 @@
                                                 <color key="textColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qk2-2W-73g">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qk2-2W-73g">
                                                 <rect key="frame" x="0.0" y="14" width="260" height="35"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -173,12 +178,19 @@
                                     <segue destination="xZV-iJ-Mp0" kind="push" id="3w8-co-lIx"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rP-U4-bcI">
+                                <rect key="frame" x="81.5" y="444" width="157" height="21.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XhP-P1-bhj" firstAttribute="centerY" secondItem="5ET-Mh-yZe" secondAttribute="centerY" id="4oA-aX-dtJ"/>
                             <constraint firstAttribute="trailing" secondItem="XhP-P1-bhj" secondAttribute="trailing" id="6o6-bB-MnI"/>
                             <constraint firstAttribute="trailing" secondItem="Jib-wZ-O65" secondAttribute="trailing" constant="30" id="74k-ii-8Us"/>
+                            <constraint firstItem="9rP-U4-bcI" firstAttribute="top" secondItem="XhP-P1-bhj" secondAttribute="bottom" constant="10" id="Ho5-19-z1d"/>
                             <constraint firstItem="Jib-wZ-O65" firstAttribute="top" secondItem="XhP-P1-bhj" secondAttribute="bottom" constant="30" id="ODr-5j-X7H"/>
                             <constraint firstItem="Jib-wZ-O65" firstAttribute="leading" secondItem="5ET-Mh-yZe" secondAttribute="leading" constant="30" id="Rth-gA-LBN"/>
                             <constraint firstItem="y74-rL-sDD" firstAttribute="leading" secondItem="5ET-Mh-yZe" secondAttribute="leading" constant="30" id="Zhk-MT-AYt"/>
@@ -186,6 +198,7 @@
                             <constraint firstItem="y74-rL-sDD" firstAttribute="top" secondItem="uMF-X6-nXY" secondAttribute="bottom" constant="60" id="gmk-8d-QAT"/>
                             <constraint firstItem="XhP-P1-bhj" firstAttribute="leading" secondItem="5ET-Mh-yZe" secondAttribute="leading" id="kOe-OW-HQu"/>
                             <constraint firstItem="XhP-P1-bhj" firstAttribute="centerX" secondItem="5ET-Mh-yZe" secondAttribute="centerX" id="yM3-pq-dIE"/>
+                            <constraint firstItem="9rP-U4-bcI" firstAttribute="centerX" secondItem="5ET-Mh-yZe" secondAttribute="centerX" id="zuY-xG-Ds1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O1n-hP-uY9"/>

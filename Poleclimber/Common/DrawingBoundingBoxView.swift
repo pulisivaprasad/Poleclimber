@@ -64,7 +64,7 @@ class DrawingBoundingBoxView: UIView {
         bgView.backgroundColor = UIColor.clear
         addSubview(bgView)
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
         label.text = labelString ?? "N/A"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.black

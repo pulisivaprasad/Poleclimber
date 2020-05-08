@@ -28,12 +28,12 @@
 		44BB542E2422FE4100C1302B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB542D2422FE4100C1302B /* Helper.swift */; };
 		44BB54352423015300C1302B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB54342423015300C1302B /* Reachability.swift */; };
 		44EDE96624643B53002CFEEE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE96524643B53002CFEEE /* Extension.swift */; };
+		44EDE96824645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */; };
 		6540F04E245804E100FF3CFA /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04C245804E100FF3CFA /* ViewControllerTests.swift */; };
 		6540F05024582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04F24582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift */; };
 		6540F053245A983000FF3CFA /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F052245A983000FF3CFA /* HistoryViewController.swift */; };
 		6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F054245A984500FF3CFA /* ProfileViewController.swift */; };
 		6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F056245B094F00FF3CFA /* TabBarViewController.swift */; };
-		657FE82C24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 657FE82B24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel */; };
 		687B6F8B3F07F31C9EA97152 /* Pods_Poleclimber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +75,7 @@
 		44BB542D2422FE4100C1302B /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		44BB54342423015300C1302B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		44EDE96524643B53002CFEEE /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV3_640_SSDLite.mlmodel; sourceTree = "<group>"; };
 		5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Poleclimber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0422458034600FF3CFA /* PoleclimberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoleclimberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0462458034600FF3CFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		6540F052245A983000FF3CFA /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		6540F054245A984500FF3CFA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6540F056245B094F00FF3CFA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		657FE82B24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV3_SSDLite.mlmodel; sourceTree = "<group>"; };
 		DFD32C714C0E44882E024251 /* Pods-Poleclimber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.debug.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,7 +230,7 @@
 		657FE82D2453EFF90098D0E6 /* TiprotDetectionModel */ = {
 			isa = PBXGroup;
 			children = (
-				657FE82B24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel */,
+				44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */,
 			);
 			path = TiprotDetectionModel;
 			sourceTree = "<group>";
@@ -404,7 +404,6 @@
 				6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */,
 				443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */,
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
-				657FE82C24531B8D0098D0E6 /* MobileNetV3_SSDLite.mlmodel in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
 				443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */,
@@ -421,6 +420,7 @@
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
+				44EDE96824645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
