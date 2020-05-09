@@ -129,7 +129,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCellIdentifer" id="F91-cs-iVn" customClass="HistoryCell" customModule="Poleclimber" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="5" width="180" height="270"/>
+                                        <rect key="frame" x="10" y="6" width="180" height="270"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5be-eb-Ujo">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="270"/>
@@ -148,31 +148,23 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOOD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-QL-Sbx">
-                                                    <rect key="frame" x="136.33333333333334" y="8" width="43.666666666666657" height="24"/>
-                                                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="good" translatesAutoresizingMaskIntoConstraints="NO" id="338-hl-2sF">
+                                                    <rect key="frame" x="140" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="4PF-ic-4Z6"/>
+                                                        <constraint firstAttribute="height" constant="40" id="HwM-cY-uwe"/>
+                                                        <constraint firstAttribute="width" constant="40" id="L1K-rq-XMX"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="EuphemiaUCAS-Bold" family="Euphemia UCAS" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerradius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="338-hl-2sF" firstAttribute="top" secondItem="5be-eb-Ujo" secondAttribute="top" id="3Ql-ZX-pG3"/>
                                                 <constraint firstItem="LD9-KL-sQg" firstAttribute="leading" secondItem="5be-eb-Ujo" secondAttribute="leading" id="BPi-mg-oGa"/>
                                                 <constraint firstAttribute="trailing" secondItem="LD9-KL-sQg" secondAttribute="trailing" id="JyF-dM-7kQ"/>
                                                 <constraint firstItem="KqC-vp-mYJ" firstAttribute="height" secondItem="5be-eb-Ujo" secondAttribute="height" id="Stg-64-5Ut"/>
+                                                <constraint firstAttribute="trailing" secondItem="338-hl-2sF" secondAttribute="trailing" id="XQH-MP-9ZA"/>
                                                 <constraint firstAttribute="bottom" secondItem="LD9-KL-sQg" secondAttribute="bottom" id="bcX-SI-AsN"/>
-                                                <constraint firstItem="v1e-QL-Sbx" firstAttribute="top" secondItem="5be-eb-Ujo" secondAttribute="top" constant="8" id="hB7-gl-A3c"/>
                                                 <constraint firstItem="KqC-vp-mYJ" firstAttribute="centerY" secondItem="5be-eb-Ujo" secondAttribute="centerY" id="rN5-yu-9BV"/>
                                                 <constraint firstItem="KqC-vp-mYJ" firstAttribute="centerX" secondItem="5be-eb-Ujo" secondAttribute="centerX" id="rXC-aS-yCm"/>
-                                                <constraint firstAttribute="trailing" secondItem="v1e-QL-Sbx" secondAttribute="trailing" id="tdj-cn-x90"/>
                                                 <constraint firstItem="KqC-vp-mYJ" firstAttribute="width" secondItem="5be-eb-Ujo" secondAttribute="width" id="wua-EW-ie9"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -180,7 +172,64 @@
                                         <connections>
                                             <outlet property="imgView" destination="KqC-vp-mYJ" id="sGB-me-hxS"/>
                                             <outlet property="timeLabel" destination="LD9-KL-sQg" id="ybk-NC-1Ma"/>
-                                            <outlet property="tiprotstatus" destination="v1e-QL-Sbx" id="9n3-RX-t5D"/>
+                                            <outlet property="tipTypeImg" destination="338-hl-2sF" id="jsR-ZA-Zfv"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCellIdentifer2" id="O0v-14-r8k" customClass="HistoryCell" customModule="Poleclimber" customModuleProvider="target">
+                                        <rect key="frame" x="200" y="5" width="184" height="271.69999999999999"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IIm-pU-Xj5">
+                                            <rect key="frame" x="0.0" y="0.0" width="184" height="271.69999999999999"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbU-GU-3hU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="245"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="245" id="a2z-HZ-B2U"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="good" translatesAutoresizingMaskIntoConstraints="NO" id="hJi-y7-b4t">
+                                                    <rect key="frame" x="144" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="0ne-ff-4C8"/>
+                                                        <constraint firstAttribute="width" constant="40" id="DUL-0z-whL"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g0-WZ-0G3">
+                                                    <rect key="frame" x="0.0" y="230" width="184" height="18.666666666666657"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.65127867390000005" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5L-Ya-ZT5">
+                                                    <rect key="frame" x="0.0" y="248.66666666666663" width="184" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hJi-y7-b4t" firstAttribute="top" secondItem="IIm-pU-Xj5" secondAttribute="top" id="CPI-1s-00P"/>
+                                                <constraint firstItem="5g0-WZ-0G3" firstAttribute="trailing" secondItem="m5L-Ya-ZT5" secondAttribute="trailing" id="KHR-hM-OjZ"/>
+                                                <constraint firstItem="5g0-WZ-0G3" firstAttribute="top" secondItem="jbU-GU-3hU" secondAttribute="bottom" constant="-15" id="LuC-iU-wft"/>
+                                                <constraint firstAttribute="trailing" secondItem="m5L-Ya-ZT5" secondAttribute="trailing" id="MDx-HN-8rY"/>
+                                                <constraint firstItem="5g0-WZ-0G3" firstAttribute="leading" secondItem="m5L-Ya-ZT5" secondAttribute="leading" id="QzU-mF-05K"/>
+                                                <constraint firstAttribute="bottom" secondItem="m5L-Ya-ZT5" secondAttribute="bottom" constant="2" id="Vq5-Hu-6e8"/>
+                                                <constraint firstItem="jbU-GU-3hU" firstAttribute="top" secondItem="IIm-pU-Xj5" secondAttribute="top" id="YAN-je-hPt"/>
+                                                <constraint firstAttribute="trailing" secondItem="hJi-y7-b4t" secondAttribute="trailing" id="hvQ-t9-7hC"/>
+                                                <constraint firstItem="jbU-GU-3hU" firstAttribute="leading" secondItem="IIm-pU-Xj5" secondAttribute="leading" id="iIl-3Z-NeG"/>
+                                                <constraint firstItem="m5L-Ya-ZT5" firstAttribute="leading" secondItem="IIm-pU-Xj5" secondAttribute="leading" id="lZF-c8-zuI"/>
+                                                <constraint firstItem="m5L-Ya-ZT5" firstAttribute="top" secondItem="5g0-WZ-0G3" secondAttribute="bottom" id="u4Y-o8-we6"/>
+                                                <constraint firstAttribute="trailing" secondItem="jbU-GU-3hU" secondAttribute="trailing" id="xwL-Td-qWH"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="184" height="271.69999999999999"/>
+                                        <connections>
+                                            <outlet property="imgView" destination="jbU-GU-3hU" id="h8Z-eT-19o"/>
+                                            <outlet property="reasonLabel" destination="m5L-Ya-ZT5" id="RAF-RU-dgh"/>
+                                            <outlet property="timeLabel" destination="5g0-WZ-0G3" id="GKc-z2-DGu"/>
+                                            <outlet property="tipTypeImg" destination="hJi-y7-b4t" id="wCG-Q4-XYx"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -867,6 +916,7 @@
         <image name="backgroundImg" width="341.33334350585938" height="227.66667175292969"/>
         <image name="camera" width="24" height="24"/>
         <image name="gallery" width="30" height="30"/>
+        <image name="good" width="26" height="26"/>
         <image name="history" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="logout" width="26" height="26"/>

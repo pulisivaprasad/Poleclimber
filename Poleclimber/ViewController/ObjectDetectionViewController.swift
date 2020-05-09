@@ -188,7 +188,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
-        userfeedbackSaving(userKey: "AGREEUSERDETAILS", titleStr: namelabel.text ?? "")
+        userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
         
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback is saved successfully.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
@@ -215,7 +215,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func submitBtnAction(selectedReason: String) {
-        userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", titleStr: selectedReason)
+        userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank's for your feedback.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
@@ -268,7 +268,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 //
 //    }
     
-    func userfeedbackSaving(userKey: String, titleStr: String)  {
+    func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
         var detailsSaving = UserDefaults.standard.object(forKey: userKey) as? [[String: AnyObject]]
 
         if detailsSaving == nil {
@@ -276,7 +276,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
 
         var disc = [String: AnyObject]()
-        disc["title"] = titleStr as AnyObject
+        disc["tipStatus"] = tipStatus as AnyObject
+        
+        if userKey == "DISAGREEUSERDETAILS" {
+            disc["reason"] = reason as AnyObject
+        }
                
         let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"

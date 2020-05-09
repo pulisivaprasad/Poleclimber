@@ -75,11 +75,23 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer", for: indexPath) as! HistoryCell
-
-        let historyDisc =  self.historyObj[indexPath.row]
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer", for: indexPath) as! HistoryCell
         
-       cell.tiprotstatus?.text = historyDisc["title"] as? String
+        let historyDisc =  self.historyObj[indexPath.row]
+
+        if segmentControl.selectedSegmentIndex == 1 {
+                   cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
+            cell.reasonLabel.text = historyDisc["reason"] as? String
+        }
+        
+        
+        if historyDisc["tipStatus"] as? String == "Good Tip Detected" {
+            cell.tipTypeImg.image = UIImage(named: "good")
+        }
+        else{
+            cell.tipTypeImg.image = UIImage(named: "bad")
+        }
+        
         if let objectdetectDate = historyDisc["time"] {
             cell.timeLabel?.text = "\(objectdetectDate)"
         }
@@ -89,7 +101,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
             let cellWidth = self.view.frame.width/2 - 15
             cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: cellWidth))
         }
-        
+                
         return cell
     }
 
@@ -117,8 +129,9 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 class HistoryCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var tiprotstatus: UILabel!
+    @IBOutlet weak var tipTypeImg: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var reasonLabel: UILabel!
 
 }
 
