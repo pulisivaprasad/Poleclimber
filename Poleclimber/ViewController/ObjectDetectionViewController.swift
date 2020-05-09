@@ -136,8 +136,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
         Helper.sharedHelper.dismissHUD(view: self.view)
             //Removing the pole tip object
-            let confThresh = 0.8
-            let objAspectRatio: CGFloat = 0.6
+            let confThresh = 0.85
+            let objAspectRatio: CGFloat = 0.75
 
             for object in result {
                 if (object.label != nil) && object.label != "pole_tip" && object.confidence > VNConfidence(confThresh)  {
@@ -151,7 +151,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             }
             
             guard self.predictions.first != nil else {
-              self.rControl.showMessage(withSpec: errorSpec, title: "Error", body: "Possible reason for rejections - image is not fit for detection | or image doesnot have pole tip.")
+                Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enof for analsyis or a pole tip could not be detected in the selected image.", vc: self)
               self.imageView.image = UIImage(named: "")
               self.noImgView.isHidden = false
               self.detectBtn.isHidden = true
@@ -190,7 +190,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBAction func AgreeBtnAction(_ sender: Any) {
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
         
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Your feedback is saved successfully.")
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
     
@@ -201,14 +201,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBAction func disAgreeBtnAction(_ sender: Any) {
         poleStatusSubView.frame = view.bounds
         if self.namelabel.text == "Good Tip Detected"{
-            poleStatusSubView.reason1.setTitle("Reason1", for: .normal)
-            poleStatusSubView.reason2.setTitle("Reason2", for: .normal)
-            poleStatusSubView.reason3.setTitle("Reason3", for: .normal)
+            poleStatusSubView.reason1.setTitle(" Rot present on the pole tip", for: .normal)
+            poleStatusSubView.reason2.setTitle(" Side chipping looks like rot", for: .normal)
+            poleStatusSubView.reason3.setTitle(" Reason3", for: .normal)
         }
         else{
-            poleStatusSubView.reason1.setTitle("Reason4", for: .normal)
-            poleStatusSubView.reason2.setTitle("Reason5", for: .normal)
-            poleStatusSubView.reason3.setTitle("Reason6", for: .normal)
+            poleStatusSubView.reason1.setTitle(" The cracks on the tip are natural cracks", for: .normal)
+            poleStatusSubView.reason2.setTitle(" Tip is covered by bird droppings", for: .normal)
+            poleStatusSubView.reason3.setTitle(" Chipping present on the tip, not the rot", for: .normal)
         }
         poleStatusSubView.delegate = self
         view.addSubview(poleStatusSubView)

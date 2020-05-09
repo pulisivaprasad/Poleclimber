@@ -37,7 +37,7 @@ class Helper: NSObject  {
     func showGlobalAlertwithMessage(_ str : String, vc: UIViewController, completion: (() -> Swift.Void)? = nil) {
         
         DispatchQueue.main.async(execute: {
-            let alertView = UIAlertController(title: "Alert", message: str as String, preferredStyle: .alert)
+            let alertView = UIAlertController(title: "Error", message: str as String, preferredStyle: .alert)
             alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: {             alert -> Void in
                 
                 completion?()
