@@ -16,7 +16,7 @@ class DatabaseFlowViewController: UIViewController {
     }
     
     @IBAction func internetOffAction(sender: UIButton) {
-        Helper.sharedHelper.showGlobalAlertwithMessage("Dear Pole tester, Please connect to internet to push data to cloud. You may not be able to take further images to test poles.")
+        Helper.sharedHelper.showGlobalAlertwithMessage("Dear Pole tester, Please connect to internet to push data to cloud. You may not be able to take further images to test poles.", title: "Info")
     }
 
     @IBAction func progressAction(sender: UIButton) {
@@ -28,16 +28,16 @@ class DatabaseFlowViewController: UIViewController {
     @objc func progressActionShow() {
         Helper.sharedHelper.dismissHUD(view: self.view)
 
-        Helper.sharedHelper.showGlobalAlertwithMessage("Database updation in progress, please wait!!!")
+        Helper.sharedHelper.showGlobalAlertwithMessage("Database updation in progress, please wait!!!", title: "Alert")
     }
 
     
     @IBAction func failAction(sender: UIButton) {
-        Helper.sharedHelper.showGlobalAlertwithMessage("Something going wrong...\nraise helpline ticket/call customer care.")
+        Helper.sharedHelper.showGlobalAlertwithMessage("Something went wrong!\nRaise helpline ticket / call customer care.", title: "Error")
     }
     
     @IBAction func completedAction(sender: UIButton) {
-        Helper.sharedHelper.showGlobalAlertwithMessage("App is ready to use.")
+        Helper.sharedHelper.showGlobalAlertwithMessage("App is ready to use.", title: "Success")
     }
 
 }

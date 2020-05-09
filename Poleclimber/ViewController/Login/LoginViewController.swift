@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser"]
@@ -22,23 +22,25 @@ class LoginViewController: UIViewController {
     }
     
       @IBAction func loginAction(_ sender: UIButton?) {
+        self.view.endEditing(true)
+
         guard emailTextField.text != "" else {
-          Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the user id.")
+          Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the user id.", title: "Alert")
             return
         }
             
         guard passwordTextField.text != "" else {
-            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the password.")
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the password.", title: "Alert")
             return
         }
         
         if !userIDArr.contains(emailTextField.text!) {
-            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct user id.")
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct user id.", title: "Alert")
             return
         }
         
         if passwordTextField.text != "openreach@123" {
-            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct password.")
+            Helper.sharedHelper.showGlobalAlertwithMessage("Please enter the correct password.", title: "Alert")
             return
         }
             
@@ -87,6 +89,11 @@ class LoginViewController: UIViewController {
         let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "TabBarViewController") as! UITabBarController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       textField.resignFirstResponder()
+       return true
+   }
 }
 
     extension UIStoryboard {

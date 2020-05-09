@@ -68,7 +68,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             self.present(imagePicker, animated: true, completion: nil)
         }
         else{
-            Helper.sharedHelper.showGlobalAlertwithMessage("You don't have camera.")
+            Helper.sharedHelper.showGlobalAlertwithMessage("You don't have camera.", title: "Alert")
         }
     }
     

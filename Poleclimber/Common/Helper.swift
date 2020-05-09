@@ -24,11 +24,11 @@ class Helper: NSObject  {
         return emailTest.evaluate(with: checkString)
     }
     
-    func showGlobalAlertwithMessage(_ str : String) {
+    func showGlobalAlertwithMessage(_ str : String, title: String) {
         
         DispatchQueue.main.async(execute: {
             let window:UIWindow = UIApplication.shared.windows.last!
-            let alertView = UIAlertController(title: "Alert", message: str as String, preferredStyle: .alert)
+            let alertView = UIAlertController(title: title, message: str as String, preferredStyle: .alert)
             alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             window.rootViewController!.present(alertView, animated: true, completion: nil)
         })
