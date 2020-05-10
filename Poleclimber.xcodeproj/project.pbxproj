@@ -37,6 +37,10 @@
 		6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F054245A984500FF3CFA /* ProfileViewController.swift */; };
 		6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F056245B094F00FF3CFA /* TabBarViewController.swift */; };
 		687B6F8B3F07F31C9EA97152 /* Pods_Poleclimber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */; };
+		7C7CD5602468401F00952ACA /* Poleclimber.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */; };
+		7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */; };
+		7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */; };
+		7C7CD5662468406700952ACA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5652468406700952ACA /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,10 @@
 		6540F052245A983000FF3CFA /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		6540F054245A984500FF3CFA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6540F056245B094F00FF3CFA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poleclimber.xcdatamodel; sourceTree = "<group>"; };
+		7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7C7CD5652468406700952ACA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		DFD32C714C0E44882E024251 /* Pods-Poleclimber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.debug.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +138,8 @@
 		444B6D462463E19D0060A163 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */,
+				7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */,
 				444B6D472463E1CB0060A163 /* UserModel.swift */,
 			);
 			path = Models;
@@ -199,6 +209,7 @@
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
 				4453033224630BB8008F086A /* Login.storyboard */,
 				44BB542124226D1600C1302B /* Assets.xcassets */,
+				7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */,
 				44BB542324226D1600C1302B /* LaunchScreen.storyboard */,
 				44BB542624226D1600C1302B /* Info.plist */,
 				44898A9124631A60003C6217 /* GoogleService-Info.plist */,
@@ -218,6 +229,7 @@
 				445B381A2438AD3800BBD569 /* DrawingBoundingBoxView.swift */,
 				6540F056245B094F00FF3CFA /* TabBarViewController.swift */,
 				44EDE96524643B53002CFEEE /* Extension.swift */,
+				7C7CD5652468406700952ACA /* DataManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -411,12 +423,14 @@
 				443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */,
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
+				7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */,
 				4486841F246550D200FE22FB /* DatabaseFlowViewController.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
 				443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */,
 				6540F053245A983000FF3CFA /* HistoryViewController.swift in Sources */,
 				445B381B2438AD3800BBD569 /* DrawingBoundingBoxView.swift in Sources */,
 				44BB54352423015300C1302B /* Reachability.swift in Sources */,
+				7C7CD5662468406700952ACA /* DataManager.swift in Sources */,
 				446F07282447050F005183B4 /* PoleStatusView.swift in Sources */,
 				443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */,
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
@@ -428,6 +442,8 @@
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
+				7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */,
+				7C7CD5602468401F00952ACA /* Poleclimber.xcdatamodel in Sources */,
 				448684272467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

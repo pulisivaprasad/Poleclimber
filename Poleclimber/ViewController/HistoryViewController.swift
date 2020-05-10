@@ -10,29 +10,36 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
-    var historyObj = [[String: AnyObject]]()
+   // var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    var acceptanceArray:[Feedback]?
+    var declinedArray:[Feedback]?
+    var isShowingAcceptedList:Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    
+    
+    func fetchFeedback() {
+         let fetchedFeedbackData = DataManager.sharedInstance.retrieveSavedFeedback()
+          print(fetchedFeedbackData as Any)
+         acceptanceArray = fetchedFeedbackData!.filter{$0.userAcceptance == "Ok"}
+         declinedArray = fetchedFeedbackData!.filter{$0.userAcceptance != "Ok"}
+         collectionView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
-        historyObj.removeAll()
-
-        if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
-            historyObj = object as! [[String : AnyObject]]
-            if let object2 = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
-                for disagreeObj in object2 as! [[String : AnyObject]] {
-                    historyObj.append(disagreeObj)
-                }
-            }
-        }
+//        if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
+//            historyObj = object as! [[String : AnyObject]]
+//        }
         self.title = "History"
-        
+        fetchFeedback()
+
         segmentControl.selectedSegmentIndex = 0
     }
     
@@ -60,55 +67,65 @@ class HistoryViewController: UIViewController {
        }
     
     @IBAction func segmentConAction(_ sender: UISegmentedControl) {
-        historyObj.removeAll()
-        if sender.selectedSegmentIndex == 0 {
-             if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
-                historyObj = object as! [[String : AnyObject]]
-                if let object2 = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
-                    for disagreeObj in object2 as! [[String : AnyObject]] {
-                        historyObj.append(disagreeObj)
-                    }
-                }
-            }
-        }
-        else{
-             if let object = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
-                historyObj = object as! [[String : AnyObject]]
-            }
-        }
+//        if sender.selectedSegmentIndex == 0 {
+//             if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
+//                historyObj = object as! [[String : AnyObject]]
+//            }
+//        }
+//        else{
+//             if let object = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
+//                historyObj = object as! [[String : AnyObject]]
+//            }
+//        }
+        isShowingAcceptedList = !isShowingAcceptedList
         collectionView.reloadData()
     }
 }
 
 extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
-        return self.historyObj.count
+        if isShowingAcceptedList{
+            return acceptanceArray?.count ?? 0
+        }else{
+            return declinedArray?.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer", for: indexPath) as! HistoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifier", for: indexPath) as! HistoryCell
         
-        let historyDisc =  self.historyObj[indexPath.row]
-
-        if (historyDisc["reason"] as? String) != nil {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
-            cell.reasonLabel.text = historyDisc["reason"] as? String
+        var feedbackObj:Feedback?
+        if isShowingAcceptedList{
+            feedbackObj = acceptanceArray![indexPath.row]
+            cell.reasonLabel.isHidden = true
+        }else{
+            cell.reasonLabel.isHidden = false
+            feedbackObj = declinedArray![indexPath.row]
         }
         
-        if historyDisc["tipStatus"] as? String == "Good Tip Detected" {
+//
+//        if segmentControl.selectedSegmentIndex == 1 {
+//                   cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
+//        }
+        cell.dummyLabel.isHidden = true
+        
+        
+            
+        cell.reasonLabel.text = feedbackObj?.reason
+        
+        if feedbackObj?.tipStatus == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
-        }
-        else{
+        }else{
             cell.tipTypeImg.image = UIImage(named: "bad")
         }
+
         
-        if let objectdetectDate = historyDisc["time"] {
+        if let objectdetectDate = feedbackObj?.date {
             cell.timeLabel?.text = "\(objectdetectDate)"
         }
         
-        if let imagename = historyDisc["image"] as? String {
+        if let imagename = feedbackObj?.image {
             let image = self.loadeImage(name: imagename)
             let cellWidth = self.view.frame.width/2 - 15
             cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: cellWidth))
@@ -124,7 +141,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-       let noOfCellsInRow = 2
+       let noOfCellsInRow = 1
 
        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
 
@@ -144,7 +161,11 @@ class HistoryCell: UICollectionViewCell {
     @IBOutlet weak var tipTypeImg: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
+    @IBOutlet weak var dummyLabel: UILabel!
+    
+
 
 }
+
 
 
