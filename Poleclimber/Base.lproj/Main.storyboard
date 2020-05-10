@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,26 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-3i-rQu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sampleBkg" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-3i-rQu">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="openreach_logo" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-LE-PL3">
-                                <rect key="frame" x="40" y="153" width="334" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="XJN-og-j8k"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Engineer’s App - Pole Testing " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
-                                <rect key="frame" x="30" y="414.66666666666669" width="354" height="71.666666666666686"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5p-lt-s3S">
                                 <rect key="frame" x="0.0" y="649" width="414" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQd-rp-KEs">
-                                        <rect key="frame" x="30" y="10" width="354" height="44"/>
+                                        <rect key="frame" x="50" y="15" width="314" height="44"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="yGx-2W-LrM"/>
@@ -62,29 +50,31 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="bQd-rp-KEs" firstAttribute="top" secondItem="a5p-lt-s3S" secondAttribute="top" constant="10" id="3UF-BA-Aez"/>
-                                    <constraint firstAttribute="bottom" secondItem="bQd-rp-KEs" secondAttribute="bottom" constant="20" id="8gQ-pd-JVX"/>
-                                    <constraint firstAttribute="trailing" secondItem="bQd-rp-KEs" secondAttribute="trailing" constant="30" id="cg2-jr-Kmw"/>
-                                    <constraint firstItem="bQd-rp-KEs" firstAttribute="leading" secondItem="a5p-lt-s3S" secondAttribute="leading" constant="30" id="qK8-Kt-QBG"/>
+                                    <constraint firstItem="bQd-rp-KEs" firstAttribute="leading" secondItem="a5p-lt-s3S" secondAttribute="leading" constant="50" id="DrY-Xc-Vfj"/>
+                                    <constraint firstItem="bQd-rp-KEs" firstAttribute="centerY" secondItem="a5p-lt-s3S" secondAttribute="centerY" id="MzZ-0E-pTZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="bQd-rp-KEs" secondAttribute="trailing" constant="50" id="vAy-yd-Mv5"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Engineer’s App - Pole Testing " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
+                                <rect key="frame" x="20" y="450" width="354" height="71.666666666666629"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.1333333333" green="0.10980392160000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6sO-3i-rQu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1hT-N9-cQy"/>
+                            <constraint firstItem="a5p-lt-s3S" firstAttribute="top" secondItem="SWR-ig-jxb" secondAttribute="bottom" constant="127.33333333333337" id="2AL-V5-vof"/>
+                            <constraint firstItem="SWR-ig-jxb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="362" id="2TT-Fg-o2g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a5p-lt-s3S" secondAttribute="trailing" id="7WK-1w-Nm3"/>
-                            <constraint firstItem="SWR-ig-jxb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="9xz-1Q-7ti"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="a5p-lt-s3S" secondAttribute="bottom" constant="90" id="A2K-Lc-a6s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6sO-3i-rQu" secondAttribute="bottom" id="HXf-Ja-HSU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S7m-LE-PL3" secondAttribute="trailing" constant="40" id="KI1-z6-g7l"/>
-                            <constraint firstItem="SWR-ig-jxb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="KLV-1j-bsN"/>
-                            <constraint firstItem="S7m-LE-PL3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="Q1J-QE-erV"/>
+                            <constraint firstItem="SWR-ig-jxb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="KLV-1j-bsN"/>
                             <constraint firstItem="6sO-3i-rQu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a8J-ls-b2b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6sO-3i-rQu" secondAttribute="trailing" id="aXo-Mz-N3x"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWR-ig-jxb" secondAttribute="trailing" constant="30" id="nsj-op-6Na"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWR-ig-jxb" secondAttribute="trailing" constant="40" id="nsj-op-6Na"/>
                             <constraint firstItem="a5p-lt-s3S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uJZ-Ut-D7s"/>
-                            <constraint firstItem="SWR-ig-jxb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xKu-Vb-V4c"/>
-                            <constraint firstItem="S7m-LE-PL3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="yd2-38-2U8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -878,15 +868,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backgroundImg" width="341.33334350585938" height="227.66667175292969"/>
         <image name="camera" width="24" height="24"/>
         <image name="gallery" width="30" height="30"/>
         <image name="good" width="26" height="26"/>
         <image name="history" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="logout" width="26" height="26"/>
-        <image name="openreach_logo" width="208" height="40"/>
         <image name="profile" width="30" height="30"/>
+        <image name="sampleBkg" width="1056" height="1178"/>
         <image name="selected" width="24" height="24"/>
         <image name="unSelected" width="30" height="30"/>
         <image name="user" width="512" height="512"/>

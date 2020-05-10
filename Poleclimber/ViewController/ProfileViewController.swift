@@ -47,6 +47,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if indexPath.row == 3 {
             cell?.textLabel?.text = "Database flow"
             cell?.detailTextLabel?.text = ""
+        
         }
         
         return cell!
