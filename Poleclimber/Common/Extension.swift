@@ -26,12 +26,13 @@ extension UIView {
 
 extension UIImage {
     /// Save PNG in the Documents directory
-    func save(_ name: String) {
+    func save(_ name: String) -> URL {
         let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let url = URL(fileURLWithPath: path).appendingPathComponent(name)
         try! self.pngData()?.write(to: url)
-        print("saved image at \(url)")
+        return url
     }
+
     
     func resize(_ newSize:CGSize) -> UIImage{
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);

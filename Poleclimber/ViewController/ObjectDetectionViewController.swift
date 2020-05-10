@@ -269,33 +269,34 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 //    }
     
     func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
-        var detailsSaving = UserDefaults.standard.object(forKey: userKey) as? [[String: AnyObject]]
-
-        if detailsSaving == nil {
-            detailsSaving = [[String: AnyObject]]()
-        }
-
-        var disc = [String: AnyObject]()
-        disc["tipStatus"] = tipStatus as AnyObject
         
-        if userKey == "DISAGREEUSERDETAILS" {
-            disc["reason"] = reason as AnyObject
+        let dataManager = DataManager.sharedInstance
+        let context = dataManager.getContext()
+        let feedback = Feedback(context: context!)
+        feedback.tipStatus = tipStatus
+        if userKey == "DISAGREEUSERDETAILS"{
+            feedback.userAcceptance = "Disagree"
+            feedback.reason = reason
+        }else{
+            feedback.userAcceptance = "Ok"
+            feedback.reason = "NULL"
         }
                
         let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
         let dateObj = dateFormatter.string(from: Date())
+        feedback.date = dateObj
                
-        disc["time"] = dateObj as AnyObject
-        
         if let image = containerView.pb_takeSnapshot() {
             let filename = "image_" + Date().description
-            image.save(filename)
-            disc["image"] = filename as AnyObject
+            _ = image.save(filename)
+            feedback.image = filename
         }
 
-        detailsSaving?.append(disc)
-        UserDefaults.standard.set(detailsSaving, forKey: userKey)
-        UserDefaults.standard.synchronize()
+        dataManager.saveChanges()
+        
     }
+    
+
+    
 }
