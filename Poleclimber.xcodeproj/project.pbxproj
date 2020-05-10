@@ -19,6 +19,7 @@
 		446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 446F07232446CFC3005183B4 /* MBProgressHUD.m */; };
 		446F07282447050F005183B4 /* PoleStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F07272447050F005183B4 /* PoleStatusView.swift */; };
 		4486841F246550D200FE22FB /* DatabaseFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */; };
+		448684272467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 448684262467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel */; };
 		44898A9024631031003C6217 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44898A8F24631031003C6217 /* LoginViewController.swift */; };
 		44898A9224631A60003C6217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44898A9124631A60003C6217 /* GoogleService-Info.plist */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
@@ -29,7 +30,6 @@
 		44BB542E2422FE4100C1302B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB542D2422FE4100C1302B /* Helper.swift */; };
 		44BB54352423015300C1302B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB54342423015300C1302B /* Reachability.swift */; };
 		44EDE96624643B53002CFEEE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE96524643B53002CFEEE /* Extension.swift */; };
-		44EDE96824645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */; };
 		6540F04E245804E100FF3CFA /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04C245804E100FF3CFA /* ViewControllerTests.swift */; };
 		6540F05024582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F04F24582E1E00FF3CFA /* ObjectDetectionViewControllerTests.swift */; };
 		6540F053245A983000FF3CFA /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F052245A983000FF3CFA /* HistoryViewController.swift */; };
@@ -65,6 +65,7 @@
 		446F07272447050F005183B4 /* PoleStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoleStatusView.swift; sourceTree = "<group>"; };
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
 		4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFlowViewController.swift; sourceTree = "<group>"; };
+		448684262467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_640_75k_SSDLite_new.mlmodel; sourceTree = "<group>"; };
 		44898A8F24631031003C6217 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		44898A9124631A60003C6217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +78,6 @@
 		44BB542D2422FE4100C1302B /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		44BB54342423015300C1302B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		44EDE96524643B53002CFEEE /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV3_640_SSDLite.mlmodel; sourceTree = "<group>"; };
 		5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Poleclimber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0422458034600FF3CFA /* PoleclimberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoleclimberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6540F0462458034600FF3CFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 		657FE82D2453EFF90098D0E6 /* TiprotDetectionModel */ = {
 			isa = PBXGroup;
 			children = (
-				44EDE96724645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel */,
+				448684262467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel */,
 			);
 			path = TiprotDetectionModel;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
 				445B381124370D4100BBD569 /* MobileNetV2_SSDLite.mlmodel in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
-				44EDE96824645957002CFEEE /* MobileNetV3_640_SSDLite.mlmodel in Sources */,
+				448684272467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

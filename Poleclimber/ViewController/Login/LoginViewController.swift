@@ -11,13 +11,15 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var versionLabel: UILabel!
+
     var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = "gary"
         passwordTextField.text = "openreach@123"
-
+        versionLabel.text = "Version: " + "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")"
         // Do any additional setup after loading the view.
     }
     
