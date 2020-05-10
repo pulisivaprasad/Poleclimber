@@ -21,8 +21,15 @@ class HistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
+        historyObj.removeAll()
+
         if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
             historyObj = object as! [[String : AnyObject]]
+            if let object2 = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
+                for disagreeObj in object2 as! [[String : AnyObject]] {
+                    historyObj.append(disagreeObj)
+                }
+            }
         }
         self.title = "History"
         
@@ -53,9 +60,15 @@ class HistoryViewController: UIViewController {
        }
     
     @IBAction func segmentConAction(_ sender: UISegmentedControl) {
+        historyObj.removeAll()
         if sender.selectedSegmentIndex == 0 {
              if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
                 historyObj = object as! [[String : AnyObject]]
+                if let object2 = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
+                    for disagreeObj in object2 as! [[String : AnyObject]] {
+                        historyObj.append(disagreeObj)
+                    }
+                }
             }
         }
         else{
@@ -79,11 +92,10 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let historyDisc =  self.historyObj[indexPath.row]
 
-        if segmentControl.selectedSegmentIndex == 1 {
-                   cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
+        if (historyDisc["reason"] as? String) != nil {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
             cell.reasonLabel.text = historyDisc["reason"] as? String
         }
-        
         
         if historyDisc["tipStatus"] as? String == "Good Tip Detected" {
             cell.tipTypeImg.image = UIImage(named: "good")

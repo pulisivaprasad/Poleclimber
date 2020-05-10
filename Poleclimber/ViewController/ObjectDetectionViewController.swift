@@ -20,7 +20,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
-    let objectDectectionModel =  MobileNetV2_640_75k_SSDLite_new() //YOLOv3Tiny()
+    let objectDectectionModel =  MobileNetV3_640_SSDLite() //YOLOv3Tiny()
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!

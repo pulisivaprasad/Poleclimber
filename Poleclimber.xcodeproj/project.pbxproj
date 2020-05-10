@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443C47B02463AEFF007731A6 /* SignUpViewController.swift */; };
+		443DDF2124681CC500B67C26 /* MobileNetV3_640_SSDLite.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 443DDF2024681CC500B67C26 /* MobileNetV3_640_SSDLite.mlmodel */; };
 		443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C2242CF74F00DBB05F /* PWebService.swift */; };
 		443F02C5242CF81500DBB05F /* PConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C4242CF81500DBB05F /* PConstants.swift */; };
 		443F3448243C34B2000719C9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F3445243C34B2000719C9 /* HomeViewController.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		443C47B02463AEFF007731A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		443DDF2024681CC500B67C26 /* MobileNetV3_640_SSDLite.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV3_640_SSDLite.mlmodel; sourceTree = "<group>"; };
 		443F02C2242CF74F00DBB05F /* PWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWebService.swift; sourceTree = "<group>"; };
 		443F02C4242CF81500DBB05F /* PConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PConstants.swift; sourceTree = "<group>"; };
 		443F3445243C34B2000719C9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		657FE82D2453EFF90098D0E6 /* TiprotDetectionModel */ = {
 			isa = PBXGroup;
 			children = (
+				443DDF2024681CC500B67C26 /* MobileNetV3_640_SSDLite.mlmodel */,
 				448684262467DE4700FE22FB /* MobileNetV2_640_75k_SSDLite_new.mlmodel */,
 			);
 			path = TiprotDetectionModel;
@@ -419,6 +422,7 @@
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
 				44898A9024631031003C6217 /* LoginViewController.swift in Sources */,
+				443DDF2124681CC500B67C26 /* MobileNetV3_640_SSDLite.mlmodel in Sources */,
 				44EDE96624643B53002CFEEE /* Extension.swift in Sources */,
 				444B6D482463E1CB0060A163 /* UserModel.swift in Sources */,
 				6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */,
