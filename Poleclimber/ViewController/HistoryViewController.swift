@@ -34,13 +34,10 @@ class HistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       self.navigationController?.isNavigationBarHidden = false
-//        if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
-//            historyObj = object as! [[String : AnyObject]]
-//        }
+
         self.title = "History"
         fetchFeedback()
 
-        segmentControl.selectedSegmentIndex = 0
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -162,6 +159,14 @@ class HistoryCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
     @IBOutlet weak var dummyLabel: UILabel!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.lightGray.cgColor
+   }
+
     
 
 
