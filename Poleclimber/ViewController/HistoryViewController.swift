@@ -24,10 +24,19 @@ class HistoryViewController: UIViewController {
     
     
     func fetchFeedback() {
-         let fetchedFeedbackData = DataManager.sharedInstance.retrieveSavedFeedback()
-          print(fetchedFeedbackData as Any)
-         acceptanceArray = fetchedFeedbackData!.filter{$0.userAcceptance == "Ok"}
-         declinedArray = fetchedFeedbackData!.filter{$0.userAcceptance != "Ok"}
+        let fetchedFeedbackData = DataManager.sharedInstance.retrieveSavedFeedback()
+            
+        guard fetchedFeedbackData != nil else{
+            return
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
+        acceptanceArray = fetchedFeedbackData!.sorted(by: {
+            dateFormatter.date(from: $0.date!)?.compare(dateFormatter.date(from: $1.date!)!) == .orderedDescending
+        })
+        
+        declinedArray = acceptanceArray!.filter{$0.userAcceptance != "Ok"}
          collectionView.reloadData()
     }
     
@@ -92,23 +101,24 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifier", for: indexPath) as! HistoryCell
         
+        cell.dummyLabel.isHidden = true
+        cell.reasonLabel.isHidden = true
+
+        
         var feedbackObj:Feedback?
         if isShowingAcceptedList{
             feedbackObj = acceptanceArray![indexPath.row]
-            cell.reasonLabel.isHidden = true
         }else{
-            cell.reasonLabel.isHidden = false
             feedbackObj = declinedArray![indexPath.row]
         }
         
-//
-//        if segmentControl.selectedSegmentIndex == 1 {
-//                   cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifer2", for: indexPath) as! HistoryCell
-//        }
-        cell.dummyLabel.isHidden = true
+
         
-        
-            
+        if feedbackObj?.reason != "NULL"{
+            cell.reasonLabel.isHidden = false
+            cell.reasonLabel.text = feedbackObj?.reason
+        }
+                    
         cell.reasonLabel.text = feedbackObj?.reason
         
         if feedbackObj?.tipStatus == "Good Tip Detected"{
@@ -173,4 +183,13 @@ class HistoryCell: UICollectionViewCell {
 }
 
 
+extension Date {
+    var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    init(milliseconds:Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+    }
+}
 
