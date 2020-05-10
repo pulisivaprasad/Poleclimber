@@ -52,9 +52,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         Helper.sharedHelper.showGlobalHUD(title: "Logging in...", view: view)
 
-        perform(#selector(login), with: nil, afterDelay: 2)
-
         
+       let isSuccess = DataManager.sharedInstance.retrieveLoginData(username: parameters["email"] as! String, password: parameters["password"] as! String)
+
+        if (isSuccess == true)
+        {
+            perform(#selector(login), with: nil, afterDelay: 2)
+        }
+        else
+        {
+            //show error alert
+            
+            //perform(#selector(login), with: nil, afterDelay: 2)
+
+        }
         //callApi(loginDict: parameters)
     }
     

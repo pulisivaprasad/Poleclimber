@@ -14,6 +14,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var fbUser:UserInfo?
+    var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -22,9 +23,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
+        if  (userDefault.object(forKey: "isFirstLaunch") == nil)
+        {
+            userDefault.set("YES", forKey: "isFirstLaunch")
+            
+            let dataManager = DataManager.sharedInstance
+            let context = dataManager.getContext()
+            let loginAuth = LoginAuth(context: context!)
+            loginAuth.username = "gary"
+            loginAuth.password = "openreach@123"
+            dataManager.saveChanges()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
         return true
     }
+    
+    @objc func methodOfReceivedNotification(notification: Notification)
+    {
+        DispatchQueue.main.async {
 
+        print("Screenshot taken!")
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 300, height: 400), false, UIScreen.main.scale)
+        
+        // Draw view in that context
+//        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        if (image != nil)
+        {
+
+            image?.draw(at: CGPoint.zero, blendMode: .normal, alpha: 0.0)
+        }
+        }
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     @available(iOS 13.0, *)

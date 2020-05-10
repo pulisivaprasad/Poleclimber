@@ -32,10 +32,6 @@ class DataManager: NSObject {
              }
        }
     
-//    func addFeedBackToDatabase(){
-//
-//    }
-    
     func retrieveSavedFeedback() -> [Feedback]? {
         
         let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")
@@ -50,5 +46,25 @@ class DataManager: NSObject {
         }
         return nil
     }
+    
+    func retrieveLoginData(username:String, password:String) -> Bool? {
+         
+         let fetchRequest = NSFetchRequest<LoginAuth>(entityName: "LoginAuth")
+        fetchRequest.predicate = NSPredicate(format: "username == %@ AND password == %@", username,password)
+         do {
+             
+             let fetchedResults = try getContext()!.fetch(fetchRequest)
+            if fetchedResults.count > 0{
+                return true
+            }else{
+                return false
+            }
+             
+         }catch let error as NSError {
+             // something went wrong, print the error.
+             print(error.description)
+         }
+         return false
+     }
 
 }
