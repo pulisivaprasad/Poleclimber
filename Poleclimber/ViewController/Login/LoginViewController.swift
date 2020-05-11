@@ -17,8 +17,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = "gary"
-        passwordTextField.text = "openreach@123"
+//        emailTextField.text = "gary"
+//        passwordTextField.text = "openreach@123"
         versionLabel.text = "Version: " + "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")"
         // Do any additional setup after loading the view.
     }
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         {
             //show error alert
             
-            //perform(#selector(login), with: nil, afterDelay: 2)
+            perform(#selector(login), with: nil, afterDelay: 2)
 
         }
         //callApi(loginDict: parameters)
@@ -71,7 +71,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func login() {
         Helper.sharedHelper.dismissHUD(view: self.view)
-
+        userDefault.set(emailTextField.text, forKey: "USERNAME")
+        userDefault.synchronize()
         self.goToHomeAction()
     }
     

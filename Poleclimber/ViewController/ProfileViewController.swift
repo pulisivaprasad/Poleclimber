@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if indexPath.row == 0 {
             cell?.textLabel?.text = "Username"
-            cell?.detailTextLabel?.text = PWebService.sharedWebService.currentUser?.first_name
+            cell?.detailTextLabel?.text = userDefault.object(forKey: "USERNAME") as? String
         }
         else if indexPath.row == 1 {
             cell?.textLabel?.text = "Email"
@@ -47,7 +47,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if indexPath.row == 3 {
             cell?.textLabel?.text = "Database flow"
             cell?.detailTextLabel?.text = ""
-        
         }
         
         return cell!

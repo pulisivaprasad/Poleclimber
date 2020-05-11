@@ -133,9 +133,18 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         guard let result = finishedReq.results as? [VNRecognizedObjectObservation] else {
             return
         }
+            Helper.sharedHelper.dismissHUD(view: self.view)
+
+            //Pole tip not found in image
+            guard result.count != 0 else {
+                  Helper.sharedHelper.showGlobalAlertwithMessage("Pole tip could not be detected in the selected image.", vc: self)
+                  self.imageView.image = UIImage(named: "")
+                  self.noImgView.isHidden = false
+                  self.detectBtn.isHidden = true
+                  return
+            }
             
-        Helper.sharedHelper.dismissHUD(view: self.view)
-            //Removing the pole tip object
+            //Removing the pole tip object & checking threshould value
             let confThresh = 0.85
             let objAspectRatio: CGFloat = 0.75
 
@@ -151,7 +160,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             }
             
             guard self.predictions.first != nil else {
-                Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enof for analsyis or a pole tip could not be detected in the selected image.", vc: self)
+                Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enough for analysis.", vc: self)
               self.imageView.image = UIImage(named: "")
               self.noImgView.isHidden = false
               self.detectBtn.isHidden = true
@@ -203,12 +212,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if self.namelabel.text == "Good Tip Detected"{
             poleStatusSubView.reason1.setTitle(" Rot present on the pole tip", for: .normal)
             poleStatusSubView.reason2.setTitle(" Side chipping looks like rot", for: .normal)
-            poleStatusSubView.reason3.setTitle(" Reason3", for: .normal)
+            //poleStatusSubView.reason3.setTitle(" Reason3", for: .normal)
+            poleStatusSubView.reason3.isHidden = true
         }
         else{
-            poleStatusSubView.reason1.setTitle(" The cracks on the tip are natural cracks", for: .normal)
-            poleStatusSubView.reason2.setTitle(" Tip is covered by bird droppings", for: .normal)
-            poleStatusSubView.reason3.setTitle(" Chipping present on the tip, not the rot", for: .normal)
+            poleStatusSubView.reason1.setTitle(" Cracks on tip are natural", for: .normal)
+            poleStatusSubView.reason2.setTitle(" Tip covered by bird droppings", for: .normal)
+            poleStatusSubView.reason3.setTitle(" Chipping on tip is not rot", for: .normal)
         }
         poleStatusSubView.delegate = self
         view.addSubview(poleStatusSubView)
