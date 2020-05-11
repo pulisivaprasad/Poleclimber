@@ -12,7 +12,7 @@ class DatabaseFlowViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Database Flow"
+        self.title = "Data Flow"
     }
     
     @IBAction func internetOffAction(sender: UIButton) {
@@ -37,7 +37,7 @@ class DatabaseFlowViewController: UIViewController {
     }
     
     @IBAction func completedAction(sender: UIButton) {
-        Helper.sharedHelper.showGlobalAlertwithMessage("App is ready to use.", title: "Success")
+        Helper.sharedHelper.showGlobalAlertwithMessage("App is ready for use.", title: "Success")
     }
 
 }

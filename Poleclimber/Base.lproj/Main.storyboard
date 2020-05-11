@@ -55,8 +55,8 @@
                                     <constraint firstAttribute="trailing" secondItem="bQd-rp-KEs" secondAttribute="trailing" constant="30" id="vAy-yd-Mv5"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Engineer’s App - Pole Testing " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
-                                <rect key="frame" x="30" y="414.66666666666669" width="354" height="71.666666666666686"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Engineer’s App  Pole Testing " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-ig-jxb">
+                                <rect key="frame" x="35" y="414.66666666666669" width="344" height="71.666666666666686"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -77,12 +77,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="a5p-lt-s3S" secondAttribute="bottom" constant="90" id="A2K-Lc-a6s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6sO-3i-rQu" secondAttribute="bottom" id="HXf-Ja-HSU"/>
                             <constraint firstItem="bSc-9P-7Ga" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="JMx-5a-t0C"/>
-                            <constraint firstItem="SWR-ig-jxb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="KLV-1j-bsN"/>
+                            <constraint firstItem="SWR-ig-jxb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="KLV-1j-bsN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bSc-9P-7Ga" secondAttribute="trailing" constant="40" id="KNJ-AK-Syi"/>
                             <constraint firstItem="SWR-ig-jxb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="UBY-Bc-BDE"/>
                             <constraint firstItem="6sO-3i-rQu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a8J-ls-b2b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6sO-3i-rQu" secondAttribute="trailing" id="aXo-Mz-N3x"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWR-ig-jxb" secondAttribute="trailing" constant="30" id="nsj-op-6Na"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWR-ig-jxb" secondAttribute="trailing" constant="35" id="nsj-op-6Na"/>
                             <constraint firstItem="bSc-9P-7Ga" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="90" id="sbr-si-QSB"/>
                             <constraint firstItem="a5p-lt-s3S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uJZ-Ut-D7s"/>
                         </constraints>
@@ -462,7 +462,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-bT-XOE">
                                         <rect key="frame" x="10" y="10" width="374" height="86"/>
-                                        <string key="text">Let's start ! Please start by providing a picture of a pole tip. You can capture an image using your camera or choose one from your gallery..</string>
+                                        <string key="text">Let's start! Please start by providing a picture of a pole tip. You can capture an image using your camera or choose one from your gallery.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

@@ -20,7 +20,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
-    let objectDectectionModel =  MobileNetV3_640_SSDLite() //YOLOv3Tiny()
+    let objectDectectionModel =  MobileNetV2_SSDLite_openreach() //YOLOv3Tiny()
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
@@ -227,7 +227,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     func submitBtnAction(selectedReason: String) {
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
-        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank's for your feedback.")
+        rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
     
@@ -293,7 +293,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
                
         let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
+          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
         let dateObj = dateFormatter.string(from: Date())
         feedback.date = dateObj
                

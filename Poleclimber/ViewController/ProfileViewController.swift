@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell?.detailTextLabel?.text = appVersion
         }
         else if indexPath.row == 3 {
-            cell?.textLabel?.text = "Database flow"
+            cell?.textLabel?.text = "Data flow"
             cell?.detailTextLabel?.text = ""
         }
         

@@ -31,7 +31,7 @@ class HistoryViewController: UIViewController {
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyy hh:mm:ss a"
+        dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
         acceptanceArray = fetchedFeedbackData!.sorted(by: {
             dateFormatter.date(from: $0.date!)?.compare(dateFormatter.date(from: $1.date!)!) == .orderedDescending
         })
