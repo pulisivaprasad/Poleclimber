@@ -146,6 +146,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        cellDidSelect(col: indexPath.row)
 //    }
     
+
+    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
        let noOfCellsInRow = 1
@@ -158,7 +160,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
 
        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
 
-       return CGSize(width: size, height: size)
+       return CGSize(width: size, height: 200)
    }
     
 }
