@@ -139,7 +139,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if let imagename = feedbackObj?.image {
             let image = self.loadeImage(name: imagename)
             let cellWidth = self.view.frame.width/2 - 15
-            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: cellWidth))
+            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 200))
         }
                 
         return cell
