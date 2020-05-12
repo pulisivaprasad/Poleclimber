@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-3i-rQu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg5" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-3i-rQu">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5p-lt-s3S">
@@ -878,7 +878,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backgroundImg" width="341.33334350585938" height="227.66667175292969"/>
+        <image name="bg5" width="420" height="668"/>
         <image name="camera" width="24" height="24"/>
         <image name="gallery" width="30" height="30"/>
         <image name="good" width="26" height="26"/>

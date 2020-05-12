@@ -24,7 +24,11 @@ class HistoryViewController: UIViewController {
     
     
     func fetchFeedback() {
-        let fetchedFeedbackData = DataManager.sharedInstance.retrieveSavedFeedback()
+        guard let userID = userDefault.object(forKey: "USERNAME") as? String else { return
+
+        }
+        
+        let fetchedFeedbackData = DataManager.sharedInstance.retrieveSavedFeedback(userID: userID)
             
         guard fetchedFeedbackData != nil else{
             return

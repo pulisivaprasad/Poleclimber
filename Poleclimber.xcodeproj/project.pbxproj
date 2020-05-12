@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F689904246872D100C38A11 /* LoginAuth+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */; };
 		0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */; };
+		44278068246A8392004D37CF /* Poleclimber.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 44278067246A8392004D37CF /* Poleclimber.xcdatamodel */; };
 		443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443C47B02463AEFF007731A6 /* SignUpViewController.swift */; };
 		443DDF2324692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 443DDF2224692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel */; };
 		443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C2242CF74F00DBB05F /* PWebService.swift */; };
@@ -38,7 +39,6 @@
 		6540F055245A984500FF3CFA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F054245A984500FF3CFA /* ProfileViewController.swift */; };
 		6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F056245B094F00FF3CFA /* TabBarViewController.swift */; };
 		687B6F8B3F07F31C9EA97152 /* Pods_Poleclimber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */; };
-		7C7CD5602468401F00952ACA /* Poleclimber.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */; };
 		7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */; };
 		7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */; };
 		7C7CD5662468406700952ACA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5652468406700952ACA /* DataManager.swift */; };
@@ -57,6 +57,7 @@
 /* Begin PBXFileReference section */
 		0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44278067246A8392004D37CF /* Poleclimber.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poleclimber.xcdatamodel; sourceTree = "<group>"; };
 		443C47B02463AEFF007731A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		443DDF2224692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite_openreach.mlmodel; sourceTree = "<group>"; };
 		443F02C2242CF74F00DBB05F /* PWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWebService.swift; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		6540F052245A983000FF3CFA /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		6540F054245A984500FF3CFA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6540F056245B094F00FF3CFA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poleclimber.xcdatamodel; sourceTree = "<group>"; };
 		7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7C7CD5652468406700952ACA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
 				4453033224630BB8008F086A /* Login.storyboard */,
 				44BB542124226D1600C1302B /* Assets.xcassets */,
-				7C7CD55F2468401F00952ACA /* Poleclimber.xcdatamodel */,
 				44BB542324226D1600C1302B /* LaunchScreen.storyboard */,
+				44278067246A8392004D37CF /* Poleclimber.xcdatamodel */,
 				44BB542624226D1600C1302B /* Info.plist */,
 				44898A9124631A60003C6217 /* GoogleService-Info.plist */,
 			);
@@ -437,6 +437,7 @@
 				446F07282447050F005183B4 /* PoleStatusView.swift in Sources */,
 				443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */,
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
+				44278068246A8392004D37CF /* Poleclimber.xcdatamodel in Sources */,
 				443DDF2324692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel in Sources */,
 				0F689904246872D100C38A11 /* LoginAuth+CoreDataClass.swift in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
@@ -448,7 +449,6 @@
 				0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
 				7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */,
-				7C7CD5602468401F00952ACA /* Poleclimber.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

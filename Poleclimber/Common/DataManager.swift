@@ -32,9 +32,10 @@ class DataManager: NSObject {
              }
        }
     
-    func retrieveSavedFeedback() -> [Feedback]? {
+    func retrieveSavedFeedback(userID: String) -> [Feedback]? {
         
         let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")
+        fetchRequest.predicate = NSPredicate(format: "poleTesterID == %@", userID)
         do {
             
             let fetchedResults = try getContext()!.fetch(fetchRequest)

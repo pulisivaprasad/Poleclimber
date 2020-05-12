@@ -147,13 +147,18 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             //Removing the pole tip object & checking threshould value
             let confThresh = 0.85
             let objAspectRatio: CGFloat = 0.75
-
+            
             for object in result {
                 if (object.label != nil) && object.label != "pole_tip" && object.confidence > VNConfidence(confThresh)  {
                     let objHeight = object.boundingBox.height
                     let objWidth = object.boundingBox.width
                     let objRatio = objHeight / objWidth
-                    if  objRatio > objAspectRatio {
+                    
+                    if  objRatio > objAspectRatio  {
+                        if self.predictions.count > 0, let dummyConfidance = self.predictions.first?.confidence, object.confidence < dummyConfidance {
+                            self.predictions.removeAll()
+                        }
+                        
                       self.predictions.append(object)
                     }
                 }
@@ -284,6 +289,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         let context = dataManager.getContext()
         let feedback = Feedback(context: context!)
         feedback.tipStatus = tipStatus
+        feedback.poleTesterID = userDefault.object(forKey: "USERNAME") as? String
         if userKey == "DISAGREEUSERDETAILS"{
             feedback.userAcceptance = "Disagree"
             feedback.reason = reason
