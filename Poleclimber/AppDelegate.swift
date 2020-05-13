@@ -7,22 +7,17 @@
 //
 
 import UIKit
-import Firebase
 import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var fbUser:UserInfo?
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // Use Firebase library to configure APIs
-        FirebaseApp.configure()
-        
+                
         if  (userDefault.object(forKey: "isFirstLaunch") == nil)
         {
             userDefault.set("YES", forKey: "isFirstLaunch")

@@ -236,24 +236,24 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
     
-    func uploadPostWithImage(folderNamePath: String) {
-          if let postImage = imageView.image {
-              Helper.sharedHelper.showGlobalHUD(title: "Posting...", view: view)
-              PWebService.sharedWebService.uploadImage(image: postImage,
-                                                       imageName: Helper.sharedHelper.generateName(),
-                                                       folderNamePath: folderNamePath) { status, response, message in
-                  Helper.sharedHelper.dismissHUD(view: self.view)
-                  if status == 100 {
-                      let str = NSString(format: "%@", response as! CVarArg)
-                      //self.uploadPost(imageString: str as String, tumbString: nil)
-                  } else {
-                      Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
-                  }
-              }
-          } else {
-            
-          }
-      }
+//    func uploadPostWithImage(folderNamePath: String) {
+//          if let postImage = imageView.image {
+//              Helper.sharedHelper.showGlobalHUD(title: "Posting...", view: view)
+//              PWebService.sharedWebService.uploadImage(image: postImage,
+//                                                       imageName: Helper.sharedHelper.generateName(),
+//                                                       folderNamePath: folderNamePath) { status, response, message in
+//                  Helper.sharedHelper.dismissHUD(view: self.view)
+//                  if status == 100 {
+//                      let str = NSString(format: "%@", response as! CVarArg)
+//                      //self.uploadPost(imageString: str as String, tumbString: nil)
+//                  } else {
+//                      Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
+//                  }
+//              }
+//          } else {
+//            
+//          }
+//      }
     
 //     func uploadPost(imageString: String?, tumbString: String?) {
 //            let feedDict = NSMutableDictionary()

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
@@ -68,7 +67,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                         userDefault.removeObject(forKey: "loginDict")
                         userDefault.removeObject(forKey: "email")
-                        try! Auth.auth().signOut()
+                       // try! Auth.auth().signOut()
                         
                         self.dismiss(animated: true, completion: nil)
 
