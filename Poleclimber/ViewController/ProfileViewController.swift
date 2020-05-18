@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,10 +43,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             cell?.detailTextLabel?.text = appVersion
         }
-        else if indexPath.row == 3 {
-            cell?.textLabel?.text = "Data flow"
-            cell?.detailTextLabel?.text = ""
-        }
+//        else if indexPath.row == 3 {
+//            cell?.textLabel?.text = "Data flow"
+//            cell?.detailTextLabel?.text = ""
+//        }
         
         return cell!
 

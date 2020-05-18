@@ -33,13 +33,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "appIcon@2x.png",
+      "filename" : "bt_app_icon 2.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "appIcon@3x.png",
+      "filename" : "bt_app_icon-1.png",
       "scale" : "3x"
     },
     {
@@ -90,7 +90,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "appIcon.png",
+      "filename" : "bt_app_icon.png",
       "scale" : "1x"
     }
   ],

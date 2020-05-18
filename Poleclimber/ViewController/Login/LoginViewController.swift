@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var versionLabel: UILabel!
 
-    var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser"]
+    var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser", "daid.wilks", "heidichingchong"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
