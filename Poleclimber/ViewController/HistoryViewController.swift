@@ -12,7 +12,8 @@ class HistoryViewController: UIViewController {
 
    // var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var historyTableView: UITableView!
+
     var acceptanceArray:[Feedback]?
     var declinedArray:[Feedback]?
     var isShowingAcceptedList:Bool = true
@@ -20,9 +21,7 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
-    
+        
     func fetchFeedback() {
         guard let userID = userDefault.object(forKey: "USERNAME") as? String else { return
 
@@ -41,7 +40,7 @@ class HistoryViewController: UIViewController {
         })
         
         declinedArray = acceptanceArray!.filter{$0.userAcceptance != "Ok"}
-         collectionView.reloadData()
+        historyTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,12 +87,12 @@ class HistoryViewController: UIViewController {
 //            }
 //        }
         isShowingAcceptedList = !isShowingAcceptedList
-        collectionView.reloadData()
+        historyTableView.reloadData()
     }
 }
 
-extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isShowingAcceptedList{
             return acceptanceArray?.count ?? 0
         }else{
@@ -101,13 +100,16 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifier", for: indexPath) as! HistoryCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
+               
+               cell.reasonLabel.isHidden = true
         
-        cell.dummyLabel.isHidden = true
-        cell.reasonLabel.isHidden = true
-
+        cell.subView.layer.cornerRadius = 6
+        cell.subView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        cell.subView.layer.shadowColor = UIColor.black.cgColor
+        cell.subView.layer.shadowOpacity = 0.3
+        cell.subView.layer.shadowRadius = 4
         
         var feedbackObj:Feedback?
         if isShowingAcceptedList{
@@ -115,35 +117,86 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         }else{
             feedbackObj = declinedArray![indexPath.row]
         }
-        
-
-        
+                              
         if feedbackObj?.reason != "NULL"{
             cell.reasonLabel.isHidden = false
             cell.reasonLabel.text = feedbackObj?.reason
         }
-                    
+                           
         cell.reasonLabel.text = feedbackObj?.reason
-        
+        cell.poleTesterName.text = feedbackObj?.poleTesterID
+               
         if feedbackObj?.tipStatus == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
         }else{
             cell.tipTypeImg.image = UIImage(named: "bad")
         }
 
-        
         if let objectdetectDate = feedbackObj?.date {
             cell.timeLabel?.text = "\(objectdetectDate)"
         }
-        
+               
         if let imagename = feedbackObj?.image {
-            let image = self.loadeImage(name: imagename)
+             let image = self.loadeImage(name: imagename)
             let cellWidth = self.view.frame.width/2 - 15
             cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 200))
         }
-                
+                       
         return cell
+        
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
+    private func setupShadow() {
+           
+       }
+    
+//    func collectionView(_ collectionView: UICollectionView,
+//                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifier", for: indexPath) as! HistoryCell
+//
+//        cell.dummyLabel.isHidden = true
+//        cell.reasonLabel.isHidden = true
+//
+//
+//        var feedbackObj:Feedback?
+//        if isShowingAcceptedList{
+//            feedbackObj = acceptanceArray![indexPath.row]
+//        }else{
+//            feedbackObj = declinedArray![indexPath.row]
+//        }
+//
+//
+//
+//        if feedbackObj?.reason != "NULL"{
+//            cell.reasonLabel.isHidden = false
+//            cell.reasonLabel.text = feedbackObj?.reason
+//        }
+//
+//        cell.reasonLabel.text = feedbackObj?.reason
+//
+//        if feedbackObj?.tipStatus == "Good Tip Detected"{
+//            cell.tipTypeImg.image = UIImage(named: "good")
+//        }else{
+//            cell.tipTypeImg.image = UIImage(named: "bad")
+//        }
+//
+//
+//        if let objectdetectDate = feedbackObj?.date {
+//            cell.timeLabel?.text = "\(objectdetectDate)"
+//        }
+//
+//        if let imagename = feedbackObj?.image {
+//            let image = self.loadeImage(name: imagename)
+//            let cellWidth = self.view.frame.width/2 - 15
+//            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 200))
+//        }
+//
+//        return cell
+//    }
 
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        collectionView.deselectItem(at: indexPath, animated: true)
@@ -152,42 +205,32 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
 
     
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-       let noOfCellsInRow = 1
-
-       let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-
-       let totalSpace = flowLayout.sectionInset.left
-           + flowLayout.sectionInset.right
-           + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-
-       let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-
-       return CGSize(width: size, height: 200)
-   }
+//   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//       let noOfCellsInRow = 1
+//
+//       let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+//
+//       let totalSpace = flowLayout.sectionInset.left
+//           + flowLayout.sectionInset.right
+//           + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+//
+//       let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+//
+//       return CGSize(width: size, height: 200)
+//   }
     
 }
 
-class HistoryCell: UICollectionViewCell {
+class HistoryCell: UITableViewCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var tipTypeImg: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
-    @IBOutlet weak var dummyLabel: UILabel!
+    @IBOutlet weak var poleTesterName: UILabel!
+    @IBOutlet weak var subView: UIView!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = 10
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.lightGray.cgColor
-   }
-
-    
-
-
 }
-
 
 extension Date {
     var millisecondsSince1970:Int64 {
