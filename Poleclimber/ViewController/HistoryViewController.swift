@@ -44,12 +44,11 @@ class HistoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      self.navigationController?.isNavigationBarHidden = false
-
-        self.title = "History"
-        fetchFeedback()
-
+       super.viewWillAppear(animated)
+       self.navigationController?.isNavigationBarHidden = false
+       navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+       self.title = "History"
+       fetchFeedback()
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -89,6 +88,68 @@ class HistoryViewController: UIViewController {
         isShowingAcceptedList = !isShowingAcceptedList
         historyTableView.reloadData()
     }
+    
+    @IBAction func editBtnAction(sender: UIButton) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: historyTableView)
+        let indexPath = self.historyTableView.indexPathForRow(at:buttonPosition)
+        print(indexPath?.row ?? "")
+        var feedbackObj:Feedback?
+        if isShowingAcceptedList{
+            feedbackObj = acceptanceArray![indexPath!.row]
+        }else{
+            feedbackObj = declinedArray![indexPath!.row]
+        }
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        // create an action
+        let firstAction: UIAlertAction = UIAlertAction(title: "Edit", style: .default) { _ -> Void in
+            self.btnEditClick(feedbackDetails: feedbackObj!)
+        }
+
+//        let secondAction: UIAlertAction = UIAlertAction(title: "Delete", style: .default) { _ -> Void in
+//            self.btnDeleteClick(feedbackDetails: feedbackObj!)
+//        }
+
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { _ -> Void in }
+
+        // add actions
+        actionSheetController.addAction(firstAction)
+       // actionSheetController.addAction(secondAction)
+        actionSheetController.addAction(cancelAction)
+
+        if let presenter = actionSheetController.popoverPresentationController {
+            presenter.sourceView = sender
+            presenter.sourceRect = sender.bounds
+        }
+
+        // present an actionSheet...
+        present(actionSheetController, animated: true, completion: nil)
+    }
+    
+    func btnEditClick(feedbackDetails: Feedback) {
+        if feedbackDetails.originalImg != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ObjectDetectionViewController") as! ObjectDetectionViewController
+            vc.feedbackObj = feedbackDetails
+            vc.editPost = 1
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        else{
+            Helper.sharedHelper.showGlobalAlertwithMessage("You don't have original image in this image.", vc: self)
+        }
+    }
+    
+    func btnDeleteClick(feedbackDetails: Feedback) {
+        let alertController = UIAlertController(title: "", message: "Are you sure, you want to delete this post?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (_: UIAlertAction!) in
+            //Helper.sharedHelper.showGlobalHUD(title: "Deleting post..", view: self.view)
+            
+            
+        }))
+        alertController.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -103,7 +164,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
                
-               cell.reasonLabel.isHidden = true
+        cell.reasonLabel.isHidden = true
         
         cell.subView.layer.cornerRadius = 6
         cell.subView.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -143,83 +204,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
                        
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
-    
-    private func setupShadow() {
-           
-       }
-    
-//    func collectionView(_ collectionView: UICollectionView,
-//                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCellIdentifier", for: indexPath) as! HistoryCell
-//
-//        cell.dummyLabel.isHidden = true
-//        cell.reasonLabel.isHidden = true
-//
-//
-//        var feedbackObj:Feedback?
-//        if isShowingAcceptedList{
-//            feedbackObj = acceptanceArray![indexPath.row]
-//        }else{
-//            feedbackObj = declinedArray![indexPath.row]
-//        }
-//
-//
-//
-//        if feedbackObj?.reason != "NULL"{
-//            cell.reasonLabel.isHidden = false
-//            cell.reasonLabel.text = feedbackObj?.reason
-//        }
-//
-//        cell.reasonLabel.text = feedbackObj?.reason
-//
-//        if feedbackObj?.tipStatus == "Good Tip Detected"{
-//            cell.tipTypeImg.image = UIImage(named: "good")
-//        }else{
-//            cell.tipTypeImg.image = UIImage(named: "bad")
-//        }
-//
-//
-//        if let objectdetectDate = feedbackObj?.date {
-//            cell.timeLabel?.text = "\(objectdetectDate)"
-//        }
-//
-//        if let imagename = feedbackObj?.image {
-//            let image = self.loadeImage(name: imagename)
-//            let cellWidth = self.view.frame.width/2 - 15
-//            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 200))
-//        }
-//
-//        return cell
-//    }
-
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//        cellDidSelect(col: indexPath.row)
-//    }
-    
-
-    
-//   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//       let noOfCellsInRow = 1
-//
-//       let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-//
-//       let totalSpace = flowLayout.sectionInset.left
-//           + flowLayout.sectionInset.right
-//           + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-//
-//       let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-//
-//       return CGSize(width: size, height: 200)
-//   }
-    
 }
 
 class HistoryCell: UITableViewCell {
@@ -229,7 +218,6 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var reasonLabel: UILabel!
     @IBOutlet weak var poleTesterName: UILabel!
     @IBOutlet weak var subView: UIView!
-    
 }
 
 extension Date {

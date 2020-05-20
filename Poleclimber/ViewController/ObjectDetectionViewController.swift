@@ -26,7 +26,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var imageView: UIImageView!
     var cvpixelBuffer: CVPixelBuffer!
     let rControl = RMController()
-    
+    var feedbackObj: Feedback?
+    var editPost = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -36,10 +38,45 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         imagePicker.delegate = self
         
         buttonsView.isHidden = true
-        namelabel.isHidden = true
-        
-        detectBtn.isHidden = true
+
+        if editPost == 1 {
+            detectBtn.isHidden = false
+            noImgView.isHidden = true
+            if let imagename = feedbackObj?.originalImg {
+                 let image = self.loadeImage(name: imagename)
+                imageView.image = image
+                getCVPixelBuffer(image: image!)
+            }
+        }
+        else{
+            namelabel.isHidden = true
+            detectBtn.isHidden = true
+        }
     }
+    
+    private func loadeImage(name: String) -> UIImage? {
+           guard let documentsDirectory = try? FileManager.default.url(for: .documentDirectory,
+                                                                           in: .userDomainMask,
+                                                                           appropriateFor:nil,
+                                                                           create:false)
+            else {
+                // May never happen
+                print ("No Document directory Error")
+                return nil
+            }
+
+           // Construct your Path from device Documents Directory
+           var imagesDirectory = documentsDirectory
+
+           // Add your file name to path
+           imagesDirectory.appendPathComponent(name)
+
+           // Create your UIImage?
+           let result = UIImage(contentsOfFile: imagesDirectory.path)
+           
+           return result
+       }
+
     
    @IBAction func detectBtnAction(sender: UIButton) {
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
@@ -75,39 +112,41 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     // MARK: - UIImagePickerControllerDelegate Method
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
-            UIGraphicsBeginImageContextWithOptions(CGSize(width: 299, height: 299), true, 2.0)
-            image.draw(in: CGRect(x: 0, y: 0, width: 299, height: 299))
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-                   
-            let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
-            var pixelBuffer : CVPixelBuffer?
-            let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(newImage.size.width), Int(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
-            guard (status == kCVReturnSuccess) else {
-                return
-            }
-                   
-            CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-            let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
-                   
-            let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-            let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue) //3
-                   
-            context?.translateBy(x: 0, y: newImage.size.height)
-            context?.scaleBy(x: 1.0, y: -1.0)
-                   
-            UIGraphicsPushContext(context!)
-            newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
-            UIGraphicsPopContext()
-            CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-            imageView.image = newImage
-            cvpixelBuffer = pixelBuffer
-
-            showAddImgView()
-
+            getCVPixelBuffer(image: image)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func getCVPixelBuffer(image: UIImage) {
+         UIGraphicsBeginImageContextWithOptions(CGSize(width: 299, height: 299), true, 2.0)
+         image.draw(in: CGRect(x: 0, y: 0, width: 299, height: 299))
+         let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+         UIGraphicsEndImageContext()
+                          
+        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+        var pixelBuffer : CVPixelBuffer?
+        let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(newImage.size.width), Int(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
+        guard (status == kCVReturnSuccess) else {
+            return
+        }
+                          
+        CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+        let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+                    
+        let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue) //3
+                          
+        context?.translateBy(x: 0, y: newImage.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
+                          
+        UIGraphicsPushContext(context!)
+        newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
+        UIGraphicsPopContext()
+        CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+        imageView.image = newImage
+        cvpixelBuffer = pixelBuffer
+
+        showAddImgView()
     }
     
      func showAddImgView() {
@@ -177,10 +216,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
           self.buttonsView.isHidden = false
             self.detectBtn.isHidden = true
           self.namelabel.isHidden = false
-
-//            if self.predictions.first?.label == "pole_tip" {
-//                self.predictions.remove(at: 0)
-//            }
             
             if self.predictions.first?.label == "good_tip" {
                 self.namelabel.text = "Good Tip Detected"
@@ -235,55 +270,39 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
     }
-    
-//    func uploadPostWithImage(folderNamePath: String) {
-//          if let postImage = imageView.image {
-//              Helper.sharedHelper.showGlobalHUD(title: "Posting...", view: view)
-//              PWebService.sharedWebService.uploadImage(image: postImage,
-//                                                       imageName: Helper.sharedHelper.generateName(),
-//                                                       folderNamePath: folderNamePath) { status, response, message in
-//                  Helper.sharedHelper.dismissHUD(view: self.view)
-//                  if status == 100 {
-//                      let str = NSString(format: "%@", response as! CVarArg)
-//                      //self.uploadPost(imageString: str as String, tumbString: nil)
-//                  } else {
-//                      Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
-//                  }
-//              }
-//          } else {
-//            
-//          }
-//      }
-    
-//     func uploadPost(imageString: String?, tumbString: String?) {
-//            let feedDict = NSMutableDictionary()
-//            if let imageString = imageString {
-//                feedDict.setValue(imageString, forKey: "source_path")
-//            }
-//
-//
-//            // Post creater user detail
-//            feedDict.setValue(PWebService.sharedWebService.currentUser?.email ?? "", forKey: kEmailKey)
-//
-//
-//            feedDict.setValue(postObj?.row_Key, forKey: "row_key")
-//            PWebService.sharedWebService.updatePost(parameters: feedDict as! [String: AnyObject],
-//                                                        rowKey: postObj!.row_Key!,
-//                                                        childName: "kFEEDS",
-//                                                        completion: { status, _, message in
-//
-//                                                            if status == 100 {
-//                                                                Helper.sharedHelper.showGlobalAlertwithMessage(message!, vc: self, completion: {
-//                                                                    self.navigationController?.popViewController(animated: true)
-//                                                                })
-//                                                            } else {
-//                                                                Helper.sharedHelper.ShowAlert(str: message! as NSString, viewcontroller: self)
-//                                                            }
-//                })
-//
-//    }
-    
+        
     func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
+        if editPost == 1 {
+            var parameters = [String: String]()
+            parameters["tipStatus"] = tipStatus
+
+            let dateFormatter = DateFormatter()
+              dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
+            let dateObj = dateFormatter.string(from: Date())
+            parameters["date"] = dateObj
+            
+            if let image = containerView.pb_takeSnapshot() {
+                let filename = "image_" + Date().description
+                let filename2 = "orimage_" + Date().description
+
+                _ = image.save(filename)
+                _ = imageView.image?.save(filename2)
+                
+                parameters["image"] = filename
+                parameters["originalImg"] = filename2
+            }
+            
+            if userKey == "DISAGREEUSERDETAILS"{
+                parameters["userAcceptance"] = "Disagree"
+                parameters["reason"] = reason
+            }else{
+                parameters["userAcceptance"] = "Ok"
+                parameters["reason"] = "NULL"
+            }
+
+            DataManager.sharedInstance.updateFeedback(parameters: parameters, fetchID: feedbackObj!.date!)
+            return
+        }
         
         let dataManager = DataManager.sharedInstance
         let context = dataManager.getContext()
@@ -305,14 +324,17 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                
         if let image = containerView.pb_takeSnapshot() {
             let filename = "image_" + Date().description
+            let filename2 = "orimage_" + Date().description
+
             _ = image.save(filename)
+            _ = imageView.image?.save(filename2)
+            
             feedback.image = filename
+            feedback.originalImg = filename2
         }
 
         dataManager.saveChanges()
-        
     }
     
-
     
 }

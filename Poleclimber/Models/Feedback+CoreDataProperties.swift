@@ -24,5 +24,6 @@ extension Feedback {
     @NSManaged public var poleID: String?
     @NSManaged public var date: String?
     @NSManaged public var userAcceptance: String?
+    @NSManaged public var originalImg: String?
 
 }

@@ -48,6 +48,52 @@ class DataManager: NSObject {
         return nil
     }
     
+    func updateFeedback(parameters: [String: String], fetchID: String) {
+           
+           let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")
+        fetchRequest.predicate = NSPredicate(format: "date == %@", fetchID)
+           do {
+               
+             let fetchedResults = try getContext()!.fetch(fetchRequest)
+             let objectUpdate = fetchedResults[0] as NSManagedObject
+            
+             objectUpdate.setValue(parameters["date"], forKey: "date")
+             objectUpdate.setValue(parameters["image"], forKey: "image")
+             objectUpdate.setValue(parameters["originalImg"], forKey: "originalImg")
+             objectUpdate.setValue(parameters["tipStatus"], forKey: "tipStatus")
+             objectUpdate.setValue(parameters["userAcceptance"], forKey: "userAcceptance")
+             objectUpdate.setValue(parameters["reason"], forKey: "reason")
+
+            saveChanges()
+               
+           }catch let error as NSError {
+               // something went wrong, print the error.
+               print(error.description)
+           }
+       }
+    
+    func deleteFeedback(parameters: [String: String], fetchID: String) {
+        
+        let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")
+     fetchRequest.predicate = NSPredicate(format: "date == %@", fetchID)
+        do {
+            
+          let fetchedResults = try getContext()!.fetch(fetchRequest)
+          let objectUpdate = fetchedResults[0] as NSManagedObject
+          objectUpdate.setValue(parameters["date"], forKey: "date")
+          objectUpdate.setValue(parameters["image"], forKey: "image")
+          objectUpdate.setValue(parameters["originalImg"], forKey: "originalImg")
+          objectUpdate.setValue(parameters["tipStatus"], forKey: "tipStatus")
+          objectUpdate.setValue(parameters["userAcceptance"], forKey: "userAcceptance")
+          objectUpdate.setValue(parameters["reason"], forKey: "reason")
+
+         saveChanges()
+            
+        }catch let error as NSError {
+            // something went wrong, print the error.
+            print(error.description)
+        }
+    }
     func retrieveLoginData(username:String, password:String) -> Bool? {
          
          let fetchRequest = NSFetchRequest<LoginAuth>(entityName: "LoginAuth")

@@ -154,7 +154,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9R-V6-tbK">
-                                                            <rect key="frame" x="205" y="12.000000000000002" width="181" height="17.666666666666671"/>
+                                                            <rect key="frame" x="205" y="12.000000000000002" width="142" height="17.666666666666671"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -165,11 +165,22 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOQ-Qs-mgl">
+                                                            <rect key="frame" x="355" y="2" width="35" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="35" id="1zh-a8-AvV"/>
+                                                                <constraint firstAttribute="height" constant="25" id="Qon-Fm-cQl"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button" image="elipsis"/>
+                                                            <connections>
+                                                                <action selector="editBtnActionWithSender:" destination="E1G-h1-gSz" eventType="touchUpInside" id="Yf6-3f-43C"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="VOQ-Qs-mgl" firstAttribute="top" secondItem="WQ9-3G-i9K" secondAttribute="top" constant="2" id="5LY-c9-3hL"/>
                                                         <constraint firstItem="sht-No-7MO" firstAttribute="trailing" secondItem="zTI-yW-d2M" secondAttribute="trailing" id="6uN-Hb-zj5"/>
-                                                        <constraint firstItem="f9R-V6-tbK" firstAttribute="trailing" secondItem="zTI-yW-d2M" secondAttribute="trailing" id="75w-Mm-5gv"/>
                                                         <constraint firstItem="sht-No-7MO" firstAttribute="leading" secondItem="zTI-yW-d2M" secondAttribute="leading" id="CB1-NZ-zvc"/>
                                                         <constraint firstItem="Fp5-IB-Ddw" firstAttribute="leading" secondItem="WQ9-3G-i9K" secondAttribute="leading" id="F45-8j-OKc"/>
                                                         <constraint firstAttribute="trailing" secondItem="zTI-yW-d2M" secondAttribute="trailing" constant="8" id="Hy3-Wf-WO3"/>
@@ -181,6 +192,8 @@
                                                         <constraint firstItem="zTI-yW-d2M" firstAttribute="leading" secondItem="Fp5-IB-Ddw" secondAttribute="trailing" constant="8" id="gVF-qb-rfA"/>
                                                         <constraint firstItem="f9R-V6-tbK" firstAttribute="top" secondItem="zTI-yW-d2M" secondAttribute="bottom" constant="4" id="jdN-bM-PjG"/>
                                                         <constraint firstItem="f9R-V6-tbK" firstAttribute="leading" secondItem="zTI-yW-d2M" secondAttribute="leading" id="l39-3Y-NVy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="VOQ-Qs-mgl" secondAttribute="trailing" constant="4" id="o5g-nk-CSE"/>
+                                                        <constraint firstItem="VOQ-Qs-mgl" firstAttribute="leading" secondItem="f9R-V6-tbK" secondAttribute="trailing" constant="8" id="r8N-Sc-Zqt"/>
                                                         <constraint firstAttribute="bottom" secondItem="Fp5-IB-Ddw" secondAttribute="bottom" id="s0e-HH-lhL"/>
                                                         <constraint firstItem="Fp5-IB-Ddw" firstAttribute="top" secondItem="WQ9-3G-i9K" secondAttribute="top" id="vuP-ve-9dC"/>
                                                     </constraints>
@@ -844,6 +857,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xo5-yh-Q1H">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -886,6 +900,7 @@
     <resources>
         <image name="bg5" width="420" height="668"/>
         <image name="camera" width="24" height="24"/>
+        <image name="elipsis" width="512" height="512"/>
         <image name="gallery" width="30" height="30"/>
         <image name="history" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
