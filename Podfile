@@ -8,7 +8,6 @@ target 'Poleclimber' do
   # Pods for Poleclimber
   pod 'RMessage'
   pod 'Alamofire'
-  pod 'AMPopTip'
-
+  pod 'JVFloatLabeledTextField'
 
 end

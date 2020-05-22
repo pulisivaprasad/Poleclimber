@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B974B55B3C5F71E53DF6070DC0CF6CF"
-               BuildableName = "AMPopTip.framework"
-               BlueprintName = "AMPopTip"
+               BlueprintIdentifier = "D50AE83DD721C55CB9B772BCBA4FDAF4"
+               BuildableName = "JVFloatLabeledTextField.framework"
+               BlueprintName = "JVFloatLabeledTextField"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

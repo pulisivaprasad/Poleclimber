@@ -163,8 +163,18 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
                            
         cell.reasonLabel.text = feedbackObj?.reason
-        cell.dpIDLabel.text = feedbackObj?.dpID
-        cell.exchangeIDLabel.text = feedbackObj?.exchangeID
+        
+        if let exchangeIDValue = feedbackObj?.exchangeID {
+            cell.exchangeIDLabel.text = "Exchange ID: \(exchangeIDValue)"
+        }
+        
+        if let idValue = feedbackObj?.id {
+            cell.idLabel.text = "ID: \(idValue)"
+        }
+        
+        if let dpIDValue = feedbackObj?.dpID {
+            cell.dpIDLabel.text = "DP ID: \(dpIDValue)"
+        }
                
         if feedbackObj?.tipStatus == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
@@ -197,6 +207,7 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var reasonLabel: UILabel!
     @IBOutlet weak var dpIDLabel: UILabel!
     @IBOutlet weak var exchangeIDLabel: UILabel!
+    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var subView: UIView!
 }
 

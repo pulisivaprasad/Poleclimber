@@ -1,28 +1,28 @@
 PODS:
   - Alamofire (5.1.0)
-  - AMPopTip (4.5.0)
   - HexColors (6.0.0)
+  - JVFloatLabeledTextField (1.2.2)
   - RMessage (3.0.3):
     - HexColors (~> 6.0)
 
 DEPENDENCIES:
   - Alamofire
-  - AMPopTip
+  - JVFloatLabeledTextField
   - RMessage
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AMPopTip
     - HexColors
+    - JVFloatLabeledTextField
     - RMessage
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
-  AMPopTip: e0ed2967892b18d1e55505c015fa06e535003fdc
   HexColors: f8c66339541a74bb08905bfe7cd4f8cc85e9e173
+  JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   RMessage: f6d768616d6afbc2c92a2451de9d7f7617b7195c
 
-PODFILE CHECKSUM: a040e2bfc5740c5b220c051c9e9abf8db0db7342
+PODFILE CHECKSUM: 50b06010764d416725d95ca6ecf880f2d8baed26
 
 COCOAPODS: 1.8.4
