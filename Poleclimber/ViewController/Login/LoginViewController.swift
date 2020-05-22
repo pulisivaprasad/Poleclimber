@@ -17,8 +17,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        emailTextField.text = "gary"
-//        passwordTextField.text = "openreach@123"
+        emailTextField.text = "gary"
+        passwordTextField.text = "openreach@123"
         versionLabel.text = "Version: " + "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")"
         // Do any additional setup after loading the view.
     }
@@ -75,6 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userDefault.synchronize()
         self.goToHomeAction()
     }
+    
     
 //    func callApi(loginDict: [String: AnyObject])
 //    {

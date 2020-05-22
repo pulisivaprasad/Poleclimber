@@ -82,6 +82,20 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
 
         if Helper.sharedHelper.isNetworkAvailable() {
+//            let filename = "image_" + Date().description
+//            _ = imageView.image?.save(filename)
+//            let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+//            let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
+//
+//            var parameters = [String : AnyObject]()
+//            parameters["file"] = url as AnyObject
+//            PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
+//                                                                  apiName: "",
+//                                                                  parameters: parameters, uploadImage: imageView.image) { (response, error) in
+//
+//                                                                    print(response)
+//
+//            }
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
