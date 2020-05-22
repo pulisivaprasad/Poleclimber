@@ -25,7 +25,8 @@ extension Feedback {
     @NSManaged public var date: String?
     @NSManaged public var userAcceptance: String?
     @NSManaged public var originalImg: String?
-    @NSManaged public var id: String?
-    @NSManaged public var exchangeID: String?
-    @NSManaged public var dpID: String?
+    @NSManaged public var exchangeArea: String?
+    @NSManaged public var dpnumber: String?
+    @NSManaged public var cpnumber: String?
+    @NSManaged public var gpsLocation: String?
 }

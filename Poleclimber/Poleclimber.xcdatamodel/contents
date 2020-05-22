@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Feedback" representedClassName="Feedback" syncable="YES">
+        <attribute name="cpnumber" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="String"/>
-        <attribute name="dpID" optional="YES" attributeType="String"/>
-        <attribute name="exchangeID" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="dpnumber" optional="YES" attributeType="String"/>
+        <attribute name="exchangeArea" optional="YES" attributeType="String"/>
+        <attribute name="gpsLocation" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="originalImg" optional="YES" attributeType="String"/>
         <attribute name="poleID" optional="YES" attributeType="String"/>
@@ -18,7 +19,7 @@
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="223"/>
         <element name="LoginAuth" positionX="-63" positionY="36" width="128" height="73"/>
     </elements>
 </model>

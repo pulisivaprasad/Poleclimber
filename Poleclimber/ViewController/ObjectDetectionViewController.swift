@@ -31,9 +31,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var editPost = 0
     
     @IBOutlet weak var textfiledView: UIView!
-    @IBOutlet weak var idTField: UITextField!
-    @IBOutlet weak var exchangeIDTFiled: UITextField!
-    @IBOutlet weak var dpIDTFiled: UITextField!
+    @IBOutlet weak var exchangeAreaTField: UITextField!
+    @IBOutlet weak var dpNumberTFiled: UITextField!
+    @IBOutlet weak var cpNumberTFiled: UITextField!
+    @IBOutlet weak var gpsLocationTField: UITextField!
+
 
     var textFiledDataDisc = [String: String]()
     
@@ -362,9 +364,10 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             feedback.image = filename
             feedback.originalImg = filename2
         }
-        feedback.id = textFiledDataDisc["id_value"]
-        feedback.exchangeID = textFiledDataDisc["exchangeID_value"]
-        feedback.dpID = textFiledDataDisc["dpID_value"]
+        feedback.exchangeArea = textFiledDataDisc["exchangeArea_Value"]
+        feedback.dpnumber = textFiledDataDisc["dpnumber_value"]
+        feedback.cpnumber = textFiledDataDisc["cpnumber_value"]
+        feedback.gpsLocation = textFiledDataDisc["gpslocation_value"]
 
         dataManager.saveChanges()
     }
@@ -382,17 +385,20 @@ extension ObjectDetectionViewController: UITextFieldDelegate {
         
         textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
 
-        if textField == idTField {
-            textFiledDataDisc["id_value"] = textField.text
+        if textField == exchangeAreaTField {
+            textFiledDataDisc["exchangeArea_Value"] = textField.text
         }
-        else if textField == exchangeIDTFiled {
-            textFiledDataDisc["exchangeID_value"] = textField.text
+        else if textField == dpNumberTFiled {
+            textFiledDataDisc["dpnumber_value"] = textField.text
+        }
+        else if textField == cpNumberTFiled {
+           textFiledDataDisc["cpnumber_value"] = textField.text
         }
         else {
-            textFiledDataDisc["dpID_value"] = textField.text
+            textFiledDataDisc["gpslocation_value"] = textField.text
         }
         
-        if textFiledDataDisc["id_value"] != "" && textFiledDataDisc["exchangeID_value"] != "" && textFiledDataDisc["dpID_value"] != "" {
+        if textFiledDataDisc["exchangeArea_Value"] != "" && textFiledDataDisc["exchangeArea_Value"] != nil && textFiledDataDisc["dpnumber_value"] != "" && textFiledDataDisc["dpnumber_value"] != nil && textFiledDataDisc["cpnumber_value"] != "" && textFiledDataDisc["cpnumber_value"] != nil && textFiledDataDisc["gpslocation_value"] != "" && textFiledDataDisc["gpslocation_value"] != nil {
             galleryBtn.backgroundColor = pAppStatusBarColor
             galleryBtn.isUserInteractionEnabled = true
         }

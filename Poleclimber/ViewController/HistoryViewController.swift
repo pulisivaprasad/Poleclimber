@@ -164,16 +164,20 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                            
         cell.reasonLabel.text = feedbackObj?.reason
         
-        if let exchangeIDValue = feedbackObj?.exchangeID {
-            cell.exchangeIDLabel.text = "Exchange ID: \(exchangeIDValue)"
+        if let exchangeAreaValue = feedbackObj?.exchangeArea {
+            cell.exchangeAreaLabel.text = "Exchange Area: \(exchangeAreaValue)"
         }
         
-        if let idValue = feedbackObj?.id {
-            cell.idLabel.text = "ID: \(idValue)"
+        if let dpNumberValue = feedbackObj?.dpnumber {
+            cell.dpNumberLabel.text = "DP Number: \(dpNumberValue)"
         }
         
-        if let dpIDValue = feedbackObj?.dpID {
-            cell.dpIDLabel.text = "DP ID: \(dpIDValue)"
+        if let cpNumberValue = feedbackObj?.cpnumber {
+            cell.cpNumberLabel.text = "CP Number: \(cpNumberValue)"
+        }
+        
+        if let gpsLocationValue = feedbackObj?.gpsLocation {
+            cell.gpsLocationLabel.text = "GPS Location: \(gpsLocationValue)"
         }
                
         if feedbackObj?.tipStatus == "Good Tip Detected"{
@@ -205,9 +209,10 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var tipTypeImg: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
-    @IBOutlet weak var dpIDLabel: UILabel!
-    @IBOutlet weak var exchangeIDLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var dpNumberLabel: UILabel!
+    @IBOutlet weak var exchangeAreaLabel: UILabel!
+    @IBOutlet weak var cpNumberLabel: UILabel!
+    @IBOutlet weak var gpsLocationLabel: UILabel!
     @IBOutlet weak var subView: UIView!
 }
 
