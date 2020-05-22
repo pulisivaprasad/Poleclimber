@@ -43,6 +43,8 @@ final class MultipartUpload {
         self.request = request
         fileManager = multipartFormData.fileManager
         self.multipartFormData = multipartFormData
+        
+        
     }
 
     func build() throws -> (request: URLRequest, uploadable: UploadRequest.Uploadable) {
