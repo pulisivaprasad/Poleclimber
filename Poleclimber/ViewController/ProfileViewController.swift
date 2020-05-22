@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if indexPath.row == 0 {
             cell?.textLabel?.text = "Username"
-            cell?.detailTextLabel?.text = userDefault.object(forKey: "USERNAME") as? String
+            cell?.detailTextLabel?.text = userDefault.object(forKey:"USERNAME") as? String
         }
         else if indexPath.row == 1 {
             cell?.textLabel?.text = "Email"
