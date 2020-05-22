@@ -1,24 +1,28 @@
 PODS:
   - Alamofire (5.1.0)
+  - AMPopTip (4.5.0)
   - HexColors (6.0.0)
   - RMessage (3.0.3):
     - HexColors (~> 6.0)
 
 DEPENDENCIES:
   - Alamofire
+  - AMPopTip
   - RMessage
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AMPopTip
     - HexColors
     - RMessage
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AMPopTip: e0ed2967892b18d1e55505c015fa06e535003fdc
   HexColors: f8c66339541a74bb08905bfe7cd4f8cc85e9e173
   RMessage: f6d768616d6afbc2c92a2451de9d7f7617b7195c
 
-PODFILE CHECKSUM: caf0ed139e1c1bc33163a93ff8f7cc8fbee77c50
+PODFILE CHECKSUM: a040e2bfc5740c5b220c051c9e9abf8db0db7342
 
 COCOAPODS: 1.8.4

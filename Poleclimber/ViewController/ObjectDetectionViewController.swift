@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import Vision
 import RMessage
+import AMPopTip
 
 class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NavigationDelegate {
     @IBOutlet weak var buttonsView: UIView!
@@ -17,6 +18,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var namelabel: UILabel!
     @IBOutlet weak var detectBtn: UIButton!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var galleryBtn: UIButton!
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
@@ -28,7 +30,25 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     let rControl = RMController()
     var feedbackObj: Feedback?
     var editPost = 0
-
+    
+    @IBOutlet weak var textfiledView: UIView!
+    @IBOutlet weak var idTField: UITextField!
+    @IBOutlet weak var exchangeIDTFiled: UITextField!
+    @IBOutlet weak var dpIDTFiled: UITextField!
+    
+    @IBOutlet weak var idInformationButton: UIButton!
+    @IBOutlet weak var exchangeIDInformationButton: UIButton!
+    @IBOutlet weak var dpIDInformationButton: UIButton!
+    
+    enum ButtonType: Int {
+           case center, topLeft, topRight, bottomLeft, bottomRight
+    }
+    
+    let popTip = PopTip()
+    var direction = PopTipDirection.up
+    var topRightDirection = PopTipDirection.down
+    var textFiledDataDisc = [String: String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -42,6 +62,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if editPost == 1 {
             detectBtn.isHidden = false
             noImgView.isHidden = true
+            textfiledView.isHidden = true
             if let imagename = feedbackObj?.originalImg {
                  let image = self.loadeImage(name: imagename)
                 imageView.image = image
@@ -52,6 +73,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             namelabel.isHidden = true
             detectBtn.isHidden = true
         }
+        
+        galleryBtn.backgroundColor = UIColor.lightGray
+                   galleryBtn.isUserInteractionEnabled = false
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -75,6 +99,36 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
            let result = UIImage(contentsOfFile: imagesDirectory.path)
            
            return result
+       }
+    
+    @IBAction func informationButtonAction(_ sender: UIButton, forEvent event: UIEvent)  {
+           guard let button = ButtonType(rawValue: sender.tag) else { return }
+           
+           //popTip.arrowRadius = 0
+           
+           switch button {
+           case .topLeft: break
+               
+           case .topRight:
+               popTip.bubbleColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+               topRightDirection = .up
+               
+               let touchPosition = UIButton(frame: CGRect(x: sender.frame.origin.x, y: (20 + (sender.superview?.superview?.frame.origin.y)!), width: 95, height: 40))
+               popTip.textColor = UIColor.lightGray
+               popTip.show(text: "Please enter ID", direction: topRightDirection, maxWidth: 150, in: view, from: touchPosition.frame)
+           case .bottomLeft: break
+              
+           case .bottomRight:
+           popTip.bubbleColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+           topRightDirection = .up
+           
+           let touchPosition = UIButton(frame: CGRect(x: sender.frame.origin.x, y: (85 + (sender.superview?.superview?.frame.origin.y)!), width: 95, height: 40))
+           popTip.textColor = UIColor.lightGray
+           popTip.show(text: "Please enter Exchange ID", direction: topRightDirection, maxWidth: 150, in: view, from: touchPosition.frame)
+              
+           case .center: break
+               
+           }
        }
 
     
@@ -166,6 +220,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
      func showAddImgView() {
         noImgView.isHidden = true
         detectBtn.isHidden = false
+        textfiledView.isHidden = true
     }
     
     // MARK: - Capture Session
@@ -194,6 +249,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                   self.imageView.image = UIImage(named: "")
                   self.noImgView.isHidden = false
                   self.detectBtn.isHidden = true
+                self.textfiledView.isHidden = true
+
                   return
             }
             
@@ -222,6 +279,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
               self.imageView.image = UIImage(named: "")
               self.noImgView.isHidden = false
               self.detectBtn.isHidden = true
+                self.textfiledView.isHidden = true
+
               return
             }
 
@@ -346,9 +405,65 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             feedback.image = filename
             feedback.originalImg = filename2
         }
+        feedback.id = textFiledDataDisc["id_value"]
+        feedback.exchangeID = textFiledDataDisc["exchangeID_value"]
+        feedback.dpID = textFiledDataDisc["dpID_value"]
 
         dataManager.saveChanges()
     }
+}
+
+
+extension ObjectDetectionViewController: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
+        return true
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == idTField {
+            textFiledDataDisc["id_value"] = textField.text
+        }
+        else if textField == exchangeIDTFiled {
+            textFiledDataDisc["exchangeID_value"] = textField.text
+        }
+        else {
+            textFiledDataDisc["dpID_value"] = textField.text
+        }
+        
+        if textFiledDataDisc["id_value"] != "" && textFiledDataDisc["exchangeID_value"] != "" && textFiledDataDisc["dpID_value"] != "" {
+            galleryBtn.backgroundColor = pAppStatusBarColor
+            galleryBtn.isUserInteractionEnabled = true
+        }
+        else{
+            galleryBtn.backgroundColor = UIColor.lightGray
+            galleryBtn.isUserInteractionEnabled = false
+        }
+    }
+}
+
+extension PopTipDirection {
+    func cycleDirection() -> PopTipDirection {
+      switch self {
+        case .up:
+            return .right
+        case .right:
+            return .down
+        case .down:
+            return .left
+        case .left:
+            return .up
+        case .none:
+            return .none
+        case .auto:
+           return .none
+      case .autoHorizontal:
+           return .right
+      case .autoVertical:
+           return .up
+        }
+    }
 }

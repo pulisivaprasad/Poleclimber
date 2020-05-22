@@ -23,55 +23,39 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AFEA4AC1-7D34-41BA-8A56-99562B61CBE3"
+            uuid = "434201BA-43C5-4365-8E7A-C48D9E7D1A59"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Poleclimber/ViewController/ObjectDetectionViewController.swift"
+            filePath = "Poleclimber/Network/PWebService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "captureImageDetails(pixelBuffer:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "callWebAPIWith(httpMethod:apiName:parameters:uploadImage:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F381FF3A-043C-4D96-9367-2800EEDAF45C"
+            uuid = "85505DF7-AEDE-4FD9-8B2F-1D29D843B5B4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Poleclimber/ViewController/ObjectDetectionViewController.swift"
+            filePath = "Poleclimber/Network/PWebService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "captureImageDetails(pixelBuffer:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "callWebAPIWith(httpMethod:apiName:parameters:uploadImage:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EC049A45-9391-473C-8946-F11E8196649B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Poleclimber/ViewController/ObjectDetectionViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "captureImageDetails(pixelBuffer:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "389FAB63-0A68-43FD-86E8-74E1165C68A7"
+            uuid = "B9211C41-DA05-4EAA-B6D9-BF14CB4B0056"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -80,55 +64,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
             endingLineNumber = "83"
-            landmarkName = "signInAccount(parameters:completion:)"
+            landmarkName = "callWebAPIWith(httpMethod:apiName:parameters:uploadImage:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4937114D-1747-4F7E-A1F2-053947DA0B78"
+            uuid = "B820D2D0-F766-4063-81B4-778EBF25FBC9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Poleclimber/Network/PWebService.swift"
+            filePath = "Poleclimber/ViewController/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "createAnAccount(parameters:completion:)"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "detectBtnAction(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4D0AF362-3CE2-431F-9D4C-CFECF30E1357"
+            uuid = "C9EE54B9-5B00-4818-B0E9-F433A2837B09"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Poleclimber/Network/PWebService.swift"
+            filePath = "Poleclimber/ViewController/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "createAnAccount(parameters:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4E74798D-6892-4E19-B384-8C7CB724540D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Poleclimber/ViewController/Login/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "loginAction(_:)"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "informationButtonAction(_:forEvent:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

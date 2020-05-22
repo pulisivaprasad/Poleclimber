@@ -8,5 +8,7 @@ target 'Poleclimber' do
   # Pods for Poleclimber
   pod 'RMessage'
   pod 'Alamofire'
+  pod 'AMPopTip'
+
 
 end

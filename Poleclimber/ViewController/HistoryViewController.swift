@@ -99,31 +99,9 @@ class HistoryViewController: UIViewController {
         }else{
             feedbackObj = declinedArray![indexPath!.row]
         }
-        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        // create an action
-        let firstAction: UIAlertAction = UIAlertAction(title: "Edit", style: .default) { _ -> Void in
-            self.btnEditClick(feedbackDetails: feedbackObj!)
-        }
-
-//        let secondAction: UIAlertAction = UIAlertAction(title: "Delete", style: .default) { _ -> Void in
-//            self.btnDeleteClick(feedbackDetails: feedbackObj!)
-//        }
-
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { _ -> Void in }
-
-        // add actions
-        actionSheetController.addAction(firstAction)
-       // actionSheetController.addAction(secondAction)
-        actionSheetController.addAction(cancelAction)
-
-        if let presenter = actionSheetController.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
-
-        // present an actionSheet...
-        present(actionSheetController, animated: true, completion: nil)
+        
+        self.btnEditClick(feedbackDetails: feedbackObj!)
+   
     }
     
     func btnEditClick(feedbackDetails: Feedback) {
@@ -185,7 +163,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
                            
         cell.reasonLabel.text = feedbackObj?.reason
-        cell.poleTesterName.text = feedbackObj?.poleTesterID
+        cell.dpIDLabel.text = feedbackObj?.dpID
+        cell.exchangeIDLabel.text = feedbackObj?.exchangeID
                
         if feedbackObj?.tipStatus == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
@@ -216,7 +195,8 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var tipTypeImg: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
-    @IBOutlet weak var poleTesterName: UILabel!
+    @IBOutlet weak var dpIDLabel: UILabel!
+    @IBOutlet weak var exchangeIDLabel: UILabel!
     @IBOutlet weak var subView: UIView!
 }
 
