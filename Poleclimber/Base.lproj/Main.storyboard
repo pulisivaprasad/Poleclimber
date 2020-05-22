@@ -490,10 +490,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t41-Zt-GxW">
-                                <rect key="frame" x="0.0" y="84" width="414" height="424"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="230"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oO6-IF-3Sy">
-                                        <rect key="frame" x="30" y="60" width="354" height="50"/>
+                                        <rect key="frame" x="30" y="20" width="354" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-If-4bu">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="14"/>
@@ -521,7 +521,7 @@
                                                 </connections>
                                             </textField>
                                             <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ve-1j-Uaz">
-                                                <rect key="frame" x="334" y="21.666666666666657" width="20" height="20"/>
+                                                <rect key="frame" x="334" y="21.666666666666671" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="Ftv-Cm-deE"/>
                                                     <constraint firstAttribute="height" constant="20" id="nve-ga-Af5"/>
@@ -560,7 +560,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWA-do-IEW">
-                                        <rect key="frame" x="30" y="130" width="354" height="50"/>
+                                        <rect key="frame" x="30" y="90" width="354" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exchange ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bec-Fd-BAX">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="14"/>
@@ -627,7 +627,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eh7-s7-reC">
-                                        <rect key="frame" x="30" y="200" width="354" height="50"/>
+                                        <rect key="frame" x="30" y="160" width="354" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DP ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI0-DN-Lqe">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="14"/>
@@ -702,9 +702,10 @@
                                     <constraint firstItem="eh7-s7-reC" firstAttribute="top" secondItem="WWA-do-IEW" secondAttribute="bottom" constant="20" id="I6E-ET-0fC"/>
                                     <constraint firstAttribute="trailing" secondItem="eh7-s7-reC" secondAttribute="trailing" constant="30" id="J3K-FL-0Vk"/>
                                     <constraint firstAttribute="trailing" secondItem="oO6-IF-3Sy" secondAttribute="trailing" constant="30" id="P9w-Dj-2ra"/>
+                                    <constraint firstAttribute="bottom" secondItem="eh7-s7-reC" secondAttribute="bottom" constant="20" id="Sl4-sd-YyP"/>
                                     <constraint firstItem="eh7-s7-reC" firstAttribute="leading" secondItem="t41-Zt-GxW" secondAttribute="leading" constant="30" id="hOP-a0-q9y"/>
                                     <constraint firstItem="WWA-do-IEW" firstAttribute="leading" secondItem="t41-Zt-GxW" secondAttribute="leading" constant="30" id="r9t-FV-hjb"/>
-                                    <constraint firstItem="oO6-IF-3Sy" firstAttribute="top" secondItem="t41-Zt-GxW" secondAttribute="top" constant="60" id="shZ-ek-tOF"/>
+                                    <constraint firstItem="oO6-IF-3Sy" firstAttribute="top" secondItem="t41-Zt-GxW" secondAttribute="top" constant="20" id="shZ-ek-tOF"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-HC-32o">
@@ -860,7 +861,6 @@
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="bottom" secondItem="5Iz-GX-fUX" secondAttribute="bottom" constant="41" id="P8y-3c-1ED"/>
                             <constraint firstItem="3aj-mJ-Dia" firstAttribute="trailing" secondItem="TZq-bD-fig" secondAttribute="trailing" constant="20" id="Zec-od-G9K"/>
                             <constraint firstItem="TZq-bD-fig" firstAttribute="top" secondItem="W16-Vj-ATB" secondAttribute="bottom" constant="10" id="bDk-wC-89H"/>
-                            <constraint firstItem="rL3-HC-32o" firstAttribute="top" secondItem="t41-Zt-GxW" secondAttribute="bottom" constant="8" id="ddD-Yc-xGY"/>
                             <constraint firstItem="TZq-bD-fig" firstAttribute="top" secondItem="rL3-HC-32o" secondAttribute="bottom" constant="30" id="eGt-q1-OCv"/>
                             <constraint firstItem="t41-Zt-GxW" firstAttribute="top" secondItem="3aj-mJ-Dia" secondAttribute="top" constant="40" id="ee2-f7-EbS"/>
                             <constraint firstItem="whl-xI-MG5" firstAttribute="leading" secondItem="3aj-mJ-Dia" secondAttribute="leading" id="nH2-DT-vkO"/>
