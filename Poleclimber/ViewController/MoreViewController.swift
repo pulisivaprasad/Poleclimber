@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
@@ -52,6 +53,11 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (indexPath.row == 0)
         {
             viewController.title = "HELP"
+
+            //Need to update our dedicated HELP url
+            let urlVal = URL(string: "https://www.openreach.com/help-and-support") as Optional
+            let vc = SFSafariViewController(url: urlVal!)
+            present(vc, animated: true)
         }
         else if (indexPath.row == 1)
         {
@@ -67,3 +73,4 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 
 }
+
