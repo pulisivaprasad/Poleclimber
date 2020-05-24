@@ -8,8 +8,11 @@
 
 import UIKit
 import SafariServices
+import MessageUI
 
-class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+@available(iOS 13.0, *)
+@available(iOS 13.0, *)
+class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableview: UITableView!
 
     override func viewDidLoad() {
@@ -25,7 +28,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,17 +36,23 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.row == 0 {
             cell?.textLabel?.text = "HELP"
+            cell?.imageView?.image = UIImage(systemName: "questionmark.circle")
         }
         else if indexPath.row == 1 {
             cell?.textLabel?.text = "LEGAL AGREEMENT"
+            cell?.imageView?.image = UIImage(systemName: "square.and.pencil")
         }
         else if indexPath.row == 2 {
-            cell?.textLabel?.text = "ABOUT"
-            
+            cell?.textLabel?.text = "FEEDBACK"
+            cell?.imageView?.image = UIImage(systemName: "envelope")
         }
-
+        else if indexPath.row == 3 {
+            cell?.textLabel?.text = "ABOUT US"
+            cell?.imageView?.image = UIImage(systemName: "person")
+        }
+        
+        cell?.imageView?.tintColor = UIColor.black
         return cell!
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,9 +72,37 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             viewController.title = "LEGAL AGREEMENT"
         }
-        else
+        else if (indexPath.row == 2)
         {
-            viewController.title = "ABOUT"
+            viewController.title = "FEEDBACK"
+            
+            if MFMailComposeViewController.canSendMail() {
+                
+                //Do nothing here
+                
+            } else {
+                // show failure alert
+                let alert = UIAlertController(title: "Alert", message: "Simulator is not supported.Please try it on real device", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        print("default")
+                        
+                    case .cancel:
+                        print("cancel")
+                        
+                    case .destructive:
+                        print("destructive")
+                        
+                    @unknown default: break
+                    }}))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+        }
+        else if (indexPath.row == 3)
+        {
+            viewController.title = "ABOUT US"
         }
         self.navigationController?.pushViewController(viewController, animated: true)
         

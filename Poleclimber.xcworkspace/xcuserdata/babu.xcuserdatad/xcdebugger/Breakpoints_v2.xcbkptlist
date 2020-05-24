@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF177E56-929B-4E18-A075-10FDF27858F6"
+            uuid = "2850AD0B-4753-43A9-98B1-6A277271094F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Poleclimber/ViewController/Login/LoginViewController.swift"
+            filePath = "Poleclimber/ViewController/MoreDetailedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "sendEmail()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

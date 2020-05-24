@@ -7,25 +7,22 @@
 //
 
 import Foundation
+import MessageUI
 
-
-class MoreDetailedViewController: UIViewController {
+class MoreDetailedViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var detailedContentView: UITextView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if (self.title == "ABOUT")
+        if (self.title == "ABOUT US")
         {
             //Need to update our dedicated About content
-            self.detailedContentView?.attributedText = NSAttributedString(string:"\t\tConnecting you to the world\n\n\nWe run the UK's digital network. We're the people who connect homes, mobile phone masts, schools, shops, banks, hospitals, libraries, broadcasters, governments and businesses – large and small – to the world.It's our mission to build the best possible network with the highest quality of service, and make sure that everyone in the UK can be connected.")
-            self.detailedContentView?.font = UIFont(name: "Helvetica Neue", size: 17)
-
+            self.detailedContentView?.attributedText = loadPage(path:"About")
         }
         else if (self.title == "HELP")
         {
@@ -34,17 +31,21 @@ class MoreDetailedViewController: UIViewController {
         else if (self.title == "LEGAL AGREEMENT")
         {
             //Need to update our dedicated legal agreement content
-            self.detailedContentView?.attributedText = loadPage()
+            self.detailedContentView?.attributedText = loadPage(path:"Legal_info")
+        }
+        else if (self.title == "FEEDBACK")
+        {
+            self.sendEmail()
         }
     }
     
     
-    func loadPage() -> NSMutableAttributedString?
+    func loadPage(path:String) -> NSMutableAttributedString?
     {
         var attributedText : NSMutableAttributedString?
         var articlePara : String?
         
-        if let path = Bundle.main.path(forResource: "Legal_info", ofType: "txt") {
+        if let path = Bundle.main.path(forResource:path,ofType:"txt") {
             do {
                 articlePara =  try String(contentsOfFile: path, encoding: String.Encoding.utf8)
                 if let htmlData = articlePara?.data(using: String.Encoding.unicode) {
@@ -64,6 +65,24 @@ class MoreDetailedViewController: UIViewController {
         attributedText?.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "Helvetica Neue", size: 15)!, range: NSMakeRange(0, (attributedText?.length)!))
         return attributedText
 
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["you@yoursite.com"])
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+            
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 
 }

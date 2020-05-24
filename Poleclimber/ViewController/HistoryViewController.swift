@@ -74,17 +74,8 @@ class HistoryViewController: UIViewController {
            return result
        }
     
-    @IBAction func segmentConAction(_ sender: UISegmentedControl) {
-//        if sender.selectedSegmentIndex == 0 {
-//             if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
-//                historyObj = object as! [[String : AnyObject]]
-//            }
-//        }
-//        else{
-//             if let object = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
-//                historyObj = object as! [[String : AnyObject]]
-//            }
-//        }
+    @IBAction func segmentConAction(_ sender: UISegmentedControl)
+    {
         isShowingAcceptedList = !isShowingAcceptedList
         historyTableView.reloadData()
     }
@@ -199,8 +190,32 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 200
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        var feedbackValue:Feedback?
+        if isShowingAcceptedList
+        {
+            feedbackValue = acceptanceArray![indexPath.row]
+        }
+        else
+        {
+            feedbackValue = declinedArray![indexPath.row]
+        }
+        
+        let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "HistoryDetailedViewController") as! HistoryDetailedViewController
+        vc.detailedDict = feedbackValue
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+    {
+        
+        //Do nothing
     }
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
 
@@ -48,6 +49,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 //            cell?.detailTextLabel?.text = ""
 //        }
         
+        cell?.imageView?.tintColor = UIColor.black
+
         return cell!
 
     }
