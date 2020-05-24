@@ -10,6 +10,7 @@
 		0F12A32624785D350010EC6A /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F12A32524785D350010EC6A /* MoreViewController.swift */; };
 		0F12A329247881290010EC6A /* MoreDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F12A328247881290010EC6A /* MoreDetailedViewController.swift */; };
 		0F12A32B24788A330010EC6A /* Legal_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0F12A32A24788A330010EC6A /* Legal_info.txt */; };
+		0F12A38E247A7DB50010EC6A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F12A38D247A7DB50010EC6A /* LaunchScreenView.swift */; };
 		0F689904246872D100C38A11 /* LoginAuth+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */; };
 		0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */; };
 		44278068246A8392004D37CF /* Poleclimber.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 44278067246A8392004D37CF /* Poleclimber.xcdatamodel */; };
@@ -61,6 +62,7 @@
 		0F12A32524785D350010EC6A /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		0F12A328247881290010EC6A /* MoreDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailedViewController.swift; sourceTree = "<group>"; };
 		0F12A32A24788A330010EC6A /* Legal_info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Legal_info.txt; sourceTree = "<group>"; };
+		0F12A38D247A7DB50010EC6A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44278067246A8392004D37CF /* Poleclimber.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poleclimber.xcdatamodel; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				44BB541824226D0F00C1302B /* AppDelegate.swift */,
 				44BB541A24226D0F00C1302B /* SceneDelegate.swift */,
 				0F12A32A24788A330010EC6A /* Legal_info.txt */,
+				0F12A38D247A7DB50010EC6A /* LaunchScreenView.swift */,
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
 				4453033224630BB8008F086A /* Login.storyboard */,
 				44BB542124226D1600C1302B /* Assets.xcassets */,
@@ -437,6 +440,7 @@
 				443F02C5242CF81500DBB05F /* PConstants.swift in Sources */,
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
 				7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */,
+				0F12A38E247A7DB50010EC6A /* LaunchScreenView.swift in Sources */,
 				4486841F246550D200FE22FB /* DatabaseFlowViewController.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
 				443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */,

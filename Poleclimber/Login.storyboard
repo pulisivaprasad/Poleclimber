@@ -226,6 +226,29 @@
             </objects>
             <point key="canvasLocation" x="2431.875" y="437.32394366197184"/>
         </scene>
+        <!--Launch Screen View-->
+        <scene sceneID="7vC-XO-ifQ">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreenView" id="nTC-4j-8xs" customClass="LaunchScreenView" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s7S-0S-gwe"/>
+                        <viewControllerLayoutGuide type="bottom" id="p9a-VZ-q6P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="teH-oO-wrr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SoR-ga-hMc"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="launchView" destination="teH-oO-wrr" id="VkR-BL-VbW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jXJ-4i-Dkc" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1335" y="1340"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="KyP-AG-D04">
             <objects>
@@ -236,7 +259,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="JgM-Dg-bVD" kind="relationship" relationship="rootViewController" id="u7k-FE-aqv"/>
+                        <segue destination="nTC-4j-8xs" kind="relationship" relationship="rootViewController" id="xYg-QR-sqC"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2U-zF-rmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
