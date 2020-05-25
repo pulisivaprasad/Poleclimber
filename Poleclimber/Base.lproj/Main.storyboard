@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -293,7 +292,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sn1-fe-5f4">
-                                <rect key="frame" x="30" y="679" width="354" height="44"/>
+                                <rect key="frame" x="30" y="749" width="354" height="44"/>
                                 <color key="backgroundColor" red="0.30588235289999999" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="c2f-Z2-2Rp"/>
@@ -311,28 +310,28 @@
                                     <action selector="logoutBtnActionWithSender:" destination="bCZ-1j-ZM7" eventType="touchUpInside" id="3LY-N4-QvS"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c7u-fq-6Wm">
-                                <rect key="frame" x="10" y="273" width="394" height="396"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="c7u-fq-6Wm">
+                                <rect key="frame" x="10" y="263" width="394" height="476"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" textLabel="t7c-ko-Jvh" detailTextLabel="6Ho-dY-1O1" style="IBUITableViewCellStyleSubtitle" id="o0R-Wg-bFk">
-                                        <rect key="frame" x="0.0" y="28" width="394" height="55.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" textLabel="t7c-ko-Jvh" detailTextLabel="Kmv-I0-YdK" style="IBUITableViewCellStyleValue1" id="o0R-Wg-bFk">
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="394" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o0R-Wg-bFk" id="LVp-l9-dSr">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="55.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t7c-ko-Jvh">
-                                                    <rect key="frame" x="20" y="7.3333333333333357" width="31" height="18"/>
+                                                    <rect key="frame" x="20" y="11.999999999999998" width="35" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ho-dY-1O1">
-                                                    <rect key="frame" x="19.999999999999996" y="28" width="54.666666666666664" height="18.666666666666668"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kmv-I0-YdK">
+                                                    <rect key="frame" x="330.66666666666669" y="12" width="43.333333333333336" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -342,8 +341,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="bCZ-1j-ZM7" id="qaB-of-6bt"/>
-                                    <outlet property="delegate" destination="bCZ-1j-ZM7" id="PRP-Tg-3YA"/>
+                                    <outlet property="dataSource" destination="bCZ-1j-ZM7" id="mi4-oT-hHK"/>
+                                    <outlet property="delegate" destination="bCZ-1j-ZM7" id="n0a-Pt-Qeg"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -353,10 +352,10 @@
                             <constraint firstItem="lRB-rt-uas" firstAttribute="trailing" secondItem="sn1-fe-5f4" secondAttribute="trailing" constant="30" id="7gk-hH-n40"/>
                             <constraint firstItem="lRB-rt-uas" firstAttribute="trailing" secondItem="c7u-fq-6Wm" secondAttribute="trailing" constant="10" id="9XH-ZJ-PNg"/>
                             <constraint firstItem="sn1-fe-5f4" firstAttribute="top" secondItem="c7u-fq-6Wm" secondAttribute="bottom" constant="10" id="FH3-LM-UcA"/>
-                            <constraint firstItem="lRB-rt-uas" firstAttribute="bottom" secondItem="sn1-fe-5f4" secondAttribute="bottom" constant="90" id="M8o-Rc-BoN"/>
+                            <constraint firstItem="lRB-rt-uas" firstAttribute="bottom" secondItem="sn1-fe-5f4" secondAttribute="bottom" constant="20" id="M8o-Rc-BoN"/>
                             <constraint firstItem="7rM-cb-N0p" firstAttribute="top" secondItem="lRB-rt-uas" secondAttribute="top" constant="25" id="S8m-eL-SCR"/>
                             <constraint firstItem="c7u-fq-6Wm" firstAttribute="leading" secondItem="lRB-rt-uas" secondAttribute="leading" constant="10" id="cvS-da-Zjl"/>
-                            <constraint firstItem="c7u-fq-6Wm" firstAttribute="top" secondItem="7rM-cb-N0p" secondAttribute="bottom" constant="20" id="dQK-6B-4cm"/>
+                            <constraint firstItem="c7u-fq-6Wm" firstAttribute="top" secondItem="7rM-cb-N0p" secondAttribute="bottom" constant="10" id="dQK-6B-4cm"/>
                             <constraint firstItem="sn1-fe-5f4" firstAttribute="leading" secondItem="lRB-rt-uas" secondAttribute="leading" constant="30" id="n1S-ap-uW8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lRB-rt-uas"/>
@@ -1305,6 +1304,7 @@
                             <constraint firstItem="kMP-z4-UUe" firstAttribute="leading" secondItem="eKk-TK-rum" secondAttribute="leading" constant="30" id="pSS-bM-wc6"/>
                             <constraint firstItem="AeJ-xH-ByA" firstAttribute="leading" secondItem="eKk-TK-rum" secondAttribute="leading" constant="25" id="qqK-C0-WU7"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="7oD-uc-Deb"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dmc-Kp-aR8"/>
                     <connections>

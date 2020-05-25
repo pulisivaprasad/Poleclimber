@@ -10,14 +10,19 @@ import UIKit
 import AVKit
 import Vision
 import RMessage
+import MapKit
+import CoreLocation
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NavigationDelegate {
+
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,CLLocationManagerDelegate, NavigationDelegate {
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
     @IBOutlet weak var namelabel: UILabel!
     @IBOutlet weak var detectBtn: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var galleryBtn: UIButton!
+    
+    let locationManager = CLLocationManager()
 
     @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
@@ -29,6 +34,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     let rControl = RMController()
     var feedbackObj: Feedback?
     var editPost = 0
+    var locationString : String?
     
     @IBOutlet weak var textfiledView: UIView!
     @IBOutlet weak var exchangeAreaTField: UITextField!
@@ -66,7 +72,58 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         
         galleryBtn.backgroundColor = UIColor.lightGray
                    galleryBtn.isUserInteractionEnabled = false
+        
+        //Location fetching part
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+       {
+           guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+           guard let location: CLLocation = manager.location
+           else
+           {
+               return
+           }
+           
+           //Use this coordinated and consume it whereever we want across the app. Or use this piece of code on capturing the image place
+           print("locations = \(locValue.latitude) \(locValue.longitude)")
+           
+           fetchCityAndCountry(from: location)
+           {
+               city, country, error in
+               guard let city = city, let country = country, error == nil
+               else
+               {
+                   return
+               }
+               
+               //Printing here the city/country name , use it to populate on UI labels
+               print(city + ", " + country)
+                
+            self.locationString = city
+            self.gpsLocationTField.text = self.locationString
+            self.textFiledDataDisc["gpslocation_value"] = self.locationString
+
+           }
+
+
+       }
+       
+       func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+           CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+               completion(placemarks?.first?.locality,
+                          placemarks?.first?.country,
+                          error)
+           }
+       }
     
     private func loadeImage(name: String) -> UIImage? {
            guard let documentsDirectory = try? FileManager.default.url(for: .documentDirectory,
@@ -367,7 +424,15 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.exchangeArea = textFiledDataDisc["exchangeArea_Value"]
         feedback.dpnumber = textFiledDataDisc["dpnumber_value"]
         feedback.cpnumber = textFiledDataDisc["cpnumber_value"]
-        feedback.gpsLocation = textFiledDataDisc["gpslocation_value"]
+        
+        if (self.locationString != nil)
+        {
+            feedback.gpsLocation = self.locationString
+        }
+        else
+        {
+            feedback.gpsLocation = textFiledDataDisc["gpslocation_value"]
+        }
 
         dataManager.saveChanges()
     }

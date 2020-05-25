@@ -27,6 +27,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Use camera to recognize objects</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We’ll use this to get the Pole location </string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We’ll use this to get the Pole location </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
