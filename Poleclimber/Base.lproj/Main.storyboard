@@ -1379,7 +1379,7 @@
                         <outlet property="namelabel" destination="TZq-bD-fig" id="hgf-jF-jYZ"/>
                         <outlet property="noImgView" destination="rL3-HC-32o" id="3ZB-zx-YYs"/>
                         <outlet property="poleStatusSubView" destination="B1O-mu-LdK" id="BSk-NA-PrE"/>
-                        <outlet property="textfiledView" destination="t41-Zt-GxW" id="9jf-0z-jlJ"/>
+                        <outlet property="textfiledView" destination="ewz-0N-fKS" id="Rkt-Tw-IQO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKv-Pf-kFm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
