@@ -1,0 +1,51 @@
+<center><strong>Terms and conditions</center></strong><br>
+<p>You’ve accessed a system managed by us. Unauthorised access to or misuse of this system is prohibited and constitutes an offence under the Computer Misuse Act 1990. If you disclose any information obtained through this system without authority we may take legal action against you.</p>
+<p>1.Acceptance of Terms and Conditions</p>
+<p>These Terms and Conditions govern the use of the www.openreach.co.uk website ("Site"). We may modify these Terms and Conditions from time to time, and will review them as a minimum on an annual basis. You are advised to keep up to date with any changes by regularly reviewing these Terms and Conditions, and will be required to confirm your acceptance whenever any changes are made by us. By using the Site you agree to be bound by these Terms and Conditions.Any products and services available through the Site are covered by separate terms and conditions and prices. Orders for any products and services placed via the Site will be subject to the appropriate terms and conditions.The Site may contain links to BT sites or to third party sites which may be covered by separate terms and conditions.</p>
+<p>2.Use of the Site</p>
+<p>This Site is a user-interface. It’s not designed for managing automated process such as macros and robots that input volume transactions over short periods of time.
+You must not use the Site to:
+(a) disseminate, upload or download any nuisance, abusive, offensive, indecent, obscene, menacing, unlawful, libellous, defamatory or otherwise objectionable material
+(b) transmit material that encourages a criminal offence to be committed
+(c) gain unauthorised access to other computing systems or
+(d) commit a fraudulent activity or in a way that breaches any legislation.</p>
+<p>3.Copyright/p>
+<p>The content of the Site is protected by copyright, trademark and other intellectual property rights as applicable and is provided solely for your own use. Republication or redistribution of any of the content available on the Site, including by framing or similar means, is prohibited.
+The Openreach identity is a registered trademark of British Telecommunications plc.
+You will indemnify BT against all loss, damages, costs and expenses arising or incurred in respect of any actions, claims or legal proceedings which are brought or threatened against BT by a third party if the Site is used in breach of this paragraph.</p>
+<p>4.Availability</p>
+<p>It is technically impracticable to provide a fault-free Site and we do not undertake to do so. In the case of a fault we will attempt to restore the Site as soon as is reasonably practicable. If a fault occurs in the Site you should report it at www.openreach.co.uk/contactus.
+Access to the Site may occasionally be suspended or restricted for operational reasons such as maintenance or the introduction of new facilities or services.
+If we are informed of any inaccuracies in the material on the Site, we’ll use reasonable endeavours to correct the inaccuracies as soon as reasonably practicable.
+Openreach reserves the right at any time and from time to time to modify, edit, delete, suspend or discontinue, temporarily or permanently, the Site (or any part of it) and/or the information, materials, products and/or services (or any part of them) available through the Site.</p>
+<p>5.Our Liability</p>
+<p>We aren’t liable in contract, tort (including negligence) or otherwise for loss whether direct or indirect of business, revenue or profits, anticipated savings or wasted expenditure, corruption or destruction of data or for any indirect or consequential loss resulting from your use of or inability to use the Site, or from your relying on the accuracy or completeness of the Site content.
+Nothing in these Terms and Conditions applies to the liability in respect of products sold under standard product terms and conditions.
+Nothing in these Terms and Conditions shall exclude liability for personal injury or death caused by its negligence.</p>
+<p>6.Advertising and Sponsorship</p>
+<p>Advertisers and sponsors are responsible for ensuring that material submitted for inclusion on the Site complies with relevant laws and codes of practice. BT is not responsible for any error or inaccuracy in advertising and sponsorship material.</p>
+<p>7.Transfer of Rights and Obligations</p>
+<p>You may not transfer any of your rights or obligations under these Terms and Conditions to another party.</p>
+<p>8.Waiver</p>
+<p>If we delay in acting upon a breach of these Terms and Conditions that delay will not be regarded as a waiver of that breach. If we waive a breach of these Terms and Conditions that waiver will be limited to that particular breach.</p>
+<p>9.Matters Beyond Our Reasonable Control</p>
+<p>We will not be liable for any breach of these Terms and Conditions caused by circumstances beyond our reasonable control.</p>
+<p>10.Confidentiality</p>
+<p>Any information of a confidential nature obtained as a result of the use of the Site will be kept in confidence and will not be disclosed to any person other than employees or professional advisers (or, in the case of BT the employees of a BT Group Company or their suppliers solely for the purpose for which it was provided).
+This paragraph 11 will not apply to:
+(a) any information which has been published other than through a breach of these Terms and Conditions;
+(b) information lawfully in the possession of the recipient before the disclosure took place;
+(c) information which a party is requested to disclose which, if it did not it would be required by law to do so.</p>
+<p>11.Data Protection</p>
+<p>We will comply with our obligations under applicable data protection legislation and maintain all relevant registrations and notifications, for the purposes of operating the Site.</p>
+<p>12.Virus Protection</p>
+<p>You must take all reasonable steps to ensure that any software you use with or in connection with the Site is not infected by viruses.
+We will take all reasonable steps (including testing with the latest commercially available virus detection software) to ensure that any software used in connection with the Site is not infected by viruses.</p>
+<p>13.Applicable Law</p>
+<p>These Terms and Conditions are governed by the law of England and Wales.</p>
+<p>14.Severability</p>
+<p>If any provision of these Terms and Conditions is held invalid, illegal or unenforceable for any reason by any court of competent jurisdiction, such provision shall be severed and the remainder of its provisions will continue in full force and effect.</p>
+<p>15.Third Party Rights</p>
+<p>A person who is not party to these Terms and Conditions has no right under the Contracts (Rights of Third Parties) Act 1999 to enforce any of these Terms or Conditions, but this does not affect any right or remedy of a third party which exists or is available apart from that act.</p>
+
+

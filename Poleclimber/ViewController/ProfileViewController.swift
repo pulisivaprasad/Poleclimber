@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+@available(iOS 13.0, *)
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+{
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var valueSwitch : UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,33 +26,92 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        
+        if (section == 0)
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+                
+        if indexPath.section == 0
+        {
+            if indexPath.row == 0  {
+                cell?.textLabel?.text = "Username"
+                cell?.detailTextLabel?.text = userDefault.object(forKey:"USERNAME") as? String
+            }
+            else if indexPath.row == 1 {
+                cell?.textLabel?.text = "Email"
+                cell?.detailTextLabel?.text = PWebService.sharedWebService.currentUser?.email
+            }
+            //        else if indexPath.row == 3 {
+            //            cell?.textLabel?.text = "Data flow"
+            //            cell?.detailTextLabel?.text = ""
+            //        }
+            
+        }
+        else
+        {
+            if indexPath.row == 0  {
+                cell?.textLabel?.text = "Maximum load count"
+                cell?.detailTextLabel?.text = "100"
+            }
+            else if indexPath.row == 1 {
+                cell?.textLabel?.text = "Mobile data usage"
+//
+//                valueSwitch!.isOn = false
+//                valueSwitch!.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+                cell?.detailTextLabel?.text = "YES"
+              //  cell?.accessoryView = valueSwitch
+            }
+            else if indexPath.row == 2 {
+                cell?.textLabel?.text = "Enable ID"
+                cell?.detailTextLabel?.text = "NO"
+            }
+        }
         
-        if indexPath.row == 0 {
-            cell?.textLabel?.text = "Username"
-            cell?.detailTextLabel?.text = userDefault.object(forKey: "USERNAME") as? String
-        }
-        else if indexPath.row == 1 {
-            cell?.textLabel?.text = "Email"
-            cell?.detailTextLabel?.text = PWebService.sharedWebService.currentUser?.email
-        }
-        else if indexPath.row == 2 {
-            cell?.textLabel?.text = "Version"
-            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-            cell?.detailTextLabel?.text = appVersion
-        }
-//        else if indexPath.row == 3 {
-//            cell?.textLabel?.text = "Data flow"
-//            cell?.detailTextLabel?.text = ""
-//        }
-        
+        cell?.imageView?.tintColor = UIColor.black
+
         return cell!
 
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let label = UILabel(frame: CGRect.init(x: 0, y: 10, width: tableView.frame.size.width, height: 30))
+        if (section == 0)
+        {
+            label.text = "SECTION A"
+        }
+        else
+        {
+            label.text = "SETTINGS"
+        }
+        label.font = UIFont(name:"HelveticaNeue-Italic", size: 17.0)
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if (indexPath.section == 0)
+        {
+             return 44
+        }
+        
+        return 50;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

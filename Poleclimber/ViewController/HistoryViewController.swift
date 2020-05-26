@@ -8,18 +8,29 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController ,UISearchBarDelegate, UISearchResultsUpdating{
 
    // var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var historyTableView: UITableView!
+    var filterdata:[String]!
+    var queryString:String?
 
     var acceptanceArray:[Feedback]?
     var declinedArray:[Feedback]?
     var isShowingAcceptedList:Bool = true
+    let resultSearchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        queryString = ""
+     //   controller.searchResultsUpdater = self
+
+        resultSearchController.searchBar.sizeToFit()
+        resultSearchController.searchBar.delegate = self
+        resultSearchController.definesPresentationContext = false
+        historyTableView.tableHeaderView = resultSearchController.searchBar
     }
         
     func fetchFeedback() {
@@ -49,7 +60,35 @@ class HistoryViewController: UIViewController {
        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
        self.title = "History"
        fetchFeedback()
+        
+       showSearchBar()
     }
+    
+    func showSearchBar(){
+        if isShowingAcceptedList
+        {
+            if (acceptanceArray!.count > 0)
+            {
+                historyTableView.tableHeaderView?.isHidden = false
+            }
+            else
+            {
+                historyTableView.tableHeaderView?.isHidden = true
+            }
+        }
+        else
+        {
+            if  (declinedArray!.count > 0)
+            {
+                historyTableView.tableHeaderView?.isHidden = false
+            }
+            else
+            {
+                historyTableView.tableHeaderView?.isHidden = true
+            }
+        }
+    }
+
     
     private func loadeImage(name: String) -> UIImage? {
            guard let documentsDirectory = try? FileManager.default.url(for: .documentDirectory,
@@ -74,19 +113,11 @@ class HistoryViewController: UIViewController {
            return result
        }
     
-    @IBAction func segmentConAction(_ sender: UISegmentedControl) {
-//        if sender.selectedSegmentIndex == 0 {
-//             if let object = UserDefaults.standard.object(forKey: "AGREEUSERDETAILS") {
-//                historyObj = object as! [[String : AnyObject]]
-//            }
-//        }
-//        else{
-//             if let object = UserDefaults.standard.object(forKey: "DISAGREEUSERDETAILS") {
-//                historyObj = object as! [[String : AnyObject]]
-//            }
-//        }
+    @IBAction func segmentConAction(_ sender: UISegmentedControl)
+    {
         isShowingAcceptedList = !isShowingAcceptedList
         historyTableView.reloadData()
+        showSearchBar()
     }
     
     @IBAction func editBtnAction(sender: UIButton) {
@@ -199,8 +230,64 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 200
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        var feedbackValue:Feedback?
+        if isShowingAcceptedList
+        {
+            feedbackValue = acceptanceArray![indexPath.row]
+        }
+        else
+        {
+            feedbackValue = declinedArray![indexPath.row]
+        }
+        
+        let vc = UIStoryboard.storyboard(name: "Main").instantiateViewController(withIdentifier: "HistoryDetailedViewController") as! HistoryDetailedViewController
+        vc.detailedDict = feedbackValue
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        //Do nothing for now
+    }
+        
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        //Validation here
+        self.queryString = searchBar.text
+        doFilterBasedOnSearchQuery()
+        
+        resultSearchController.isActive = false
+    }
+    
+    
+    func updateSearchResults(for searchController: UISearchController)
+    {
+        doFilterBasedOnSearchQuery()
+    }
+    
+    func doFilterBasedOnSearchQuery()
+    {
+        if (!self.queryString!.isEmpty)
+        {
+          //  var feedbackObj:Feedback?
+            //            var arrayList:NSMutableArray
+            //            if isShowingAcceptedList{
+            //                feedbackObj = acceptanceArray![indexPath.row]
+            //            }else{
+            //                feedbackObj = declinedArray![indexPath.row]
+            //            }
+            //
+            //            filterdata = data.filter { $0.contains(searchText) }
+           // acceptanceArray?.removeAll()
+            historyTableView.reloadData()
+        }
     }
 }
 
