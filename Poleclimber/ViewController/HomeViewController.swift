@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
        
     @IBAction func inspectionBtnAction(_ sender: UIButton) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-               let viewController = sb.instantiateViewController(withIdentifier: "PoleDetailsViewController") as! PoleDetailsViewController
+               let viewController = sb.instantiateViewController(withIdentifier: "ObjectDetectionViewController") as! ObjectDetectionViewController
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
