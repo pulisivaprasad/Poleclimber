@@ -10,6 +10,8 @@
 		0F689904246872D100C38A11 /* LoginAuth+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */; };
 		0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */; };
 		44278068246A8392004D37CF /* Poleclimber.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 44278067246A8392004D37CF /* Poleclimber.xcdatamodel */; };
+		442B3993247A43D70014C021 /* PoleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B3992247A43D70014C021 /* PoleDetailsViewController.swift */; };
+		442B3995247A45A00014C021 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B3994247A45A00014C021 /* LocationManager.swift */; };
 		443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443C47B02463AEFF007731A6 /* SignUpViewController.swift */; };
 		443DDF2324692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 443DDF2224692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel */; };
 		443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F02C2242CF74F00DBB05F /* PWebService.swift */; };
@@ -58,6 +60,8 @@
 		0F689902246872D100C38A11 /* LoginAuth+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0F689903246872D100C38A11 /* LoginAuth+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginAuth+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44278067246A8392004D37CF /* Poleclimber.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poleclimber.xcdatamodel; sourceTree = "<group>"; };
+		442B3992247A43D70014C021 /* PoleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoleDetailsViewController.swift; sourceTree = "<group>"; };
+		442B3994247A45A00014C021 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		443C47B02463AEFF007731A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		443DDF2224692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2_SSDLite_openreach.mlmodel; sourceTree = "<group>"; };
 		443F02C2242CF74F00DBB05F /* PWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWebService.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				6540F052245A983000FF3CFA /* HistoryViewController.swift */,
 				6540F054245A984500FF3CFA /* ProfileViewController.swift */,
 				4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */,
+				442B3992247A43D70014C021 /* PoleDetailsViewController.swift */,
 				443C47AD2463AEAC007731A6 /* Login */,
 			);
 			path = ViewController;
@@ -234,6 +239,7 @@
 				6540F056245B094F00FF3CFA /* TabBarViewController.swift */,
 				44EDE96524643B53002CFEEE /* Extension.swift */,
 				7C7CD5652468406700952ACA /* DataManager.swift */,
+				442B3994247A45A00014C021 /* LocationManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				443F02C3242CF74F00DBB05F /* PWebService.swift in Sources */,
 				7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */,
 				4486841F246550D200FE22FB /* DatabaseFlowViewController.swift in Sources */,
+				442B3995247A45A00014C021 /* LocationManager.swift in Sources */,
 				44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */,
 				443C47B12463AEFF007731A6 /* SignUpViewController.swift in Sources */,
 				6540F053245A983000FF3CFA /* HistoryViewController.swift in Sources */,
@@ -449,6 +456,7 @@
 				0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
 				7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */,
+				442B3993247A43D70014C021 /* PoleDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
