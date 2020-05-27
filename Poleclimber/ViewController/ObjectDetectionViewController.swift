@@ -29,13 +29,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     let rControl = RMController()
     var feedbackObj: Feedback?
     var editPost = 0
-    
-    @IBOutlet weak var textfiledView: UIView!
-    @IBOutlet weak var exchangeAreaTField: UITextField!
-    @IBOutlet weak var dpNumberTFiled: UITextField!
-    @IBOutlet weak var cpNumberTFiled: UITextField!
-    @IBOutlet weak var gpsLocationTField: UITextField!
-
 
     var textFiledDataDisc = [String: String]()
     
@@ -52,7 +45,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if editPost == 1 {
             detectBtn.isHidden = false
             noImgView.isHidden = true
-            textfiledView.isHidden = true
             if let imagename = feedbackObj?.originalImg {
                  let image = self.loadeImage(name: imagename)
                 imageView.image = image
@@ -63,9 +55,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             namelabel.isHidden = true
             detectBtn.isHidden = true
         }
-        
-        galleryBtn.backgroundColor = UIColor.lightGray
-                   galleryBtn.isUserInteractionEnabled = false
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -179,7 +168,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
      func showAddImgView() {
         noImgView.isHidden = true
         detectBtn.isHidden = false
-        textfiledView.isHidden = true
     }
     
     // MARK: - Capture Session
@@ -208,7 +196,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                   self.imageView.image = UIImage(named: "")
                   self.noImgView.isHidden = false
                   self.detectBtn.isHidden = true
-                self.textfiledView.isHidden = true
 
                   return
             }
@@ -238,7 +225,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
               self.imageView.image = UIImage(named: "")
               self.noImgView.isHidden = false
               self.detectBtn.isHidden = true
-                self.textfiledView.isHidden = true
 
               return
             }
@@ -276,7 +262,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @objc func navigateToHomeScreen() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func disAgreeBtnAction(_ sender: Any) {
@@ -364,48 +350,18 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             feedback.image = filename
             feedback.originalImg = filename2
         }
-        feedback.exchangeArea = textFiledDataDisc["exchangeArea_Value"]
-        feedback.dpnumber = textFiledDataDisc["dpnumber_value"]
-        feedback.cpnumber = textFiledDataDisc["cpnumber_value"]
-        feedback.gpsLocation = textFiledDataDisc["gpslocation_value"]
+        feedback.exchangeArea = textFiledDataDisc["Exchange Area"]
+        feedback.dpnumber = textFiledDataDisc["DP Number"]
+        feedback.cpnumber = textFiledDataDisc["CP Number"]
+        
+        var address = "\(textFiledDataDisc["Street"] ?? ""), \(textFiledDataDisc["City"] ?? ""), \(textFiledDataDisc["State"] ?? ""), \(textFiledDataDisc["Country"] ?? "")"
+        
+        if let zipcode = textFiledDataDisc["Zip Code"] {
+            address = address + ", " + zipcode
+        }
+        
+        feedback.gpsLocation = address
 
         dataManager.saveChanges()
     }
 }
-
-extension ObjectDetectionViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
-
-        if textField == exchangeAreaTField {
-            textFiledDataDisc["exchangeArea_Value"] = textField.text
-        }
-        else if textField == dpNumberTFiled {
-            textFiledDataDisc["dpnumber_value"] = textField.text
-        }
-        else if textField == cpNumberTFiled {
-           textFiledDataDisc["cpnumber_value"] = textField.text
-        }
-        else {
-            textFiledDataDisc["gpslocation_value"] = textField.text
-        }
-        
-        if textFiledDataDisc["exchangeArea_Value"] != "" && textFiledDataDisc["exchangeArea_Value"] != nil && textFiledDataDisc["dpnumber_value"] != "" && textFiledDataDisc["dpnumber_value"] != nil && textFiledDataDisc["cpnumber_value"] != "" && textFiledDataDisc["cpnumber_value"] != nil && textFiledDataDisc["gpslocation_value"] != "" && textFiledDataDisc["gpslocation_value"] != nil {
-            galleryBtn.backgroundColor = pAppStatusBarColor
-            galleryBtn.isUserInteractionEnabled = true
-        }
-        else{
-            galleryBtn.backgroundColor = UIColor.lightGray
-            galleryBtn.isUserInteractionEnabled = false
-        }
-    }
-}
-

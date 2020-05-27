@@ -176,9 +176,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cpNumberLabel.text = "CP Number: \(cpNumberValue)"
         }
         
-        if let gpsLocationValue = feedbackObj?.gpsLocation {
-            cell.gpsLocationLabel.text = "GPS Location: \(gpsLocationValue)"
-        }
+//        if let gpsLocationValue = feedbackObj?.gpsLocation {
+//            cell.gpsLocationLabel.text = "GPS Location: \(gpsLocationValue)"
+//        }
                
         if feedbackObj?.tipStatus == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
