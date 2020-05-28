@@ -15,8 +15,7 @@ protocol LocationManagerDelegate {
 class LocationManager: NSObject {
     var delegate: LocationManagerDelegate?
     
-    // - Private
-    private let locationManager = CLLocationManager()
+     let locationManager = CLLocationManager()
     
     
     // - API

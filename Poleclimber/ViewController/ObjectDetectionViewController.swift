@@ -41,6 +41,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         imagePicker.delegate = self
         
         buttonsView.isHidden = true
+        namelabel.isHidden = true
 
         if editPost == 1 {
             detectBtn.isHidden = false
@@ -52,7 +53,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             }
         }
         else{
-            namelabel.isHidden = true
             detectBtn.isHidden = true
         }
     }
@@ -361,6 +361,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
         
         feedback.gpsLocation = address
+        feedback.latitude = textFiledDataDisc["Latitude"]
+        feedback.longitude = textFiledDataDisc["Longitude"]
 
         dataManager.saveChanges()
     }

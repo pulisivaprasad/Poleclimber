@@ -29,4 +29,7 @@ extension Feedback {
     @NSManaged public var dpnumber: String?
     @NSManaged public var cpnumber: String?
     @NSManaged public var gpsLocation: String?
+    @NSManaged public var latitude: String?
+    @NSManaged public var longitude: String?
+
 }

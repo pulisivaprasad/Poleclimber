@@ -18,8 +18,11 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var stateTFiled: UITextField!
     @IBOutlet weak var countryTField: UITextField!
     @IBOutlet weak var zipCodeTField: UITextField!
+    @IBOutlet weak var latitudeTField: UITextField!
+    @IBOutlet weak var longitudeTField: UITextField!
+
     private let locationManager = LocationManager()
-    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "Street", "City", "State", "Country"]
+    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "Street", "City", "State", "Country", "Latitude", "Longitude"]
 
     var textFiledDataDisc = [String: String]()
 
@@ -38,12 +41,16 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
         countryTField.text = country
         zipCodeTField.text = zipcode
         
+        latitudeTField.text = "\(locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
+        longitudeTField.text = "\(locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
+        
         textFiledDataDisc[(streetTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = streetTField.text
         textFiledDataDisc[(cityTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = cityTFiled.text
         textFiledDataDisc[(stateTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = stateTFiled.text
         textFiledDataDisc[(countryTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = countryTField.text
         textFiledDataDisc[(zipCodeTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = zipCodeTField.text
-
+        textFiledDataDisc[(latitudeTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = latitudeTField.text
+        textFiledDataDisc[(longitudeTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = longitudeTField.text
     }
     
     @IBAction func continueBtnAction(sender: UIButton) {
