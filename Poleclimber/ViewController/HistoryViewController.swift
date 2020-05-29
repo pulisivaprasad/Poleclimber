@@ -142,7 +142,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
                
-        cell.reasonLabel.isHidden = true
+        //cell.reasonLabel.isHidden = true
         
         cell.subView.layer.cornerRadius = 6
         cell.subView.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -158,11 +158,10 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
                               
         if feedbackObj?.reason != "NULL"{
-            cell.reasonLabel.isHidden = false
             cell.reasonLabel.text = feedbackObj?.reason
         }
                            
-        cell.reasonLabel.text = feedbackObj?.reason
+       // cell.reasonLabel.text = feedbackObj?.reason
         
         if let exchangeAreaValue = feedbackObj?.exchangeArea {
             cell.exchangeAreaLabel.text = "Exchange Area: \(exchangeAreaValue)"
@@ -192,15 +191,15 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                
         if let imagename = feedbackObj?.image {
              let image = self.loadeImage(name: imagename)
-            let cellWidth = self.view.frame.width/2 - 15
-            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 200))
+            let cellWidth = self.view.frame.width/2
+            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 150))
         }
                        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 150
     }
 }
 

@@ -266,20 +266,17 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func disAgreeBtnAction(_ sender: Any) {
-        poleStatusSubView.frame = view.bounds
+        let pickerView = ToolbarPickerView()
         if self.namelabel.text == "Good Tip Detected"{
-            poleStatusSubView.reason1.setTitle(" Rot present on the pole tip", for: .normal)
-            poleStatusSubView.reason2.setTitle(" Side chipping looks like rot", for: .normal)
-            //poleStatusSubView.reason3.setTitle(" Reason3", for: .normal)
-            poleStatusSubView.reason3.isHidden = true
+            pickerView.sePickerdata(poleType: "Good")
         }
         else{
-            poleStatusSubView.reason1.setTitle(" Cracks on tip are natural", for: .normal)
-            poleStatusSubView.reason2.setTitle(" Tip covered by bird droppings", for: .normal)
-            poleStatusSubView.reason3.setTitle(" Chipping on tip is not rot", for: .normal)
+            pickerView.sePickerdata(poleType: "Bad")
         }
-        poleStatusSubView.delegate = self
-        view.addSubview(poleStatusSubView)
+        self.view.addSubview(pickerView)
+        self.view.addSubview(pickerView.toolbar!)
+        pickerView.toolbarDelegate = self
+
     }
     
     func submitBtnAction(selectedReason: String) {
@@ -365,5 +362,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.longitude = textFiledDataDisc["Longitude"]
 
         dataManager.saveChanges()
+    }
+}
+
+extension ObjectDetectionViewController: ToolbarPickerViewDelegate {
+
+    func didTapDone(selectedObject: String) {
+       submitBtnAction(selectedReason: selectedObject)
+        print(selectedObject)
     }
 }
