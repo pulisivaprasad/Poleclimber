@@ -54,6 +54,7 @@ extension LocationManager: CLLocationManagerDelegate {
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil) {
+                //Helper.sharedHelper.showGlobalAlertwithMessage("We are unable to fetech GPS Location, Please enter manually.", title: "Alert")
                 print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
                 return
             }

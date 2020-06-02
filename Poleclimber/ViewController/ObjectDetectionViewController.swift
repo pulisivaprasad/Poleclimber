@@ -11,7 +11,7 @@ import AVKit
 import Vision
 import RMessage
 
-class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NavigationDelegate {
+class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var boxesView: DrawingBoundingBoxView!
     @IBOutlet weak var namelabel: UILabel!
@@ -19,7 +19,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var galleryBtn: UIButton!
 
-    @IBOutlet var poleStatusSubView: PoleStatusView!
     var predictions: [VNRecognizedObjectObservation] = []
     let objectDectectionModel =  MobileNetV2_SSDLite_openreach() //YOLOv3Tiny()
     @IBOutlet weak var noImgView: UIView!

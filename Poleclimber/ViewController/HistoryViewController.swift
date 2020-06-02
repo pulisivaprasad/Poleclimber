@@ -201,6 +201,20 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let sb = UIStoryboard(name: "Main", bundle: nil)
+           let viewController = sb.instantiateViewController(withIdentifier: "HistoryDetailViewController") as! HistoryDetailViewController
+        var feedbackObj:Feedback?
+        if isShowingAcceptedList{
+            feedbackObj = acceptanceArray![indexPath.row]
+        }else{
+            feedbackObj = declinedArray![indexPath.row]
+        }
+        viewController.feedbackObj = feedbackObj
+    self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
 }
 
 class HistoryCell: UITableViewCell {
