@@ -1,28 +1,36 @@
 PODS:
   - Alamofire (5.1.0)
   - HexColors (6.0.0)
+  - InitialsImageView (0.7.0)
   - JVFloatLabeledTextField (1.2.2)
+  - RevealingSplashView (0.6.0)
   - RMessage (3.0.3):
     - HexColors (~> 6.0)
 
 DEPENDENCIES:
   - Alamofire
+  - InitialsImageView
   - JVFloatLabeledTextField
+  - RevealingSplashView
   - RMessage
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - HexColors
+    - InitialsImageView
     - JVFloatLabeledTextField
+    - RevealingSplashView
     - RMessage
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   HexColors: f8c66339541a74bb08905bfe7cd4f8cc85e9e173
+  InitialsImageView: 7a416d36fc6df5434198664db28a3ffb0228426d
   JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   RMessage: f6d768616d6afbc2c92a2451de9d7f7617b7195c
 
-PODFILE CHECKSUM: 50b06010764d416725d95ca6ecf880f2d8baed26
+PODFILE CHECKSUM: 9538e197d61ffcd657a8204ad5d0e2d9c8330472
 
 COCOAPODS: 1.8.4

@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import InitialsImageView
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var imgView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
       self.navigationController?.isNavigationBarHidden = false
        self.title = "Profile"
        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        imgView.setImageForName((userDefault.object(forKey: "USERNAME") as? String)!, backgroundColor: nil, circular: true, textAttributes: nil)
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

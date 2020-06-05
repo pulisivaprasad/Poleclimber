@@ -9,5 +9,7 @@ target 'Poleclimber' do
   pod 'RMessage'
   pod 'Alamofire'
   pod 'JVFloatLabeledTextField'
+  pod 'RevealingSplashView'
+  pod "InitialsImageView"
 
 end
