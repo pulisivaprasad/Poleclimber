@@ -26,6 +26,12 @@ class HistoryDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "History Details"
+        
+        if let imagename = feedbackObj?.image {
+             let image = self.loadeImage(name: imagename)
+            imageView.image = image
+        }
+        
         updateddate.text = feedbackObj?.date
         if feedbackObj?.reason != "NULL"{
             feedbackReason.text = feedbackObj?.reason
@@ -36,10 +42,7 @@ class HistoryDetailViewController: UIViewController {
         address.text = "Address: " + feedbackObj!.gpsLocation!
         latAndLong.text = "Latitude: \(feedbackObj?.latitude ?? ""), Longitude: \(feedbackObj?.longitude ?? "")"
         
-        if let imagename = feedbackObj?.image {
-             let image = self.loadeImage(name: imagename)
-            imageView.image = image
-        }
+        
         
         if feedbackObj?.tipStatus == "Good Tip Detected"{
             tipTypeImg.image = UIImage(named: "good")

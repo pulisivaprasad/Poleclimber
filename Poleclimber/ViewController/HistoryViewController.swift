@@ -175,6 +175,17 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cpNumberLabel.text = "CP Number: \(cpNumberValue)"
         }
         
+        if let latValue = feedbackObj?.latitude {
+            let latfloat = Float(latValue)
+            let doubleStr = String(format: "%.4f", latfloat!) // "3.14"
+            cell.lat.text = "Lat: \(doubleStr)"
+        }
+        if let longitudeValue = feedbackObj?.longitude {
+            let longfloat = Float(longitudeValue)
+            let doubleStr = String(format: "%.4f", longfloat!) // "3.14"
+            cell.long.text = "Long: \(doubleStr)"
+        }
+        
 //        if let gpsLocationValue = feedbackObj?.gpsLocation {
 //            cell.gpsLocationLabel.text = "GPS Location: \(gpsLocationValue)"
 //        }
@@ -192,14 +203,14 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         if let imagename = feedbackObj?.image {
              let image = self.loadeImage(name: imagename)
             let cellWidth = self.view.frame.width/2
-            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 150))
+            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 165))
         }
                        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 165
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -225,7 +236,9 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var dpNumberLabel: UILabel!
     @IBOutlet weak var exchangeAreaLabel: UILabel!
     @IBOutlet weak var cpNumberLabel: UILabel!
-    @IBOutlet weak var gpsLocationLabel: UILabel!
+    @IBOutlet weak var lat: UILabel!
+    @IBOutlet weak var long: UILabel!
+
     @IBOutlet weak var subView: UIView!
 }
 
