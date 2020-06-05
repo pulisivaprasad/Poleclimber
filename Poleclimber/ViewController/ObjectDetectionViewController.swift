@@ -28,6 +28,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     let rControl = RMController()
     var feedbackObj: Feedback?
     var editPost = 0
+    var fileName = ""
 
     var textFiledDataDisc = [String: String]()
     
@@ -83,21 +84,46 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
 
         if Helper.sharedHelper.isNetworkAvailable() {
-//            let filename = "image_" + Date().description
-//            _ = imageView.image?.save(filename)
-//            let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-//            let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
-//
-//            var parameters = [String : AnyObject]()
-//            parameters["file"] = url as AnyObject
-//            PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
-//                                                                  apiName: "",
-//                                                                  parameters: parameters, uploadImage: imageView.image) { (response, error) in
-//
-//                                                                    print(response)
-//
-//            }
-            perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
+ let filename = "image_" + Date().description
+                _ = imageView.image?.save(filename)
+                let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+                let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
+    
+                var parameters = [String : AnyObject]()
+                parameters["file"] = url as AnyObject
+                PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
+                                                                      apiName: "",
+                                                                      fileName: fileName,
+                                                                      parameters: parameters, uploadImage: imageView.image) { (response, error) in
+                                                                        Helper.sharedHelper.dismissHUD(view: self.view)
+                                                                        if error == nil, let res = response?.object(at: 2), (res as AnyObject).count > 0 {
+                                                                            
+                                                                            let resObj = response?.object(at: 2) as AnyObject
+                                                                            if let objectNameArr = response?.object(at: 1) as? AnyObject {
+                                                                                self.namelabel.text = objectNameArr.object(at: 0) as? String
+                                                                                self.buttonsView.isHidden = false
+                                                                                self.detectBtn.isHidden = true
+                                                                            }
+                                                                            let resObj2 = resObj.object(at: 0) as AnyObject
+                                                                            
+                                                                            print(resObj2.object(at: 0))
+                                                                            if let xPos = resObj2.object(at: 0) as? NSNumber, let yPos = resObj2.object(at: 1) as? NSNumber, let widthPos = resObj2.object(at: 2) as? NSNumber, let heightPos = resObj2.object(at: 3) as? NSNumber {
+                                                                                let myView = DrawRectangle(frame: CGRect(x: CGFloat(truncating: xPos), y: CGFloat(truncating: yPos), width: CGFloat(truncating: widthPos), height: CGFloat(truncating: heightPos)))
+//                                                                                    CGRect(x: Int(truncating: xPos), y: Int(truncating: yPos), width: Int(truncating: widthPos), height: Int(truncating: heightPos)))
+
+                                                                                self.view.addSubview(myView)
+                                                                            }
+                                                                                
+
+                                                                            
+                                                                        }
+                                                                        else{
+                                                                        Helper.sharedHelper.showGlobalAlertwithMessage("Something went wrong!, Please try after some time.", vc: self)
+                                                                        }
+
+
+                }
+           // perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
            rControl.showMessage(withSpec: warningSpec, title: "Info", body: "You don't have internet connection so classification will run using iOS ML model.")
@@ -128,6 +154,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             getCVPixelBuffer(image: image)
+            
+             guard let fileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
+             print(fileUrl.lastPathComponent) // get file Name
+            // print(fileUrl.pathExtension)     // get file extension
+             fileName = fileUrl.lastPathComponent
+            
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -254,10 +286,15 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
-        userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
+        if Helper.sharedHelper.isNetworkAvailable() {
+            dataSendToServer(reason:"NULL", userResult: "Ok")
+        }
+        else{
+            userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
+        }
         
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
     }
     
     @objc func navigateToHomeScreen() {
@@ -279,11 +316,50 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func submitBtnAction(selectedReason: String) {
-        userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
+        if Helper.sharedHelper.isNetworkAvailable() {
+            dataSendToServer(reason: selectedReason, userResult: "Disagree")
+        }
+        else{
+            userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
+        }
 
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 5)
+        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
     }
+    
+    func dataSendToServer(reason: String, userResult: String) {
+        var parameters = [String : String]()
+        parameters["PoletesterID"] = textFiledDataDisc["PoletesterID"]
+        parameters["PoleID"] = textFiledDataDisc["PoleID"]
+        parameters["DPno"] = textFiledDataDisc["DP Number"]
+        parameters["CPno"] = textFiledDataDisc["CP Number"]
+        parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"]
+        parameters["Latitude"] = textFiledDataDisc["Latitude"]
+        parameters["Longitude"] = textFiledDataDisc["Longitude"]
+        parameters["Userresult"] = userResult
+        parameters["Reason"] = reason
+        
+        let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
+        
+        Helper.sharedHelper.showGlobalHUD(title: "Saving...", view: view)
+
+        PWebService.sharedWebService.callWebAPIRequest(httpMethod: "POST",
+                                                       apiName: newURL,
+                                                   parameters: parameters) { (response, error) in
+                                                    Helper.sharedHelper.dismissHUD(view: self.view)
+
+                                                    if error == nil {
+                                                        
+                                                    }
+                                                    else{
+                                                        Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+                                                    }
+                                                    
+        }
+
+
+    }
+
         
     func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
         if editPost == 1 {
@@ -369,5 +445,29 @@ extension ObjectDetectionViewController: ToolbarPickerViewDelegate {
     func didTapDone(selectedObject: String) {
        submitBtnAction(selectedReason: selectedObject)
         print(selectedObject)
+    }
+}
+
+class DrawRectangle: DrawingBoundingBoxView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clear
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override func draw(_ rect: CGRect) {
+
+        guard let context = UIGraphicsGetCurrentContext() else {
+            print("could not get graphics context")
+            return
+        }
+
+        context.setStrokeColor(UIColor.red.cgColor)
+        context.setLineWidth(2)
+        context.stroke(rect.insetBy(dx: 0, dy: 90))
     }
 }

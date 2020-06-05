@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else if indexPath.row == 1 {
             cell?.textLabel?.text = "Email"
-            cell?.detailTextLabel?.text = PWebService.sharedWebService.currentUser?.email
+            cell?.detailTextLabel?.text = ""
         }
         else if indexPath.row == 2 {
             cell?.textLabel?.text = "Version"
