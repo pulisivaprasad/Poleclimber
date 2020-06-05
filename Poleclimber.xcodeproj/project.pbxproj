@@ -25,7 +25,6 @@
 		446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 446F07232446CFC3005183B4 /* MBProgressHUD.m */; };
 		4486841F246550D200FE22FB /* DatabaseFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */; };
 		44898A9024631031003C6217 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44898A8F24631031003C6217 /* LoginViewController.swift */; };
-		44898A9224631A60003C6217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44898A9124631A60003C6217 /* GoogleService-Info.plist */; };
 		44BB541924226D0F00C1302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541824226D0F00C1302B /* AppDelegate.swift */; };
 		44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB541A24226D0F00C1302B /* SceneDelegate.swift */; };
 		44BB542024226D0F00C1302B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BB541E24226D0F00C1302B /* Main.storyboard */; };
@@ -41,6 +40,10 @@
 		6540F057245B095000FF3CFA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540F056245B094F00FF3CFA /* TabBarViewController.swift */; };
 		655B9F7D247F77D0002D2915 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655B9F7C247F77D0002D2915 /* ToolbarPickerView.swift */; };
 		655B9F7F24861A12002D2915 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655B9F7E24861A12002D2915 /* HistoryDetailViewController.swift */; };
+		65F12007248A20150043A93A /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F12006248A20150043A93A /* MoreViewController.swift */; };
+		65F12009248A201E0043A93A /* MoreDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F12008248A201E0043A93A /* MoreDetailedViewController.swift */; };
+		65F1200C248A23580043A93A /* Legal_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = 65F1200B248A23580043A93A /* Legal_info.txt */; };
+		65F1200E248A235E0043A93A /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 65F1200D248A235E0043A93A /* About.txt */; };
 		687B6F8B3F07F31C9EA97152 /* Pods_Poleclimber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBB3FE76DE5F90E012EA665 /* Pods_Poleclimber.framework */; };
 		7C7CD5632468403E00952ACA /* Feedback+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */; };
 		7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */; };
@@ -80,7 +83,6 @@
 		4482300EC7E5B8FA41D03915 /* Pods-Poleclimber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poleclimber.release.xcconfig"; path = "Target Support Files/Pods-Poleclimber/Pods-Poleclimber.release.xcconfig"; sourceTree = "<group>"; };
 		4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFlowViewController.swift; sourceTree = "<group>"; };
 		44898A8F24631031003C6217 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		44898A9124631A60003C6217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44BB541524226D0F00C1302B /* Poleclimber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poleclimber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BB541824226D0F00C1302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44BB541A24226D0F00C1302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,10 @@
 		6540F056245B094F00FF3CFA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		655B9F7C247F77D0002D2915 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		655B9F7E24861A12002D2915 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
+		65F12006248A20150043A93A /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		65F12008248A201E0043A93A /* MoreDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreDetailedViewController.swift; sourceTree = "<group>"; };
+		65F1200B248A23580043A93A /* Legal_info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Legal_info.txt; sourceTree = "<group>"; };
+		65F1200D248A235E0043A93A /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		7C7CD5612468403E00952ACA /* Feedback+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7C7CD5622468403E00952ACA /* Feedback+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feedback+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7C7CD5652468406700952ACA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 				4486841E246550D200FE22FB /* DatabaseFlowViewController.swift */,
 				442B3992247A43D70014C021 /* PoleDetailsViewController.swift */,
 				655B9F7E24861A12002D2915 /* HistoryDetailViewController.swift */,
+				65F12005248A20080043A93A /* More */,
 				443C47AD2463AEAC007731A6 /* Login */,
 			);
 			path = ViewController;
@@ -220,11 +227,10 @@
 				44BB541A24226D0F00C1302B /* SceneDelegate.swift */,
 				44BB541E24226D0F00C1302B /* Main.storyboard */,
 				4453033224630BB8008F086A /* Login.storyboard */,
-				44BB542124226D1600C1302B /* Assets.xcassets */,
+				65F1200A248A23220043A93A /* Resource */,
 				44BB542324226D1600C1302B /* LaunchScreen.storyboard */,
 				44278067246A8392004D37CF /* Poleclimber.xcdatamodel */,
 				44BB542624226D1600C1302B /* Info.plist */,
-				44898A9124631A60003C6217 /* GoogleService-Info.plist */,
 			);
 			path = Poleclimber;
 			sourceTree = "<group>";
@@ -263,6 +269,25 @@
 				443DDF2224692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel */,
 			);
 			path = TiprotDetectionModel;
+			sourceTree = "<group>";
+		};
+		65F12005248A20080043A93A /* More */ = {
+			isa = PBXGroup;
+			children = (
+				65F12006248A20150043A93A /* MoreViewController.swift */,
+				65F12008248A201E0043A93A /* MoreDetailedViewController.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		65F1200A248A23220043A93A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				44BB542124226D1600C1302B /* Assets.xcassets */,
+				65F1200B248A23580043A93A /* Legal_info.txt */,
+				65F1200D248A235E0043A93A /* About.txt */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		8FBA887087DF9240D11CB325 /* Pods */ = {
@@ -369,9 +394,10 @@
 			files = (
 				4453033324630BB8008F086A /* Login.storyboard in Resources */,
 				44BB542524226D1600C1302B /* LaunchScreen.storyboard in Resources */,
-				44898A9224631A60003C6217 /* GoogleService-Info.plist in Resources */,
+				65F1200C248A23580043A93A /* Legal_info.txt in Resources */,
 				44BB542224226D1600C1302B /* Assets.xcassets in Resources */,
 				44BB542024226D0F00C1302B /* Main.storyboard in Resources */,
+				65F1200E248A235E0043A93A /* About.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +475,7 @@
 				443F344A243C34B2000719C9 /* ObjectDetectionViewController.swift in Sources */,
 				446F07242446CFC3005183B4 /* MBProgressHUD.m in Sources */,
 				44278068246A8392004D37CF /* Poleclimber.xcdatamodel in Sources */,
+				65F12009248A201E0043A93A /* MoreDetailedViewController.swift in Sources */,
 				443DDF2324692DED00B67C26 /* MobileNetV2_SSDLite_openreach.mlmodel in Sources */,
 				0F689904246872D100C38A11 /* LoginAuth+CoreDataClass.swift in Sources */,
 				44BB541B24226D0F00C1302B /* SceneDelegate.swift in Sources */,
@@ -460,6 +487,7 @@
 				0F689905246872D100C38A11 /* LoginAuth+CoreDataProperties.swift in Sources */,
 				44BB542E2422FE4100C1302B /* Helper.swift in Sources */,
 				7C7CD5642468403E00952ACA /* Feedback+CoreDataClass.swift in Sources */,
+				65F12007248A20150043A93A /* MoreViewController.swift in Sources */,
 				442B3993247A43D70014C021 /* PoleDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
