@@ -40,6 +40,8 @@ class HistoryViewController: UIViewController {
         })
         
         declinedArray = acceptanceArray!.filter{$0.userAcceptance != "Ok"}
+        Helper.sharedHelper.dismissHUD(view: self.view)
+
         historyTableView.reloadData()
     }
     
@@ -48,6 +50,8 @@ class HistoryViewController: UIViewController {
        self.navigationController?.isNavigationBarHidden = false
        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
        self.title = "History"
+        Helper.sharedHelper.showGlobalHUD(title: "Data fetching...", view: view)
+
        fetchFeedback()
     }
     

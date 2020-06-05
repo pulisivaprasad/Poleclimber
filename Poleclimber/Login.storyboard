@@ -236,12 +236,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="JgM-Dg-bVD" kind="relationship" relationship="rootViewController" id="u7k-FE-aqv"/>
+                        <segue destination="xBO-Fp-Alk" kind="relationship" relationship="rootViewController" id="gKq-VW-ndY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2U-zF-rmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1434.375" y="437.32394366197184"/>
+        </scene>
+        <!--Launch Screen View-->
+        <scene sceneID="y1l-IK-HKf">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreenView" id="xBO-Fp-Alk" customClass="LaunchScreenView" customModule="Poleclimber" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EQK-rj-ZIA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lyc-cG-e2R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u5W-gq-G5i">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2WC-wQ-il0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iVU-oN-ay9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="1126"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="axc-Jk-UEG">
