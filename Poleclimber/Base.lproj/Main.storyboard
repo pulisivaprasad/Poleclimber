@@ -1518,28 +1518,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vuz-BG-w80">
-                                <rect key="frame" x="10" y="144" width="300" height="275"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" editingAccessoryType="detailDisclosureButton" textLabel="Qol-F0-wyy" style="IBUITableViewCellStyleDefault" id="RCc-TQ-rZF">
-                                        <rect key="frame" x="0.0" y="55.5" width="300" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="vQK-n7-UmB">
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RCc-TQ-rZF" id="u0i-EH-d1Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="274" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vQK-n7-UmB" id="Vej-pG-Pg6">
+                                            <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qol-F0-wyy">
-                                                    <rect key="frame" x="15" y="0.0" width="251" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1550,10 +1539,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="vuz-BG-w80" firstAttribute="top" secondItem="9Sd-Ps-H0q" secondAttribute="top" constant="100" id="AE1-Ab-Apf"/>
-                            <constraint firstItem="vuz-BG-w80" firstAttribute="leading" secondItem="9Sd-Ps-H0q" secondAttribute="leading" constant="10" id="PpM-nj-4V0"/>
-                            <constraint firstItem="9Sd-Ps-H0q" firstAttribute="bottom" secondItem="vuz-BG-w80" secondAttribute="bottom" constant="100" id="b8e-6M-x2u"/>
-                            <constraint firstItem="9Sd-Ps-H0q" firstAttribute="trailing" secondItem="vuz-BG-w80" secondAttribute="trailing" constant="10" id="q5N-zp-ZOI"/>
+                            <constraint firstItem="vuz-BG-w80" firstAttribute="top" secondItem="9Sd-Ps-H0q" secondAttribute="top" id="AE1-Ab-Apf"/>
+                            <constraint firstItem="vuz-BG-w80" firstAttribute="leading" secondItem="9Sd-Ps-H0q" secondAttribute="leading" id="PpM-nj-4V0"/>
+                            <constraint firstItem="9Sd-Ps-H0q" firstAttribute="bottom" secondItem="vuz-BG-w80" secondAttribute="bottom" id="b8e-6M-x2u"/>
+                            <constraint firstItem="9Sd-Ps-H0q" firstAttribute="trailing" secondItem="vuz-BG-w80" secondAttribute="trailing" id="q5N-zp-ZOI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Sd-Ps-H0q"/>
                     </view>
