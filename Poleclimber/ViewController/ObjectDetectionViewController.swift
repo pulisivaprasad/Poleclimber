@@ -29,6 +29,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var feedbackObj: Feedback?
     var editPost = 0
     var fileName = ""
+    
+    @IBOutlet weak var urlTextField: UITextField!
+
 
     var textFiledDataDisc = [String: String]()
     
@@ -92,7 +95,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 var parameters = [String : AnyObject]()
                 parameters["file"] = url as AnyObject
                 PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
-                                                                      apiName: "",
+                                                            apiName: urlTextField.text!,
                                                                       fileName: fileName,
                                                                       parameters: parameters, uploadImage: imageView.image) { (response, error) in
                                                                         Helper.sharedHelper.dismissHUD(view: self.view)
@@ -339,12 +342,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["Userresult"] = userResult
         parameters["Reason"] = reason
         
-        let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
+        let urlString = urlTextField.text
+        
+        let newURL =  urlString?.replacingOccurrences(of: "detect", with: "data")
         
         Helper.sharedHelper.showGlobalHUD(title: "Saving...", view: view)
 
         PWebService.sharedWebService.callWebAPIRequest(httpMethod: "POST",
-                                                       apiName: newURL,
+                                                       apiName: newURL!,
                                                    parameters: parameters) { (response, error) in
                                                     Helper.sharedHelper.dismissHUD(view: self.view)
 
@@ -470,4 +475,13 @@ class DrawRectangle: DrawingBoundingBoxView {
         context.setLineWidth(2)
         context.stroke(rect.insetBy(dx: 0, dy: 90))
     }
+}
+
+extension ObjectDetectionViewController: UITextFieldDelegate {
+
+func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+
+    return true
+}
 }
