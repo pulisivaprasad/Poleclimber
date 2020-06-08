@@ -13,21 +13,16 @@ class HistoryViewController: UIViewController {
    // var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var historyTableView: UITableView!
-    let resultSearchController = UISearchController(searchResultsController: nil)
-    var queryString:String?
+    var filteredArray:[Feedback]?
 
     var acceptanceArray:[Feedback]?
     var declinedArray:[Feedback]?
     var isShowingAcceptedList:Bool = true
+    var searchActive: Bool = false
+    @IBOutlet var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        queryString = ""
-
-        resultSearchController.searchBar.sizeToFit()
-        resultSearchController.searchBar.delegate = self
-        resultSearchController.definesPresentationContext = false
-        historyTableView.tableHeaderView = resultSearchController.searchBar
     }
         
     func fetchFeedback() {
@@ -62,7 +57,7 @@ class HistoryViewController: UIViewController {
 
        fetchFeedback()
         
-        showSearchBar()
+//        showSearchBar()
 
     }
     
@@ -172,10 +167,15 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isShowingAcceptedList{
-            return acceptanceArray?.count ?? 0
-        }else{
-            return declinedArray?.count ?? 0
+        if searchActive {
+            return filteredArray?.count ?? 0
+        }
+        else{
+           if isShowingAcceptedList{
+             return acceptanceArray?.count ?? 0
+           }else{
+             return declinedArray?.count ?? 0
+           }
         }
     }
     
@@ -191,10 +191,16 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         cell.subView.layer.shadowRadius = 4
         
         var feedbackObj:Feedback?
-        if isShowingAcceptedList{
-            feedbackObj = acceptanceArray![indexPath.row]
-        }else{
-            feedbackObj = declinedArray![indexPath.row]
+        
+        if searchActive {
+            feedbackObj = filteredArray![indexPath.row]
+        }
+        else{
+            if isShowingAcceptedList{
+                feedbackObj = acceptanceArray![indexPath.row]
+            }else{
+                feedbackObj = declinedArray![indexPath.row]
+            }
         }
                               
         if feedbackObj?.reason != "NULL"{
@@ -257,11 +263,17 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     let sb = UIStoryboard(name: "Main", bundle: nil)
            let viewController = sb.instantiateViewController(withIdentifier: "HistoryDetailViewController") as! HistoryDetailViewController
         var feedbackObj:Feedback?
-        if isShowingAcceptedList{
-            feedbackObj = acceptanceArray![indexPath.row]
-        }else{
-            feedbackObj = declinedArray![indexPath.row]
+        if searchActive {
+            feedbackObj = filteredArray![indexPath.row]
         }
+        else{
+            if isShowingAcceptedList{
+                feedbackObj = acceptanceArray![indexPath.row]
+            }else{
+                feedbackObj = declinedArray![indexPath.row]
+            }
+        }
+
         viewController.feedbackObj = feedbackObj
     self.navigationController?.pushViewController(viewController, animated: true)
     }
@@ -292,45 +304,45 @@ extension Date {
     }
 }
 
-extension HistoryViewController: UISearchBarDelegate, UISearchResultsUpdating {
+extension HistoryViewController: UISearchBarDelegate {
+    
+ // MARK: UISearchBarDelegate functions
+ func searchBarTextDidEndEditing(_: UISearchBar) {
+    //        searchActive = false;
+    //        searchBar.resignFirstResponder()
+}
+
+func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchActive = false
+    searchBar.resignFirstResponder()
+}
+
+func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    //        searchActive = false;
+    searchBar.resignFirstResponder()
+}
 
 func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
 {
-    //Do nothing for now
-}
-    
-func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    
-    //Validation here
-    self.queryString = searchBar.text
-    doFilterBasedOnSearchQuery()
-    
-    resultSearchController.isActive = false
-}
+     if searchText.count == 0 {
+         searchBar.resignFirstResponder()
+         searchActive = false
+         filteredArray?.removeAll()
+         historyTableView.reloadData()
+     } else {
+         searchActive = true
+        if isShowingAcceptedList{
+            filteredArray = acceptanceArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
+            }
 
+        }
+        else{
+            filteredArray = declinedArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
+            }
+        }
 
-func updateSearchResults(for searchController: UISearchController)
-{
-    doFilterBasedOnSearchQuery()
-}
-
-func doFilterBasedOnSearchQuery()
-{
-    if (!self.queryString!.isEmpty)
-    {
-      //  var feedbackObj:Feedback?
-        //            var arrayList:NSMutableArray
-        //            if isShowingAcceptedList{
-        //                feedbackObj = acceptanceArray![indexPath.row]
-        //            }else{
-        //                feedbackObj = declinedArray![indexPath.row]
-        //            }
-        //
-        //            filterdata = data.filter { $0.contains(searchText) }
-       // acceptanceArray?.removeAll()
-        historyTableView.reloadData()
-    }
-}
-
+         historyTableView.reloadData()
+     }
+  }
 }
 

@@ -686,8 +686,18 @@
                                     <action selector="segmentConAction:" destination="E1G-h1-gSz" eventType="valueChanged" id="M24-wy-xQk"/>
                                 </connections>
                             </segmentedControl>
+                            <searchBar contentMode="redraw" placeholder="DP Number or CP Number" translatesAutoresizingMaskIntoConstraints="NO" id="Rfx-DH-mc0">
+                                <rect key="frame" x="0.0" y="102" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5Lb-i2-eqZ"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="E1G-h1-gSz" id="C7p-qu-7Hj"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="frR-5E-CjG">
-                                <rect key="frame" x="0.0" y="104" width="320" height="415"/>
+                                <rect key="frame" x="0.0" y="152" width="320" height="367"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HistoryCell" rowHeight="150" id="FiS-BS-Gmw" customClass="HistoryCell" customModule="Poleclimber" customModuleProvider="target">
@@ -833,19 +843,23 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Rfx-DH-mc0" firstAttribute="trailing" secondItem="7Qs-3q-6A1" secondAttribute="trailing" id="8XB-gz-hKL"/>
+                            <constraint firstItem="Rfx-DH-mc0" firstAttribute="leading" secondItem="7Qs-3q-6A1" secondAttribute="leading" id="ATH-Zx-f7r"/>
                             <constraint firstItem="7Qs-3q-6A1" firstAttribute="trailing" secondItem="kzB-WW-KjF" secondAttribute="trailing" constant="8" id="OxA-wu-U3r"/>
-                            <constraint firstItem="frR-5E-CjG" firstAttribute="top" secondItem="kzB-WW-KjF" secondAttribute="bottom" constant="8" id="XdC-W5-Ddj"/>
+                            <constraint firstItem="Rfx-DH-mc0" firstAttribute="top" secondItem="kzB-WW-KjF" secondAttribute="bottom" constant="6" id="UBw-sZ-oLi"/>
                             <constraint firstItem="frR-5E-CjG" firstAttribute="leading" secondItem="7Qs-3q-6A1" secondAttribute="leading" id="fpH-Vp-EG4"/>
                             <constraint firstItem="kzB-WW-KjF" firstAttribute="top" secondItem="7Qs-3q-6A1" secondAttribute="top" constant="8" id="k5u-Li-YRi"/>
                             <constraint firstItem="7Qs-3q-6A1" firstAttribute="bottom" secondItem="frR-5E-CjG" secondAttribute="bottom" id="npu-q1-jFw"/>
                             <constraint firstItem="kzB-WW-KjF" firstAttribute="leading" secondItem="7Qs-3q-6A1" secondAttribute="leading" constant="8" id="oB0-9b-vT7"/>
                             <constraint firstItem="7Qs-3q-6A1" firstAttribute="trailing" secondItem="frR-5E-CjG" secondAttribute="trailing" id="rOr-ry-5gj"/>
+                            <constraint firstItem="frR-5E-CjG" firstAttribute="top" secondItem="Rfx-DH-mc0" secondAttribute="bottom" constant="6" id="x6Q-yC-Ijf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Qs-3q-6A1"/>
                     </view>
                     <navigationItem key="navigationItem" id="evC-7D-A3L"/>
                     <connections>
                         <outlet property="historyTableView" destination="frR-5E-CjG" id="xwP-wj-fel"/>
+                        <outlet property="searchBar" destination="Rfx-DH-mc0" id="c8L-LS-pBh"/>
                         <outlet property="segmentControl" destination="kzB-WW-KjF" id="umK-v0-PXF"/>
                     </connections>
                 </viewController>
