@@ -13,7 +13,6 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var exchangeAreaTField: UITextField!
     @IBOutlet weak var dpNumberTFiled: UITextField!
     @IBOutlet weak var cpNumberTFiled: UITextField!
-    @IBOutlet weak var streetTField: UITextField!
     @IBOutlet weak var cityTFiled: UITextField!
     @IBOutlet weak var stateTFiled: UITextField!
     @IBOutlet weak var countryTField: UITextField!
@@ -21,30 +20,37 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var latitudeTField: UITextField!
     @IBOutlet weak var longitudeTField: UITextField!
 
-    private let locationManager = LocationManager()
-    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "Street", "City", "State", "Country", "Latitude", "Longitude"]
+    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "City", "State", "Country", "Latitude", "Longitude"]
 
     var textFiledDataDisc = [String: String]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
+        appDelegate.locationManager.delegate = self
       self.navigationController?.isNavigationBarHidden = false
         self.title = "Pole Details"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        latitudeTField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+        longitudeTField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+    }
+    
+    @objc func doneButtonTappedForMyNumericTextField() {
+        print("Done");
+        latitudeTField.resignFirstResponder()
+        longitudeTField.resignFirstResponder()
+
     }
     
     func getAddress(street: String, city: String, state: String, country: String, zipcode: String) {
-        streetTField.text = street
         cityTFiled.text = city
         stateTFiled.text = state
         countryTField.text = country
         zipCodeTField.text = zipcode
         
-        latitudeTField.text = "\(locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
-        longitudeTField.text = "\(locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
+        latitudeTField.text = "\(appDelegate.locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
+        longitudeTField.text = "\(appDelegate.locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
         
-        textFiledDataDisc[(streetTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = streetTField.text
         textFiledDataDisc[(cityTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = cityTFiled.text
         textFiledDataDisc[(stateTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = stateTFiled.text
         textFiledDataDisc[(countryTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = countryTField.text
@@ -84,5 +90,33 @@ extension PoleDetailsViewController: UITextFieldDelegate {
         let keyPlaceholder = textField.placeholder?.replacingOccurrences(of: "*", with: "")
 
         textFiledDataDisc[keyPlaceholder!] = textField.text
+    }
+}
+
+extension UITextField {
+    func addDoneCancelToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
+        let onCancel = onCancel ?? (target: self, action: #selector(cancelButtonTapped))
+        let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
+
+        let toolbar: UIToolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(title: "Cancel", style: .plain, target: onCancel.target, action: onCancel.action),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
+        ]
+        toolbar.sizeToFit()
+
+        self.inputAccessoryView = toolbar
+    }
+
+    // Default actions:
+    @objc func doneButtonTapped() {
+        self.resignFirstResponder()
+        
+    }
+    @objc func cancelButtonTapped() {
+        self.resignFirstResponder()
+        
     }
 }

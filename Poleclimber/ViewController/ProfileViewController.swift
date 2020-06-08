@@ -84,6 +84,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                         userDefault.removeObject(forKey: "loginDict")
                         userDefault.removeObject(forKey: "email")
+                        userDefault.removeObject(forKey: "USERNAME")
+                        userDefault.removeObject(forKey: "USERPASSWORD")
+                        userDefault.removeObject(forKey: "REMEMBERME")
                        // try! Auth.auth().signOut()
                         
                         self.dismiss(animated: true, completion: nil)
