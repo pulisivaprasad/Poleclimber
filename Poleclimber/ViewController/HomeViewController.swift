@@ -21,8 +21,6 @@ class HomeViewController: UIViewController {
            super.viewWillAppear(animated)
            self.navigationController?.isNavigationBarHidden = true
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
     }
        
     @IBAction func inspectionBtnAction(_ sender: UIButton) {
