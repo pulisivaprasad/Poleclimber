@@ -28,7 +28,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,11 +42,11 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell?.textLabel?.text = "LEGAL AGREEMENT"
             cell?.imageView?.image = UIImage(systemName: "square.and.pencil")
         }
-        else if indexPath.row == 2 {
+        else if indexPath.row == 5 {
             cell?.textLabel?.text = "FEEDBACK"
             cell?.imageView?.image = UIImage(systemName: "envelope")
         }
-        else if indexPath.row == 3 {
+        else if indexPath.row == 2 {
             cell?.textLabel?.text = "ABOUT US"
             cell?.imageView?.image = UIImage(systemName: "person")
         }
@@ -72,7 +72,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             viewController.title = "LEGAL AGREEMENT"
         }
-        else if (indexPath.row == 2)
+        else if (indexPath.row == 5)
         {
             viewController.title = "FEEDBACK"
             
@@ -100,7 +100,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return
             }
         }
-        else if (indexPath.row == 3)
+        else if (indexPath.row == 2)
         {
             viewController.title = "ABOUT US"
         }

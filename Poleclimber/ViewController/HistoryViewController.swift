@@ -13,6 +13,8 @@ class HistoryViewController: UIViewController {
    // var historyObj = [[String: AnyObject]]()
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var historyTableView: UITableView!
+    let resultSearchController = UISearchController(searchResultsController: nil)
+    var queryString:String?
 
     var acceptanceArray:[Feedback]?
     var declinedArray:[Feedback]?
@@ -20,6 +22,12 @@ class HistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        queryString = ""
+
+        resultSearchController.searchBar.sizeToFit()
+        resultSearchController.searchBar.delegate = self
+        resultSearchController.definesPresentationContext = false
+        historyTableView.tableHeaderView = resultSearchController.searchBar
     }
         
     func fetchFeedback() {
@@ -53,6 +61,34 @@ class HistoryViewController: UIViewController {
         Helper.sharedHelper.showGlobalHUD(title: "Data fetching...", view: view)
 
        fetchFeedback()
+        
+        showSearchBar()
+
+    }
+    
+    func showSearchBar(){
+        if isShowingAcceptedList
+        {
+            if (acceptanceArray!.count > 0)
+            {
+                historyTableView.tableHeaderView?.isHidden = false
+            }
+            else
+            {
+                historyTableView.tableHeaderView?.isHidden = true
+            }
+        }
+        else
+        {
+            if  (declinedArray!.count > 0)
+            {
+                historyTableView.tableHeaderView?.isHidden = false
+            }
+            else
+            {
+                historyTableView.tableHeaderView?.isHidden = true
+            }
+        }
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -254,5 +290,47 @@ extension Date {
     init(milliseconds:Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }
+}
+
+extension HistoryViewController: UISearchBarDelegate, UISearchResultsUpdating {
+
+func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+{
+    //Do nothing for now
+}
+    
+func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    
+    //Validation here
+    self.queryString = searchBar.text
+    doFilterBasedOnSearchQuery()
+    
+    resultSearchController.isActive = false
+}
+
+
+func updateSearchResults(for searchController: UISearchController)
+{
+    doFilterBasedOnSearchQuery()
+}
+
+func doFilterBasedOnSearchQuery()
+{
+    if (!self.queryString!.isEmpty)
+    {
+      //  var feedbackObj:Feedback?
+        //            var arrayList:NSMutableArray
+        //            if isShowingAcceptedList{
+        //                feedbackObj = acceptanceArray![indexPath.row]
+        //            }else{
+        //                feedbackObj = declinedArray![indexPath.row]
+        //            }
+        //
+        //            filterdata = data.filter { $0.contains(searchText) }
+       // acceptanceArray?.removeAll()
+        historyTableView.reloadData()
+    }
+}
+
 }
 

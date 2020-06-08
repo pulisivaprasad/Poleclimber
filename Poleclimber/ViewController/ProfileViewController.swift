@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,6 +47,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             cell?.detailTextLabel?.text = appVersion
         }
+        else if indexPath.row == 3 {
+            cell?.textLabel?.text = "Update"
+            cell?.detailTextLabel?.text = ""
+        }
 //        else if indexPath.row == 3 {
 //            cell?.textLabel?.text = "Data flow"
 //            cell?.detailTextLabel?.text = ""
@@ -57,10 +61,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 3  {
+        if indexPath.row == 4  {
             let sb = UIStoryboard(name: "Main", bundle: nil)
                    let viewController = sb.instantiateViewController(withIdentifier: "DatabaseFlowViewController") as! DatabaseFlowViewController
             self.navigationController?.pushViewController(viewController, animated: true)
+        }
+       else if indexPath.row == 3  {
+           let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            let yourFloatvalueFromString = CGFloat(truncating: NumberFormatter().number(from: currentVersion!)!)
+
+            if yourFloatvalueFromString > 0.0 {
+                Helper.sharedHelper.ShowAlert(str: "Coming soon..", viewcontroller: self)
+            }
+
         }
     }
     
