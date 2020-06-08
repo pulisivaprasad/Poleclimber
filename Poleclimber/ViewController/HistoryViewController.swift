@@ -332,12 +332,13 @@ func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
      } else {
          searchActive = true
         if isShowingAcceptedList{
-            filteredArray = acceptanceArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
+            filteredArray = acceptanceArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil ||
+                ($0.cpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
             }
-
         }
         else{
-            filteredArray = declinedArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
+            filteredArray = declinedArray?.filter { ($0.dpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil ||
+                ($0.cpnumber)?.range(of: searchText, options: [.diacriticInsensitive, .caseInsensitive]) != nil
             }
         }
 
