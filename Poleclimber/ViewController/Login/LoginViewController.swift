@@ -12,15 +12,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var rememberMeBtn: UIButton!
 
     var userIDArr = ["gary", "michael", "ahmed", "clive", "tariq", "sanjiv", "testuser", "daid.wilks", "heidichingchong"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = "gary"
-        passwordTextField.text = "openreach@123"
+//        emailTextField.text = "gary"
+//        passwordTextField.text = "openreach@123"
         versionLabel.text = "Version: " + "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")"
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if  let remember = userDefault.object(forKey: "REMEMBERME") as? String, remember == "YES" {
+            emailTextField.text = userDefault.object(forKey: "USERNAME") as? String
+            passwordTextField.text = userDefault.object(forKey: "USERPASSWORD") as? String
+            rememberMeBtn.isSelected = true
+        }
     }
     
       @IBAction func loginAction(_ sender: UIButton?) {
@@ -69,9 +79,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //callApi(loginDict: parameters)
     }
     
+    @IBAction func rememberMeAction(_ sender: UIButton?) {
+        if sender?.isSelected == true {
+            sender?.isSelected = false
+        }
+        else{
+            sender?.isSelected = true
+        }
+
+    }
+    
     @objc func login() {
         Helper.sharedHelper.dismissHUD(view: self.view)
         userDefault.set(emailTextField.text, forKey: "USERNAME")
+
+        if rememberMeBtn.isSelected {
+            userDefault.set(passwordTextField.text, forKey: "USERPASSWORD")
+            userDefault.set("YES", forKey: "REMEMBERME")
+        }
+        else{
+            userDefault.set("", forKey: "USERPASSWORD")
+            userDefault.set("NO", forKey: "REMEMBERME")
+        }
         userDefault.synchronize()
         self.goToHomeAction()
     }
