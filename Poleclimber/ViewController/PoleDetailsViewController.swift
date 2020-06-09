@@ -13,7 +13,6 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var exchangeAreaTField: UITextField!
     @IBOutlet weak var dpNumberTFiled: UITextField!
     @IBOutlet weak var cpNumberTFiled: UITextField!
-    @IBOutlet weak var streetTField: UITextField!
     @IBOutlet weak var cityTFiled: UITextField!
     @IBOutlet weak var stateTFiled: UITextField!
     @IBOutlet weak var countryTField: UITextField!
@@ -22,7 +21,7 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var longitudeTField: UITextField!
 
     private let locationManager = LocationManager()
-    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "Street", "City", "State", "Country", "Latitude", "Longitude"]
+    var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "City", "State", "Country", "Latitude", "Longitude"]
 
     var textFiledDataDisc = [String: String]()
 
@@ -35,7 +34,6 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     }
     
     func getAddress(street: String, city: String, state: String, country: String, zipcode: String) {
-        streetTField.text = street
         cityTFiled.text = city
         stateTFiled.text = state
         countryTField.text = country
@@ -44,7 +42,6 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
         latitudeTField.text = "\(locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
         longitudeTField.text = "\(locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
         
-        textFiledDataDisc[(streetTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = streetTField.text
         textFiledDataDisc[(cityTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = cityTFiled.text
         textFiledDataDisc[(stateTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = stateTFiled.text
         textFiledDataDisc[(countryTField.placeholder?.replacingOccurrences(of: "*", with: ""))!] = countryTField.text

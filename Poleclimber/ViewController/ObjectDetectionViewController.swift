@@ -350,7 +350,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.dpnumber = textFiledDataDisc["DP Number"]
         feedback.cpnumber = textFiledDataDisc["CP Number"]
         
-        var address = "\(textFiledDataDisc["Street"] ?? ""), \(textFiledDataDisc["City"] ?? ""), \(textFiledDataDisc["State"] ?? ""), \(textFiledDataDisc["Country"] ?? "")"
+        var address = "\(textFiledDataDisc["City"] ?? ""), \(textFiledDataDisc["State"] ?? ""), \(textFiledDataDisc["Country"] ?? "")"
         
         if let zipcode = textFiledDataDisc["Zip Code"] {
             address = address + ", " + zipcode
