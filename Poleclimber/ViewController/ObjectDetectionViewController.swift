@@ -29,6 +29,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var feedbackObj: Feedback?
     var editPost = 0
     var fileName = ""
+    var selecetdReasonText = String()
     
     @IBOutlet weak var urlTextField: UITextField!
 
@@ -116,12 +117,10 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
                                                                                 self.view.addSubview(myView)
                                                                             }
-                                                                                
-
-                                                                            
                                                                         }
                                                                         else{
-                                                                        Helper.sharedHelper.showGlobalAlertwithMessage("Something went wrong!, Please try after some time.", vc: self)
+                                                                            //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+                                                                            self.detectSubImagesInImg()
                                                                         }
 
 
@@ -325,7 +324,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         else{
             userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
         }
-
+        selecetdReasonText = selectedReason
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
         perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
     }
@@ -357,7 +356,15 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                                         
                                                     }
                                                     else{
-                                                        Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+                                                    //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+                                                        if reason == "OK" {
+                                                            self.userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: self.namelabel.text ?? "", reason: "")
+
+                                                        }
+                                                        else{
+                                                            self.userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: self.namelabel.text!, reason: self.selecetdReasonText)
+
+                                                        }
                                                     }
                                                     
         }
