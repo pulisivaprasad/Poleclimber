@@ -288,15 +288,16 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
+        userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
+
         if Helper.sharedHelper.isNetworkAvailable() {
             dataSendToServer(reason:"NULL", userResult: "Ok")
         }
         else{
-            userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
+            perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
         }
         
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
     }
     
     @objc func navigateToHomeScreen() {
@@ -318,21 +319,22 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func submitBtnAction(selectedReason: String) {
+        userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
+
         if Helper.sharedHelper.isNetworkAvailable() {
             dataSendToServer(reason: selectedReason, userResult: "Disagree")
         }
         else{
-            userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
+            perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
         }
         selecetdReasonText = selectedReason
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
-        perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
     }
     
     func dataSendToServer(reason: String, userResult: String) {
         var parameters = [String : String]()
-        parameters["PoletesterID"] = textFiledDataDisc["PoletesterID"]
-        parameters["PoleID"] = textFiledDataDisc["PoleID"]
+        parameters["PoletesterID"] = userDefault.object(forKey: "USERNAME") as? String
+        parameters["PoleID"] = "12"
         parameters["DPno"] = textFiledDataDisc["DP Number"]
         parameters["CPno"] = textFiledDataDisc["CP Number"]
         parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"]
@@ -340,7 +342,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["Longitude"] = textFiledDataDisc["Longitude"]
         parameters["Userresult"] = userResult
         parameters["Reason"] = reason
-        
+        parameters["MLresult"] = namelabel.text
+
         let urlString = urlTextField.text
         
         let newURL =  urlString?.replacingOccurrences(of: "detect", with: "data")
@@ -353,7 +356,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                                     Helper.sharedHelper.dismissHUD(view: self.view)
 
                                                     if error == nil {
-                                                        
+                                                        if let messsage = response!["data"] as? MLFeatureValue {
+                                                            Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
+                                                            navigateToHomeScreen()
+                                                        }
+
                                                     }
                                                     else{
                                                     //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)

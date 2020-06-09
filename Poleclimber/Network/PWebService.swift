@@ -32,7 +32,7 @@ typealias CompletionHandlerWithAnyObject = (_ status: Int, _ response: AnyObject
                           uploadImage: UIImage? = nil,
                           completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> ()) {
           
-          let urlStr = NSString(format:"%@",kBaseUrl) as String
+          let urlStr = NSString(format:"%@",apiName) as String
           guard let url = URL(string: urlStr) else {
               completion(nil, nil)
               return

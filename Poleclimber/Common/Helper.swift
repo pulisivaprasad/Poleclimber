@@ -46,6 +46,19 @@ class Helper: NSObject  {
         })
     }
     
+    func showGlobalAlertwithMessage(_ str : String, title: String, vc: UIViewController, completion: (() -> Swift.Void)? = nil) {
+        
+        DispatchQueue.main.async(execute: {
+            let alertView = UIAlertController(title: title, message: str as String, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: {             alert -> Void in
+                
+                completion?()
+            }))
+            vc.present(alertView, animated: true, completion: nil)
+        })
+    }
+
+    
     class func dropShadow(view: UIView, upOrDown: Bool) {
         
         view.layer.masksToBounds = false
