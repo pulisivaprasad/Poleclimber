@@ -29,13 +29,10 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var feedbackObj: Feedback?
     var editPost = 0
     var fileName = ""
-    var selecetdReasonText = String()
     
-    @IBOutlet weak var urlTextField: UITextField!
-
-
     var textFiledDataDisc = [String: String]()
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -96,7 +93,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 var parameters = [String : AnyObject]()
                 parameters["file"] = url as AnyObject
                 PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
-                                                            apiName: urlTextField.text!,
+                                                            apiName: appDelegate.urlString,
                                                                       fileName: fileName,
                                                                       parameters: parameters, uploadImage: imageView.image) { (response, error) in
                                                                         Helper.sharedHelper.dismissHUD(view: self.view)
@@ -290,7 +287,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBAction func AgreeBtnAction(_ sender: Any) {
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
 
-        if Helper.sharedHelper.isNetworkAvailable() {
+        if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
             dataSendToServer(reason:"NULL", userResult: "Ok")
         }
         else{
@@ -315,19 +312,17 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         self.view.addSubview(pickerView)
         self.view.addSubview(pickerView.toolbar!)
         pickerView.toolbarDelegate = self
-
     }
     
     func submitBtnAction(selectedReason: String) {
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
-        if Helper.sharedHelper.isNetworkAvailable() {
+        if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
             dataSendToServer(reason: selectedReason, userResult: "Disagree")
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
         }
-        selecetdReasonText = selectedReason
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
     }
     
@@ -344,42 +339,31 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["Reason"] = reason
         parameters["MLresult"] = namelabel.text
 
-        let urlString = urlTextField.text
+        let urlString = appDelegate.urlString
         
-        let newURL =  urlString?.replacingOccurrences(of: "detect", with: "data")
+        let newURL =  urlString.replacingOccurrences(of: "detect", with: "data")
         
         Helper.sharedHelper.showGlobalHUD(title: "Saving...", view: view)
 
         PWebService.sharedWebService.callWebAPIRequest(httpMethod: "POST",
-                                                       apiName: newURL!,
+                                                       apiName: newURL,
                                                    parameters: parameters) { (response, error) in
                                                     Helper.sharedHelper.dismissHUD(view: self.view)
 
                                                     if error == nil {
                                                         if let messsage = response!["data"] as? MLFeatureValue {
                                                             Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
-                                                            navigateToHomeScreen()
+                                                            self.navigateToHomeScreen()
                                                         }
 
                                                     }
                                                     else{
-                                                    //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
-                                                        if reason == "OK" {
-                                                            self.userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: self.namelabel.text ?? "", reason: "")
-
-                                                        }
-                                                        else{
-                                                            self.userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: self.namelabel.text!, reason: self.selecetdReasonText)
-
-                                                        }
+                                                                                                                self.navigateToHomeScreen()
+ //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
                                                     }
-                                                    
         }
-
-
     }
 
-        
     func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
         if editPost == 1 {
             var parameters = [String: String]()
@@ -489,13 +473,4 @@ class DrawRectangle: DrawingBoundingBoxView {
         context.setLineWidth(2)
         context.stroke(rect.insetBy(dx: 0, dy: 90))
     }
-}
-
-extension ObjectDetectionViewController: UITextFieldDelegate {
-
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-
-    return true
-}
 }

@@ -1054,17 +1054,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-HC-32o">
-                                <rect key="frame" x="10" y="88.5" width="300" height="239.5"/>
+                                <rect key="frame" x="10" y="128.5" width="300" height="199.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-bT-XOE">
-                                        <rect key="frame" x="20" y="48" width="260" height="107.5"/>
+                                        <rect key="frame" x="20" y="8" width="260" height="107.5"/>
                                         <string key="text">Let's start! Please start by providing a picture of a pole tip. You can capture an image using your camera or choose one from your gallery.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-W5-X0P">
-                                        <rect key="frame" x="20" y="175.5" width="120" height="44"/>
+                                        <rect key="frame" x="20" y="135.5" width="120" height="44"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="yWC-sO-6sm"/>
@@ -1083,7 +1083,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-Ni-akT">
-                                        <rect key="frame" x="160" y="175.5" width="120" height="44"/>
+                                        <rect key="frame" x="160" y="135.5" width="120" height="44"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="IlF-cB-vXg"/>
@@ -1098,31 +1098,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http://328dd39a45d6.ngrok.io/detect" borderStyle="roundedRect" placeholder="URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Isc-uA-boM">
-                                        <rect key="frame" x="20" y="0.0" width="260" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Ier-TX-zru"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="c6Y-Jp-ahG" id="8T5-zR-HJX"/>
-                                        </connections>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="I2E-Ni-akT" firstAttribute="width" secondItem="UIi-W5-X0P" secondAttribute="width" id="1EQ-pW-MZd"/>
-                                    <constraint firstAttribute="trailing" secondItem="Isc-uA-boM" secondAttribute="trailing" constant="20" id="4I7-gl-oaO"/>
                                     <constraint firstItem="I2E-Ni-akT" firstAttribute="leading" secondItem="UIi-W5-X0P" secondAttribute="trailing" constant="20" id="5hY-Pc-tmI"/>
                                     <constraint firstItem="9IY-bT-XOE" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="20" id="5ld-ML-Kbf"/>
-                                    <constraint firstItem="Isc-uA-boM" firstAttribute="top" secondItem="rL3-HC-32o" secondAttribute="top" id="7a3-qm-bNA"/>
                                     <constraint firstItem="I2E-Ni-akT" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="Asa-H6-MZ4"/>
                                     <constraint firstAttribute="trailing" secondItem="I2E-Ni-akT" secondAttribute="trailing" constant="20" id="NEI-aL-ZmX"/>
+                                    <constraint firstItem="9IY-bT-XOE" firstAttribute="top" secondItem="rL3-HC-32o" secondAttribute="top" constant="8" id="OnW-e0-VdV"/>
                                     <constraint firstAttribute="bottom" secondItem="UIi-W5-X0P" secondAttribute="bottom" constant="20" id="QaN-3C-Jwv"/>
                                     <constraint firstItem="UIi-W5-X0P" firstAttribute="top" secondItem="9IY-bT-XOE" secondAttribute="bottom" constant="20" id="ari-Bx-uvz"/>
-                                    <constraint firstItem="Isc-uA-boM" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="20" id="ddo-vR-0bU"/>
-                                    <constraint firstItem="9IY-bT-XOE" firstAttribute="top" secondItem="Isc-uA-boM" secondAttribute="bottom" constant="8" id="iEr-d3-Ca1"/>
                                     <constraint firstAttribute="bottom" secondItem="I2E-Ni-akT" secondAttribute="bottom" constant="20" id="oac-8P-i2O"/>
                                     <constraint firstAttribute="trailing" secondItem="9IY-bT-XOE" secondAttribute="trailing" constant="20" id="qsa-vh-X1X"/>
                                     <constraint firstItem="UIi-W5-X0P" firstAttribute="leading" secondItem="rL3-HC-32o" secondAttribute="leading" constant="20" id="uzd-WO-5ME"/>
@@ -1239,7 +1225,6 @@
                         <outlet property="namelabel" destination="TZq-bD-fig" id="hgf-jF-jYZ"/>
                         <outlet property="noImgView" destination="rL3-HC-32o" id="3ZB-zx-YYs"/>
                         <outlet property="textfiledView" destination="t41-Zt-GxW" id="9jf-0z-jlJ"/>
-                        <outlet property="urlTextField" destination="Isc-uA-boM" id="Nw1-uY-g9F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKv-Pf-kFm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1511,8 +1496,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-Rh-9T5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="XLf-Ao-DUg"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="hjw-A8-fdb" style="IBUITableViewCellStyleDefault" id="85M-da-60A">
                                         <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
@@ -1538,12 +1526,32 @@
                                     <outlet property="delegate" destination="cwl-l5-6Th" id="RJB-ds-XHM"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AWS Settings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2b-DP-PUP">
+                                <rect key="frame" x="20" y="268" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http://328dd39a45d6.ngrok.io/detect" borderStyle="roundedRect" placeholder="URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fj0-4b-Q0g">
+                                <rect key="frame" x="20" y="300" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ndo-DR-on4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cwl-l5-6Th" id="7nN-iI-uqs"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="yaq-Rh-9T5" firstAttribute="top" secondItem="HMY-Hz-fVh" secondAttribute="top" id="F2a-OY-cNb"/>
-                            <constraint firstAttribute="bottom" secondItem="yaq-Rh-9T5" secondAttribute="bottom" id="bfa-i9-UIn"/>
+                            <constraint firstItem="Fj0-4b-Q0g" firstAttribute="top" secondItem="yaq-Rh-9T5" secondAttribute="bottom" constant="50" id="XLW-TO-TVx"/>
                             <constraint firstItem="yaq-Rh-9T5" firstAttribute="leading" secondItem="HMY-Hz-fVh" secondAttribute="leading" id="bpf-4j-yrB"/>
+                            <constraint firstItem="9Sd-Ps-H0q" firstAttribute="trailing" secondItem="Fj0-4b-Q0g" secondAttribute="trailing" constant="20" id="j7P-My-ZCg"/>
+                            <constraint firstItem="Fj0-4b-Q0g" firstAttribute="leading" secondItem="9Sd-Ps-H0q" secondAttribute="leading" constant="20" id="pWr-vi-QUb"/>
                             <constraint firstAttribute="trailing" secondItem="yaq-Rh-9T5" secondAttribute="trailing" id="qau-fL-2kl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Sd-Ps-H0q"/>
@@ -1551,11 +1559,12 @@
                     <navigationItem key="navigationItem" id="nvm-Cw-gpQ"/>
                     <connections>
                         <outlet property="tableview" destination="yaq-Rh-9T5" id="bX4-g8-5w2"/>
+                        <outlet property="urlTextField" destination="Fj0-4b-Q0g" id="CdX-gF-Cyh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDV-FA-7Mb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="956"/>
+            <point key="canvasLocation" x="622.5" y="955.9859154929577"/>
         </scene>
         <!--More-->
         <scene sceneID="VbZ-Av-DqG">
