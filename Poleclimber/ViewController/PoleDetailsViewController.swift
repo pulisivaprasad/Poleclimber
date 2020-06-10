@@ -20,14 +20,14 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
     @IBOutlet weak var latitudeTField: UITextField!
     @IBOutlet weak var longitudeTField: UITextField!
 
-    private let locationManager = LocationManager()
     var placeHolderArr = ["Exchange Area", "DP Number", "CP Number", "City", "State", "Country", "Latitude", "Longitude"]
 
     var textFiledDataDisc = [String: String]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
+        appDelegate.locationManager.delegate = self
       self.navigationController?.isNavigationBarHidden = false
         self.title = "Pole Details"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -39,8 +39,8 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
         countryTField.text = country
         zipCodeTField.text = zipcode
         
-        latitudeTField.text = "\(locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
-        longitudeTField.text = "\(locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
+        latitudeTField.text = "\(appDelegate.locationManager.locationManager.location?.coordinate.latitude ?? 0.0)"
+        longitudeTField.text = "\(appDelegate.locationManager.locationManager.location?.coordinate.longitude ?? 0.0)"
         
         textFiledDataDisc[(cityTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = cityTFiled.text
         textFiledDataDisc[(stateTFiled.placeholder?.replacingOccurrences(of: "*", with: ""))!] = stateTFiled.text
