@@ -11,6 +11,5 @@ target 'Poleclimber' do
   pod 'JVFloatLabeledTextField'
   pod 'RevealingSplashView'
   pod 'InitialsImageView'
-  pod 'AWSS3'
 
 end

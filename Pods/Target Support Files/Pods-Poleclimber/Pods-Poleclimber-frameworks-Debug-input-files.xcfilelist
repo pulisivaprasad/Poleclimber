@@ -1,6 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Poleclimber/Pods-Poleclimber-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework
-${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework
 ${BUILT_PRODUCTS_DIR}/InitialsImageView/InitialsImageView.framework
