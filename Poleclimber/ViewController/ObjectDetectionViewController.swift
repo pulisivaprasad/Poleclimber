@@ -97,22 +97,46 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                                                       fileName: fileName,
                                                                       parameters: parameters, uploadImage: imageView.image) { (response, error) in
                                                                         Helper.sharedHelper.dismissHUD(view: self.view)
-                                                                        if error == nil, let res = response?.object(at: 2), (res as AnyObject).count > 0 {
+                                                                        if error == nil, let res = response?["detectedClasses"], res != nil {
+                                                                            let poleValues = (response!["detectedClasses"] as AnyObject)
                                                                             
-                                                                            let resObj = response?.object(at: 2) as AnyObject
-                                                                            if let objectNameArr = response?.object(at: 1) as? AnyObject {
-                                                                                self.namelabel.text = objectNameArr.object(at: 0) as? String
-                                                                                self.buttonsView.isHidden = false
-                                                                                self.detectBtn.isHidden = true
-                                                                            }
-                                                                            let resObj2 = resObj.object(at: 0) as AnyObject
-                                                                            
-                                                                            print(resObj2.object(at: 0))
-                                                                            if let xPos = resObj2.object(at: 0) as? NSNumber, let yPos = resObj2.object(at: 1) as? NSNumber, let widthPos = resObj2.object(at: 2) as? NSNumber, let heightPos = resObj2.object(at: 3) as? NSNumber {
-                                                                                let myView = DrawRectangle(frame: CGRect(x: CGFloat(truncating: xPos), y: CGFloat(truncating: yPos), width: CGFloat(truncating: widthPos), height: CGFloat(truncating: heightPos)))
-//                                                                                    CGRect(x: Int(truncating: xPos), y: Int(truncating: yPos), width: Int(truncating: widthPos), height: Int(truncating: heightPos)))
+                                                                                print(poleValues)
+                                                                            for i in 0 ..< (poleValues as! NSArray).count {
+                                                                                let poleType = poleValues.object(at: i) as? String
+                                                                                
+                                                                                if poleType == "good_tip" || poleType == "bad_tip" {
+//                                                                                    print("Episode \(i + 1): \(poleValues.object(at: i))")
+                                                                                    let resObj2 = (response?["detections"] as AnyObject).object(at: i)
+                                                                                    
+                                                                                    if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber {
+                                                                                        
+                                                                                        let devcieHeight = self.imageView.frame.height - 20
 
-                                                                                self.view.addSubview(myView)
+                                                                                        var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
+                                                                                        width1 = (width1 / devcieHeight) * self.boxesView.frame.width
+                                                                                        
+                                                                                        var height1 = CGFloat(truncating: heightPos) - CGFloat(truncating: yPos)
+                                                                                        height1 = (height1 / devcieHeight) * self.boxesView.frame.height
+                                                                                        
+                                                                                        let yPos1 = ((CGFloat(truncating: yPos) / devcieHeight) * self.boxesView.frame.height) + 100
+                                                                                        
+                                                                                        let xPos1 = (CGFloat(truncating: xPos) / devcieHeight) * self.boxesView.frame.width
+                                                                                        
+                                                                                        let myView = DrawRectangle(frame: CGRect(x: CGFloat(xPos1), y: CGFloat(yPos1), width: CGFloat(width1), height: CGFloat(height1)))
+                                                                                        myView.poleType = poleType!
+                                                                                                                                                                    self.view.addSubview(myView)
+                                                                                        
+                                                                                        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
+                                                                                        label.text = poleType ?? "N/A"
+                                                                                        label.font = UIFont.systemFont(ofSize: 14)
+                                                                                        label.textColor = UIColor.black
+                                                                                        label.backgroundColor = poleType == "good_tip" ? UIColor.green : UIColor.red
+                                                                                        label.sizeToFit()
+                                                                                        label.frame = CGRect(x: myView.frame.origin.x, y: myView.frame.origin.y - label.frame.height,
+                                                                                                             width: label.frame.width, height: label.frame.height)
+                                                                                        self.view.addSubview(label)
+                                                                                                                                                                }
+                                                                                }
                                                                             }
                                                                         }
                                                                         else{
@@ -452,7 +476,8 @@ extension ObjectDetectionViewController: ToolbarPickerViewDelegate {
 }
 
 class DrawRectangle: DrawingBoundingBoxView {
-
+    var poleType = ""
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
@@ -469,8 +494,8 @@ class DrawRectangle: DrawingBoundingBoxView {
             return
         }
 
-        context.setStrokeColor(UIColor.red.cgColor)
-        context.setLineWidth(2)
-        context.stroke(rect.insetBy(dx: 0, dy: 90))
+        context.setStrokeColor(poleType == "good_tip" ? UIColor.green.cgColor : UIColor.red.cgColor)
+        context.setLineWidth(4)
+        context.stroke(rect.insetBy(dx: 0, dy: 0))
     }
 }
