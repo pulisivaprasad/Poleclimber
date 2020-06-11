@@ -10,6 +10,7 @@ target 'Poleclimber' do
   pod 'Alamofire'
   pod 'JVFloatLabeledTextField'
   pod 'RevealingSplashView'
-  pod "InitialsImageView"
+  pod 'InitialsImageView'
+  pod 'AWSS3'
 
 end
