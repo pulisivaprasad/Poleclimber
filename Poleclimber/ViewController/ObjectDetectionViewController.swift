@@ -118,7 +118,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 if poleType == "good_tip" || poleType == "bad_tip" {
                  let resObj2 = (response?["detections"] as AnyObject).object(at: i)
                                                                                             
-                 if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber, let confidanceValue = (resObj2 as AnyObject).object(at: 4) as? NSNumber {
+                 if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber {
                   let devcieHeight = self.imageView.frame.height - 20
 
                   var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
@@ -391,7 +391,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     func dataSendToServer(reason: String, userResult: String) {
         var parameters = [String : String]()
         parameters["PoletesterID"] = userDefault.object(forKey: "USERNAME") as? String
-        parameters["PoleID"] = "12"
         parameters["DPno"] = textFiledDataDisc["DP Number"]
         parameters["CPno"] = textFiledDataDisc["CP Number"]
         parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"]
