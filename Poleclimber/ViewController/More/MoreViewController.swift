@@ -14,8 +14,6 @@ import MessageUI
 @available(iOS 13.0, *)
 class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableview: UITableView!
-    @IBOutlet weak var urlTextField: UITextField!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +29,6 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillDisappear(_ animated: Bool) {
               super.viewWillDisappear(animated)
-        appDelegate.urlString = urlTextField.text!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -29,9 +29,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var feedbackObj: Feedback?
     var editPost = 0
     var fileName = ""
+    var timeStamp = ""
+    var requestMethod = ""
+    var imageName = ""
+    var detectionTime = ""
+    var id = ""
     
     var textFiledDataDisc = [String: String]()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,67 +89,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         Helper.sharedHelper.showGlobalHUD(title: "Processing...", view: view)
 
         if Helper.sharedHelper.isNetworkAvailable() {
- let filename = "image_" + Date().description
-                _ = imageView.image?.save(filename)
-                let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-                let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
-    
-                var parameters = [String : AnyObject]()
-                parameters["file"] = url as AnyObject
-                PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST",
-                                                            apiName: appDelegate.urlString,
-                                                                      fileName: fileName,
-                                                                      parameters: parameters, uploadImage: imageView.image) { (response, error) in
-                                                                        Helper.sharedHelper.dismissHUD(view: self.view)
-                                                                        if error == nil, let res = response?["detectedClasses"], res != nil {
-                                                                            let poleValues = (response!["detectedClasses"] as AnyObject)
-                                                                            
-                                                                                print(poleValues)
-                                                                            for i in 0 ..< (poleValues as! NSArray).count {
-                                                                                let poleType = poleValues.object(at: i) as? String
-                                                                                
-                                                                                if poleType == "good_tip" || poleType == "bad_tip" {
-//                                                                                    print("Episode \(i + 1): \(poleValues.object(at: i))")
-                                                                                    let resObj2 = (response?["detections"] as AnyObject).object(at: i)
-                                                                                    
-                                                                                    if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber {
-                                                                                        
-                                                                                        let devcieHeight = self.imageView.frame.height - 20
-
-                                                                                        var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
-                                                                                        width1 = (width1 / devcieHeight) * self.boxesView.frame.width
-                                                                                        
-                                                                                        var height1 = CGFloat(truncating: heightPos) - CGFloat(truncating: yPos)
-                                                                                        height1 = (height1 / devcieHeight) * self.boxesView.frame.height
-                                                                                        
-                                                                                        let yPos1 = ((CGFloat(truncating: yPos) / devcieHeight) * self.boxesView.frame.height) + 100
-                                                                                        
-                                                                                        let xPos1 = (CGFloat(truncating: xPos) / devcieHeight) * self.boxesView.frame.width
-                                                                                        
-                                                                                        let myView = DrawRectangle(frame: CGRect(x: CGFloat(xPos1), y: CGFloat(yPos1), width: CGFloat(width1), height: CGFloat(height1)))
-                                                                                        myView.poleType = poleType!
-                                                                                                                                                                    self.view.addSubview(myView)
-                                                                                        
-                                                                                        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
-                                                                                        label.text = poleType ?? "N/A"
-                                                                                        label.font = UIFont.systemFont(ofSize: 14)
-                                                                                        label.textColor = UIColor.black
-                                                                                        label.backgroundColor = poleType == "good_tip" ? UIColor.green : UIColor.red
-                                                                                        label.sizeToFit()
-                                                                                        label.frame = CGRect(x: myView.frame.origin.x, y: myView.frame.origin.y - label.frame.height,
-                                                                                                             width: label.frame.width, height: label.frame.height)
-                                                                                        self.view.addSubview(label)
-                                                                                                                                                                }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                        else{
-                                                                            //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
-                                                                            self.detectSubImagesInImg()
-                                                                        }
-
-
-                }
+           apiCalling()
            // perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
         else{
@@ -153,6 +97,100 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
     }
+    
+    func apiCalling() {
+        let filename = "image_" + Date().description
+        _ = imageView.image?.save(filename)
+        let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
+            
+        var parameters = [String : AnyObject]()
+        parameters["file"] = url as AnyObject
+        PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST", apiName: kBaseUrl, fileName: fileName, parameters: parameters, uploadImage: imageView.image) { (response, error) in
+            Helper.sharedHelper.dismissHUD(view: self.view)
+            if error == nil, let res = response?["detectedClasses"], res != nil {
+              let poleValues = (response!["detectedClasses"] as AnyObject)
+                                                                                    
+              print(poleValues)
+              for i in 0 ..< (poleValues as! NSArray).count {
+                let poleType = poleValues.object(at: i) as? String
+                                                                                        
+                if poleType == "good_tip" || poleType == "bad_tip" {
+                 let resObj2 = (response?["detections"] as AnyObject).object(at: i)
+                                                                                            
+                 if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber, let confidanceValue = (resObj2 as AnyObject).object(at: 4) as? NSNumber {
+                  let devcieHeight = self.imageView.frame.height - 20
+
+                  var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
+                  width1 = (width1 / devcieHeight) * self.boxesView.frame.width
+                                                                                                
+                  var height1 = CGFloat(truncating: heightPos) - CGFloat(truncating: yPos)
+                  height1 = (height1 / devcieHeight) * self.boxesView.frame.height
+                                                                                                
+                  let yPos1 = ((CGFloat(truncating: yPos) / devcieHeight) * self.boxesView.frame.height)
+                                                                                                
+                  let xPos1 = ((CGFloat(truncating: xPos) / devcieHeight) * self.boxesView.frame.width)
+                    
+                    
+                    
+//                    //Removing the pole tip object & checking threshould value
+//                    let confThresh = 0.85
+//                    let objAspectRatio: CGFloat = 0.75
+//
+//                    if CGFloat(confidanceValue) > CGFloat(confThresh)  {
+//                      let objHeight = height1
+//                      let objWidth = width1
+//                      let objRatio = objHeight / objWidth
+//
+//                      if  objRatio > objAspectRatio  {
+////                                               if self.predictions.count > 0, let dummyConfidance = self.predictions.first?.confidence, confidanceValue < dummyConfidance {
+////                                                   self.predictions.removeAll()
+////                                               }
+//
+//                      }
+//                    }
+
+                                                                                                
+                 let myView = DrawRectangle(frame: CGRect(x: CGFloat(xPos1), y: CGFloat(yPos1), width: CGFloat(width1), height: CGFloat(height1)))
+                 myView.poleType = poleType!
+                self.boxesView.addSubview(myView)
+                                                                                                
+                  let label = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
+                   label.text = poleType ?? "N/A"
+                   label.font = UIFont.systemFont(ofSize: 14)
+                   label.textColor = UIColor.black
+                   label.backgroundColor = poleType == "good_tip" ? UIColor.green : UIColor.red
+                   label.sizeToFit()
+                   label.frame = CGRect(x: myView.frame.origin.x, y: myView.frame.origin.y - label.frame.height,
+                                        width: label.frame.width, height: label.frame.height)
+                    self.boxesView.addSubview(label)
+                                                                                                         
+                   self.buttonsView.isHidden = false
+                   self.detectBtn.isHidden = true
+                   self.namelabel.isHidden = false
+                   if poleType == "good_tip" {
+                    self.namelabel.text = "Good Tip Detected"
+                   }
+                   else{
+                    self.namelabel.text = "Bad Tip Detected"
+                   }
+                    
+                    self.timeStamp = (response!["timeStamp"] as AnyObject) as! String
+                    self.requestMethod = (response!["requestMethod"] as AnyObject) as! String
+                    self.imageName = (response!["imageName"] as AnyObject) as! String
+                    self.detectionTime = "\(response!["detectionTime"] as AnyObject)"
+                    self.id = "\(response!["id"] as AnyObject)"
+               }
+            }
+          }
+        }
+        else{
+            //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+             self.detectSubImagesInImg()
+        }
+
+      }
+}
     
     @objc func detectSubImagesInImg() {
         captureImageDetails(pixelBuffer: cvpixelBuffer!)
@@ -362,10 +400,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["Userresult"] = userResult
         parameters["Reason"] = reason
         parameters["MLresult"] = namelabel.text
-
-        let urlString = appDelegate.urlString
+        parameters["timeStamp"] = timeStamp
+        parameters["requestMethod"] = requestMethod
+        parameters["imageName"] = imageName
+        parameters["detectionTime"] = detectionTime
+        parameters["id"] = id
         
-        let newURL =  urlString.replacingOccurrences(of: "detect", with: "data")
+        let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
         
         Helper.sharedHelper.showGlobalHUD(title: "Saving...", view: view)
 
