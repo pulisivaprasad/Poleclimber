@@ -347,6 +347,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     @IBAction func AgreeBtnAction(_ sender: Any) {
+        imageSavingInS3Bucket()
+
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
 
         if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
@@ -378,6 +380,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     func submitBtnAction(selectedReason: String) {
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
+        imageSavingInS3Bucket()
 
         if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
             dataSendToServer(reason: selectedReason, userResult: "Disagree")
@@ -387,6 +390,25 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
     }
+    
+    func imageSavingInS3Bucket() {
+           guard let image = imageView.image else { return } //1
+                     AWSS3Manager.shared.uploadImage(image: image, fileName: fileName, progress: {[weak self] ( uploadProgress) in
+                         
+                         guard let strongSelf = self else { return }
+                        // strongSelf.progressView.progress = Float(uploadProgress)//2
+                         
+                     }) {[weak self] (uploadedFileUrl, error) in
+                         
+                         guard let strongSelf = self else { return }
+                         if let finalPath = uploadedFileUrl as? String { // 3
+                          print("sss == \(finalPath)")
+                             //strongSelf.s3UrlLabel.text = "Uploaded file url: " + finalPath
+                         } else {
+                             print("\(String(describing: error?.localizedDescription))") // 4
+                         }
+                     }
+       }
     
     func dataSendToServer(reason: String, userResult: String) {
         var parameters = [String : String]()

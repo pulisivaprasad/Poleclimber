@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import AWSS3
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
                 
+        self.initializeS3() //2
+
         if  (userDefault.object(forKey: "isFirstLaunch") == nil)
         {
             userDefault.set("YES", forKey: "isFirstLaunch")
@@ -33,6 +37,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
         return true
     }
+    
+    func initializeS3() {
+        //let poolId = "***** your poolId *****" // 3-1
+        let credentialsProvider = AWSStaticCredentialsProvider.init(accessKey: "AKIAWIV5LQZAKU7YMV6D", secretKey: "6dhaCGmWI33kRoYMbbha2bgmXT1VtG9+R8hvIRB5")
+
+       // let credentialsProvider = AWSStaticCredentialsProvider.init(accessKey: <#T##String#>, secretKey: <#T##String#>)
+        let configuration = AWSServiceConfiguration(region: .EUWest2, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        
+    }
+
+
     
     @objc func methodOfReceivedNotification(notification: Notification)
     {
