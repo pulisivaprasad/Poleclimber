@@ -34,6 +34,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var imageName = ""
     var detectionTime = ""
     var id = ""
+    var detectedClasses = [AnyObject]()
+    var detections = [AnyObject]()
+    var goodCofidanceValueObjArr = [AnyObject]()
     
     var textFiledDataDisc = [String: String]()
 
@@ -110,15 +113,31 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             Helper.sharedHelper.dismissHUD(view: self.view)
             if error == nil, let res = response?["detectedClasses"], res != nil {
               let poleValues = (response!["detectedClasses"] as AnyObject)
-                                                                                    
+              self.detectedClasses = poleValues as! [AnyObject]
+                
+            //Pole tip not found in image
+             guard self.detectedClasses.count != 0 else {
+                Helper.sharedHelper.showGlobalAlertwithMessage("Pole tip could not be detected in the selected image.", vc: self)
+                self.imageView.image = UIImage(named: "")
+                self.noImgView.isHidden = false
+                self.detectBtn.isHidden = true
+
+                return
+             }
+                
+                
+            var myView = DrawRectangle()
+            var myLabel = UILabel()
+
+                
               print(poleValues)
               for i in 0 ..< (poleValues as! NSArray).count {
                 let poleType = poleValues.object(at: i) as? String
-                                                                                        
-                if poleType == "good_tip" || poleType == "bad_tip" {
+                self.detections.append((response?["detections"] as AnyObject).object(at: i) as! NSArray)
+                if poleType != "pole_tip" {
                  let resObj2 = (response?["detections"] as AnyObject).object(at: i)
                                                                                             
-                 if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber {
+                 if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber, let confidanceValue = (resObj2 as AnyObject).object(at: 4) as? NSNumber {
                   let devcieHeight = self.imageView.frame.height - 20
 
                   var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
@@ -133,47 +152,42 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                     
                     
                     
-//                    //Removing the pole tip object & checking threshould value
-//                    let confThresh = 0.85
-//                    let objAspectRatio: CGFloat = 0.75
-//
-//                    if CGFloat(confidanceValue) > CGFloat(confThresh)  {
-//                      let objHeight = height1
-//                      let objWidth = width1
-//                      let objRatio = objHeight / objWidth
-//
-//                      if  objRatio > objAspectRatio  {
-////                                               if self.predictions.count > 0, let dummyConfidance = self.predictions.first?.confidence, confidanceValue < dummyConfidance {
-////                                                   self.predictions.removeAll()
-////                                               }
-//
-//                      }
-//                    }
+              //Removing the pole tip object & checking threshould value
+                let confThresh = 0.85
+                let objAspectRatio: CGFloat = 0.75
 
+                if CGFloat(truncating: confidanceValue) > CGFloat(confThresh)  {
+                let objHeight = height1
+                let objWidth = width1
+                let objRatio = objHeight / objWidth
+        
+                if  objRatio > objAspectRatio  {
+//            if self.predictions.count > 0, let dummyConfidance = self.predictions.first?.confidence, object.confidence < dummyConfidance {
+//                self.predictions.removeAll()
+//            }
+            
+               self.goodCofidanceValueObjArr.append(resObj2 as AnyObject)
+               }
+             }
                                                                                                 
-                 let myView = DrawRectangle(frame: CGRect(x: CGFloat(xPos1), y: CGFloat(yPos1), width: CGFloat(width1), height: CGFloat(height1)))
+                 myView = DrawRectangle(frame: CGRect(x: CGFloat(xPos1), y: CGFloat(yPos1), width: CGFloat(width1), height: CGFloat(height1)))
                  myView.poleType = poleType!
-                self.boxesView.addSubview(myView)
                                                                                                 
-                  let label = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
-                   label.text = poleType ?? "N/A"
-                   label.font = UIFont.systemFont(ofSize: 14)
-                   label.textColor = UIColor.black
-                   label.backgroundColor = poleType == "good_tip" ? UIColor.green : UIColor.red
-                   label.sizeToFit()
-                   label.frame = CGRect(x: myView.frame.origin.x, y: myView.frame.origin.y - label.frame.height,
-                                        width: label.frame.width, height: label.frame.height)
-                    self.boxesView.addSubview(label)
-                                                                                                         
-                   self.buttonsView.isHidden = false
-                   self.detectBtn.isHidden = true
-                   self.namelabel.isHidden = false
-                   if poleType == "good_tip" {
-                    self.namelabel.text = "Good Tip Detected"
-                   }
-                   else{
-                    self.namelabel.text = "Bad Tip Detected"
-                   }
+                  myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 640, height: 640))
+                   myLabel.text = poleType ?? "N/A"
+                   myLabel.font = UIFont.systemFont(ofSize: 14)
+                   myLabel.textColor = UIColor.black
+                   myLabel.backgroundColor = poleType == "good_tip" ? UIColor.green : UIColor.red
+                   myLabel.sizeToFit()
+                   myLabel.frame = CGRect(x: myView.frame.origin.x, y: myView.frame.origin.y - myLabel.frame.height,
+                                        width: myLabel.frame.width, height: myLabel.frame.height)
+                    
+                    if poleType == "good_tip" {
+                        self.namelabel.text = "Good Tip Detected"
+                    }
+                    else{
+                        self.namelabel.text = "Bad Tip Detected"
+                    }
                     
                     self.timeStamp = (response!["timeStamp"] as AnyObject) as! String
                     self.requestMethod = (response!["requestMethod"] as AnyObject) as! String
@@ -183,6 +197,22 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                }
             }
           }
+                guard self.goodCofidanceValueObjArr.count != 0 else {
+                    Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enough for analysis.", vc: self)
+                  self.imageView.image = UIImage(named: "")
+                  self.noImgView.isHidden = false
+                  self.detectBtn.isHidden = true
+
+                  return
+                }
+                
+                self.buttonsView.isHidden = false
+                self.detectBtn.isHidden = true
+                self.namelabel.isHidden = false
+                
+                self.boxesView.addSubview(myView)
+                self.boxesView.addSubview(myLabel)
+
         }
         else{
             //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
@@ -389,21 +419,24 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func dataSendToServer(reason: String, userResult: String) {
-        var parameters = [String : String]()
-        parameters["PoletesterID"] = userDefault.object(forKey: "USERNAME") as? String
-        parameters["DPno"] = textFiledDataDisc["DP Number"]
-        parameters["CPno"] = textFiledDataDisc["CP Number"]
-        parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"]
-        parameters["Latitude"] = textFiledDataDisc["Latitude"]
-        parameters["Longitude"] = textFiledDataDisc["Longitude"]
-        parameters["Userresult"] = userResult
-        parameters["Reason"] = reason
-        parameters["MLresult"] = namelabel.text
-        parameters["timeStamp"] = timeStamp
-        parameters["requestMethod"] = requestMethod
-        parameters["imageName"] = imageName
-        parameters["detectionTime"] = detectionTime
-        parameters["id"] = id
+        var parameters = [String : AnyObject]()
+        parameters["PoletesterID"] = (userDefault.object(forKey: "USERNAME") as? String) as AnyObject
+        parameters["DPno"] = textFiledDataDisc["DP Number"] as AnyObject
+        parameters["CPno"] = textFiledDataDisc["CP Number"] as AnyObject
+        parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"] as AnyObject
+        parameters["Latitude"] = textFiledDataDisc["Latitude"] as AnyObject
+        parameters["Longitude"] = textFiledDataDisc["Longitude"] as AnyObject
+        parameters["Userresult"] = userResult as AnyObject
+        parameters["Reason"] = reason as AnyObject
+        parameters["MLresult"] = namelabel.text as AnyObject
+        parameters["timeStamp"] = timeStamp as AnyObject
+        parameters["requestMethod"] = requestMethod as AnyObject
+        parameters["imageName"] = imageName as AnyObject
+        parameters["detectionTime"] = detectionTime as AnyObject
+        parameters["id"] = id as AnyObject
+        parameters["detectedClasses"] = self.detectedClasses as AnyObject
+        parameters["detections"] = self.detections as AnyObject
+
         
         let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
         

@@ -112,7 +112,7 @@ typealias CompletionHandlerWithAnyObject = (_ status: Int, _ response: AnyObject
     
     func callWebAPIRequest(httpMethod: String,
                         apiName: String,
-                        parameters: [String: String],
+                        parameters: [String: AnyObject],
                         uploadImage: UIImage? = nil,
                         completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> ()) {
         
