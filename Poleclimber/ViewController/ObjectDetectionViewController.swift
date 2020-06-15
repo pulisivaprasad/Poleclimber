@@ -113,20 +113,20 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     
     func apiCalling() {
         let filename = "image_" + Date().description
-        _ = imageView.image?.save(filename)
+        _ = originalmageView.image?.save(filename)
         let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
             
         var parameters = [String : AnyObject]()
         parameters["file"] = url as AnyObject
-        PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST", apiName: kBaseUrl, fileName: fileName, parameters: parameters, uploadImage: imageView.image) { (response, error) in
+        PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST", apiName: kBaseUrl, fileName: fileName, parameters: parameters, uploadImage: originalmageView.image) { (response, error) in
             Helper.sharedHelper.dismissHUD(view: self.view)
             if error == nil, let res = response?["detectedClasses"], res != nil {
               let poleValues = (response!["detectedClasses"] as AnyObject)
               self.detectedClasses = "\(poleValues as! [AnyObject])"
                 
             //Pole tip not found in image
-             guard self.detectedClasses.count != 0 else {
+             guard (response!["detectedClasses"] as AnyObject).count != 0 else {
                 Helper.sharedHelper.showGlobalAlertwithMessage("Pole tip could not be detected in the selected image.", vc: self)
                 self.imageView.image = UIImage(named: "")
                 self.noImgView.isHidden = false
@@ -146,17 +146,19 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                  let resObj2 = (response?["detections"] as AnyObject).object(at: i)
                                                                                             
                  if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber, let confidanceValue = (resObj2 as AnyObject).object(at: 4) as? NSNumber {
-                  let devcieHeight = CGFloat(598)
+                    
+                    let devcieHeight = (self.originalmageView.image?.size.height)! - 20
+                    let devcieWidth = self.originalmageView.image?.size.width
 
                   var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
-                  width1 = (width1 / devcieHeight) * self.boxesView.frame.width
+                  width1 = (width1 / devcieWidth!) * self.boxesView.frame.width
                                                                                                 
                   var height1 = CGFloat(truncating: heightPos) - CGFloat(truncating: yPos)
                   height1 = (height1 / devcieHeight) * self.boxesView.frame.height
                                                                                                 
                   let yPos1 = ((CGFloat(truncating: yPos) / devcieHeight) * self.boxesView.frame.height)
                                                                                                 
-                  let xPos1 = ((CGFloat(truncating: xPos) / devcieHeight) * self.boxesView.frame.width)
+                    let xPos1 = ((CGFloat(truncating: xPos) / devcieWidth!) * self.boxesView.frame.width)
                                         
               //Removing the pole tip object & checking threshould value
                 let confThresh = 0.85
@@ -449,10 +451,29 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
            parameters["detections"] = "\(self.detections as AnyObject)"
         }
         
-        let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
-        let dateObj = dateFormatter.string(from: Date())
-        parameters["userTime"] = dateObj
+        
+        parameters["userTime"] = ("\(Date())")
+        
+        var address = "\(textFiledDataDisc["City"] ?? ""), \(textFiledDataDisc["State"] ?? ""), \(textFiledDataDisc["Country"] ?? "")"
+               
+        if let zipcode = textFiledDataDisc["Zip Code"] {
+            address = address + ", " + zipcode
+        }
+        if let lat = textFiledDataDisc["Latitude"] {
+            address = address + ", " + lat
+        }
+        else{
+            address = address + ", " + feedbackObj!.latitude!
+        }
+        
+        if let long = textFiledDataDisc["Longitude"] {
+            address = address + ", " + long
+        }
+        else{
+            address = address + ", " + feedbackObj!.latitude!
+        }
+        
+        parameters["gpsLocation"] = address
         
         let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
         
