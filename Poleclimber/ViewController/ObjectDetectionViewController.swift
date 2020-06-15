@@ -24,6 +24,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBOutlet weak var noImgView: UIView!
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
+    var originalmageView = UIImageView()
+
     var cvpixelBuffer: CVPixelBuffer!
     let rControl = RMController()
     var feedbackObj: Feedback?
@@ -34,7 +36,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var imageName = ""
     var detectionTime = ""
     var id = ""
-    var detectedClasses = [AnyObject]()
+    var detectedClasses = ""
     var detections = [AnyObject]()
     var goodCofidanceValueObjArr = [AnyObject]()
     
@@ -59,6 +61,14 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 imageView.image = image
                 getCVPixelBuffer(image: image!)
             }
+            fileName = feedbackObj!.imgID ?? ""
+            timeStamp = feedbackObj!.timeStamp ?? ""
+            requestMethod = feedbackObj!.requestMethod ?? ""
+            imageName = feedbackObj!.imageName ?? ""
+            detectionTime = feedbackObj!.detectionTime ?? ""
+            id = feedbackObj!.id ?? ""
+            detectedClasses = feedbackObj!.detectedClasses ?? ""
+//            detections = feedbackObj?.detections as AnyObject]
         }
         else{
             detectBtn.isHidden = true
@@ -113,7 +123,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             Helper.sharedHelper.dismissHUD(view: self.view)
             if error == nil, let res = response?["detectedClasses"], res != nil {
               let poleValues = (response!["detectedClasses"] as AnyObject)
-              self.detectedClasses = poleValues as! [AnyObject]
+              self.detectedClasses = "\(poleValues as! [AnyObject])"
                 
             //Pole tip not found in image
              guard self.detectedClasses.count != 0 else {
@@ -125,10 +135,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 return
              }
                 
-                
             var myView = DrawRectangle()
             var myLabel = UILabel()
-
                 
               print(poleValues)
               for i in 0 ..< (poleValues as! NSArray).count {
@@ -138,7 +146,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                  let resObj2 = (response?["detections"] as AnyObject).object(at: i)
                                                                                             
                  if let xPos = (resObj2 as AnyObject).object(at: 0) as? NSNumber, let yPos = (resObj2 as AnyObject).object(at: 1) as? NSNumber, let widthPos = (resObj2 as AnyObject).object(at: 2) as? NSNumber, let heightPos = (resObj2 as AnyObject).object(at: 3) as? NSNumber, let confidanceValue = (resObj2 as AnyObject).object(at: 4) as? NSNumber {
-                  let devcieHeight = self.imageView.frame.height - 20
+                  let devcieHeight = CGFloat(598)
 
                   var width1 = CGFloat(truncating: widthPos) - CGFloat(truncating: xPos)
                   width1 = (width1 / devcieHeight) * self.boxesView.frame.width
@@ -149,9 +157,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                   let yPos1 = ((CGFloat(truncating: yPos) / devcieHeight) * self.boxesView.frame.height)
                                                                                                 
                   let xPos1 = ((CGFloat(truncating: xPos) / devcieHeight) * self.boxesView.frame.width)
-                    
-                    
-                    
+                                        
               //Removing the pole tip object & checking threshould value
                 let confThresh = 0.85
                 let objAspectRatio: CGFloat = 0.75
@@ -244,6 +250,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     // MARK: - UIImagePickerControllerDelegate Method
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            originalmageView.image = image
             getCVPixelBuffer(image: image)
             
              guard let fileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
@@ -379,8 +386,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     @IBAction func AgreeBtnAction(_ sender: Any) {
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
 
-        if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
-            dataSendToServer(reason:"NULL", userResult: "Ok")
+        if Helper.sharedHelper.isNetworkAvailable(){
+            dataSendToServer(reason:"NA", userResult: "Ok")
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
@@ -409,7 +416,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     func submitBtnAction(selectedReason: String) {
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
-        if Helper.sharedHelper.isNetworkAvailable() && editPost != 1 {
+        if Helper.sharedHelper.isNetworkAvailable() {
             dataSendToServer(reason: selectedReason, userResult: "Disagree")
         }
         else{
@@ -419,24 +426,33 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     }
     
     func dataSendToServer(reason: String, userResult: String) {
-        var parameters = [String : AnyObject]()
-        parameters["PoletesterID"] = (userDefault.object(forKey: "USERNAME") as? String) as AnyObject
-        parameters["DPno"] = textFiledDataDisc["DP Number"] as AnyObject
-        parameters["CPno"] = textFiledDataDisc["CP Number"] as AnyObject
-        parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"] as AnyObject
-        parameters["Latitude"] = textFiledDataDisc["Latitude"] as AnyObject
-        parameters["Longitude"] = textFiledDataDisc["Longitude"] as AnyObject
-        parameters["Userresult"] = userResult as AnyObject
-        parameters["Reason"] = reason as AnyObject
-        parameters["MLresult"] = namelabel.text as AnyObject
-        parameters["timeStamp"] = timeStamp as AnyObject
-        parameters["requestMethod"] = requestMethod as AnyObject
-        parameters["imageName"] = imageName as AnyObject
-        parameters["detectionTime"] = detectionTime as AnyObject
-        parameters["id"] = id as AnyObject
-        parameters["detectedClasses"] = self.detectedClasses as AnyObject
-        parameters["detections"] = self.detections as AnyObject
-
+        var parameters = [String : String]()
+        parameters["PoletesterID"] = (userDefault.object(forKey: "USERNAME") as? String)
+        parameters["DPno"] = textFiledDataDisc["DP Number"] != nil ? textFiledDataDisc["DP Number"] : feedbackObj?.dpnumber
+        parameters["CPno"] = textFiledDataDisc["CP Number"] != nil ? textFiledDataDisc["CP Number"] : feedbackObj?.cpnumber
+        parameters["Exchange_area"] = textFiledDataDisc["Exchange Area"] != nil ? textFiledDataDisc["Exchange Area"] : feedbackObj?.exchangeArea
+        parameters["Latitude"] = textFiledDataDisc["Latitude"] != nil ? textFiledDataDisc["Latitude"] : feedbackObj?.latitude
+        parameters["Longitude"] = textFiledDataDisc["Longitude"] != nil ? textFiledDataDisc["Longitude"] : feedbackObj?.longitude
+        parameters["Userresult"] = userResult != nil ? userResult : feedbackObj?.userResult
+        parameters["Reason"] = reason != nil ? reason : feedbackObj?.reason
+        parameters["MLresult"] = namelabel.text != nil ? namelabel.text : feedbackObj?.mlResult
+        parameters["timeStamp"] = timeStamp
+        parameters["requestMethod"] = requestMethod
+        parameters["imageName"] = imageName
+        parameters["detectionTime"] = detectionTime
+        parameters["id"] = id
+        parameters["detectedClasses"] = self.detectedClasses
+        if editPost == 1 {
+            parameters["detections"] = feedbackObj?.detections
+        }
+        else{
+           parameters["detections"] = "\(self.detections as AnyObject)"
+        }
+        
+        let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
+        let dateObj = dateFormatter.string(from: Date())
+        parameters["userTime"] = dateObj
         
         let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
         
@@ -449,62 +465,37 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
                                                     if error == nil {
                                                         if let messsage = response!["data"] as? MLFeatureValue {
-                                                            Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
+                                                            //Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
+                                                        //perform(#selector(self.navigateToHomeScreen), with: nil, afterDelay: 3)
+                                                            
+
                                                             self.navigateToHomeScreen()
                                                         }
 
                                                     }
                                                     else{
-                                                                                                                self.navigateToHomeScreen()
- //Helper.sharedHelper.showGlobalAlertwithMessage(error!.localizedDescription, vc: self)
+                                                        self.navigateToHomeScreen()
                                                     }
         }
     }
 
     func userfeedbackSaving(userKey: String, tipStatus: String, reason: String)  {
         if editPost == 1 {
-            var parameters = [String: String]()
-            parameters["tipStatus"] = tipStatus
-
-            let dateFormatter = DateFormatter()
-              dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
-            let dateObj = dateFormatter.string(from: Date())
-            parameters["date"] = dateObj
-            
-            if let image = containerView.pb_takeSnapshot() {
-                let filename = "image_" + Date().description
-                let filename2 = "orimage_" + Date().description
-
-                _ = image.save(filename)
-                _ = imageView.image?.save(filename2)
-                
-                parameters["image"] = filename
-                parameters["originalImg"] = filename2
-            }
-            
-            if userKey == "DISAGREEUSERDETAILS"{
-                parameters["userAcceptance"] = "Disagree"
-                parameters["reason"] = reason
-            }else{
-                parameters["userAcceptance"] = "Ok"
-                parameters["reason"] = "NULL"
-            }
-
-            DataManager.sharedInstance.updateFeedback(parameters: parameters, fetchID: feedbackObj!.date!)
+           updateDB(tipStatus: tipStatus, userKey: userKey, reason: reason)
             return
         }
         
         let dataManager = DataManager.sharedInstance
         let context = dataManager.getContext()
         let feedback = Feedback(context: context!)
-        feedback.tipStatus = tipStatus
+        feedback.mlResult = tipStatus
         feedback.poleTesterID = userDefault.object(forKey: "USERNAME") as? String
         if userKey == "DISAGREEUSERDETAILS"{
-            feedback.userAcceptance = "Disagree"
+            feedback.userResult = "Disagree"
             feedback.reason = reason
         }else{
-            feedback.userAcceptance = "Ok"
-            feedback.reason = "NULL"
+            feedback.userResult = "Ok"
+            feedback.reason = "NA"
         }
                
         let dateFormatter = DateFormatter()
@@ -535,8 +526,54 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.gpsLocation = address
         feedback.latitude = textFiledDataDisc["Latitude"]
         feedback.longitude = textFiledDataDisc["Longitude"]
-
+        feedback.detections = "\(self.detections)"
+        feedback.timeStamp = timeStamp
+        feedback.requestMethod = requestMethod
+        feedback.imageName = imageName
+        feedback.detectionTime = detectionTime
+        feedback.id = id
+        feedback.imgID = fileName
+        feedback.detectedClasses = self.detectedClasses
         dataManager.saveChanges()
+    }
+    
+    func updateDB(tipStatus: String, userKey: String, reason: String) {
+        var parameters = [String: String]()
+                   parameters["mlResult"] = tipStatus
+
+        let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
+        let dateObj = dateFormatter.string(from: Date())
+         parameters["date"] = dateObj
+                   
+        if let image = containerView.pb_takeSnapshot() {
+         let filename = "image_" + Date().description
+         let filename2 = "orimage_" + Date().description
+
+         _ = image.save(filename)
+         _ = imageView.image?.save(filename2)
+                       
+            parameters["image"] = filename
+            parameters["originalImg"] = filename2
+        }
+                   
+        if userKey == "DISAGREEUSERDETAILS"{
+            parameters["userResult"] = "Disagree"
+            parameters["reason"] = reason
+        }else{
+            parameters["userResult"] = "Ok"
+            parameters["reason"] = "NA"
+        }
+        
+        parameters["detections"] = "\(self.detections)"
+        parameters["timeStamp"] = timeStamp
+        parameters["requestMethod"] = requestMethod
+        parameters["imageName"] = imageName
+        parameters["detectionTime"] = detectionTime
+        parameters["id"] = id
+        parameters["detectedClasses"] = self.detectedClasses
+
+        DataManager.sharedInstance.updateFeedback(parameters: parameters, fetchID: feedbackObj!.date!)
     }
 }
 

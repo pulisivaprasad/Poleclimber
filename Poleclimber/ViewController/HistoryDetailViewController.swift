@@ -33,7 +33,7 @@ class HistoryDetailViewController: UIViewController {
         }
         
         updateddate.text = feedbackObj?.date
-        if feedbackObj?.reason != "NULL"{
+        if feedbackObj?.reason != "NA"{
             feedbackReason.text = feedbackObj?.reason
         }
         exchangeArea.text = "Exchange Area: " + (feedbackObj?.exchangeArea ?? "")

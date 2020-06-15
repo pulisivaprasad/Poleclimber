@@ -42,7 +42,7 @@ class HistoryViewController: UIViewController {
             dateFormatter.date(from: $0.date!)?.compare(dateFormatter.date(from: $1.date!)!) == .orderedDescending
         })
         
-        declinedArray = acceptanceArray!.filter{$0.userAcceptance != "Ok"}
+        declinedArray = acceptanceArray!.filter{$0.userResult != "Ok"}
         Helper.sharedHelper.dismissHUD(view: self.view)
 
         historyTableView.reloadData()
@@ -203,11 +203,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
                               
-        if feedbackObj?.reason != "NULL"{
-            cell.reasonLabel.text = feedbackObj?.reason
-        }
+            cell.reasonLabel.text = feedbackObj?.reason == "NA" ? "" : feedbackObj?.reason
                            
-       // cell.reasonLabel.text = feedbackObj?.reason
         
         if let exchangeAreaValue = feedbackObj?.exchangeArea {
             cell.exchangeAreaLabel.text = "Exchange Area: \(exchangeAreaValue)"
@@ -236,7 +233,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 //            cell.gpsLocationLabel.text = "GPS Location: \(gpsLocationValue)"
 //        }
                
-        if feedbackObj?.tipStatus == "Good Tip Detected"{
+        if feedbackObj?.mlResult == "Good Tip Detected"{
             cell.tipTypeImg.image = UIImage(named: "good")
         }else{
             cell.tipTypeImg.image = UIImage(named: "bad")

@@ -31,5 +31,17 @@ extension Feedback {
     @NSManaged public var gpsLocation: String?
     @NSManaged public var latitude: String?
     @NSManaged public var longitude: String?
+    @NSManaged public var imgID: String?    
+    
+    @NSManaged public var detections: String?
+    @NSManaged public var detectedClasses: String?
+    @NSManaged public var id: String?
+    @NSManaged public var detectionTime: String?
+    @NSManaged public var imageName: String?
+    @NSManaged public var requestMethod: String?
+    @NSManaged public var timeStamp: String?
+    @NSManaged public var mlResult: String?
+    @NSManaged public var userResult: String?
+
 
 }
