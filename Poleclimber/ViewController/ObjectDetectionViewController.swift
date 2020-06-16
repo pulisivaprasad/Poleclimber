@@ -25,6 +25,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var imagePicker:UIImagePickerController!
     @IBOutlet weak var imageView: UIImageView!
     var originalmageView = UIImageView()
+    var modelRunningLocation = "iPhone"
 
     var cvpixelBuffer: CVPixelBuffer!
     let rControl = RMController()
@@ -217,7 +218,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.buttonsView.isHidden = false
                 self.detectBtn.isHidden = true
                 self.namelabel.isHidden = false
-                
+                self.modelRunningLocation = "cloud"
                 self.boxesView.addSubview(myView)
                 self.boxesView.addSubview(myLabel)
 
@@ -474,6 +475,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
         
         parameters["gpsLocation"] = address
+        parameters["mlModelProcessingLocation"] = modelRunningLocation
         
         let newURL =  kBaseUrl.replacingOccurrences(of: "detect", with: "data")
         
@@ -555,6 +557,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.id = id
         feedback.imgID = fileName
         feedback.detectedClasses = self.detectedClasses
+        feedbackObj?.mlModelProcessingLocation = modelRunningLocation
         dataManager.saveChanges()
     }
     
@@ -593,6 +596,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["detectionTime"] = detectionTime
         parameters["id"] = id
         parameters["detectedClasses"] = self.detectedClasses
+        parameters["mlModelProcessingLocation"] = modelRunningLocation
 
         DataManager.sharedInstance.updateFeedback(parameters: parameters, fetchID: feedbackObj!.date!)
     }

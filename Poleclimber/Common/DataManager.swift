@@ -60,8 +60,8 @@ class DataManager: NSObject {
              objectUpdate.setValue(parameters["date"], forKey: "date")
              objectUpdate.setValue(parameters["image"], forKey: "image")
              objectUpdate.setValue(parameters["originalImg"], forKey: "originalImg")
-             objectUpdate.setValue(parameters["tipStatus"], forKey: "tipStatus")
-             objectUpdate.setValue(parameters["userAcceptance"], forKey: "userAcceptance")
+             objectUpdate.setValue(parameters["mlResult"], forKey: "mlResult")
+             objectUpdate.setValue(parameters["userResult"], forKey: "userResult")
              objectUpdate.setValue(parameters["reason"], forKey: "reason")
 
             saveChanges()

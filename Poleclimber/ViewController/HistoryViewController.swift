@@ -23,6 +23,7 @@ class HistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
         
     func fetchFeedback() {
@@ -48,6 +49,7 @@ class HistoryViewController: UIViewController {
         historyTableView.reloadData()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
        self.navigationController?.isNavigationBarHidden = false
@@ -58,7 +60,60 @@ class HistoryViewController: UIViewController {
        fetchFeedback()
         
 //        showSearchBar()
+        
+        let csvString = writeCoreObjectsToCSV(objects: acceptanceArray!, named: "Generic name")
+        print(csvString)
+        //let data = csvString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let url = URL(fileURLWithPath: path).appendingPathComponent("FEEDBACKDATA")
+        print(url)
 
+    }
+    
+    // Takes a managed object and writes it to the .csv file ..?
+    func writeCoreObjectsToCSV(objects: [Feedback], named: String) -> [String]
+    {
+    // Make sure we have some data to export
+    guard objects.count > 0 else
+    {
+        return [""]
+    }
+        var feedbackArr = [String]()
+        
+        for feedbackObj in objects {
+             let firstObject = feedbackObj
+               let attribs = Array(firstObject.entity.attributesByName.keys)
+               // The attires.reduce function is throwing an error about originally using combine as in the second post, used auto fix, but noteworthy.
+               //Now gives an error that says "No '+' candidates produce the expected contextual result type NSString"
+                   let csvHeaderString = (attribs.reduce("", {($0 as String) + "," + $1 }) as NSString).substring(from: 1) + "\n"
+               // This function says that substring from index has been renamed as well as a few other lines within it
+               let csvArray = objects.map({object in
+                   (attribs.map({((object.value(forKey: $0) ?? "NIL") as AnyObject).description}).reduce("",{$0 + "," + $1}) as NSString).substring(from: 1) + "\n"
+               })
+               // Again with the reduce issue
+                   let csvString = csvArray.reduce("", +)
+            
+            let savingCSVString = csvHeaderString + csvString
+
+            
+            let filemanager = FileManager.default
+            let directory = filemanager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let path = directory.appendingPathComponent("FEEDBACKDATA").appendingPathExtension("csv")
+            if filemanager.fileExists(atPath: path.path) {
+                filemanager.createFile(atPath: path.path, contents: nil, attributes: nil)
+            }
+            do {
+                try savingCSVString.write(to: path, atomically: true, encoding: .utf8)
+                       
+            }catch let error {
+                print(error.localizedDescription)
+            }
+            
+            feedbackArr.append(savingCSVString)
+        }
+   
+      return feedbackArr
     }
     
     func showSearchBar(){

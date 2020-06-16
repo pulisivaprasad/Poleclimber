@@ -15,6 +15,7 @@
         <attribute name="imgID" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="String"/>
         <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="mlModelProcessingLocation" optional="YES" attributeType="String"/>
         <attribute name="mlResult" optional="YES" attributeType="String"/>
         <attribute name="originalImg" optional="YES" attributeType="String"/>
         <attribute name="poleID" optional="YES" attributeType="String"/>
@@ -22,8 +23,6 @@
         <attribute name="reason" optional="YES" attributeType="String"/>
         <attribute name="requestMethod" optional="YES" attributeType="String"/>
         <attribute name="timeStamp" optional="YES" attributeType="String"/>
-        <attribute name="tipStatus" optional="YES" attributeType="String"/>
-        <attribute name="userAcceptance" optional="YES" attributeType="String"/>
         <attribute name="userResult" optional="YES" attributeType="String"/>
     </entity>
     <entity name="LoginAuth" representedClassName="LoginAuth" syncable="YES">
@@ -31,7 +30,7 @@
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="403"/>
+        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="388"/>
         <element name="LoginAuth" positionX="-63" positionY="36" width="128" height="73"/>
     </elements>
 </model>
