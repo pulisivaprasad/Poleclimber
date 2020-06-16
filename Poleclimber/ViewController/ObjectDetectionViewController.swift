@@ -60,6 +60,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             if let imagename = feedbackObj?.originalImg {
                  let image = self.loadeImage(name: imagename)
                 imageView.image = image
+                originalmageView.image = image
                 getCVPixelBuffer(image: image!)
             }
             fileName = feedbackObj!.imgID ?? ""
@@ -69,6 +70,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             detectionTime = feedbackObj!.detectionTime ?? ""
             id = feedbackObj!.id ?? ""
             detectedClasses = feedbackObj!.detectedClasses ?? ""
+            
 //            detections = feedbackObj?.detections as AnyObject]
         }
         else{

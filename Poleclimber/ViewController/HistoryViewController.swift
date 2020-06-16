@@ -61,12 +61,12 @@ class HistoryViewController: UIViewController {
         
 //        showSearchBar()
         
-        let csvString = writeCoreObjectsToCSV(objects: acceptanceArray!, named: "Generic name")
+        let csvString = writeCoreObjectsToCSV(objects: acceptanceArray!, named: (userDefault.object(forKey: "USERNAME") as? String)!)
         print(csvString)
         //let data = csvString.dataUsingEncoding(NSUTF8StringEncoding)
         
         let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let url = URL(fileURLWithPath: path).appendingPathComponent("FEEDBACKDATA")
+        let url = URL(fileURLWithPath: path).appendingPathComponent((userDefault.object(forKey: "USERNAME") as? String)!)
         print(url)
 
     }
@@ -95,11 +95,10 @@ class HistoryViewController: UIViewController {
                    let csvString = csvArray.reduce("", +)
             
             let savingCSVString = csvHeaderString + csvString
-
             
             let filemanager = FileManager.default
             let directory = filemanager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let path = directory.appendingPathComponent("FEEDBACKDATA").appendingPathExtension("csv")
+            let path = directory.appendingPathComponent(named).appendingPathExtension("csv")
             if filemanager.fileExists(atPath: path.path) {
                 filemanager.createFile(atPath: path.path, contents: nil, attributes: nil)
             }

@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.1.0)
+  - AWSCore (2.13.4)
+  - AWSS3 (2.13.4):
+    - AWSCore (= 2.13.4)
   - HexColors (6.0.0)
   - InitialsImageView (0.7.0)
   - JVFloatLabeledTextField (1.2.2)
@@ -9,6 +12,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AWSS3
   - InitialsImageView
   - JVFloatLabeledTextField
   - RevealingSplashView
@@ -17,6 +21,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AWSCore
+    - AWSS3
     - HexColors
     - InitialsImageView
     - JVFloatLabeledTextField
@@ -25,12 +31,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AWSCore: 06beea22b6bdbfe9f5ab5015c6901e8475c746a8
+  AWSS3: ab3965322c8e5ee069eaf9b3201c55557ad21be1
   HexColors: f8c66339541a74bb08905bfe7cd4f8cc85e9e173
   InitialsImageView: 7a416d36fc6df5434198664db28a3ffb0228426d
   JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   RMessage: f6d768616d6afbc2c92a2451de9d7f7617b7195c
 
-PODFILE CHECKSUM: b202b844cc7e2dc6e33f3ec39d38befd0922a9c7
+PODFILE CHECKSUM: 21a58cbe08c1de22052cf4a135a533108e58d56e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
