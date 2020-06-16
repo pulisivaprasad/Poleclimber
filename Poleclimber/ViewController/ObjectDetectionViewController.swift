@@ -36,7 +36,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var requestMethod = ""
     var imageName = ""
     var detectionTime = ""
-    var id = ""
     var detectedClasses = ""
     var detections = [AnyObject]()
     var goodCofidanceValueObjArr = [AnyObject]()
@@ -68,7 +67,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             requestMethod = feedbackObj!.requestMethod ?? ""
             imageName = feedbackObj!.imageName ?? ""
             detectionTime = feedbackObj!.detectionTime ?? ""
-            id = feedbackObj!.id ?? ""
             detectedClasses = feedbackObj!.detectedClasses ?? ""
             
 //            detections = feedbackObj?.detections as AnyObject]
@@ -114,6 +112,26 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         }
     }
     
+    func imageSavingInS3Bucket() {
+        guard let image = originalmageView.image else { return } //1
+                  AWSS3Manager.shared.uploadImage(image: image, fileName: fileName, progress: {[weak self] ( uploadProgress) in
+                      
+                      guard let strongSelf = self else { return }
+                     // strongSelf.progressView.progress = Float(uploadProgress)//2
+                      
+                  }) {[weak self] (uploadedFileUrl, error) in
+                      
+                      guard let strongSelf = self else { return }
+                      if let finalPath = uploadedFileUrl as? String { // 3
+                       print("sss == \(finalPath)")
+                          //strongSelf.s3UrlLabel.text = "Uploaded file url: " + finalPath
+                      } else {
+                          print("\(String(describing: error?.localizedDescription))") // 4
+                      }
+                  }
+    }
+    
+    
     func apiCalling() {
         let filename = "image_" + Date().description
         _ = originalmageView.image?.save(filename)
@@ -122,11 +140,18 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             
         var parameters = [String : AnyObject]()
         parameters["file"] = url as AnyObject
+      //  imageSavingInS3Bucket()
         PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST", apiName: kBaseUrl, fileName: fileName, parameters: parameters, uploadImage: originalmageView.image) { (response, error) in
             Helper.sharedHelper.dismissHUD(view: self.view)
             if error == nil, let res = response?["detectedClasses"], res != nil {
               let poleValues = (response!["detectedClasses"] as AnyObject)
               self.detectedClasses = "\(poleValues as! [AnyObject])"
+                self.modelRunningLocation = "cloud"
+
+                self.timeStamp = (response!["timeStamp"] as AnyObject) as! String
+                self.requestMethod = (response!["requestMethod"] as AnyObject) as! String
+                self.imageName = (response!["imageName"] as AnyObject) as! String
+                self.detectionTime = "\(response!["detectionTime"] as AnyObject)"
                 
             //Pole tip not found in image
              guard (response!["detectedClasses"] as AnyObject).count != 0 else {
@@ -134,6 +159,8 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.imageView.image = UIImage(named: "")
                 self.noImgView.isHidden = false
                 self.detectBtn.isHidden = true
+                self.namelabel.text = "No pole tip found"
+                self.dataSendToServer(reason: "NA", userResult: "NA", navigateToHome: 2)
 
                 return
              }
@@ -200,11 +227,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                         self.namelabel.text = "Bad Tip Detected"
                     }
                     
-                    self.timeStamp = (response!["timeStamp"] as AnyObject) as! String
-                    self.requestMethod = (response!["requestMethod"] as AnyObject) as! String
-                    self.imageName = (response!["imageName"] as AnyObject) as! String
-                    self.detectionTime = "\(response!["detectionTime"] as AnyObject)"
-                    self.id = "\(response!["id"] as AnyObject)"
                }
             }
           }
@@ -213,6 +235,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                   self.imageView.image = UIImage(named: "")
                   self.noImgView.isHidden = false
                   self.detectBtn.isHidden = true
+                  self.namelabel.text = "No pole tip found"
+
+                  self.dataSendToServer(reason: "Bad quality", userResult: "NA", navigateToHome: 2)
 
                   return
                 }
@@ -220,7 +245,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.buttonsView.isHidden = false
                 self.detectBtn.isHidden = true
                 self.namelabel.isHidden = false
-                self.modelRunningLocation = "cloud"
                 self.boxesView.addSubview(myView)
                 self.boxesView.addSubview(myLabel)
 
@@ -392,7 +416,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
 
         if Helper.sharedHelper.isNetworkAvailable(){
-            dataSendToServer(reason:"NA", userResult: "Ok")
+            dataSendToServer(reason:"NA", userResult: "Ok", navigateToHome: 1)
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
@@ -422,7 +446,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
         if Helper.sharedHelper.isNetworkAvailable() {
-            dataSendToServer(reason: selectedReason, userResult: "Disagree")
+            dataSendToServer(reason: selectedReason, userResult: "Disagree", navigateToHome: 1)
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
@@ -430,7 +454,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
     }
     
-    func dataSendToServer(reason: String, userResult: String) {
+    func dataSendToServer(reason: String, userResult: String, navigateToHome: Int) {
         var parameters = [String : String]()
         parameters["PoletesterID"] = (userDefault.object(forKey: "USERNAME") as? String)
         parameters["DPno"] = textFiledDataDisc["DP Number"] != nil ? textFiledDataDisc["DP Number"] : feedbackObj?.dpnumber
@@ -445,7 +469,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["requestMethod"] = requestMethod
         parameters["imageName"] = imageName
         parameters["detectionTime"] = detectionTime
-        parameters["id"] = id
         parameters["detectedClasses"] = self.detectedClasses
         if editPost == 1 {
             parameters["detections"] = feedbackObj?.detections
@@ -493,8 +516,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                                             //Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
                                                         //perform(#selector(self.navigateToHomeScreen), with: nil, afterDelay: 3)
                                                             
-
-                                                            self.navigateToHomeScreen()
+                                                            if navigateToHome == 1 {
+                                                              self.navigateToHomeScreen()
+                                                            }
                                                         }
 
                                                     }
@@ -556,10 +580,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.requestMethod = requestMethod
         feedback.imageName = imageName
         feedback.detectionTime = detectionTime
-        feedback.id = id
         feedback.imgID = fileName
         feedback.detectedClasses = self.detectedClasses
-        feedbackObj?.mlModelProcessingLocation = modelRunningLocation
+        feedback.mlModelProcessingLocation = modelRunningLocation
         dataManager.saveChanges()
     }
     
@@ -596,7 +619,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["requestMethod"] = requestMethod
         parameters["imageName"] = imageName
         parameters["detectionTime"] = detectionTime
-        parameters["id"] = id
         parameters["detectedClasses"] = self.detectedClasses
         parameters["mlModelProcessingLocation"] = modelRunningLocation
 

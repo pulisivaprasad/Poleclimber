@@ -48,6 +48,27 @@ class DataManager: NSObject {
         return nil
     }
     
+    func retrieveSavedFeedbackWithLocalMLModel(userID: String) -> [Feedback]? {
+           
+           let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")
+        
+        let predicateIsNumber = NSPredicate(format: "poleTesterID == %@", userID)
+        let predicateIsEnabled = NSPredicate(format: "mlModelProcessingLocation == %@", "iPhone")
+        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateIsNumber, predicateIsEnabled])
+        
+           fetchRequest.predicate = andPredicate //NSPredicate(format: "poleTesterID == %@", userID)
+           do {
+               
+               let fetchedResults = try getContext()!.fetch(fetchRequest)
+               return fetchedResults
+               
+           }catch let error as NSError {
+               // something went wrong, print the error.
+               print(error.description)
+           }
+           return nil
+       }
+    
     func updateFeedback(parameters: [String: String], fetchID: String) {
            
            let fetchRequest = NSFetchRequest<Feedback>(entityName: "Feedback")

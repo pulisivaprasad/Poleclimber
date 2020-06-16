@@ -9,7 +9,6 @@
         <attribute name="dpnumber" optional="YES" attributeType="String"/>
         <attribute name="exchangeArea" optional="YES" attributeType="String"/>
         <attribute name="gpsLocation" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="imgID" optional="YES" attributeType="String"/>
@@ -30,7 +29,7 @@
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="388"/>
+        <element name="Feedback" positionX="-63" positionY="-18" width="128" height="373"/>
         <element name="LoginAuth" positionX="-63" positionY="36" width="128" height="73"/>
     </elements>
 </model>
