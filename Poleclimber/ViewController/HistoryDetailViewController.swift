@@ -44,10 +44,10 @@ class HistoryDetailViewController: UIViewController {
         
         
         
-        if feedbackObj?.mlResult == "Good Tip Detected"{
-            tipTypeImg.image = UIImage(named: "good")
+        if feedbackObj?.userResult == "Ok"{
+            tipTypeImg.image = UIImage(named: "like")
         }else{
-            tipTypeImg.image = UIImage(named: "bad")
+            tipTypeImg.image = UIImage(named: "disLike")
         }
     }
     

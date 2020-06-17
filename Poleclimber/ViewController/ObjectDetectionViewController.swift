@@ -485,19 +485,6 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if let zipcode = textFiledDataDisc["Zip Code"] {
             address = address + ", " + zipcode
         }
-        if let lat = textFiledDataDisc["Latitude"] {
-            address = address + ", " + lat
-        }
-        else{
-            address = address + ", " + feedbackObj!.latitude!
-        }
-        
-        if let long = textFiledDataDisc["Longitude"] {
-            address = address + ", " + long
-        }
-        else{
-            address = address + ", " + feedbackObj!.latitude!
-        }
         
         parameters["gpsLocation"] = address
         parameters["mlModelProcessingLocation"] = modelRunningLocation
