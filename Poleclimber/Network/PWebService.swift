@@ -75,7 +75,18 @@ typealias CompletionHandlerWithAnyObject = (_ status: Int, _ response: AnyObject
         "Content-Type": "application/form-data"
         ]
         
-        AF.upload(
+        let manager = AF
+        manager.session.configuration.timeoutIntervalForRequest = 30
+        manager.session.configuration.timeoutIntervalForResource = 30
+        
+
+        
+//        let configuration = URLSessionConfiguration.default
+//          configuration.timeoutIntervalForRequest = 300
+//          configuration.httpShouldUsePipelining = true
+//        let sessionManger = Session(configuration: configuration, startRequestsImmediately: true)
+
+        manager.upload(
          multipartFormData: { multipartFormData in
             multipartFormData.append((uploadImage?.jpegData(compressionQuality: 0.5)!)!, withName: "file" , fileName: fileName, mimeType: "image/jpg")
          },

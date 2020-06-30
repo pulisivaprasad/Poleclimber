@@ -32,7 +32,7 @@ class PoleDetailsViewController: UIViewController, LocationManagerDelegate {
         self.title = "Pole Details"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         latitudeTField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
-        longitudeTField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+        longitudeTField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))       
     }
     
     @objc func doneButtonTappedForMyNumericTextField() {

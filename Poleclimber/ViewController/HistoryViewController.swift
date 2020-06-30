@@ -37,8 +37,10 @@ class HistoryViewController: UIViewController {
             return
         }
         
+        var localTimeZoneAbbreviation: String { return TimeZone.current.abbreviation() ?? "" }
+
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
+        dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss "
         acceptanceArray = fetchedFeedbackData!.sorted(by: {
             dateFormatter.date(from: $0.date!)?.compare(dateFormatter.date(from: $1.date!)!) == .orderedDescending
         })
@@ -220,15 +222,14 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cpNumberLabel.text = "CP Number: \(cpNumberValue)"
         }
         
-        if let latValue = feedbackObj?.latitude {
+        if let latValue = feedbackObj?.latitude, let longitudeValue = feedbackObj?.longitude {
             let latfloat = Float(latValue)
             let doubleStr = String(format: "%.4f", latfloat!) // "3.14"
-            cell.lat.text = "Lat: \(doubleStr)"
-        }
-        if let longitudeValue = feedbackObj?.longitude {
+            
             let longfloat = Float(longitudeValue)
-            let doubleStr = String(format: "%.4f", longfloat!) // "3.14"
-            cell.long.text = "Long: \(doubleStr)"
+            let doubleStr2 = String(format: "%.4f", longfloat!) // "3.14"
+
+            cell.long.text = "GPS: \(doubleStr), \(doubleStr2)"
         }
         
 //        if let gpsLocationValue = feedbackObj?.gpsLocation {
@@ -237,8 +238,18 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                
         if feedbackObj?.userResult == "Ok"{
             cell.tipTypeImg.image = UIImage(named: "like")
-        }else{
+        }else if feedbackObj?.userResult == "Disagree"{
             cell.tipTypeImg.image = UIImage(named: "disLike")
+        }
+        else{
+            cell.tipTypeImg.image = UIImage(named: "rejecetd")
+        }
+        
+        if feedbackObj?.mlModelProcessingLocation == "iPhone" {
+            cell.processedTypeImg.image = UIImage(named: "iPhone")
+        }
+        else{
+            cell.processedTypeImg.image = UIImage(named: "clouds")
         }
 
         if let objectdetectDate = feedbackObj?.date {
@@ -248,14 +259,14 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         if let imagename = feedbackObj?.image {
              let image = self.loadeImage(name: imagename)
             let cellWidth = self.view.frame.width/2
-            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 165))
+            cell.imgView.image = image?.resize(CGSize(width: cellWidth, height: 155))
         }
                        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 165
+        return 155
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -289,6 +300,8 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var cpNumberLabel: UILabel!
     @IBOutlet weak var lat: UILabel!
     @IBOutlet weak var long: UILabel!
+    @IBOutlet weak var processedTypeImg: UIImageView!
+
 
     @IBOutlet weak var subView: UIView!
 }

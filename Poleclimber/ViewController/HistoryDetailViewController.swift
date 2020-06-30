@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class HistoryDetailViewController: UIViewController {
 
@@ -19,9 +20,11 @@ class HistoryDetailViewController: UIViewController {
     @IBOutlet weak var latAndLong: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tipTypeImg: UIImageView!
+    @IBOutlet weak var mlProcessImg: UIImageView!
 
     var feedbackObj:Feedback?
     
+    @IBOutlet weak var mapSubView: MapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,11 +47,30 @@ class HistoryDetailViewController: UIViewController {
         
         
         
-        if feedbackObj?.userResult == "Ok"{
+        if feedbackObj?.userResult == "Ok" {
             tipTypeImg.image = UIImage(named: "like")
-        }else{
+        }else if feedbackObj?.userResult == "Disagree" {
             tipTypeImg.image = UIImage(named: "disLike")
         }
+        else{
+            tipTypeImg.image = UIImage(named: "rejecetd")
+        }
+        
+        if feedbackObj?.mlModelProcessingLocation == "iPhone" {
+            mlProcessImg.image = UIImage(named: "iPhone")
+        }
+        else{
+            mlProcessImg.image = UIImage(named: "clouds")
+        }
+        
+        
+        mapSubView.frame = CGRect(x: 0, y: 60, width: self.view.frame.size.width, height: self.view.frame.size.height - 60)
+        //mapSubView.mapView.delegate = self
+        mapSubView.feedbackObj = feedbackObj
+        self.view.addSubview(mapSubView)
+        mapSubView.isHidden = true
+       // mapSubView.openMapForPlace()
+        mapSubView.setMapViewFrame()
     }
     
     private func loadeImage(name: String) -> UIImage? {
@@ -73,4 +95,61 @@ class HistoryDetailViewController: UIViewController {
         
         return result
     }
+    
+    @IBAction func segmentConAction(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            
+            UIView.transition(
+            with: mapSubView,
+            duration: 1,
+            options: .transitionFlipFromLeft,
+            animations: {
+                self.mapSubView.isHidden = true
+            })
+        }
+        else{
+            UIView.transition(
+            with: mapSubView,
+            duration: 1,
+            options: .transitionFlipFromLeft,
+            animations: {
+                self.mapSubView.isHidden = false
+            })
+        }
+
+    }
 }
+
+
+//extension HistoryDetailViewController: MKMapViewDelegate{
+//
+//func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//    guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
+//
+//    let reuseId = "pin"
+//    var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+//
+//    if pinView == nil {
+//        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//        pinView!.canShowCallout = true
+//        pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
+//        pinView!.pinTintColor = UIColor.black
+//    }
+//    else {
+//        pinView!.annotation = annotation
+//    }
+//    return pinView
+//}
+//
+//func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//    print("tapped on pin ")
+//}
+//
+//func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//    if control == view.rightCalloutAccessoryView {
+//        if let doSomething = view.annotation?.title! {
+//           print("do something")
+//        }
+//    }
+//  }
+//}

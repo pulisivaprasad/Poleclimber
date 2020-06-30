@@ -32,11 +32,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
     var feedbackObj: Feedback?
     var editPost = 0
     var fileName = ""
-    var timeStamp = ""
-    var requestMethod = ""
-    var imageName = ""
-    var detectionTime = ""
-    var detectedClasses = ""
+    var timeStamp = "NA"
+    var requestMethod = "NA"
+    var imageName = "NA"
+    var detectionTime = "NA"
+    var detectedClasses = "NA"
     var detections = [AnyObject]()
     var goodCofidanceValueObjArr = [AnyObject]()
     
@@ -65,7 +65,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             fileName = feedbackObj!.imgID ?? ""
             timeStamp = feedbackObj!.timeStamp ?? ""
             requestMethod = feedbackObj!.requestMethod ?? ""
-            imageName = feedbackObj!.imageName ?? ""
+            imageName = feedbackObj!.imageName ?? feedbackObj?.imgID ?? ""
             detectionTime = feedbackObj!.detectionTime ?? ""
             detectedClasses = feedbackObj!.detectedClasses ?? ""
             
@@ -111,42 +111,50 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             perform(#selector(detectSubImagesInImg), with: nil, afterDelay: 2)
         }
     }
-    
-    func imageSavingInS3Bucket() {
-        guard let image = originalmageView.image else { return } //1
-                  AWSS3Manager.shared.uploadImage(image: image, fileName: fileName, progress: {[weak self] ( uploadProgress) in
-                      
-                      guard let strongSelf = self else { return }
-                     // strongSelf.progressView.progress = Float(uploadProgress)//2
-                      
-                  }) {[weak self] (uploadedFileUrl, error) in
-                      
-                      guard let strongSelf = self else { return }
-                      if let finalPath = uploadedFileUrl as? String { // 3
-                       print("sss == \(finalPath)")
-                          //strongSelf.s3UrlLabel.text = "Uploaded file url: " + finalPath
-                      } else {
-                          print("\(String(describing: error?.localizedDescription))") // 4
-                      }
-                  }
-    }
-    
-    
+        
     func apiCalling() {
-        let filename = "image_" + Date().description
+        let filename = "orimage_" + Date().description
         _ = originalmageView.image?.save(filename)
         let path: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let url = URL(fileURLWithPath: path).appendingPathComponent(filename)
             
         var parameters = [String : AnyObject]()
         parameters["file"] = url as AnyObject
-      //  imageSavingInS3Bucket()
         PWebService.sharedWebService.callWebAPIWith(httpMethod: "POST", apiName: kBaseUrl, fileName: fileName, parameters: parameters, uploadImage: originalmageView.image) { (response, error) in
             Helper.sharedHelper.dismissHUD(view: self.view)
-            if error == nil, let res = response?["detectedClasses"], res != nil {
+            if error == nil  {
+                self.modelRunningLocation = "cloud"
+                 let responceCode = (response!["responseCode"] as AnyObject) as! NSNumber
+                 
+                 // Problem with the image dimensions and channels
+                 if responceCode == 1  {
+                    self.alertAction(messageString: "Quality of the selected image problem with the image dimensions and channels.", processType: 1)
+                    self.imageView.image = UIImage(named: "")
+                    self.noImgView.isHidden = false
+                    self.detectBtn.isHidden = true
+                    self.namelabel.text = "Dimensions and channels"
+                    self.userfeedbackSaving(userKey: "NA", tipStatus: "dimensions and channels" , reason: "NA")
+
+                    return
+                 }
+                 
+                // Problem with the image quality (blur or lowlight)
+                 if responceCode == 2  {
+                    self.alertAction(messageString: "Quality of the selected image problem with the blur or lowlight.", processType: 1)
+
+                    self.imageView.image = UIImage(named: "")
+                    self.noImgView.isHidden = false
+                    self.detectBtn.isHidden = true
+                    self.namelabel.text = "Blur or lowlight"
+                    self.userfeedbackSaving(userKey: "NA", tipStatus: "blur or lowlight" , reason: "NA")
+
+                    return
+                 }
+                
+            if let res = response?["detectedClasses"], res != nil {
+                
               let poleValues = (response!["detectedClasses"] as AnyObject)
               self.detectedClasses = "\(poleValues as! [AnyObject])"
-                self.modelRunningLocation = "cloud"
 
                 self.timeStamp = (response!["timeStamp"] as AnyObject) as! String
                 self.requestMethod = (response!["requestMethod"] as AnyObject) as! String
@@ -155,16 +163,17 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 
             //Pole tip not found in image
              guard (response!["detectedClasses"] as AnyObject).count != 0 else {
-                Helper.sharedHelper.showGlobalAlertwithMessage("Pole tip could not be detected in the selected image.", vc: self)
+                self.alertAction(messageString: "Pole tip could not be detected in the selected image.", processType: 1)
+
                 self.imageView.image = UIImage(named: "")
                 self.noImgView.isHidden = false
                 self.detectBtn.isHidden = true
                 self.namelabel.text = "No pole tip found"
-                self.dataSendToServer(reason: "NA", userResult: "NA", navigateToHome: 2)
+                self.userfeedbackSaving(userKey: "NA", tipStatus: "No pole tip found" , reason: "NA")
 
                 return
              }
-                
+                                
             var myView = DrawRectangle()
             var myLabel = UILabel()
                 
@@ -231,13 +240,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             }
           }
                 guard self.goodCofidanceValueObjArr.count != 0 else {
-                    Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enough for analysis.", vc: self)
+                    self.alertAction(messageString: "Quality of the selected image is not good  enough for analysis.", processType: 1)
                   self.imageView.image = UIImage(named: "")
                   self.noImgView.isHidden = false
                   self.detectBtn.isHidden = true
-                  self.namelabel.text = "No pole tip found"
-
-                  self.dataSendToServer(reason: "Bad quality", userResult: "NA", navigateToHome: 2)
+                  self.namelabel.text = "Bad quality"
+                    self.userfeedbackSaving(userKey: "NA", tipStatus: "Bad quality" , reason: "NA")
 
                   return
                 }
@@ -247,6 +255,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                 self.namelabel.isHidden = false
                 self.boxesView.addSubview(myView)
                 self.boxesView.addSubview(myLabel)
+            }
 
         }
         else{
@@ -350,10 +359,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
 
             //Pole tip not found in image
             guard result.count != 0 else {
-                  Helper.sharedHelper.showGlobalAlertwithMessage("Pole tip could not be detected in the selected image.", vc: self)
+                self.alertAction(messageString: "Pole tip could not be detected in the selected image.", processType: 0)
                   self.imageView.image = UIImage(named: "")
                   self.noImgView.isHidden = false
                   self.detectBtn.isHidden = true
+                self.userfeedbackSaving(userKey: "NA", tipStatus: "No pole tip found" , reason: "NA")
 
                   return
             }
@@ -379,10 +389,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             }
             
             guard self.predictions.first != nil else {
-                Helper.sharedHelper.showGlobalAlertwithMessage("Quality of the selected image is not good  enough for analysis.", vc: self)
+                self.alertAction(messageString: "Quality of the selected image is not good  enough for analysis.", processType: 0)
               self.imageView.image = UIImage(named: "")
               self.noImgView.isHidden = false
               self.detectBtn.isHidden = true
+                self.userfeedbackSaving(userKey: "NA", tipStatus: "Bad quality" , reason: "NA")
 
               return
             }
@@ -399,13 +410,9 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             else{
                 self.namelabel.text = "Bad Tip Detected"
             }
-
+            self.modelRunningLocation = "iPhone"
             self.boxesView.predictedObjects = self.predictions
-
-          //let objectBounds = VNImageRectForNormalizedRect(result[0].boundingBox, Int(self.videoPreview.frame.size.width), Int(self.videoPreview.frame.size.height))
-
           }
-             //print(firstObservation.identifier, firstObservation.confidence)
         }
                 
         request.imageCropAndScaleOption = .scaleFill
@@ -416,7 +423,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         userfeedbackSaving(userKey: "AGREEUSERDETAILS", tipStatus: namelabel.text ?? "", reason: "")
 
         if Helper.sharedHelper.isNetworkAvailable(){
-            dataSendToServer(reason:"NA", userResult: "Ok", navigateToHome: 1)
+            dataSendToServer(reason:"NA", userResult: "Ok")
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
@@ -446,7 +453,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         userfeedbackSaving(userKey: "DISAGREEUSERDETAILS", tipStatus: namelabel.text!, reason: selectedReason)
 
         if Helper.sharedHelper.isNetworkAvailable() {
-            dataSendToServer(reason: selectedReason, userResult: "Disagree", navigateToHome: 1)
+            dataSendToServer(reason: selectedReason, userResult: "Disagree")
         }
         else{
             perform(#selector(navigateToHomeScreen), with: nil, afterDelay: 3)
@@ -454,7 +461,27 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         rControl.showMessage(withSpec: successSpec, title: "Success", body: "Thank you. You can find these results in the history tab if you would like to see them again at a later date.")
     }
     
-    func dataSendToServer(reason: String, userResult: String, navigateToHome: Int) {
+    func alertAction(messageString: String, processType: Int) {
+        let alert = UIAlertController.init(title: "Error", message: messageString, preferredStyle: .alert)
+                        
+            let yesAction = UIAlertAction.init(title: "Ok", style: .default, handler: { (alert) in
+                if processType == 1 {
+                    self.dataSendToServer(reason: "NA", userResult: "NA")
+                }
+                else{
+                    self.navigateToHomeScreen()
+                }
+
+              self.dismiss(animated: true, completion: nil)
+
+            })
+                        
+            alert.addAction(yesAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func dataSendToServer(reason: String, userResult: String) {
         var parameters = [String : String]()
         parameters["PoletesterID"] = (userDefault.object(forKey: "USERNAME") as? String)
         parameters["DPno"] = textFiledDataDisc["DP Number"] != nil ? textFiledDataDisc["DP Number"] : feedbackObj?.dpnumber
@@ -467,7 +494,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         parameters["MLresult"] = namelabel.text != nil ? namelabel.text : feedbackObj?.mlResult
         parameters["timeStamp"] = timeStamp
         parameters["requestMethod"] = requestMethod
-        parameters["imageName"] = imageName
+        parameters["imageName"] = imageName != "NA" ? imageName : fileName
         parameters["detectionTime"] = detectionTime
         parameters["detectedClasses"] = self.detectedClasses
         if editPost == 1 {
@@ -477,13 +504,22 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
            parameters["detections"] = "\(self.detections as AnyObject)"
         }
         
+        var localTimeZoneAbbreviation: String { return TimeZone.current.abbreviation() ?? "" }
         
-        parameters["userTime"] = ("\(Date())")
+        let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss "
+        let dateObj = dateFormatter.string(from: Date()) + localTimeZoneAbbreviation
+
+        parameters["userTime"] = dateObj
         
         var address = "\(textFiledDataDisc["City"] ?? ""), \(textFiledDataDisc["State"] ?? ""), \(textFiledDataDisc["Country"] ?? "")"
                
         if let zipcode = textFiledDataDisc["Zip Code"] {
             address = address + ", " + zipcode
+        }
+        
+        if editPost == 1 {
+            address = feedbackObj!.gpsLocation!
         }
         
         parameters["gpsLocation"] = address
@@ -503,9 +539,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
                                                             //Helper.sharedHelper.showGlobalAlertwithMessage("\(messsage)", title: "Success", vc: self)
                                                         //perform(#selector(self.navigateToHomeScreen), with: nil, afterDelay: 3)
                                                             
-                                                            if navigateToHome == 1 {
                                                               self.navigateToHomeScreen()
-                                                            }
                                                         }
 
                                                     }
@@ -529,14 +563,20 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if userKey == "DISAGREEUSERDETAILS"{
             feedback.userResult = "Disagree"
             feedback.reason = reason
-        }else{
+        }else if userKey == "NA"{
+            feedback.userResult = "NA"
+            feedback.reason = "NA"
+        }
+        else{
             feedback.userResult = "Ok"
             feedback.reason = "NA"
         }
                
+        var localTimeZoneAbbreviation: String { return TimeZone.current.abbreviation() ?? "" }
+
         let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
-        let dateObj = dateFormatter.string(from: Date())
+          dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss "
+        let dateObj = dateFormatter.string(from: Date()) // + localTimeZoneAbbreviation
         feedback.date = dateObj
                
         if let image = containerView.pb_takeSnapshot() {
@@ -544,7 +584,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
             let filename2 = "orimage_" + Date().description
 
             _ = image.save(filename)
-            _ = imageView.image?.save(filename2)
+            _ = originalmageView.image?.save(filename2)
+            if imageView.image == nil {
+                imageView.image = originalmageView.image
+                _ = imageView.image?.save(filename)
+                _ = originalmageView.image?.save(filename2)
+                imageView.image = UIImage(named: "")
+            }
             
             feedback.image = filename
             feedback.originalImg = filename2
@@ -565,7 +611,7 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         feedback.detections = "\(self.detections)"
         feedback.timeStamp = timeStamp
         feedback.requestMethod = requestMethod
-        feedback.imageName = imageName
+        feedback.imageName = imageName != "NA" ? imageName : fileName
         feedback.detectionTime = detectionTime
         feedback.imgID = fileName
         feedback.detectedClasses = self.detectedClasses
@@ -577,9 +623,11 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         var parameters = [String: String]()
                    parameters["mlResult"] = tipStatus
 
+        var localTimeZoneAbbreviation: String { return TimeZone.current.abbreviation() ?? "" }
+
         let dateFormatter = DateFormatter()
-         dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss a"
-        let dateObj = dateFormatter.string(from: Date())
+         dateFormatter.dateFormat = "dd-MMM-yyy hh:mm:ss "
+        let dateObj = dateFormatter.string(from: Date()) // + localTimeZoneAbbreviation
          parameters["date"] = dateObj
                    
         if let image = containerView.pb_takeSnapshot() {
@@ -587,7 +635,13 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
          let filename2 = "orimage_" + Date().description
 
          _ = image.save(filename)
-         _ = imageView.image?.save(filename2)
+         _ = originalmageView.image?.save(filename2)
+            if imageView.image == nil {
+                imageView.image = originalmageView.image
+                _ = imageView.image?.save(filename)
+                _ = originalmageView.image?.save(filename2)
+                imageView.image = UIImage(named: "")
+            }
                        
             parameters["image"] = filename
             parameters["originalImg"] = filename2
@@ -596,7 +650,12 @@ class ObjectDetectionViewController: UIViewController, AVCaptureVideoDataOutputS
         if userKey == "DISAGREEUSERDETAILS"{
             parameters["userResult"] = "Disagree"
             parameters["reason"] = reason
-        }else{
+        }
+        else if userKey == "NA"{
+            parameters["userResult"] = "NA"
+            parameters["reason"] = "NA"
+        }
+        else{
             parameters["userResult"] = "Ok"
             parameters["reason"] = "NA"
         }
